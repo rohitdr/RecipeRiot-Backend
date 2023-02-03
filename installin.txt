@@ -1,0 +1,4 @@
+npm i init
+npm i -g nodemon
+npm i express
+npm i mongoose

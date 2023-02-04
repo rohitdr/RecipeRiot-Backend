@@ -2,3 +2,11 @@ npm i init
 npm i -g nodemon
 npm i express
 npm i mongoose
+npm i express-validator
+1. Open Windows PowerShell with Run as Administrator
+2. Run this command: Set-ExecutionPolicy Unrestricted
+   npm install --save express-validator
+   npm install -g nodemon //installing it globally
+
+   npm i jsonwebtoken
+   npm i bcrypt

@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
-const jwtSecret = "adlksfjakghaslkdfj"
+const jwtSecret ="adlksfjakghaslkdfj"
 const fetchUser=(req,res,next)=>{
          const token = req.header('auth-token')
          if(!token){
-            res.status(400).send({'error':"Please login to continue"})
+            res.status(401).send({'error':"Please login to continue"})
          }
          try{
-     const data = jwt.verify(token,jwtSecret)
-     req.user =data.user
-     next()
+     const data = jwt.verify(token,jwtSecret);
+
+     req.user = data;
+     next();
          }
   catch(error){
         res.status(401).send({error:"Please login to continue "})   

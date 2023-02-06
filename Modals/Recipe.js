@@ -7,7 +7,7 @@ const RecipeSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
-  labe: {
+  label: {
     type: String,
     required: true,
   },
@@ -19,7 +19,7 @@ const RecipeSchema = new Schema({
     type: String,
     required: true,
   },
-  dietlabel: {
+  dietLabels: {
     type: Array,
     required: true,
   },
@@ -31,11 +31,11 @@ const RecipeSchema = new Schema({
     type: Array,
     required: true,
   },
-  ingredientLine: {
+  ingredientLines: {
     type: Array,
     required: true,
   },
-  ingredients: {
+  ingredients: [{
     text: {
       type: String,
     },
@@ -46,9 +46,9 @@ const RecipeSchema = new Schema({
 
     image: {
       type: String,
-      required: true,
+    
     },
-  },
+}],
   calories: {
     type: Number,
   },

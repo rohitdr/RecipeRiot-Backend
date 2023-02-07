@@ -88,7 +88,7 @@ router.post('/login', [
 //get user details login required
 router.post('/getUser', fetchUser, async (req, res) => {
     try {
-        const id = req.user.id;
+        const id = req.user._id;
         const user = await User.findById(id).select("-password")
         res.json(user)
     }

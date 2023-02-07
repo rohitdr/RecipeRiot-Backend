@@ -8,7 +8,11 @@ const { body, validationResult } = require("express-validator");
 router.get("/allRecipes", fetchuser, async (req, res) => {
   try {
     const recipe = await Recipe.find({ user: req.user.id });
+    
     const recipe_lenght=recipe.length
+    if(recipe_lenght==0){
+      res.status(400).send("Their is no Recipes avialable in database")
+    }
     res.json({recipe,count : recipe_lenght});
     
   } catch (error) {

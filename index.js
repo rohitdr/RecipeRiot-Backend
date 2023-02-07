@@ -10,7 +10,7 @@ app.use(express.json())
 // })
 app.use('/api/auth',require('./Routes/auth'))
 
-// app.use('./api/recipe',require('./Routes/recipe.js'))
+app.use('/api/recipe',require('./Routes/Recipe.js'))
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

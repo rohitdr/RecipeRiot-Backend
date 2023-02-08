@@ -99,4 +99,28 @@ router.post('/getUser', fetchUser, async (req, res) => {
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
+
+//changing password 
+router.post('/changePassword', fetchUser,async(req,res)=>{
+    try{
+          const id = req.user.id;
+          const user = await User.findById(id) 
+          if(!user){
+            return res.status(400).json({ 'error': "Sorry user does not exist" })
+          }
+          const salt = await bcrypt.genSalt(10);
+        const securedpass = await bcrypt.hash(req.body.password, salt)
+        const updatedUser = await User.update({ _id:id}  ,{ $set: {password : securedpass  } } )
+
+        if(!updatedUser){
+            res.status(400).send({ error: "Their is something wrong ! Try again "});
+        }
+        res.send({"succcess":"successfully password updated"})
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 module.exports = router;

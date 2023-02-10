@@ -13,7 +13,7 @@ router.get("/allRecipes", fetchuser, async (req, res) => {
     if(recipe_lenght==0){
       res.status(400).send("Their is no Recipes avialable in database")
     }
-    res.json({recipe,count : recipe_lenght});
+    res.json({recipe});
     
   } catch (error) {
     console.log(error.message);

@@ -202,4 +202,23 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
+
+  /// fecthing all recipes sorting by time
+  router.get("/LatestRecipes", async (req, res) => {
+    try {
+        
+      const recipe = await Recipe.find().sort( { date:-1 } )
+      if(recipe.length===0){
+        return res.status(404).send("Recipe not found")
+      }
+      
+      const recipe_lenght=recipe.length
+      res.json({recipe,count : recipe_lenght});
+
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 module.exports = router;
+

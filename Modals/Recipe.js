@@ -7,6 +7,10 @@ const RecipeSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
+    date: {
+      type: Date,
+      default: Date.now
+  },
   label: {
     type: String,
     required: true,

@@ -172,7 +172,8 @@ router.delete('/deleteRecipe/:id',fetchuser,async(req,res)=>{
 router.get("/allRecipeswith/:name", async (req, res) => {
     try {
         const exp = req.params.name;
-      const recipe = await Recipe.find( { 'label' : { '$regex' : exp} } )
+        
+      const recipe = await Recipe.find( { 'label' : { '$regex' : exp,'$options' : 'i'}  } )
       if(recipe.length===0){
         return res.status(404).send("Recipe not found")
       }
@@ -189,7 +190,7 @@ router.get("/allRecipeswith/:name", async (req, res) => {
 router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
     try {
         const exp = req.params.diet_label;
-      const recipe = await Recipe.find( { 'dietLabels' : { '$regex' : exp} } )
+      const recipe = await Recipe.find( { 'dietLabels' : { '$regex' : exp, '$options' :"i"}  } )
       if(recipe.length===0){
         return res.status(404).send("Recipe not found")
       }

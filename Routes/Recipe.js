@@ -3,6 +3,8 @@ const fetchuser = require("../Middleware/fetchuser");
 const Recipe = require("../Modals/Recipe.js");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
+const fetchUser = require("../Middleware/fetchuser");
+const User = require('../Modals/User.js')
 
 //fectching all recipes
 router.get("/allRecipes", fetchuser, async (req, res) => {
@@ -216,6 +218,33 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
       const recipe_lenght=recipe.length
       res.json({recipe,count : recipe_lenght});
 
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+  /// Like a recipe
+  router.get("/like", fetchUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const recipeId=req.body.id;
+        // res.json(userId)
+        const user = await User.findById(userId).select("Liked_Recipe")
+        const likes = await Recipe.findById(recipeId).select("Likes")
+      // const recipe = await Recipe.find().sort( { date:-1 } )
+      // if(recipe.length===0){
+      //   return res.status(404).send("Recipe not found")
+      // }
+     const LikesofRecipe=likes.Likes
+      const LikedRecipes=user.Liked_Recipe
+      if(LikedRecipes.includes(userId)){
+        return res.status(400).send("Your already Liked this recipe")
+      }
+      const NewLikedRecipes = await User.findByIdAndUpdate({ _id:userId}  ,{ $set: {Liked_Recipe : LikedRecipes.concat(recipeId)  } })
+      const NewLikes = await Recipe.findByIdAndUpdate({ _id:recipeId}  ,{ $set: {Likes : LikesofRecipe+1  } })
+      // const recipe_lenght=recipe.length
+      // res.json({recipe,count : recipe_lenght});
+res.json("success ! You had liked the recipe")
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Internal Server Error");

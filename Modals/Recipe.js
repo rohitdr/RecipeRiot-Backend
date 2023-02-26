@@ -11,6 +11,11 @@ const RecipeSchema = new Schema({
       type: Date,
       default: Date.now
   },
+  Likes:{
+    type:Number,
+    default:0
+
+  },
   label: {
     type: String,
     required: true,

@@ -20,7 +20,26 @@ const userSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    Liked_Recipe:{
+        type:Array
+
+
+    },
+    Profile_Image:{
+    type:String,
+    default:"UserImages/default.jpg"
+    },
+    Total_Comments:{
+        type:Number,
+        default:0
+    },
+    Total_Ratings:{
+        type:Number,
+        default:0
     }
+
+
 
 })
 User = mongoose.model('User', userSchema)

@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchUser = require('../Middleware/fetchUser.js');
 const jwtSecret = "adlksfjakghaslkdfj"
+const Recipe = require("../Modals/Recipe.js");
 
 //crate user no login required
 router.post('/createUser', [
@@ -90,9 +91,11 @@ router.post('/getUser', fetchUser, async (req, res) => {
     try {
       
         const id = req.user.id;
-       
+        const recipe = await Recipe.find({ user: req.user.id });
+    
+        const recipe_lenght=recipe.length
         const user = await User.findById(id).select("-password")
-        res.json(user)
+        res.json({user:user,totalResults:recipe_lenght})
     }
     catch (error) {
         console.error(error.message)

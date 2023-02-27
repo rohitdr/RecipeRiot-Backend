@@ -23,6 +23,23 @@ router.get("/allRecipes", fetchuser, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+// fetching recipe by id
+router.get("/recipebyid/:id", fetchuser, async (req, res) => {
+  try {
+    const recipe = await Recipe.find({ _id:req.params.id});
+    
+    const recipe_lenght=recipe.length
+    if(recipe_lenght==0){
+      res.status(400).send("Their is no Recipes avialable in database with this id")
+    }
+    
+    res.json({recipe})
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 //crating  or adding a new Recipe , login require
 router.post("/addRecipe", fetchuser, async (req, res) => {
   try {

@@ -272,5 +272,25 @@ res.json("success ! You had Unliked the recipe")
       res.status(500).send("Internal Server Error");
     }
   });
+  //fectching all recipes by id
+router.get("/allLikedRecipe", fetchuser, async (req, res) => {
+  try {
+     const user = await User.findOne({_id:req.user.id})
+   if(user.Liked_Recipe.lenght<1){
+    res.status(400).send("You had Not liked any recipe yet")
+   }
+  var recipe=[]
+  for (let i=0; i<user.Liked_Recipe.length;i++){
+recipe[i]=await Recipe.findById(user.Liked_Recipe[i]);
+  }
+ 
+   
+     res.json(recipe)
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 module.exports = router;
 

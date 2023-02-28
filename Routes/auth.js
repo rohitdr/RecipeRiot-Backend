@@ -77,7 +77,8 @@ router.post('/login', [
             id: user.id
         }
         const auth_token = jwt.sign(data, jwtSecret)
-        res.json({ auth_token })
+        let success = "true"
+        res.json({ success ,auth_token })
 
     }
     catch (error) {

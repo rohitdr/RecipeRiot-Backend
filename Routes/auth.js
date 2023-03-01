@@ -18,7 +18,7 @@ router.post('/createUser', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ error: errors.array() });
     }
     try {
         let emailcheck = await User.findOne({ 'email': req.body.email });
@@ -54,21 +54,13 @@ router.post('/createUser', [
 
 //login of user login not  required
 
-router.post('/login', [
-    body('email', 'Enter a correct email').isEmail(),
-    body('password', "password can't be blank").exists()
-], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+router.post('/login', async (req, res) => {
+  
     const { email, password } = req.body;
 
     try {
         let user = await User.findOne({ email })
-        if (!user) {
-            return res.status(400).json({ 'error': "Sorry user does not exist" })
-        }
+       
         let passCompare = await bcrypt.compare(password, user.password)
         if (!passCompare) {
             return res.status(400).json({ 'error': "Please use correct correndentials" })
@@ -127,4 +119,31 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
+// checking email
+router.post('/checkemail', [
+    body('email', 'Enter a correct email').isEmail(),
+    body('password', "password can't be blank").exists()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json( errors );
+    }
+    const { email, password } = req.body;
+
+    try {
+        let user = await User.findOne({ email })
+        if (!user) {
+            return res.status(400).json({ 'error': "Sorry user does not exist" })
+        }
+       
+    
+        res.json("success")
+
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+router
 module.exports = router;

@@ -54,13 +54,18 @@ router.post('/createUser', [
 
 //login of user login not  required
 
-router.post('/login', async (req, res) => {
-  
+router.post('/login', [
+    body('email', 'Enter a correct email').isEmail(),
+    body('password', "password can't be blank").exists()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json( errors );
+    }
     const { email, password } = req.body;
 
     try {
-        let user = await User.findOne({ email })
-       
+        let user = await User.findOne({email: email})
         let passCompare = await bcrypt.compare(password, user.password)
         if (!passCompare) {
             return res.status(400).json({ 'error': "Please use correct correndentials" })
@@ -104,6 +109,10 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
           if(!user){
             return res.status(400).json({ 'error': "Sorry user does not exist" })
           }
+          let passCompare = await bcrypt.compare(req.body.oldpassword, user.password)
+          if (!passCompare) {
+            return res.status(400).json({ 'error': "Please use correct correndentials" })
+        }
           const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
         const updatedUser = await User.update({ _id:id}  ,{ $set: {password : securedpass  } } )
@@ -120,30 +129,6 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
     }
 })
 // checking email
-router.post('/checkemail', [
-    body('email', 'Enter a correct email').isEmail(),
-    body('password', "password can't be blank").exists()
-], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json( errors );
-    }
-    const { email, password } = req.body;
 
-    try {
-        let user = await User.findOne({ email })
-        if (!user) {
-            return res.status(400).json({ 'error': "Sorry user does not exist" })
-        }
-       
-    
-        res.json("success")
-
-    }
-    catch (error) {
-        console.error(error.message)
-        res.status(500).send({ error: "Internal server Erorr" });
-    }
-})
 router
 module.exports = router;

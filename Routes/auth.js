@@ -133,14 +133,14 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
 // checking username is avialabel or not
 router.post('/checkUsername',async(req,res)=>{
     try{
-         username = req.body.username
-          const user = await User.findOne({username:username})
+        
+          const user = await User.findOne({username:req.body.username})
           if(user){
-            return res.status(400).json({ 'error': "Sorry username is not avialable" })
+            return res.status(400).send(false)
           }
           
           
-        res.send("true")
+        res.send(true)
         
     }catch(error)
     {

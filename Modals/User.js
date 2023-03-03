@@ -1,10 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 const userSchema = new Schema({
-    name:{
-        type: String,
-        required: true
-    },
+    
     email: {
         type: String,
         required: true
@@ -41,7 +38,48 @@ type:String,
     Total_Ratings:{
         type:Number,
         default:0
-    }
+    },
+    address:{
+        type:String
+    },
+    city:{
+        type:String
+    },
+    date_of_birth:{
+       type:Date
+    },
+    facebook:{
+        type:String
+    },
+    twitter:{
+        type:String
+    },
+    git:{
+        type:String
+    },
+    web:{
+        type:String
+    },
+    faourite_food:{
+        type:String
+    },
+    first_name:{
+        type:String
+    },
+    last_name:{
+        type:String
+    },
+    gender:{
+        type:String
+    },
+    pincode:{
+        type:Number
+    },
+    state:{
+        type:String
+    },
+    
+
 
 
 

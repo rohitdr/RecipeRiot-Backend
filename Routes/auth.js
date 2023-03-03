@@ -11,7 +11,6 @@ const Recipe = require("../Modals/Recipe.js");
 
 //crate user no login required
 router.post('/createUser', [
-    body('name').isLength({ min: 3 }),
     body('email').isEmail(),
     body('password').isLength({ min: 5 }),
     body('phone_number').isLength({ min: 5 }),
@@ -33,11 +32,24 @@ router.post('/createUser', [
         const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
         let user = await User.create({
-            name: req.body.name,
+            
             email: req.body.email,
             phone_number: req.body.phone_number,
             password: securedpass,
-            username:req.body.username
+            username:req.body.username,
+            address:req.body.address,
+            city:req.body.city,
+            date_of_birth:req.body.date_of_birth,
+            facebook:req.body.facebook,
+            faourite_food:req.body.faourite_food,
+            first_name:req.body.first_name,
+            last_name:req.body.last_name,
+            gender:req.body.gender,
+            git:req.body.git,
+            pincode:req.body.pincode,
+            state:req.body.state,
+            twitter:req.body.twitter,
+            web:req.body.web
         })
         const data = {
             id: user.id

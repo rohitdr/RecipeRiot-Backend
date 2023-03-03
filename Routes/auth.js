@@ -140,7 +140,7 @@ router.post('/checkUsername',async(req,res)=>{
           }
           
           
-        res.send("success")
+        res.send("true")
         
     }catch(error)
     {

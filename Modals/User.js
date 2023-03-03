@@ -30,6 +30,10 @@ const userSchema = new Schema({
     type:String,
     default:"UserImages/default.jpg"
     },
+    username:{
+type:String,
+
+    },
     Total_Comments:{
         type:Number,
         default:0

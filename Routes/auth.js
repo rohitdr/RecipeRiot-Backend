@@ -14,7 +14,8 @@ router.post('/createUser', [
     body('name').isLength({ min: 3 }),
     body('email').isEmail(),
     body('password').isLength({ min: 5 }),
-    body('phone_number').isLength({ min: 5 })
+    body('phone_number').isLength({ min: 5 }),
+    body('username').isLength({ min: 8 })
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -35,7 +36,8 @@ router.post('/createUser', [
             name: req.body.name,
             email: req.body.email,
             phone_number: req.body.phone_number,
-            password: securedpass
+            password: securedpass,
+            username:req.body.username
         })
         const data = {
             id: user.id
@@ -128,7 +130,24 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
-// checking email
+// checking username is avialabel or not
+router.post('/checkUsername',async(req,res)=>{
+    try{
+         username = req.body.username
+          const user = await User.findOne({username:username})
+          if(user){
+            return res.status(400).json({ 'error': "Sorry username is not avialable" })
+          }
+          
+          
+        res.send("success")
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 
 router
 module.exports = router;

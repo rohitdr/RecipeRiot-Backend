@@ -3,18 +3,39 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const RecipeSchema = new Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  Comments:[ {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     date: {
       type: Date,
-      default: Date.now
-  },
-  Likes:{
-    type:Number,
-    default:0
-
+      default: Date.now,
+    },
+    comment: {
+      type: String,
+    },
+    rating: {
+      type: Number,
+    },
+    username:{
+      type: String,
+    },
+    Profileimage: {
+      type: String,
+    },
+  }],
+  Likes: {
+    type: Number,
+    default: 0,
   },
   label: {
     type: String,
@@ -44,20 +65,20 @@ const RecipeSchema = new Schema({
     type: Array,
     required: true,
   },
-  ingredients: [{
-    text: {
-      type: String,
-    },
-    weight: {
-      type: Number,
-    },
-   
+  ingredients: [
+    {
+      text: {
+        type: String,
+      },
+      weight: {
+        type: Number,
+      },
 
-    image: {
-      type: String,
-    
+      image: {
+        type: String,
+      },
     },
-}],
+  ],
   calories: {
     type: Number,
   },
@@ -235,83 +256,83 @@ const RecipeSchema = new Schema({
       },
     },
     NIA: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+      label: {
+        type: String,
       },
-      VITB6A: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+      quantity: {
+        type: Number,
       },
-      FOLAC: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+      unit: {
+        type: String,
       },
-      VITB12: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+    },
+    VITB6A: {
+      label: {
+        type: String,
       },
-      VITD: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+      quantity: {
+        type: Number,
       },
-      TOCPHA: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+      unit: {
+        type: String,
       },
-      WATER: {
-        label: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-        },
-        unit: {
-          type: String,
-        },
+    },
+    FOLAC: {
+      label: {
+        type: String,
       },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
+    VITB12: {
+      label: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
+    VITD: {
+      label: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
+    TOCPHA: {
+      label: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
+    WATER: {
+      label: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
   },
 });
 
-module.exports=mongoose.model('Recipe',RecipeSchema)
+module.exports = mongoose.model("Recipe", RecipeSchema);

@@ -330,7 +330,7 @@ recipe[i]=await Recipe.findById(user.Liked_Recipe[i]);
 /// api for commenting on recipe
 router.post("/commentreicpe", fetchuser, async (req, res) => {
   try {
-     const user = await User.findOne({_id:req.user.id})
+     const user = await User.findById(req.user.id)
      const recipe = await Recipe.findById(req.body.id)
  
   

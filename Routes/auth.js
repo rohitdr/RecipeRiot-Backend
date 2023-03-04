@@ -132,7 +132,7 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
         const updatedUser = await User.update({ _id:id}  ,{ $set: {password : securedpass  } } )
 
         if(!updatedUser){
-            res.status(400).send({ error: "Their is something wrong ! Try again "});
+           return res.status(400).send({ error: "Their is something wrong ! Try again "});
         }
         res.send({"succcess":"successfully password updated"})
         
@@ -160,6 +160,4 @@ router.post('/checkUsername',async(req,res)=>{
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
-
-router
 module.exports = router;

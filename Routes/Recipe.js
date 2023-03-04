@@ -13,7 +13,7 @@ router.get("/allRecipes", fetchuser, async (req, res) => {
     
     const recipe_lenght=recipe.length
     if(recipe_lenght==0){
-      res.status(400).send("Their is no Recipes avialable in database")
+     return res.status(404).send("Their is no Recipes avialable in database")
     }
     
     res.json({recipe:recipe,totalResults:recipe_lenght});
@@ -30,7 +30,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
     
     const recipe_lenght=recipe.length
     if(recipe_lenght==0){
-      res.status(400).send("Their is no Recipes avialable in database with this id")
+      return res.status(400).send("Their is no Recipes avialable in database with this id")
     }
     
     res.json({recipe})
@@ -241,6 +241,23 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
+  //fetching all latest recipe by id
+  router.get("/LatestRecipesbyid",fetchUser, async (req, res) => {
+    try {
+       
+      const recipe = await Recipe.find({ user: req.user.id }).sort( { date:-1 } )
+      if(recipe.length===0){
+        return res.status(404).send("Recipe not found")
+      }
+      
+      const recipe_lenght=recipe.length
+      res.json({recipe,count : recipe_lenght});
+
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  });
   /// Like a recipe
   router.post("/like", fetchUser, async (req, res) => {
     try {
@@ -293,8 +310,8 @@ res.json("success ! You had Unliked the recipe")
 router.get("/allLikedRecipe", fetchuser, async (req, res) => {
   try {
      const user = await User.findOne({_id:req.user.id})
-   if(user.Liked_Recipe.lenght<1){
-    res.status(400).send("You had Not liked any recipe yet")
+   if(user.Liked_Recipe.length<1){
+     return res.status(404).send("You had Not liked any recipe yet")
    }
   var recipe=[]
   for (let i=0; i<user.Liked_Recipe.length;i++){

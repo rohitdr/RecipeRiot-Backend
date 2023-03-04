@@ -44,7 +44,7 @@ router.post('/createUser', [
             faourite_food:req.body.faourite_food,
             first_name:req.body.first_name,
             last_name:req.body.last_name,
-            gender:req.body.gender,
+            sex:req.body.gender,
             git:req.body.git,
             pincode:req.body.pincode,
             state:req.body.state,

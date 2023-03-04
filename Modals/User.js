@@ -69,7 +69,7 @@ type:String,
     last_name:{
         type:String
     },
-    gender:{
+    sex:{
         type:String
     },
     pincode:{

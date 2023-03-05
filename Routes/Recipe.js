@@ -330,13 +330,34 @@ recipe[i]=await Recipe.findById(user.Liked_Recipe[i]);
 /// api for commenting on recipe
 router.post("/commentreicpe", fetchuser, async (req, res) => {
   try {
+    const userid= req.user.id;
      const user = await User.findById(req.user.id)
      const recipe = await Recipe.findById(req.body.id)
- 
-  
+ let state=true
+//  for (let i=0; i<recipe.Comments.length;i++){
+//   if(  recipe.Comments[i]._id==req.user.id){
+    
+//   }
+
+//     }
+
+
+
+let stateelement=[]
+recipe.Comments.filter((element)=>{
+    element._id=req.user.id
+})
+    //    recipe.Comments.map((element)=>{
+    // if(element._id == userid)
+    //   stateelement.concat(element)
+    //    })
+       if(recipe.Comments.length>1){
+        return res.status(404).json("You had already Comment on this recipe")
+       }
      const commentedRecipe = await Recipe.findByIdAndUpdate({ _id:req.body.id}  ,{ $set: { Comments:recipe.Comments.concat(req.body.comment)}})
    
-     res.json(commentedRecipe)
+     res.json(commentedRecipe.Comments)
+    // res.json(recipe.Comments)
     
   } catch (error) {
     console.log(error.message);

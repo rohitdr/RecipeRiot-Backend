@@ -343,16 +343,16 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
 
 
 
-let stateelement=[]
-recipe.Comments.filter((element)=>{
-    element._id=req.user.id
+let stateelement=recipe.Comments.filter((element)=>{
+     return element._id=req.user.id
 })
     //    recipe.Comments.map((element)=>{
     // if(element._id == userid)
     //   stateelement.concat(element)
     //    })
-       if(recipe.Comments.length>1){
+       if(stateelement.length>1){
         return res.status(404).json("You had already Comment on this recipe")
+    
        }
      const commentedRecipe = await Recipe.findByIdAndUpdate({ _id:req.body.id}  ,{ $set: { Comments:recipe.Comments.concat(req.body.comment)}})
    

@@ -7,6 +7,11 @@ const RecipeSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  instruction:{
+    type:Array
+  }
+   ,
+
   date: {
     type: Date,
     default: Date.now,

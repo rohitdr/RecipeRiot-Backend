@@ -59,6 +59,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       cuisineType,
       ingredients,
       totalNutrients,
+      instruction
     } = req.body;
     const recipe = new Recipe({
       totalTime,
@@ -77,6 +78,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       user: req.user.id,
       ingredients,
       totalNutrients,
+      instruction
     });
     const savedRecipe = await recipe.save();
     res.json(savedRecipe);

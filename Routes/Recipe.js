@@ -106,6 +106,7 @@ router.put('/updateRecipe/:id', fetchuser, async (req, res) => {
       cuisineType,
       ingredients,
       totalNutrients,
+      instruction
     } = req.body;
 
     const newrecipe = {};
@@ -120,6 +121,9 @@ router.put('/updateRecipe/:id', fetchuser, async (req, res) => {
     }
     if (ingredientLines) {
       newrecipe.ingredientLines = ingredientLines;
+    }
+    if (instruction) {
+      newrecipe.instruction = instruction;
     }
     if (cautions) {
       newrecipe.cautions= cautions

@@ -98,7 +98,7 @@ router.post('/login', [
     }
 })
 
-//get user details login required
+//get user details of logged in user login required
 router.post('/getUser', fetchUser, async (req, res) => {
     try {
       
@@ -114,7 +114,22 @@ router.post('/getUser', fetchUser, async (req, res) => {
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
-
+//get user detail by its id 
+router.post('/getUserbyid', async (req, res) => {
+    try {
+      
+        const id = req.body.id;
+        const recipe = await Recipe.find({ user: req.body.id });
+    
+        const recipe_lenght=recipe.length
+        const user = await User.findById(id).select("-password")
+        res.json({user:user,totalResults:recipe_lenght})
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 //changing password 
 router.post('/changePassword', fetchUser,async(req,res)=>{
     try{
@@ -160,4 +175,22 @@ router.post('/checkUsername',async(req,res)=>{
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
+/// uploading image or changing image of profile
+router.post('/changeuploadimage', fetchUser, async (req, res) => {
+    try {
+       const image = req.body.image;
+        const id = req.user.id;
+        const user = await User.findById(id) 
+          if(!user){
+            return res.status(400).json({ 'error': "Sorry user does not exist" })
+          }
+        const updatedUser = await User.update({ _id:id}  ,{ $set: { Profile_Image: image  } } )
+        res.json(updatedUser)
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+
 module.exports = router;

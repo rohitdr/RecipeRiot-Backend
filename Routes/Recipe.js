@@ -216,7 +216,7 @@ router.get("/allRecipeswith/:name", async (req, res) => {
 router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
     try {
         const exp = req.params.diet_label;
-      const recipe = await Recipe.find( { 'dietLabels' : { '$regex' : exp, '$options' :"i"}  } )
+      const recipe = await Recipe.find( { 'dietLabels' : exp  } )
       if(recipe.length===0){
         return res.status(404).send("Recipe not found")
       }
@@ -229,6 +229,24 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
+
+    //feching recipe by cusineType
+router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
+  try {
+      const type = req.params.cuisine_Type;
+    const recipe = await Recipe.find( { 'cuisineType' : type  } )
+    if(recipe.length===0){
+      return res.status(404).send("Recipe not found")
+    }
+    
+    const recipe_lenght=recipe.length
+    res.json({recipe,count : recipe_lenght});
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
   /// fecthing all recipes sorting by time
   router.get("/LatestRecipes", async (req, res) => {

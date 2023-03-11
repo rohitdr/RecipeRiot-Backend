@@ -196,4 +196,58 @@ router.post('/changeuploadimage', fetchUser, async (req, res) => {
     }
 })
 
+//update users details
+router.put('/updateuser', fetchUser, async (req, res) => {
+    try {
+      const {
+      username,email,first_name,last_name,phone_number,git
+      } = req.body;
+  
+      const newuser = {};
+      if(git){
+        newuser.git=git
+      }
+    if(username){
+        newuser.username=username
+        let userbyusername=await User.findOne({username:username})
+        if(userbyusername){
+            return res.status(404).send({error:"This username is not avialable "})
+        }
+
+    }
+    if(email){
+        newuser.email=email
+        let userbyemail=await User.findOne({email:email})
+    if(userbyemail){
+        return res.status(404).send({error:"The given Email is already linked with other account"})
+    }
+    }
+    if(first_name){
+        newuser.first_name=first_name
+    }
+    if(last_name){
+        newuser.last_name=last_name
+    }
+    if(phone_number){
+        newuser.phone_number
+        let userbyphone=await User.findOne({phone_number:phone_number})
+        if(userbyphone){
+            return res.status(404).send({error:"The given Phone Number is already linked with other account"})
+        }
+    }
+   
+    
+     let user = await User.findById(req.user.id)
+    
+     //allowing only owner to update the recipe
+     if(user._id.toString() !== req.user.id){
+      return res.status(404).send({ error:"You can't update details of other user Not allowed"})
+     }
+   let updateduser =await User.findByIdAndUpdate(req.user.id,{$set:newuser},{new:true})
+   res.json(" The details has been successfully updated")
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send({error:"INTERNAL SERVER ERROR"});
+    }
+  });
 module.exports = router;

@@ -200,12 +200,21 @@ router.post('/changeuploadimage', fetchUser, async (req, res) => {
 router.put('/updateuser', fetchUser, async (req, res) => {
     try {
       const {
-      username,email,first_name,last_name,phone_number,git
+      username,email,first_name,last_name,phone_number,git,facebook,twitter,web
       } = req.body;
   
       const newuser = {};
       if(git){
         newuser.git=git
+      }
+      if(facebook){
+        newuser.facebook=facebook
+      }
+      if(twitter){
+        newuser.twitter=twitter
+      }
+      if(web){
+        newuser.web=web
       }
     if(username){
         newuser.username=username
@@ -239,7 +248,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
     
      let user = await User.findById(req.user.id)
     
-     //allowing only owner to update the recipe
+     //allowing only owner to update the his account
      if(user._id.toString() !== req.user.id){
       return res.status(404).send({ error:"You can't update details of other user Not allowed"})
      }

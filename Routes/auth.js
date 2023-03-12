@@ -37,17 +37,14 @@ router.post('/createUser', [
             phone_number: req.body.phone_number,
             password: securedpass,
             username:req.body.username,
-            address:req.body.address,
-            city:req.body.city,
-            date_of_birth:req.body.date_of_birth,
+            
             facebook:req.body.facebook,
-            faourite_food:req.body.faourite_food,
+           
             first_name:req.body.first_name,
             last_name:req.body.last_name,
-            sex:req.body.gender,
+           
             git:req.body.git,
-            pincode:req.body.pincode,
-            state:req.body.state,
+          
             twitter:req.body.twitter,
             web:req.body.web
         })
@@ -259,4 +256,33 @@ router.put('/updateuser', fetchUser, async (req, res) => {
       res.status(500).send({error:"INTERNAL SERVER ERROR"});
     }
   });
+
+  //forget password and changing the password
+  router.post('/forgetPassword',async(req,res)=>{
+    try{
+          const email = req.body.email;
+          const username=req.body.username;
+          const user = await User.findOne({email:email}) 
+          if(!user){
+            return res.status(404).json({ 'error': "Sorry user does not exist with this email" })
+          }
+          
+          if (username !== user.username) {
+            return res.status(404).json({ 'error': "Please use correct correndentials" })
+        }
+          const salt = await bcrypt.genSalt(10);
+        const securedpass = await bcrypt.hash(req.body.password, salt)
+        const updatedUser = await User.updateOne({email:email}  ,{ $set: {password : securedpass  } } )
+
+        if(!updatedUser){
+           return res.status(404).send({ error: "Their is something wrong ! Try again "});
+        }
+        res.json({"succcess":"successfully password updated"})
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 module.exports = router;

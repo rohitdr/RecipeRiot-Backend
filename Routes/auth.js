@@ -264,20 +264,20 @@ router.put('/updateuser', fetchUser, async (req, res) => {
           const username=req.body.username;
           const user = await User.findOne({email:email}) 
           if(!user){
-            return res.status(404).json({ 'error': "Sorry user does not exist with this email" })
+            return res.status(404).json({ error: "Sorry user does not exist with this email" })
           }
           
-          if (username !== user.username) {
-            return res.status(404).json({ 'error': "Please use correct correndentials" })
+          if (username != user.username) {
+            return res.status(404).json({ error: "Please use correct correndentials" })
         }
           const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
         const updatedUser = await User.updateOne({email:email}  ,{ $set: {password : securedpass  } } )
 
         if(!updatedUser){
-           return res.status(404).send({ error: "Their is something wrong ! Try again "});
+           return res.status(404).json({ error: "Their is something wrong ! Try again "});
         }
-        res.json({"succcess":"successfully password updated"})
+        res.json({succcess:"successfully password updated"})
         
     }catch(error)
     {

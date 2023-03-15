@@ -44,31 +44,31 @@ const RecipeSchema = new Schema({
   },
   label: {
     type: String,
-    required: true,
+    
   },
   image: {
     type: String,
-    required: true,
+    
   },
   source: {
     type: String,
-    required: true,
+    
   },
   dietLabels: {
     type: Array,
-    required: true,
+    
   },
   healthLabels: {
     type: Array,
-    required: true,
+    
   },
   cautions: {
     type: Array,
-    required: true,
+    
   },
   ingredientLines: {
     type: Array,
-    required: true,
+    
   },
   ingredients: [
     {
@@ -95,15 +95,15 @@ const RecipeSchema = new Schema({
   },
   cuisineType: {
     type: Array,
-    required: true,
+    
   },
   mealType: {
     type: Array,
-    required: true,
+    
   },
   dishType: {
     type: Array,
-    required: true,
+    
   },
   totalNutrients: {
     ENERC_KCAL: {

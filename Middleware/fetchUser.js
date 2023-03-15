@@ -3,7 +3,7 @@ const jwtSecret ="adlksfjakghaslkdfj"
 const fetchUser=(req,res,next)=>{
          const token = req.header('auth-token')
          if(!token){
-            res.status(401).send({'error':"Please login to continue"})
+            res.status(404).send({'error':"Please login to continue"})
          }
          try{
      const data = jwt.verify(token,jwtSecret);
@@ -12,7 +12,7 @@ const fetchUser=(req,res,next)=>{
      next();
          }
   catch(error){
-        res.status(401).send({error:"Please login to continue "})   
+        res.status(404).send({error:"Please login to continue "})   
     }
 }
 

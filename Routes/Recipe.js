@@ -442,7 +442,7 @@ let stateelement=recipe.Comments.filter((element)=>{
     // if(element._id == userid)
     //   stateelement.concat(element)
     //    })
-       if(stateelement.length>1){
+       if(stateelement.length>0){
         return res.status(404).json("You had already Comment on this recipe")
     
        }

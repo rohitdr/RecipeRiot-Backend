@@ -429,7 +429,7 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
     let state = true;
 
     let stateelement = recipe.Comments.filter((element) => {
-      return (element._id = req.user.id);
+      return (element.user == req.user.id);
     });
  
     if (stateelement.length > 0) {

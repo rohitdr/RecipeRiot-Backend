@@ -120,10 +120,13 @@ router.post('/getUserbyid', async (req, res) => {
       
         const id = req.body.id;
         const recipe = await Recipe.find({ user: req.body.id });
-    
+      var totalComments=0;
+      recipe.map((element)=>{
+          totalComments += element.Comments.length;
+      })
         const recipe_lenght=recipe.length
         const user = await User.findById(id).select("-password")
-        res.json({user:user,totalResults:recipe_lenght})
+        res.json({user:user,totalResults:recipe_lenght,TotalCommnts:totalComments})
     }
     catch (error) {
         console.error(error.message)

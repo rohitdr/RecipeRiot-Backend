@@ -1,0 +1,67 @@
+/* dropping text */
+.drop-text{
+
+    opacity:0;
+    animation: drop .4s linear forwards;
+ 
+}
+@keyframes drop {
+	0% {transform: translateY(-200px) scaleY(0.9); opacity: 0;}
+	5% {opacity: .7;}
+	50% {transform: translateY(0px) scaleY(1); opacity: 1;}
+	65% {transform: translateY(-17px) scaleY(.9); opacity: 1;}
+	75% {transform: translateY(-22px) scaleY(.9); opacity: 1;}
+	100% {transform: translateY(0px) scaleY(1); opacity: 1;}
+  }
+  /* //zoom animation */
+.zoom {
+
+
+   
+    margin: 0 auto;
+    height:300px;
+    width:500px;
+    transition: width 1s, height 1s, transform 2s;
+   
+  }
+  
+  .zoom:hover {
+    height:100%;
+    width:100%;
+
+    /* transform: rotate(360deg); */
+  }
+  /* .Moving_in_z_axis_animation_profile_card{
+  transform:
+  perspective(900px)
+  rotateX(40deg)
+translateY(-100px)
+  scale(0.7);
+box-shadow: 0px 20px 100px #555;
+transition:0.5s ease all;
+
+
+}
+
+.Moving_in_z_axis_animation_profile_card:hover {
+  transform:
+    rotate(0deg)
+    scale(1)
+    translateY(10px);
+} */
+.box_decrease_size_animation {
+  transform:
+    perspective(750px)
+    translate3d(0px, 0px, -10px)
+  
+    scale(0.9, 0.9);
+  border-radius: 20px;
+  border: 5px solid #e6e6e6;
+  box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
+  transition: 0.4s ease-in-out transform;
+
+ 
+}
+.box_decrease_size_animation:hover {
+  transform: translate3d(0px, 0px, -250px);
+}

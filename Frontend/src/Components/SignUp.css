@@ -1,0 +1,34 @@
+.singupcardheder{
+    height: 95px;
+    width: 256px;
+    margin-top: -40px;
+    z-index: 10;
+    background:  linear-gradient(60deg,#c04cd4,#a027d4);
+    border-radius: 20px;
+    /* text-size-adjust: auto; */
+}
+.sign_s{
+    opacity:0;
+    animation: drop .4s linear forwards 1s;
+}
+.sign_i{
+    opacity:0;
+    animation: drop .4s linear forwards 1.6s;
+}
+.sign_g{
+    opacity:0;
+    animation: drop .4s linear forwards 2.2s;
+}
+.sign_n{
+    opacity:0;
+    animation: drop .4s linear forwards 2.8s;
+}
+.sign_u{
+    opacity:0;
+    animation: drop .4s linear forwards 3.4s;
+}
+.sign_p{
+    opacity:0;
+    animation: drop .4s linear forwards 4s;
+}
+

@@ -1,0 +1,146 @@
+
+.cardratingview {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+    margin-top:20px;
+}
+.text-muted {
+    color: #8898aa!important;
+}
+.card .card-subtitleratingview {
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #8898aa;
+}
+ul.list-style-none li {
+    list-style: none;
+}
+.progress-barratingview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #707cd2;
+    transition: width .6s ease;
+}
+.progressratingview {
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+    -o-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+}
+
+.progressratingview {
+    display: flex;
+    height: 4px;
+    overflow: hidden;
+    font-size: .65625rem;
+    background-color: rgba(120,130,140,.13);
+    border-radius: 0;
+    box-shadow: inset 0 0.1rem 0.1rem rgba(0,0,0,.1);
+}
+.display-5ratingview {
+    font-size: 50px !important;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.reviews-members .media .mr-3 {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+}
+@media (min-width:1400px) {
+    .reviews-members .media .mr-3 {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}}
+.restaurant-detailed-header-left img {
+    width: 88px;
+    height: 88px;
+    border-radius: 3px;
+    object-fit: cover;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
+}
+.mask-custom {
+    background: rgba(24, 24, 16, .2);
+    border-radius: 2em;
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+  }
+
+  @keyframes myAnimation{
+    10%{
+  opacity: 1;
+  scale: 0.8;
+  transform: translateX(-5%);
+
+    }
+    40%{
+      opacity: 0.6;
+      transform: translateX(-10%);
+      scale: 0.6;
+     
+    }
+    70%{
+        opacity: 0.3;
+        transform: translateX(-15%);
+        scale: 0.4;
+    }
+    100%{
+      display: none;
+      opacity: 0;
+      transform: translateX(-20%);
+      scale: 0.2;
+    
+    }
+  }
+  @keyframes myAnimation2{
+    10%{
+       
+        opacity: 0.1;
+      
+       
+
+    }
+    40%{
+        opacity: 0.3;
+      
+      
+     
+    }
+    70%{
+        opacity: 0.6;
+       
+    
+    }
+    100%{
+        opacity: 1;
+       
+       
+    
+    }
+  }
+  
+  .disapear_component{ 
+   
+      animation-name: myAnimation;
+      animation-duration: .3s;
+      animation-fill-mode: forwards;
+  }
+  .appear_component{
+    animation-name: myAnimation2;
+    animation-duration: .3s;
+    animation-fill-mode: forwards;
+  }

@@ -1,0 +1,145 @@
+.background-radial-gradient {
+	background-color: hsl(218, 41%, 15%);
+	background-image: radial-gradient(650px circle at 0% 0%,
+		hsl(218, 41%, 35%) 15%,
+		hsl(218, 41%, 30%) 35%,
+		hsl(218, 41%, 20%) 75%,
+		hsl(218, 41%, 19%) 80%,
+		transparent 100%),
+	  radial-gradient(1250px circle at 100% 100%,
+		hsl(218, 41%, 45%) 15%,
+		hsl(218, 41%, 30%) 35%,
+		hsl(218, 41%, 20%) 75%,
+		hsl(218, 41%, 19%) 80%,
+		transparent 100%);
+  }
+
+  #radius-shape-1 {
+	height: 220px;
+	width: 220px;
+	top: -60px;
+	left: -130px;
+	background: radial-gradient(#44006b, #ad1fff);
+	overflow: hidden;
+  }
+
+  #radius-shape-2 {
+	border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+	bottom: -60px;
+	right: -110px;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(#44006b, #ad1fff);
+	overflow: hidden;
+  }
+
+  .bg-glass {
+	background-color: hsla(0, 0%, 100%, 0.9) !important;
+	backdrop-filter: saturate(200%) blur(25px);
+  }
+
+  @media (min-width:450px){
+.loginform{
+	padding-right:60px;
+	padding-left:60px;
+}
+.loginformheader{
+	padding: 1.5rem 10px;
+  }
+  }
+  .loginformheader{
+	margin-top: -70px;
+	margin-bottom: 20px;
+	background: linear-gradient(60deg,#c04cd4,#a027d4);
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 20%), 0 13px 24px -11px rgba(191, 52, 216, 0.6);
+	border-radius: 30px;
+    padding: 2.5rem 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+  @media (min-width:450px){
+  .box_decrease_size_animationforlogin {
+	transform:
+	  perspective(750px)
+	  translate3d(0px, 0px, -10px)
+	
+	  scale(0.9, 0.9);
+	border-radius: 20px;
+	
+	box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
+	transition: 0.4s ease-in-out transform;
+  
+   
+  }
+  .box_decrease_size_animationforlogin:hover {
+	transform: translate3d(0px, 0px, -250px) scale(1.1,1.1);
+	
+
+  }}
+.login_login:hover,
+.login_login:focus{
+
+	background-color: #ac40ab;
+    color: #fff;
+    letter-spacing: 3px;
+    box-shadow: none;
+    outline: none;
+}
+.login_login{
+	
+	
+		color: #000;
+		background-color: #ac40ab;
+		font-size: 15px;
+		font-weight: bold;
+		text-transform: uppercase;
+		width: 100%;
+		padding: 12px 15px 11px;
+		border-radius: 20px;
+		box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
+		border: none;
+		transition: all 0.5s ease 0s;
+	
+}
+.loginform-control{
+    color: #333;
+    background: #ecf0f3;
+    font-size: 15px;
+    height: 50px;
+    padding: 20px ;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+}
+.loginform-control:focus{
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+    outline: none;
+}
+#accountdetailsubmit{
+	display: none;
+}
+@media (min-width:990px ) and (max-width: 1200px) {
+	.accountdetailcard{
+        width: 56%!important;
+	}
+	
+}
+#displaysocailform{
+	display: none;
+}
+@media (min-width:992px ) and (max-width: 1200px) {
+.logincardbody{
+padding-left: 0rem!important;
+padding-right: 0rem!important;
+}
+}
+@media (min-width:200px ) and (max-width: 490px) {
+	.logincardbody{
+	padding-left: 0.5rem!important;
+	padding-right: 0.5rem!important;
+	}
+	}

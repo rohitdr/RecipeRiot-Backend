@@ -1,0 +1,1734 @@
+1.removed awesome icon imports
+2.installing react bootstrap
+3.npm install react-bootstrap bootstrap
+4.adding for buttons
+5.npm install --save cdbreact
+6.almost completed the navbar
+npm i react-top-loading-bar
+ npm i react-scripts
+
+npm i react-infinite-scroll-component
+
+
+
+    trying something 
+      {" "}
+  <form>
+        <div className="scene">
+          <div className="card">
+            <div className="face front">
+              <div className="d-flex blankRecipe">
+                <div
+                  className="p-1 imageBox flex-fill bd-highlight"
+                  style={{ width: "50%" }}
+                >
+                  <input
+                    type="file"
+                    className="fileToUpload mx-auto hidden"
+                    id="imgInp"
+                    name="image"
+                    onChange={loadFile}
+                  
+                  />
+                  <img id="output" height="300px" width="300px" />
+                </div>
+
+                <div
+                  className="p-1 flex-fill bd-highlight"
+                  style={{ width: "50%" }}
+                >
+                  <div className="form-outline">
+                    <input
+                      type="text"
+                      id="label"
+                      name="label"
+                      placeholder="Enter the title"
+                      className="form-control border-dark"
+                      onChange={onchangelabel}
+                    />
+
+                    <h5 className="card-text text-center fw-bold text-dark">
+                      {" "}
+                      INGRIDIANTS
+                    </h5>
+                    <p className="card-text text-dark">
+                      {/* <textarea className="form-control" id="textAreaExample" placeholder="Enter the Ingrediants" rows="3"></textarea> */}
+                      <input
+                        type="text"
+                        name="account[first_Ingrediant]"
+                        className="form-control border-dark"
+                        placeholder="Enter the first Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                      />
+                      <input
+                        type="text"
+                        name="account[Second_ingrediant]"
+                        className="form-control mt-1 border-dark"
+                        placeholder="Enter the Second Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                      />
+
+                      <input
+                        type="text"
+                        name="account[third_Ingrediant]"
+                        className="form-control mt-1 border-dark"
+                        placeholder="Enter the third Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                      />
+                      <div
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Add More Ingrediants"
+                      >
+                        <i
+                          className=" fs-4 fa-solid  fa-circle-plus text-dark mt-1"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        ></i>
+                      </div>
+                    </p>
+
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal_additional_details"
+                    >
+                      Add Recipe
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card-footer text-muted">
+                <table className="table table-borderless table-hover  text-dark">
+                  <tbody>
+                    <tr>
+                      <td style={{ color: "white", background: "	red" }}>
+                        Caution
+                      </td>
+                      <td style={{ color: "white", background: "	red" }}>
+                        {/* {props.caution.toString().length > 2
+                  ? props.caution.slice(0, 2).toString()
+                  : "___"} */}
+                        <input
+                          type="text"
+                         
+                          placeholder="Enter the caution"
+                          className="form-control border-dark"
+                          name="cautions"
+                          id="cautions"
+                        onChange={onchange}
+                        />
+                      </td>
+                      <td style={{ color: "white", background: "	green" }}>
+                        Source:&#8594;
+                      </td>
+                      <td style={{ color: "white", background: "	green" }}>
+                        {/* {props.source} */}
+                        <input
+                          type="text"
+                          id="source"
+                          placeholder="Enter the source"
+                          className="form-control border-dark"
+                          name="source"
+                          onChange={onchange}
+
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* modal after clicking the add item */}
+        <div
+          className="modal"
+          id="exampleModal_additional_details"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-scrollable">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Additional Details
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="form-outline">
+                  <label className="form-label text-dark fw-bold" for="typeURL">
+                    Enter Source Url
+                  </label>
+                  <input type="url" id="url" className="form-control" name="url" onChange={onchange} />
+                </div>
+                <div className="form-outline">
+                  <label className="form-label text-dark fw-bold" for="typeURL">
+                    Enter calories
+                  </label>
+                  <input type="number"  className="form-control" name="calories"  id="calories" onChange={onchange}/>
+                </div>
+                <div className="form-outline">
+                  <label className="form-label text-dark fw-bold" for="typeURL">
+                    Enter TotalWeight
+                  </label>
+                  <input type="number"  className="form-control" name="totalWeight"  id="totalWeight" onChange={onchange} />
+                </div>
+                <div className="form-outline">
+                  <label className="form-label text-dark fw-bold" for="typeURL">
+                    Enter TotalTime
+                  </label>
+                  <input type="number" id="totalTime" className="form-control" name="totalTime"   onChange={onchange} />
+                </div>
+                {/* dietlabels */}
+                  <label className="form-label text-dark fw-bold">
+                  Choose the Diet Labels
+                </label>
+                <select multiple="multiple" class="form-select" id="dietLabels" name="dietLabels" onChange={onchangearray}>
+
+
+              
+
+      <option value="balanced"> balanced  </option>
+
+
+      <option value="high-fiber"> high-fiber  </option>
+
+
+      <option value="high-protein"> high-protein  </option>
+
+
+      <option value="low-carb"> low-carb  </option>
+
+
+      <option value="low-fat"> low-fat  </option>
+
+
+      <option value="low-sodium"> low-sodium  </option>
+
+
+  </select>
+
+                {/* healthLabel */}
+                <label className="form-label text-dark fw-bold">
+                  Choose the Health Labels
+                </label>
+                <select multiple="multiple" className="form-select" name="healthLabels" id="healthLabels" onChange={onchangearray}>
+                  <option value="alcohol-cocktail"> alcohol-cocktail </option>
+
+                  <option value="alcohol-free"> alcohol-free </option>
+
+                  <option value="celery-free"> celery-free </option>
+
+                  <option value="crustacean-free"> crustacean-free </option>
+
+                  <option value="dairy-free"> dairy-free </option>
+
+                  <option value="DASH"> DASH </option>
+
+                  <option value="egg-free"> egg-free </option>
+
+                  <option value="fish-free"> fish-free </option>
+
+                  <option value="fodmap-free"> fodmap-free </option>
+
+                  <option value="gluten-free"> gluten-free </option>
+
+                  <option value="immuno-supportive"> immuno-supportive </option>
+
+                  <option value="keto-friendly"> keto-friendly </option>
+
+                  <option value="kidney-friendly"> kidney-friendly </option>
+
+                  <option value="kosher"> kosher </option>
+
+                  <option value="low-fat-abs"> low-fat-abs </option>
+
+                  <option value="low-potassium"> low-potassium </option>
+
+                  <option value="low-sugar"> low-sugar </option>
+
+                  <option value="lupine-free"> lupine-free </option>
+
+                  <option value="Mediterranean"> Mediterranean </option>
+
+                  <option value="mollusk-free"> mollusk-free </option>
+
+                  <option value="mustard-free"> mustard-free </option>
+
+                  <option value="no-oil-added"> no-oil-added </option>
+
+                  <option value="paleo"> paleo </option>
+
+                  <option value="peanut-free"> peanut-free </option>
+
+                  <option value="pescatarian"> pescatarian </option>
+
+                  <option value="pork-free"> pork-free </option>
+
+                  <option value="red-meat-free"> red-meat-free </option>
+
+                  <option value="sesame-free"> sesame-free </option>
+
+                  <option value="shellfish-free"> shellfish-free </option>
+
+                  <option value="soy-free"> soy-free </option>
+
+                  <option value="sugar-conscious"> sugar-conscious </option>
+
+                  <option value="sulfite-free"> sulfite-free </option>
+
+                  <option value="tree-nut-free"> tree-nut-free </option>
+
+                  <option value="vegan"> vegan </option>
+
+                  <option value="vegetarian"> vegetarian </option>
+
+                  <option value="wheat-free"> wheat-free </option>
+                </select>
+
+                {/* crusine type */}
+                <label className="form-label text-dark fw-bold">
+                  Choose the cuisine Type
+                </label>
+                <select
+                  multiple="multiple"
+                  className="form-select"
+                  name="cuisineType"
+                  id="cuisineType"
+                  onChange={onchangearray}
+                >
+                  <option value="American"> American </option>
+
+                  <option value="Asian"> Asian </option>
+
+                  <option value="British"> British </option>
+
+                  <option value="Caribbean"> Caribbean </option>
+
+                  <option value="Central Europe"> Central Europe </option>
+
+                  <option value="Chinese"> Chinese </option>
+
+                  <option value="Eastern Europe"> Eastern Europe </option>
+
+                  <option value="French"> French </option>
+
+                  <option value="Indian"> Indian </option>
+
+                  <option value="Italian"> Italian </option>
+
+                  <option value="Japanese"> Japanese </option>
+
+                  <option value="Kosher"> Kosher </option>
+
+                  <option value="Mediterranean"> Mediterranean </option>
+
+                  <option value="Mexican"> Mexican </option>
+
+                  <option value="Middle Eastern"> Middle Eastern </option>
+
+                  <option value="Nordic"> Nordic </option>
+
+                  <option value="South American"> South American </option>
+
+                  <option value="South East Asian"> South East Asian </option>
+                </select>
+                {/* meal type */}
+
+                <label className="form-label text-dark fw-bold">
+                  Choose the Meal Type
+                </label>
+                <select multiple="multiple" className="form-select" name="mealType" id="mealType"  onChange={onchangearray}>
+                  <option value="Breakfast"> Breakfast </option>
+
+                  <option value="Dinner"> Dinner </option>
+
+                  <option value="Lunch"> Lunch </option>
+
+                  <option value="Snack"> Snack </option>
+
+                  <option value="Teatime"> Teatime </option>
+                </select>
+                {/* dish type */}
+                <label className="form-label text-dark fw-bold">
+                  Choose the Dish Type
+                </label>
+                <select multiple="multiple" className="form-select" name="dishType" id="dishType"  onChange={onchangearray}>
+                  <option value="Biscuits and cookies">
+                    {" "}
+                    Biscuits and cookies{" "}
+                  </option>
+
+                  <option value="Bread"> Bread </option>
+
+                  <option value="Cereals"> Cereals </option>
+
+                  <option value="Condiments and sauces">
+                    {" "}
+                    Condiments and sauces{" "}
+                  </option>
+
+                  <option value="Desserts"> Desserts </option>
+
+                  <option value="Drinks"> Drinks </option>
+
+                  <option value="Main course"> Main course </option>
+
+                  <option value="Pancake"> Pancake </option>
+
+                  <option value="Preps"> Preps </option>
+
+                  <option value="Preserve"> Preserve </option>
+
+                  <option value="Salad"> Salad </option>
+
+                  <option value="Sandwiches"> Sandwiches </option>
+
+                  <option value="Side dish"> Side dish </option>
+
+                  <option value="Soup"> Soup </option>
+
+                  <option value="Starter"> Starter </option>
+
+                  <option value="Sweets"> Sweets </option>
+                </select>
+                <button
+                  type="button"
+                  className="btn btn-primary mt-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_nutritional_details"
+                >
+                  Add Nutritional Details
+                </button>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary" onClick={RecipeAdder}  data-bs-dismiss="modal">
+                  Add Recipe
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* modal for adding more Ingrediant */}
+        <div
+          className="modal"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Ingrediants
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="form-outline">
+                  <input
+                    type="text"
+                    id="typeText"
+                    className="form-control border-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal4"
+                  />
+                  <label className="form-label fw-bold" for="typeText">
+                    Fourth Ingrediants
+                  </label>
+                </div>
+                <div className="form-outline">
+                  <input type="text" id="typeText" className="form-control"  data-bs-toggle="modal"
+                          data-bs-target="#exampleModal5" />
+                  <label className="form-label fw-bold" for="typeText">
+                    Fifth Ingrediants
+                  </label>
+                </div>
+                <div className="form-outline">
+                  <input type="text" id="typeText" className="form-control"  data-bs-toggle="modal"
+                          data-bs-target="#exampleModal6" />
+                  <label className="form-label fw-bold" for="typeText">
+                    Sixeth Ingrediants
+                  </label>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary">
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* modal for adding totalNutrients */}
+        <div
+          className="modal"
+          id="exampleModal_nutritional_details"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Ingrediants
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nutrient</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">units</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Energy</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="ENERC_KCAL"
+                          name="ENERC_KCAL"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            required
+                            onChange={(e)=>{
+                            
+                             ENERC_KCAL_value= e.target.value
+                           
+                           
+                            }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Fat</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="FAT"
+                            name="FAT"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                               required
+                            onChange={(e)=>{
+                              FAT_value= e.target.value
+                            
+                             
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Carbs</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="CHOCDF"
+                            name="CHOCDF"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                               required
+                            onChange={(e)=>{
+                              CHOCDF_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                            
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>Fiber</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="FIBTG"
+                            name="FIBTG"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                               required
+                            onChange={(e)=>{
+                              FIBTG_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>Sugars</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="SUGAR"
+                            name="SUGAR"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                               required
+                            onChange={(e)=>{
+                              SUGAR_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>Protein</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="PROCNT"
+                            name="PROCNT"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              PROCNT_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">7</th>
+                      <td>Cholesterol</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                          
+                           
+                            id="CHOLE"
+                            name="CHOLE"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              CHOLE_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">8</th>
+                      <td>Calcium</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                          type="number"
+                           id="CA"
+                           name="CA"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              CA_value= e.target.value
+                            
+                            
+                             }}
+                           
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">9</th>
+                      <td>Iron</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="FE"
+                            name="FE"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              FE_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">10</th>
+                      <td>Vitamin A</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="VITA_RAE"
+                            name="VITA_RAE"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITA_RAE_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">11</th>
+                      <td>Vitamin C</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="VITC"
+                            name="VITC"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITC_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">12</th>
+                      <td>Thiamin B1</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="THIA"
+                            name="THIA"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              THIA_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">13</th>
+                      <td>Riboflavin B2</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="RIBF"
+                            name="RIBF"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              RIBF_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">14</th>
+                      <td>Niacin B3</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="NIA"
+                            name="NIA"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              NIA_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">15</th>
+                      <td>Vitamin B6</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="VITB6A"
+                            name="VITB6A"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITB6A_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">16</th>
+                      <td> Vitamin B12</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="VITB12"
+                            name="VITB12"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITB12_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">17</th>
+                      <td>Vitamin D</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            iid="VITD"
+                            name="VITD"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITD_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">18</th>
+                      <td>Vitamin E</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="TOCPHA"
+                            name="TOCPHA"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              TOCPHA_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">19</th>
+                      <td>Vitamin K</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="VITK1"
+                            name="VITK1"
+                            className="form-control"
+                            placeholder="Enter Quantity"
+                            onChange={(e)=>{
+                              VITK1_value= e.target.value
+                            
+                            
+                             }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">20</th>
+                      <td>Water</td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="number"
+                            id="WATER"
+                            name="WATER"
+                            className="form-control"
+                        placeholder="Enter Quantity"
+                        onChange={(e)=>{
+                          WATER_value= e.target.value
+                        
+                        
+                         }}
+                          />
+
+                        </div>
+                      </td>
+                      <td>
+                        <div className="form-outline">
+                          <input
+                            type="text"
+                            id="typeNumber"
+                            className="form-control"
+                            placeholder="Enter the units"
+                          />
+
+                        </div>
+                      </td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary" onClick={settingTotalNutrients}  data-bs-dismiss="modal">
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* modal for adding Ingrediants details */}
+       <IngrediantsDetails number="first" modal={1}></IngrediantsDetails>
+       <IngrediantsDetails number="second" modal={2}></IngrediantsDetails>
+       <IngrediantsDetails number="third" modal={3}></IngrediantsDetails>
+       <IngrediantsDetails number="fourth" modal={4}></IngrediantsDetails>
+       <IngrediantsDetails number="fifth" modal={5}></IngrediantsDetails>
+       <IngrediantsDetails number="sixed" modal={6}></IngrediantsDetails>
+      </form>
+
+
+
+
+        <div className="d-flex">
+          <div
+            className="p-1 flex-fill bd-highlight"
+            style={{ width: "50%" }}
+          >
+            <img
+             
+              src={props.ImageUrl}
+              className="card-img-top recipeItemImage rounded"
+              alt=""
+              style={{ zIndex:"1" }}
+              onerror="this.src='https://cdn.xxl.thumbs.canstockphoto.com/image-not-available-written-in-chalk-on-a-blackboard-stock-image_csp8317846.jpg'"
+              height="300px"
+              width="500px"
+            />
+            <span class="position-absolute translate-middle badge bg-dark"><i class="fa-solid fs-6 fa-right-left" onClick={onclickRotate}></i></span>
+          </div>
+       
+          <div className="p-1 flex-fill bd-highlight   " style={{ width: "50%" }}  >
+            <h4 className={`fw-bold text-${props.headingColor}`}  >
+              {props.title}
+            </h4>
+            <p className={`card-text text-${props.headingColor}`} style={{textAlign:"justify"}}>
+              {props.health_labels}.......
+            </p>
+            <h5
+              className={`card-text text-center fw-bold text-${props.headingColor}`}
+            >
+              {" "}
+              INGRIDIANTS
+            </h5>
+            <p className={`card-text text-${props.headingColor}`}>
+              {props.Ingridiants}.....
+            </p>
+          </div>
+        
+        </div>
+       
+        <div className="card-footer text-muted">
+        
+          <table
+            className={`table table-borderless table-hover  text-${props.headingColor}`}
+          >
+            <tbody>
+              <tr>
+                <td style={{ color: "white", background: "	red" }}>Caution</td>
+                <td style={{ color: "white", background: "	red" }}>
+                  {props.caution.toString().length > 2
+                    ? props.caution.slice(0, 2).toString()
+                    : "___"}
+                </td>
+                <td style={{ color: "white", background: "	green" }}>
+                  Source:&#8594;
+                </td>
+                <td style={{ color: "white", background: "	green" }}>
+                  {props.source}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         
+        </div>
+        {/* <span class="position-absolute  translate-middle badge rounded-pill bg-danger" style={{zIndex:"99999990"}}>
+            {props.time === 0 ? "Default" : props.time + "min"}
+            <span class="visually-hidden">source</span>
+          </span> */}
+
+
+          <div class="face back">
+       <div
+          className="card-body "
+
+          style={{ backgroundColor: "rgb(63 52 81 / 15%)" }}
+        >  <span class="position-absolute translate-middle badge"><i class="fa-solid fs-6 fa-right-left" onClick={onclickRotate}></i><i class="fa-solid fs-6 fa-trash  mx-2" onClick={()=>{
+          deleteRecipe(props.id) }}></i></span>
+
+          <h5
+            className={`card-text text-center fw-bold text-white`}
+          >
+            NUTRIENTS
+          </h5>
+          <div className="d-flex bd-highlight">
+            <div
+              className="p-2 flex-fill bd-highlight"
+              style={{ width: "50%" }}
+            >
+              <h3 className={`text-center text-white`}>
+                {props.caleroies}Kcal
+              </h3>
+              <h5 className={`text-center text-white`}>
+                {" "}
+                Fat :{props.fat}g
+              </h5>
+              <table
+                className={`table table-borderless   my-4 text-white`}
+              >
+                <tbody>
+                  <tr>
+                    {/* <td>{Main_Nutrition}</td>
+      <td>{Main_Nutrition_quantity}</td> */}
+                  </tr>
+                  <tr>
+                    <td>Sugar</td>
+                    <td>{Math.ceil(props.sugar)}g</td>
+                  </tr>
+                  <tr>
+                    <td>Water</td>
+                    <td>{Math.ceil(props.water)}g</td>
+                  </tr>
+                  <tr>
+                    <td>Cholesterol</td>
+                    <td>{Math.ceil(props.chole)}g</td>
+                  </tr>
+                </tbody>
+              </table> 
+            
+              {/* <a className="btn btn-primary" href={props.url} role="button">Read More</a> */}
+            </div>
+
+            <div className="p-1 flex-fill bd-highlight">
+              <table
+                className={` table table-borderless  text-white`}
+              >
+                <tbody>
+                  <tr>
+                    {/* 
+     <td>{aditional_Nutrition}</td>
+     <td>{aditional_Nutrition_quantity}</td> */}
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-A</td>
+                    <td>{Math.ceil(props.vitamin_a)}μg</td>
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-C</td>
+                    <td>{Math.ceil(props.vitamin_c)}mg</td>
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-B6</td>
+                    <td>{Math.ceil(props.vitamin_b6)}mg</td>
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-D</td>
+                    <td>{Math.ceil(props.vitamin_d)}μg</td>
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-E</td>
+                    <td>{Math.ceil(props.vitamin_e)}mg</td>
+                  </tr>
+                  <tr>
+                    <td>VITAMIN-K</td>
+                    <td>{Math.ceil(props.vitamin_k)}μg</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <Button
+              color="primary"
+              size="large"
+              href={props.url}
+              label="Read More"
+              
+            ></Button>
+            <Button
+              color="primary"
+              size="large"
+              href={props.url}
+              label="delete"
+            ></Button>
+            <Button
+              color="success"
+              size="large"
+              href={props.url}
+              label="Edit"
+            ></Button>
+          </div>
+        </div>
+
+
+
+        <div className='home_file  '>
+
+{/* carousel */}
+<div className=' carousel'>
+ <Carousel fade variant="dark" >
+      <Carousel.Item >
+        <img
+          className=" carousel_image w-100"
+          src="https://images.unsplash.com/photo-1542010589005-d1eacc3918f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVjaXBlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+          alt="First slide"
+        />
+       
+      </Carousel.Item >
+      <Carousel.Item >
+        <img
+          className="carousel_image  w-100"
+          src="https://images.pexels.com/photos/6061743/pexels-photo-6061743.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt="Second slide"
+        />
+
+      
+      </Carousel.Item>
+      <Carousel.Item >
+        <img
+          className="carousel_image w-100"
+          src="https://images.pexels.com/photos/4686816/pexels-photo-4686816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Third slide"
+        />
+
+     
+      </Carousel.Item>
+    </Carousel>
+    </div>
+{/* carousel */}
+{/* cards carousel */}
+
+<Carousel fade variant="dark"indicators={false} controls={false} interval={2000}>
+
+      <Carousel.Item >
+      <h1 className="text-center b my-4 fw-bold text-white" >
+          Top Recipes
+          </h1>
+      {loading && <Loader></Loader>}
+      <div className="cards-wrapper mb-3">
+     
+      {recipe.recipe && recipe.recipe.map((element)=>{
+      first++;
+      
+      if(first<7){
+        return <div className={`carousel_card card ${(first<3)?hide:""}`} key={element._id}>
+        <Carousel_card image={element.image} title={element.label}></Carousel_card>
+       
+       </div>
+      }
+     
+     
+        
+     }
+     )
+     }
+    </div>
+       
+      </Carousel.Item>
+      <Carousel.Item>
+      <h1 className="text-center b my-4 fw-bold text-white" >
+          Top Recipes
+          </h1>
+      {loading && <Loader></Loader>}
+      <div className="cards-wrapper mb-3">
+      {recipe.recipe && recipe.recipe.map((element)=>{
+      second++;
+      if(second>6 && second<13){
+        return <div className={`carousel_card card ${(second<9)?hide:""}`} key={element._id}>
+        <Carousel_card image={element.image} title={element.label}></Carousel_card>
+       
+       </div>
+      }
+     
+     
+        
+     }
+     )
+     }
+
+      </div>
+
+      
+      </Carousel.Item>
+      <Carousel.Item>
+      <h1 className="text-center  my-4 fw-bold text-white" >
+          Top Recipes
+          </h1>
+      {loading && <Loader></Loader>}
+      <div className="cards-wrapper mb-3">
+      {recipe.recipe && recipe.recipe.map((element)=>{
+      third++;
+      if(third>13 && third<20){
+        return <div className={`carousel_card card ${(third<16)?hide:""}`} key={element._id}>
+        <Carousel_card image={element.image} title={element.label}></Carousel_card>
+       
+       </div>
+      }
+     
+     
+        
+     }
+     )
+     }
+
+      </div>
+
+     
+      </Carousel.Item>
+    </Carousel>
+{/* cards carousel */}
+
+
+{/* latest Recipe */}
+<div className="latest_recipe_container">
+<div className="row">
+  <div className="col-md-3 d-none d-md-block " id="latestRecipeUpper">
+  <div className="carousel_card   card my-3 " style={{height:"20%"}}>
+<Carousel_card image={"https://static.toiimg.com/photo/96087126/96087126.jpg?v=3"} height={100}></Carousel_card>
+  </div>
+  <div className="carousel_card  card my-3 " style={{height:"20%"}}>
+<Carousel_card image={"https://image.winudf.com/v2/image1/Y29tLmRvbmF0ZS5wYWxtZHJvaWRfc2NyZWVuXzBfMTU4ODE1MDIwN18wNTg/screen-0.jpg?fakeurl=1&type=.webp"} height={100} ></Carousel_card>
+  </div>
+  <div className="carousel_card  card my-3 " style={{height:"20%"}}>
+<Carousel_card image={"https://static.toiimg.com/photo/96087126/96087126.jpg?v=3"} height={100}></Carousel_card>
+  </div>
+  </div>
+  <div className="col-md-6 my-3">
+  <div className="p-1 border bg-white">
+  <div className=" mb-3 text-center" style={{backgroundColor:"rgb(13, 63, 29)"}}>
+<strong className='fw-bold text-white fs-3' >Latest Recipes</strong>
+</div>
+    {/* latest 1 */}
+
+    {Latest_recipe.recipe && Latest_recipe.recipe.map((element)=>{
+      fourth++;
+      if(fourth<10){
+        return <a href="" className="text-dark">
+        <div className="row mb-4 border-bottom pb-2">
+          <div className="col-3 ">
+            <img src={element.image}
+              className="img-fluid shadow-1-strong rounded latest_recipe_image " alt="Latest Recipe Image" />
+          </div>
+  
+          <div className="col-9">
+            <p className="mb-2 fs-4"><strong>{element.label}</strong></p>
+            <p>
+              <u>  {(new Date(element.date).toLocaleString())}</u>
+            </p>
+          </div>
+        </div>
+      </a>
+      }
+     
+     
+        
+     }
+     )
+     }
+  
+   
+
+  </div>
+  </div>
+  <div className="col-md-3 d-none d-md-block">
+  <div className="carousel_card card my-3 "style={{height:"20%"}}>
+<Carousel_card image={"https://static.toiimg.com/photo/96087126/96087126.jpg?v=3"} height={100}></Carousel_card>
+  </div>
+  <div className="carousel_card card my-3 "style={{height:"20%"}}>
+<Carousel_card image={"https://static.toiimg.com/photo/96087126/96087126.jpg?v=3"} height={100}></Carousel_card>
+  </div>
+  <div className="carousel_card card my-3 " style={{height:"20%"}}>
+<Carousel_card image={"https://static.toiimg.com/photo/96087126/96087126.jpg?v=3"} height={100}></Carousel_card>
+  </div>
+    </div>
+</div>
+</div>
+{/* latest Recipe */}
+{/* customer reviews */}
+
+    <div class="mgb-40 padb-30 auto-invert line-b-4  align-center">
+        <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Not Yet Convinced?</h4>
+        <h1 class="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg" contenteditable="false">Read Customer Reviews</h1>
+    </div>
+    <ul class="hash-list cols-3 cols-1-xs pad-30-all  align-center text-sm">
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]"/>
+          <p class="fs-110 font-cond-l" contenteditable="false">" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Martha Stewart</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Business Woman - New York</small>
+        </li>
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]"/>
+          <p class="fs-110 font-cond-l" contenteditable="false">" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Ariana Menage</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Recording Artist - Los Angeles</small>
+        </li>
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]"/>
+          <p class="fs-110 font-cond-l" contenteditable="false">" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Sean Carter</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Fund Manager - Chicago</small>
+        </li>
+      </ul>
+   
+{/* customer reviews */}
+    </div>
+
+
+
+    add recipe
+
+       <div className="AddRecipe pt-2">
+    <div className="container bg-white pt-2 ">
+        <div className="row">
+            <div className="col-md-8">
+            <div className="form-floating">
+               
+                    <input
+                      type="text"
+                      id="label"
+                      name="label"
+                      placeholder="Enter the title"
+                      className="form-control border-dark"
+                    //   onChange={onchangelabel}
+                    />
+                     <label for="label">Title</label>
+
+  </div>
+  <div className="input-group mt-2">
+  
+  <input
+                    type="file"
+                    className="fileToUpload mx-auto hidden form-control "
+                    id="imgInp"
+                    name="image"
+                    // onChange={loadFile}
+                  
+                  /> 
+  <span className="input-group-text">Recipe Image</span>
+</div>
+                  <div className="row mt-2">
+                    <div className="col-4">
+                    <input
+                        type="text"
+                        name="account[first_Ingrediant]"
+                        className="form-control border-dark mt-1"
+                        placeholder="Enter the first Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                      />
+                    </div>
+                    <div className="col-3">
+                    <input
+                        type="text"
+                        name="account[Second_ingrediant]"
+                        className="form-control mt-1 border-dark"
+                        placeholder="Enter the Second Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                      />
+
+                        </div>
+                        <div className="col-4">
+                        <input
+                        type="text"
+                        name="account[third_Ingrediant]"
+                        className="form-control mt-1 border-dark"
+                        placeholder="Enter the third Ingrediant"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                      />
+                        </div>
+                        <div className="col-1">
+                        <div
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Add More Ingrediants"
+                        className='mt-1'
+                      >
+                        <i
+                          className=" fs-4 fa-solid  fa-circle-plus text-dark mt-1"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        ></i>
+                      </div>
+                        </div>
+                  </div>
+                   
+                     
+                    
+                      {/* */}
+                  
+                  
+                  
+                  <div className="row">
+                   <div className="col-sm-7">
+                    <div className="input-group mt-2">
+                    <span className="input-group-text">Caution</span>
+                    <input
+                          type="text"
+                         
+                          placeholder="Enter the caution"
+                          className="form-control "
+                          name="cautions"
+                          id="cautions"
+                        // onChange={onchange}
+                        />
+                        </div>
+
+                    </div>
+                    <div className="row">
+                    <div className="col-sm-7">
+                    <div className="input-group mt-2">
+                    <span className="input-group-text">Source</span>
+
+                    <input
+                          type="text"
+                          id="source"
+                          placeholder="Enter the source"
+                          className="form-control "
+                          name="source"
+                        //   onChange={onchange}
+
+                        />
+                    </div>    </div>
+                        </div>
+                  </div>
+                  
+                  
+                   </div>
+            <div className="col-md-4">
+           
+                  <img id="output" height="200px" width="300px" />
+              
+            </div>
+        </div>
+  
+  
+   </div>
+   </div>

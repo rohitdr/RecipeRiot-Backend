@@ -6,9 +6,9 @@ export default function Footer() {
   
 
 
-  <footer class="bg-light text-center text-white">
+  <footer class="bg-light text-center text-white" >
 
-  <div class="container p-4 pb-0">
+  <div class="container p-4 pb-0" >
    
     <section class="mb-4">
 

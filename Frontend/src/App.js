@@ -32,6 +32,7 @@ import Footer from "./Components/Footer";
 import InternalServerError from "./Components/InternalServerError";
 import EditRecipe from "./Components/EditRecipe";
 import BlankRecipeItemAddRecipe from "./Components/BlankRecipeItemAddRecipe";
+import Admin from "./Components/Admin";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
@@ -394,7 +395,18 @@ function App() {
             element={
               
               <Home></Home>
+         
+         
+           
+            }
+          />
+           <Route
+            exact
+            path="/Admin"
+            element={
+              
              
+             <Admin></Admin>
          
            
             }

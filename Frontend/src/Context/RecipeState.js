@@ -33,7 +33,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        `http://localhost:5000/api/recipe/allRecipeswithdietLabels/${type}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithdietLabels/${type}`,
         {
           method: "GET",
           mode: "cors",
@@ -65,7 +65,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        `http://localhost:5000/api/recipe/allRecipeswithdishtype/${type}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithdishtype/${type}`,
         {
           method: "GET",
           mode: "cors",
@@ -93,8 +93,8 @@ export default function RecipeState(props) {
       const response = await fetch(
         `${
           type == "lunch/dinner"
-            ? "http://localhost:5000/api/recipe/allRecipeswithmealtypelunchdinner"
-            : `http://localhost:5000/api/recipe/allRecipeswithmealtype/${type}`
+            ? `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithmealtypelunchdinner`
+            : `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithmealtype/${type}`
         }`,
         {
           method: "GET",
@@ -122,7 +122,7 @@ export default function RecipeState(props) {
       sethealthloading(true);
       setProgress(30);
       const response = await fetch(
-        `http://localhost:5000/api/recipe/allRecipeswithhealthlabels/${type}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithhealthlabels/${type}`,
         {
           method: "GET",
           mode: "cors",
@@ -149,7 +149,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        `http://localhost:5000/api/recipe/allRecipeswithcuisinetype/${type}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithcuisinetype/${type}`,
         {
           method: "GET",
           mode: "cors",
@@ -180,7 +180,7 @@ export default function RecipeState(props) {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/auth/getUserbyid",
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/getUserbyid`,
         {
           method: "POST",
           mode: "cors",
@@ -210,7 +210,7 @@ export default function RecipeState(props) {
       setLoading(true);
       setProgress(30);
       const response = await fetch(
-        `http://localhost:5000/api/recipe/recipebyid/${id}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/recipebyid/${id}`,
         {
           method: "GET",
           mode: "cors",
@@ -238,7 +238,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        "http://localhost:5000/api/recipe/allLikedRecipe",
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allLikedRecipe`,
         {
           method: "GET",
           mode: "cors",
@@ -277,7 +277,7 @@ export default function RecipeState(props) {
         sessionStorage.getItem("auth-token") ||
         localStorage.getItem("auth-token")
       ) {
-        const response = await fetch("http://localhost:5000/api/auth/getUser", {
+        const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/getUser`, {
           method: "POST",
           mode: "cors",
           headers: {
@@ -305,7 +305,7 @@ export default function RecipeState(props) {
   const UnLikeRecipe = async (recipeid) => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/recipe/unlike", {
+      const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/unlike`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -332,7 +332,7 @@ export default function RecipeState(props) {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5000/api/recipe/like", {
+      const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/like`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -372,7 +372,7 @@ export default function RecipeState(props) {
       setnamereicpeloading(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/recipe/allRecipeswith${recipename}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswith${recipename}`,
         {
           method: "GET",
           mode: "cors",
@@ -407,7 +407,7 @@ export default function RecipeState(props) {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/recipe/LatestRecipes",
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/LatestRecipes`,
         {
           method: "GET",
           mode: "cors",
@@ -434,7 +434,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        "http://localhost:5000/api/recipe/LatestRecipesbyid",
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/LatestRecipesbyid`,
         {
           method: "GET",
           mode: "cors",
@@ -473,7 +473,7 @@ export default function RecipeState(props) {
     try {
       setProgress(30);
       const response = await fetch(
-        "http://localhost:5000/api/recipe/allRecipes",
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipes`,
         {
           method: "GET",
           mode: "cors",
@@ -517,7 +517,7 @@ export default function RecipeState(props) {
       setLoading(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/recipe/deleteRecipe/${id}`,
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/deleteRecipe/${id}`,
         {
           method: "DELETE",
           mode: "cors",

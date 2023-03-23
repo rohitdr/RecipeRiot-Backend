@@ -781,7 +781,7 @@ const collapsecuisineItems = [
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-      
+         { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ?(userData?.user?.email === "rohitdr098@gmail.com" && <Navbar.Link  hideIn="md" onClick={()=>{  Navigate("/Admin")}}> <p className="navbarhome">ADMIN</p> </Navbar.Link>):""}
        
        
 
@@ -891,12 +891,15 @@ const collapsecuisineItems = [
          
             
            <Collapse.Group   divider={false}>
-           <Collapse  title="Home"  style={{cursor:"pointer"}} onClick={()=>{Navigate(`/home`)}}  >
-           <Navbar.CollapseItem key="home">
+           <Collapse  title="Home"  style={{cursor:"pointer"}}   >
+           <Navbar.CollapseItem key="home" onClick={()=>{Navigate(`/home`)}}>
            <div className="">
          Home
            </div></Navbar.CollapseItem>
-     
+           { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ? (userData?.user?.email === process.env.REACT_APP_Admin_Email_id &&  <Navbar.CollapseItem key="ADMIN"  onClick={()=>{Navigate(`/Admin`)}}>
+           <div className="">
+     ADMIN
+           </div></Navbar.CollapseItem>):""}
           </Collapse>
           <Collapse  title="Meal Type" >
           {collapsemealItems.map((item) => (
@@ -909,7 +912,7 @@ const collapsecuisineItems = [
           </Navbar.CollapseItem>
         ))}
           </Collapse>
-          <Collapse title="Dish Type" >
+          <Collapse title="Dish Type">
           {collapsedishItems.map((item) => (
           <Navbar.CollapseItem key={item.name}>
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate(item.path,{state:{type:item.type}})}}>

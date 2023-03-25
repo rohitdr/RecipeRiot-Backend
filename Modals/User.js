@@ -30,7 +30,13 @@ const userSchema = new Schema({
     username:{
 type:String,
 
+
     },
+    Total_Recipes:{
+        type:Number,
+        default:0 
+    }
+    ,
     Total_Comments:{
         type:Number,
         default:0

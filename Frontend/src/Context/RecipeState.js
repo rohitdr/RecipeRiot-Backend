@@ -27,7 +27,184 @@ export default function RecipeState(props) {
   const [dishdata, setdishdata] = useState({});
   const [dietdata, setdietdata] = useState({});
   const [namerecipeloading, setnamereicpeloading] = useState(false);
-
+  const [AdminAllUser,setAdminAllUser]=useState({})
+  const [AdminAllUserByDate,setAdminAllUserByDate]=useState({})
+const [AdminAllRecipe,setAdminAllRecipe]=useState({})
+const [AdminAllRecipeByDate,setAdminAllRecipeByDate]=useState({})
+const [AllContactMessages, setAllContactMessages]=useState({})
+//api to get all Messages for admin
+const GetAllcontactMessages = async () => {
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/Contact/GetAllMessages`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        
+        },
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+     setAllContactMessages(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+      setAllContactMessages(result)
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setAllContactMessages(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+};
+ //api to get all user details for admin
+ const AdminGetAllUserByDate = async () => {
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminGetAllUserByDate`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token"),
+        },
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setAdminAllUserByDate(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+   setAdminAllUserByDate(result)
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+  setAdminAllUserByDate(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+};
+//api to get all Recipes for admin
+const AdminGetAllRecipeByDate = async () => {
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipesByDate`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token"),
+        },
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+     setAdminAllRecipeByDate(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+      setAdminAllRecipeByDate(result)
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setAdminAllRecipeByDate(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+};
+//api to get all Recipes for admin
+const AdminGetAllRecipe = async () => {
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipes`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token"),
+        },
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+     setAdminAllRecipe(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+      setAdminAllRecipe(result)
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setAdminAllRecipe(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+};
+  //api to get all user details for admin
+  const AdminGetAllUser = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminGetAllUser`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
+      if (response.status == 500) {
+        setProgress(100);
+        setLoading(false);
+        setAdminAllUser(500)
+      } else {
+        let result = await response.json();
+        setProgress(70);
+     setAdminAllUser(result)
+        setProgress(100);
+      }
+    } catch (error) {
+      setProgress(100);
+    setAdminAllUser(500)
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
   //api to get recipe who has a particular mealtype
   const diettype = async (type) => {
     try {
@@ -599,6 +776,17 @@ export default function RecipeState(props) {
         setName_to_search,
         searchRecipe,
         setsearchedRecipe,
+        AdminAllUser,
+        AdminGetAllUser,
+        AdminGetAllRecipe,
+        AdminAllRecipe,
+        AdminAllRecipeByDate,
+        AdminGetAllRecipeByDate,
+        AdminAllUserByDate,
+        AdminGetAllUserByDate,
+        GetAllcontactMessages,
+        AllContactMessages
+
       }}
     >
       {props.children}

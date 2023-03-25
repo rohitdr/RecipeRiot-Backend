@@ -80,6 +80,9 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       totalNutrients,
       instruction,
     });
+    const user = await User.findById(req.user.id)
+    const newtotalrecipenumber = await User.findByIdAndUpdate({ _id: req.user.id },
+      { $set: { Total_Recipes:user.Total_Recipes+1 } })
     const savedRecipe = await recipe.save();
     res.json(savedRecipe);
   } catch (error) {
@@ -209,6 +212,36 @@ router.get("/allRecipeswith/:name", async (req, res) => {
 
     const recipe_lenght = recipe.length;
     res.json({ recipe, count: recipe_lenght });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+//fetching all reicpes of database for admin
+router.get("/AdminGetAllRecipes",fetchUser, async (req, res) => {
+  try {
+    let user = await User.findById(req.user.id)
+    if(user.email !== "rohitdr098@gmail.com"){
+        return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+    }
+  let allRecipe = await Recipe.find()
+      res.json({AllRecipe:allRecipe})     
+     
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+//fetching all reicpes of database for admin according to date
+router.get("/AdminGetAllRecipesByDate",fetchUser, async (req, res) => {
+  try {
+    let user = await User.findById(req.user.id)
+    if(user.email !== "rohitdr098@gmail.com"){
+        return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+    }
+  let allRecipe = await Recipe.find().sort({ date: -1 });
+      res.json({AllRecipe:allRecipe})     
+     
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -439,6 +472,8 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
       { _id: req.body.id },
       { $set: { Comments: recipe.Comments.concat(req.body.comment) } }
     );
+    const incrementTotalComment= await User.findByIdAndUpdate( { _id: req.user.id },
+      { $set: { Total_Comments:user.Total_Comments+1 } })
 
     res.json(commentedRecipe.Comments);
    

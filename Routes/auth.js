@@ -288,4 +288,43 @@ router.put('/updateuser', fetchUser, async (req, res) => {
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
+// route for the admin for all user data
+router.post('/AdminGetAllUser', fetchUser,async(req,res)=>{
+    try{
+        let user = await User.findById(req.user.id)
+        if(user.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+      let allUser = await User.find().select("-password")
+          res.json({AllUser:allUser})     
+         
+         
+          
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+// route for the admin for all user data by date
+router.post('/AdminGetAllUserByDate', fetchUser,async(req,res)=>{
+    try{
+        let user = await User.findById(req.user.id)
+        if(user.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+      let allUser = await User.find().select("-password").sort({ date: -1 })
+          res.json({AllUser:allUser})     
+         
+         
+          
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+
 module.exports = router;

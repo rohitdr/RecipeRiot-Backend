@@ -10,7 +10,7 @@ import Loader from "./Loader";
 export default function Searchbar(props) {
   const context = useContext(RecipeContext)
   const [searchmodal,setsearchmodal]=useState(false)
-  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,getUser,userData,namerecipeloading,setProgress} = context
+  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,getUser,userData,namerecipeloading,setProgress,logoutUser} = context
 let Navigate = useNavigate();
 useEffect(()=>{
 getUser()
@@ -19,10 +19,10 @@ getUser()
 
 
 const logout=()=>{
- 
+ logoutUser()
   localStorage.removeItem("auth-token")
   sessionStorage.removeItem("auth-token")
-Navigate("/login")
+
 }
 var searchentered
 

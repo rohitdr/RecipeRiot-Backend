@@ -1,10 +1,12 @@
 const mongoose= require('mongoose')
 const express = require('express')
 const router = express.Router();
-const Contact = require('../Modals/ContactUs')
+const Contact = require('../Modals/ContactUs');
+const fetchUser = require('../Middleware/fetchuser');
+const User = require('../Modals/User')
 
-
-router.get("/Message", async (req,res)=>{
+// router to post a message 
+router.post("/Message", async (req,res)=>{
 try{
   const alreadymessage = await Contact.findOne({Email:req.body.Email,Name:req.body.Name})
 
@@ -31,6 +33,7 @@ catch(error){
     console.log(error.message)
 }
 })
+//router to get all message
 router.get("/GetAllMessages", async (req,res)=>{
     try{
       const AllMessages = await Contact.find().sort({date:-1})
@@ -44,4 +47,25 @@ router.get("/GetAllMessages", async (req,res)=>{
         console.log(error.message)
     }
     })
+    //router to delete all messages
+router.delete("/delete/:id",fetchUser,async(req,res)=>{
+    try{
+        let user = await User.findById(req.user.id)
+        if(user.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+        const Messages = await Contact.findById(req.params.id)
+      if(!Messages){
+              return res.status(404).json("No Message Found")
+          }
+   const deletemessage = await Contact.findByIdAndDelete(req.params.id)
+
+          res.json("successfully deleted the message")
+      }
+      catch(error){
+          res.status(500).json(error.message)
+          console.log(error.message)
+      } 
+})
+
 module.exports= router

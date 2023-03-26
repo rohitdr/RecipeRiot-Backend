@@ -9,7 +9,7 @@ import AnimatedPage from './AnimatedPage';
 import {AnimatePresence, motion} from 'framer-motion'
 export default function Home() {
 
-
+const [contactmessage,setcontactmessage]=useState({Name:"",Email:"",Subject:"",Message:""})
 
 
   const [cuisineactive,setcuisineactive]=useState(0)
@@ -24,7 +24,7 @@ const [newlyarriveddivstate,setnewlyarriveddivstate]=useState(0)
   var fourth=0
   var cuisinenumber=0
   const context = useContext(RecipeContext)
-  const {loading,LatesRecipe,Latest_recipe,getUser,cuisine,cuisinedata,cuisineloading} = context
+  const {loading,LatesRecipe,Latest_recipe,getUser,cuisine,cuisinedata,cuisineloading,ContactusSubmitApi,  contactsendmessage} = context
 
 
  useEffect(()=>{
@@ -35,10 +35,20 @@ cuisine("indian")
  
 },[])
 
+//onchange for contact us form 
+const contactuschange = (e)=>{
+ setcontactmessage({...contactmessage,[e.target.name]:e.target.value})
+}
+//on submit contactus
+const contactussubmitBUTTON=()=>{
+
+ContactusSubmitApi(contactmessage)
+}
+
   return (
    
   <AnimatedPage><>
-   { cuisinedata ==500 || Latest_recipe==500? <InternalServerError></InternalServerError>: <div >
+   { cuisinedata ==500 || contactsendmessage==500|| Latest_recipe==500? <InternalServerError></InternalServerError>: <div >
 
 
   <section id="hero" class="d-flex align-items-center mb-4">
@@ -518,27 +528,23 @@ cuisine("indian")
 
         <div className="row mt-5 justify-content-center">
           <div className="col-lg-10">
-            <form action="forms/contact.php" method="post" role="form" className="php-email-form">
+            <form action="" method="post" role="form" className="php-email-form" onSubmit={(e)=>{e.preventDefault();}}>
               <div className="row">
                 <div className="col-md-6 form-group">
-                  <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required/>
+                  <input type="text" name="Name" id="Name" className="form-control"  placeholder="Your Name" required onChange={contactuschange}/>
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required/>
+                  <input type="email" className="form-control"  name="Email" id="Email" placeholder="Your Email" required onChange={contactuschange}/>
                 </div>
               </div>
               <div className="form-group mt-3">
-                <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required/>
+                <input type="text" className="form-control" name="Subject" id="Subject" placeholder="Subject" required onChange={contactuschange}/>
               </div>
               <div className="form-group mt-3">
-                <textarea className="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea className="form-control" name="Message" id="Message" rows="5" placeholder="Message" required onChange={contactuschange}></textarea>
               </div>
-              <div className="my-3">
-                <div className="loading">Loading</div>
-                <div className="error-message"></div>
-                <div className="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div className="text-center"><button type="submit">Send Message</button></div>
+             
+              <div className="text-center"><button type="submit" onClick={contactussubmitBUTTON}>Send Message</button></div>
             </form>
           </div>
 

@@ -87,6 +87,7 @@ router.post('/login', [
         const data = {
             id: user.id
         }
+        const onlinestatus = await User.findByIdAndUpdate({_id :user.id}, { $set: {OnLine : true  } })
         const auth_token = jwt.sign(data, jwtSecret)
         let success = "true"
         res.json({ success ,auth_token })
@@ -97,7 +98,24 @@ router.post('/login', [
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
-
+//logout -setting offine status
+router.post('/logout', fetchUser, async (req, res) => {
+    try {
+      
+        const id = req.user.id;
+       
+        const user = await User.findById(id)
+        if(!user){
+            return res.status(404).json({error:"something is not Correct"})
+        }
+        const onlinestatus = await User.findByIdAndUpdate({_id:id},{$set:{OnLine:false}})
+     res.json("Now Your are Offline")
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 //get user details of logged in user login required
 router.post('/getUser', fetchUser, async (req, res) => {
     try {

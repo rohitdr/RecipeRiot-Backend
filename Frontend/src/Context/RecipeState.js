@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import RecipeContext from "./RecipeContext";
 export default function RecipeState(props) {
@@ -32,6 +33,124 @@ export default function RecipeState(props) {
 const [AdminAllRecipe,setAdminAllRecipe]=useState({})
 const [AdminAllRecipeByDate,setAdminAllRecipeByDate]=useState({})
 const [AllContactMessages, setAllContactMessages]=useState({})
+const [contactsendmessage,setcontactsendmessage]=useState({})
+const [deletemessageresult,setdeletemessageresult]=useState({})
+
+let Navigate = useNavigate();
+//api for logout
+const logoutUser=async()=>{
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/auth/logout`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token")
+        
+        }
+    
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+    
+    } else {
+      let result = await response.json();
+      setProgress(70);
+      Navigate("/login")
+
+    showAlert("You Are Successfully Logged Out ","success")
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+  
+    setLoading(false);
+    console.log(error.message);
+  }
+}
+//api for deleting the message 
+const deletemessage=async(id)=>{
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/contact/delete/${id}`,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token")
+        
+        }
+    
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setdeletemessageresult(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+
+    showAlert("This Message is Successfully Deleted","success")
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setdeletemessageresult(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+}
+//api for contact us form
+const ContactusSubmitApi = async (message) => {
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/contact/Message`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        
+        },
+        body: JSON.stringify(message),
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setcontactsendmessage(500)
+    } else {
+      let result = await response.json();
+      setProgress(70);
+    showAlert("We Will contact You Soon","success")
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setcontactsendmessage(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+};
 //api to get all Messages for admin
 const GetAllcontactMessages = async () => {
   try {
@@ -785,7 +904,11 @@ const AdminGetAllRecipe = async () => {
         AdminAllUserByDate,
         AdminGetAllUserByDate,
         GetAllcontactMessages,
-        AllContactMessages
+        AllContactMessages,
+        contactsendmessage,
+        ContactusSubmitApi,
+        deletemessage,
+        logoutUser
 
       }}
     >

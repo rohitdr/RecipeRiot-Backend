@@ -5,84 +5,280 @@ import { Button } from '@nextui-org/react';
 import './admin.css'
 import RecipeItem from './RecipeItem';
 import { useNavigate } from 'react-router-dom';
+
+import { Collapse, Text,Avatar} from "@nextui-org/react";
 export default function Admin() {
-  const [adminactivepage, setadminactivepage]=useState(1)
+  const [adminactivepage, setadminactivepage]=useState(0)
   let Navigate = useNavigate();
   const context = useContext(RecipeContext)
   const {AdminAllUser, AdminGetAllUser,  AdminGetAllRecipe, AdminAllRecipe,  GetAllcontactMessages,
-    AllContactMessages,   AdminAllRecipeByDate,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate}=context
+    AllContactMessages,userData,getUser,   AdminAllRecipeByDate,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate,deletemessage,get}=context
   useEffect(()=>{
-
+    getUser()
   },[])
-  var totalMessagetodisplay=5;
-  var messagecounter =0;
+
   var totalratings=0;
   return (<>
 
-<section className="min-vh-100" style={{backgroundColor: "#eee"}}>
+<section className="min-vh-100" >
             <div className="container py-5">
+{/*        
+            <nav className="">
+  <spna className="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">Active</spna>
+  <span className="flex-sm-fill text-sm-center nav-link" href="#">Longer nav link</span>
+  <spna className="flex-sm-fill text-sm-center nav-link" href="#">Link</spna>
+  <a className="flex-sm-fill text-sm-center nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+</nav> */}
+
+
+       <nav className="nav nav-pills flex-column flex-sm-row hideinlessthan768 ">
+      <span className={`flex-sm-fill text-sm-center nav-link   cursor-pointer ${adminactivepage ==0 ?"active ":""} `} onClick={()=>{ setadminactivepage(0)}}  >Statics</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==1?"active":""} `}  onClick={()=>{ AdminGetAllUser(); setadminactivepage(1)}}>Users</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==2?"active":""} `}  onClick={()=>{ AdminGetAllUserByDate(); setadminactivepage(2)}}>User Activities</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==3?"active":""} `} onClick={()=>{ AdminGetAllRecipe(); setadminactivepage(3)}}>Recipes</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==4?"active":""} `} onClick={()=>{ AdminGetAllRecipeByDate(); setadminactivepage(4)}}>Recipes Activities</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==5?"active":""} `} onClick={()=>{GetAllcontactMessages();  setadminactivepage(5)}}>Messages</span>
+ {/* <Link className={`nav-link ${location.pathname==='/Profile_LikedRecipe'?"active":""} `} to="/Profile_LikedRecipe">LikedRecipes</Link>
+ <Link className={`nav-link ${location.pathname==='/AddRecipe'?"active":""} `} to="/AddRecipe">Add Recipe</Link>   */}
+  </nav>
+  <hr className=" ms-2 hideinlessthan768 mb-2"/>
+ 
+
+ 
+{adminactivepage ==0 &&   <><div class="container-fluid">
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+  
+</div>
+
+
+<div class="row">
+
+  
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2 ">
+            <div class="card-body ">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Earnings (Monthly)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Earnings (Annual)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        style={{width: "50%"}} aria-valuenow="50" aria-valuemin="0"
+                                        aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Pending Requests</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+
+    <div class="col-lg-6 mb-4">
+
        
-       <nav class="nav profile-nav-borders ">
-      <span class={`nav-link cursor-pointer ${adminactivepage ==0 ?"active ":""}  ms-0`} onClick={()=>{ setadminactivepage(0)}}  >Statics</span>
-      <span class={`nav-link cursor-pointer ${adminactivepage ==1?"active":""} `}  onClick={()=>{ AdminGetAllUser(); setadminactivepage(1)}}>Users</span>
-      <span class={`nav-link cursor-pointer ${adminactivepage ==2?"active":""} `}  onClick={()=>{ AdminGetAllUserByDate(); setadminactivepage(2)}}>User Activities</span>
-      <span class={`nav-link cursor-pointer ${adminactivepage ==3?"active":""} `} onClick={()=>{ AdminGetAllRecipe(); setadminactivepage(3)}}>Recipes</span>
-      <span class={`nav-link cursor-pointer ${adminactivepage ==4?"active":""} `} onClick={()=>{ AdminGetAllRecipeByDate(); setadminactivepage(4)}}>Recipes Activities</span>
-      <span class={`nav-link cursor-pointer ${adminactivepage ==5?"active":""} `} onClick={()=>{GetAllcontactMessages();  setadminactivepage(5)}}>Messages</span>
- {/* <Link class={`nav-link ${location.pathname==='/Profile_LikedRecipe'?"active":""} `} to="/Profile_LikedRecipe">LikedRecipes</Link>
- <Link class={`nav-link ${location.pathname==='/AddRecipe'?"active":""} `} to="/AddRecipe">Add Recipe</Link>   */}
-  </nav><hr class="mt-0 mb-2"/>
- 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+            </div>
+            <div class="card-body">
+                <h4 class="small font-weight-bold">Server Migration <span
+                        class="float-right">20%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style={{width: "20%"}}
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Sales Tracking <span
+                        class="float-right">40%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-warning" role="progressbar" style={{width: "40%"}}
+                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Customer Database <span
+                        class="float-right">60%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style={{width: "60%"}}
+                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Payout Details <span
+                        class="float-right">80%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-info" role="progressbar" style={{width: "80%"}}
+                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Account Setup <span
+                        class="float-right">Complete!</span></h4>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style={{width: "100%"}}
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
 
- 
+       
+   
 
+    </div>
+
+    <div class="col-lg-6 mb-4">
+
+      
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: "25rem;"}}
+                        src="https://img.freepik.com/free-vector/happy-freelancer-with-computer-home-young-man-sitting-armchair-using-laptop-chatting-online-smiling-vector-illustration-distance-work-online-learning-freelance_74855-8401.jpg?w=2000" alt="..."/>
+                </div>
+                <p>Add some quality, svg illustrations to your project courtesy of unDraw, a
+                    constantly updated collection of beautiful svg images that you can use
+                    completely free and without attribution!</p>
+             
+            </div>
+        </div>
+
+   
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+            </div>
+            <div class="card-body">
+                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
+                    CSS bloat and poor page performance. Custom CSS classes are used to create
+                    custom components and custom utility classes.</p>
+                <p class="mb-0">Before working with this theme, you should become familiar with the
+                    Bootstrap framework, especially the utility classes.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div> </>
+}
    {/* {AdminAllUser==500 ?<InternalServerError></InternalServerError>:  */}
-   {  adminactivepage ==1 && <section class="" style={{backgroundColor: "#f4f5f7"}}>
-  <div class="container py-5 h-100">
-    <div class="row  align-items-center h-100">
+   {  adminactivepage ==1 && <section className="">
+  <div className="container py-5 h-100">
+    <div className="row  align-items-center h-100">
       {AdminAllUser?.AllUser && AdminAllUser?.AllUser?.map((element)=>{
-  return <div class=" col-md-6 mb-4 ">
-  <div class="card mb-3" style={{borderRadius: ".5rem"}}>
-    <div class="row g-0">
-      <div class="col-md-4 gradient-custom text-center text-white"
+  return <div className=" col-md-6 mb-4 " key={element._id}>
+  <div className="card mb-3 latestrecipelibox" style={{borderRadius: ".5rem"}}>
+    <div className="row g-0">
+      <div className="col-md-4 gradient-custom text-center text-white"
         style={{borderTopLeftRadius: ".5rem", borderBottomLeftaRdius: ".5rem"}}>
         <img src={element.Profile_Image}
-          alt="Avatar" class="img-fluid my-5 box_decrease_size_animationforlogin" style={{width: "80px"}} />
+          alt="Avatar" className="img-fluid my-5 box_decrease_size_animationforlogin border border-danger" style={{width: "80px"}} />
         <h5>{element.first_name} {element.last_name}</h5>
         <p>{element.username}</p>
-        <i class="far fa-edit mb-5"></i>
+       
       </div>
-      <div class="col-md-8">
-        <div class="card-body p-4">
+      <div className="col-md-8">
+        <div className="card-body p-4 latestrecipelibox ">
           <h6>Information</h6>
-          <hr class="mt-0 mb-4"/>
-          <div class="row pt-1">
-            <div class="col-6 mb-3">
+          <hr className="mt-0 mb-4"/>
+          <div className="row pt-1">
+            <div className="col-6 mb-3">
               <h6>Email</h6>
-              <p class="text-muted">{element.email}</p>
+              <p className="text-muted">{element.email}</p>
             </div>
-            <div class="col-6 mb-3">
+            <div className="col-6 mb-3">
               <h6>Phone</h6>
-              <p class="text-muted">{element.phone_number}</p>
+              <p className="text-muted">{element.phone_number}</p>
             </div>
           </div>
           <h6>Statics</h6>
-          <hr class="mt-0 mb-4"/>
-          <div class="row py-1 mb-2">
-          <div class="progress  px-0">
-                    <div class=" progress-bar bg-success progress-bar-striped active " style={{width:`${element.Total_Comments}%`}} >{ element.Total_Comments >10 ?element.Total_Comments+"-Comments":""}</div>
-                    <div class="progress-value"> { element.Total_Comments <10 ?element.Total_Comments+"-Comments":""}</div>
-                </div>   <div class="progress  px-0 mt-1">
-                    <div class=" progress-bar bg-primary progress-bar-striped active " style={{width:`${element.Total_Recipes}%`}}>{ element.Total_Recipes >10 ?element.Total_Recipes+"-Recipes":""}</div>
-                    <div class="progress-value"> { element.Total_Recipes <10 ?element.Total_Recipes+"-Recieps":""}</div>
+          <hr className="mt-0 mb-4"/>
+          <div className="row py-1 mb-2">
+          <div className="progress  px-0">
+                    <div className=" progress-bar bg-success progress-bar-striped active " style={{width:`${element.Total_Comments}%`}} >{ element.Total_Comments >10 ?element.Total_Comments+"-Comments":""}</div>
+                    <div className="progress-value"> { element.Total_Comments <10 ?element.Total_Comments+"-Comments":""}</div>
+                </div>   <div className="progress  px-0 mt-1">
+                    <div className=" progress-bar bg-primary progress-bar-striped active " style={{width:`${element.Total_Recipes}%`}}>{ element.Total_Recipes >10 ?element.Total_Recipes+"-Recipes":""}</div>
+                    <div className="progress-value"> { element.Total_Recipes <10 ?element.Total_Recipes+"-Recieps":""}</div>
                 </div> 
 
           </div>
           
-          <div class="d-flex justify-content-start">
+          <div className="d-flex justify-content-start">
          
-            <a href={element.facebook}><i class="fab fa-facebook-f  text-primary fa-lg me-3"></i></a>
-            <a href={element.twitter}><i class="fab fa-twitter  text-primary fa-lg me-3"></i></a>
+            <a href={element.facebook}><i className="fab fa-facebook-f  text-primary fa-lg me-3"></i></a>
+            <a href={element.twitter}><i className="fab fa-twitter  text-primary fa-lg me-3"></i></a>
             <a href={element.web}><i className="fas fa-globe fa-lg text-warning me-3"></i></a>
             <a href={element.git}> <i className=" fab fa-github text-dark fa-lg me-3"></i></a>
         
@@ -98,32 +294,37 @@ export default function Admin() {
     </div>
   </div>
 </section>}
-{ adminactivepage == 2 &&<div className="card card-header-actions mb-4 ">
+{ adminactivepage == 2 &&<div className="card border border-primary card-header-actions mb-4 ">
 <div className="card-header">
     Latest Users
     
 </div>
 
-        <div className="card-body px-0">
+        <div className="card-body px-0 min-vh-100">
        { AdminAllUserByDate?.AllUser && AdminAllUserByDate?.AllUser?.map((element)=>{
 
-           return <><div className="d-flex align-items-center justify-content-between px-4" key={element._id}>
-                <div className="d-flex align-items-center">
+           return <><div className="d-flex align-items-center justify-content-between px-4 p-4 my-2 latestrecipelibox " key={element._id}>
+                <div className="d-flex align-items-center ">
+                  <div>
                 <img src={element.Profile_Image}
-              className="img-fluid shadow-1-strong rounded border border-success latest_recipe_image Profile_activity_latest_image " alt="Latest Recipe Image" />
-                    <div className="ms-4">
+              className="img-fluid shadow-1-strong rounded border border-success latest_recipe_image Profile_activity_latest_image  " alt="Latest Recipe Image" />
+                 
+                 </div>   <div className="ms-4">
                         <div className="small">{element.first_name} {element.last_name}</div>
+                        {element.OnLine? <span class="badge rounded-pill bg-success">Online</span>:""}
+                        {!element.OnLine? <span class="badge rounded-pill bg-secondary">Offline</span>:""}
                         <div className="text-xs text-muted">{(new Date(element.date).toLocaleString())}</div>
                     </div>
+                   
                 </div>
                 <div className="ms-4 small row">
                     <div className="mt-2 col-md-6"> <Button
                     //  onPress={()=>{deleterecipe(element._id)}} 
                      color="error" auto ghost>
-                 <i class="fa-sharp fa-solid fa-trash"></i>
+                 <i className="fa-sharp fa-solid fa-trash"></i>
                   </Button></div>
                     <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                   </Button></div>
                 </div>
             </div>
@@ -213,16 +414,16 @@ export default function Admin() {
       
        
 </div>}
-{ adminactivepage ==4 &&<div className="card card-header-actions mb-4 ">
+{ adminactivepage ==4 &&<div className="card border border-success card-header-actions mb-4 ">
 <div className="card-header">
     Latest Recipes
     
 </div>
 
-        <div className="card-body px-0">
+        <div className="card-body px-0 min-vh-100">
        { AdminAllRecipeByDate?.AllRecipe && AdminAllRecipeByDate?.AllRecipe?.map((element)=>{
 
-           return <><div className="d-flex align-items-center justify-content-between px-4" key={element._id}>
+           return <><div className="d-flex align-items-center  justify-content-between p-4 my-2 latestrecipelibox" key={element._id}>
                 <div className="d-flex align-items-center">
                 <img src={element.image}
               className="img-fluid shadow-1-strong rounded latest_recipe_image Profile_activity_latest_image " alt="Latest Recipe Image" />
@@ -235,14 +436,14 @@ export default function Admin() {
                     <div className="mt-2 col-md-6"> <Button
                     //  onPress={()=>{deleterecipe(element._id)}} 
                      color="error" auto ghost>
-                 <i class="fa-sharp fa-solid fa-trash"></i>
+                 <i className="fa-sharp fa-solid fa-trash"></i>
                   </Button></div>
                     <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                   </Button></div>
                 </div>
             </div>
-            <hr/></>
+           </>
           
        })}
           
@@ -250,75 +451,82 @@ export default function Admin() {
           
         </div>
     </div>}
-  {adminactivepage ==5 && <div class="container">
-<div class="row">
-
-	<div class="chat_container">
-		<div class="job-box">
-			<div class="job-box-filter">
-				<div class="row">
-					<div class="col-md-6 col-sm-6">
-					<label onClick={totalMessagetodisplay =document?.getElementById("messageshowbox")?.value }>Show 
-					<select name="datatable_length" onClick={(e)=>{totalMessagetodisplay = 10}} id="messageshowbox"  class="form-control input-sm">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-					</select>
-					show </label>
+  {adminactivepage ==5 && <div className="container">
+<div className="row d-flex justify-content-center">
+<div className="col-md-8">
+	<div className="chat_container">
+		<div className="job-box">
+			<div className="job-box-filter">
+				<div className="row">
+					<div className="col-md-6 col-sm-6">
+          <Text
+        h1
+        size={20}
+        css={{
+          textGradient: "45deg, $blue600 -20%, $pink600 50%",
+        }}
+        weight="bold"
+      >
+        Let's Have a Look At Your Messages
+      </Text>
+     
 					</div>
-					<div class="col-md-6 col-sm-6">
-						<div class="filter-search-box text-right">
-							<label>Search:<input type="search" class="form-control input-sm" placeholder=""/></label>
-						</div>
-					</div>
+					
 				</div>
 			</div>
-			<div class="inbox-message">
-				<ul>
+			<div className="inbox-message">
+      <Collapse.Group shadow splitted >
           {AllContactMessages?.AllMessages && AllContactMessages?.AllMessages?.map((element)=>{
-        messagecounter++;
-            if(messagecounter<= totalMessagetodisplay){
+   
 
          
-           return <li key={element._id}>
+           return   <Collapse
+           key={element._id}
+           arrowIcon={ <i class="fa-sharp fa-solid text-danger fa-trash" onClick={()=>{deletemessage(element._id); GetAllcontactMessages();}}></i>}
+           title={<Text h4>{element.Name}</Text>}
+           subtitle={<div className='d-none d-md-block'>{element.Email}</div> }
+          
+           contentLeft={
+             <Avatar
+               size="lg"
+               src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+               color="secondary"
+               bordered
+               squared
+             />
+           }
+         >
+           <Text h5 
+             weight="bold">
+          {element.Subject}
+     
+           </Text>
+           <Text h6
+             weight="bold" className='hideinsmall'>
+          {element.Email}
+     
+           </Text>
+           <Text>
+      
+      {element.Message}
+           </Text>
+           <Text >
+         {new Date(element.Date).toDateString()}
+     
+           </Text>
+         </Collapse>  }
+          )}
 					
-							<div class="message-avatar">
-								<img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""/>
-							</div>
-							<div class="message-body">
-								<div class="message-body-heading">
-									<h5>{element.Name}<span class="unread">{element.Email}</span></h5>
-
-									<span>{(new Date(element.Date).toLocaleString())}</span>
-								</div>
-                
-                <div className="d-flex justify-content-between">
-                <div>  <span> <h6>{element.Subject}</h6></span>
-								<p>{element.Message}</p></div>
-              <div className="ms-4 small row">
-                    <div className="mt-2 col-md-6"> <Button
-                    //  onPress={()=>{deleterecipe(element._id)}} 
-                     color="error" auto ghost>
-                 <i class="fa-sharp fa-solid fa-trash"></i>
-                  </Button></div>
-                    <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </Button></div>
-                </div>
-                </div>
-							</div>
-             
-					
-					</li>   }
-          })}
-					
-				</ul>
+				
+       
+        
+        </Collapse.Group>
+        
 			</div>
 		</div>
 	</div>
 </div>
-
+</div>
 </div>}
 
 

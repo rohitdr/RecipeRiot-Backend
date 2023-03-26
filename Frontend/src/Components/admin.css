@@ -153,4 +153,13 @@ cursor: pointer;
         line-height: 27px;
         font-size: 15px;
     }
- 
+    @media only screen and (min-width:768px){
+ .hideinsmall{
+display: none!important;
+ }
+    }
+    @media only screen and (max-width:768px){
+        .hideinlessthan768{
+       display: none!important;
+        }
+           }

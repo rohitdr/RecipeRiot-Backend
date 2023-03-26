@@ -64,6 +64,10 @@ type:String,
     },
     last_name:{
         type:String
+    },
+    OnLine:{
+        type:Boolean,
+        default:false
     }
     
 

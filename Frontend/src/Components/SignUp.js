@@ -76,7 +76,7 @@ twitter:""
   const checkusername = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/checkUsername",
+        `${REACT_APP_Fetch_Api_Start}/auth/checkUsername`,
         {
           method: "POST",
 
@@ -247,7 +247,7 @@ const changethird=(e)=>{
     try{
     setProgress(10)
       
-       const response = await fetch(`http://localhost:5000/api/auth/createUser`, {
+       const response = await fetch(`${REACT_APP_Fetch_Api_Start}/auth/createUser`, {
          method: 'POST',
          mode: "cors",
          headers: {

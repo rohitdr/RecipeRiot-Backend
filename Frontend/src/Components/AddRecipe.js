@@ -321,7 +321,7 @@ const Addapi=async()=>{
       
   
      
-     const response = await fetch(`http://localhost:5000/api/recipe/addRecipe`, {
+     const response = await fetch(`${REACT_APP_Fetch_Api_Start}/recipe/addRecipe`, {
          method: 'POST',
          mode: "cors",
          headers: {

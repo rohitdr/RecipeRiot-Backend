@@ -51,7 +51,7 @@ const changeprofileimage=async(file)=>{
   try{
 setProgress(30)
   
-  const response = await fetch("http://localhost:5000/api/auth/changeuploadimage", {
+  const response = await fetch(`${REACT_APP_Fetch_Api_Start}/auth/changeuploadimage`, {
       method: 'POST',
       mode: "cors",
       headers: {
@@ -145,7 +145,7 @@ const updateaccountdetail=async (data)=>{
   try{
   setProgress(30)
   const response =  await fetch(
-    "http://localhost:5000/api/auth/updateuser",
+    `${REACT_APP_Fetch_Api_Start}/auth/updateuser`,
     {
       method: "PUT",
 

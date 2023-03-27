@@ -2,7 +2,7 @@ const mongoose= require('mongoose')
 const express = require('express')
 const router = express.Router();
 const Contact = require('../Modals/ContactUs');
-const fetchUser = require('../Middleware/fetchuser');
+const fetchUser = require('../Middleware/fetchUser');
 const User = require('../Modals/User')
 
 // router to post a message 

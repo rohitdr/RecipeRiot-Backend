@@ -1,9 +1,9 @@
 const express = require("express");
-const fetchuser = require("../Middleware/fetchuser");
+const fetchuser = require("../Middleware/fetchUser");
 const Recipe = require("../Modals/Recipe.js");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
-const fetchUser = require("../Middleware/fetchuser");
+const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User.js");
 
 //fectching all recipes

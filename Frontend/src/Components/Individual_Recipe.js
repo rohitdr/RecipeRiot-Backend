@@ -42,7 +42,7 @@ const {
     setProgress(30);
     console.log(CurrentRecipeItemid);
     const response = await fetch(
-      `${REACT_APP_Fetch_Api_Start}/recipe/commentreicpe`,
+      `${process.env.REACT_APP_Fetch_Api_Start}/recipe/commentreicpe`,
       {
         method: "POST",
         mode: "cors",

@@ -24,7 +24,7 @@ const [servererror,setservererror]=useState(0)
         try{
         setProgress(10)
    
-        const response = await fetch(`${REACT_APP_Fetch_Api_Start}/auth/changePassword`, {
+        const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/changePassword`, {
           method: 'POST',
      
           headers: {

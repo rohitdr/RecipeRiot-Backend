@@ -20,7 +20,7 @@ export default function Login() {
     try{
  setProgress(10)
    
-    const response = await fetch(`${REACT_APP_Fetch_Api_Start}/auth/login`, {
+    const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/login`, {
       method: 'POST',
       mode: "cors",
       headers: {
@@ -84,7 +84,7 @@ setservererror(500)
   const forgetpassapi=async()=>{
     try{
     setProgress(30)
-    const response = await fetch(`${REACT_APP_Fetch_Api_Start}/auth/forgetPassword`, {
+    const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/forgetPassword`, {
       method: 'POST',
       mode: "cors",
       headers: {

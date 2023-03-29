@@ -1019,7 +1019,7 @@ const collapsecuisineItems = [
            </div></Navbar.CollapseItem>
            { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ? (userData?.user?.email === process.env.REACT_APP_Admin_Email_id &&  <Navbar.CollapseItem key="ADMIN"  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}});Admingetallstaticaldata()}}>
            <div className="">
-     ADMIN
+     Control Panel
            </div></Navbar.CollapseItem>):""}
           </Collapse>
           <Collapse  title="Meal Type" >

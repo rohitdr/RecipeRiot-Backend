@@ -31,7 +31,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
     if (recipe_lenght == 0) {
       return res
         .status(404)
-        .send("Their is no Recipes avialable in database with this id");
+        .json("Their is no Recipes avialable in database with this id");
     }
 
     res.json({ recipe });

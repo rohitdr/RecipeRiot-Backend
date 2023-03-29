@@ -10,8 +10,8 @@ export default function InternalServerError() {
       <NoResult
         heading="Internal Server Error"
         button={
-          <Button className="text-center" color="gradient" ghost auto onClick={()=>{window.location.href = '/Home'}}>
-            HOME
+          <Button className="text-center" color="gradient" ghost auto onClick={()=>{window.location.reload()}}>
+           Reload
           </Button>
         }
         paragraph="the server encountered an unexpected condition that prevented it from fulfilling the request."

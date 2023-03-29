@@ -529,4 +529,7 @@ width: 348px!important;
   
 }
 
-
+.deleteaccountbutton_profile_security:hover{
+  background-color: red!important;
+  color: white!important;
+}

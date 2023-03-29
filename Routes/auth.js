@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const fetchUser = require('../Middleware/fetchUser.js');
 const {jwtSecret}=require('../Config/Keys')
 const Recipe = require("../Modals/Recipe.js");
+const ContactUs = require('../Modals/ContactUs.js');
 
 //crate user no login required
 router.post('/createUser', [
@@ -76,7 +77,7 @@ router.post('/login', [
     const { email, password } = req.body;
 
     try {
-        let user = await User.findOne({email: email})
+        let user = await User.findOne({email: {$regex:email,$options: "i"}})
         if(!user){
             return res.status(404).json({ 'error': "Please use correct correndentials" })
         }
@@ -244,7 +245,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
     }
     if(email){
         newuser.email=email
-        let userbyemail=await User.findOne({email:email})
+        let userbyemail=await User.findOne({email:{$regex:email,$options:"i"}})
     if(userbyemail){
         return res.status(404).send({error:"The given Email is already linked with other account"})
     }
@@ -283,7 +284,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
     try{
           const email = req.body.email;
           const username=req.body.username;
-          const user = await User.findOne({email:email}) 
+          const user = await User.findOne({email:{$regex:email,$options:"i"}}) 
           if(!user){
             return res.status(404).json({ error: "Sorry user does not exist with this email" })
           }
@@ -293,7 +294,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
         }
           const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
-        const updatedUser = await User.updateOne({email:email}  ,{ $set: {password : securedpass  } } )
+        const updatedUser = await User.updateOne({email:{$regex:email,$options:"i"}}  ,{ $set: {password : securedpass  } } )
 
         if(!updatedUser){
            return res.status(404).json({ error: "Their is something wrong ! Try again "});
@@ -344,5 +345,45 @@ router.post('/AdminGetAllUserByDate', fetchUser,async(req,res)=>{
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })
+//delete user accout by user itself
+router.delete('/deleteAccount', fetchUser,async(req,res)=>{
+    try{
+       
 
+        if(req.user.id !== req.body.id){
+            return res.status(404).json({ error: "Your cannot Access the Action , Its not Your Account" })
+        }
+        let deleted_user=await User.deleteOne({_id:req.user.id})
+         let delete_recipe=await Recipe.deleteMany({user:req.user.id})
+         res.json("Your account and Your Recipes are deleted is successfully deleted")
+         
+          
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+//delete user accout by admin
+router.delete('/AdminDeleteAccount', fetchUser,async(req,res)=>{
+    try{
+       
+        let user = await User.findById(req.user.id)
+        if(user.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+        
+        let deleted_user=await User.deleteOne({_id:req.body.id})
+         let delete_recipe=await Recipe.deleteMany({user:req.body.id})
+         res.json("This account and his Recipes are deleted successfully ")
+         
+          
+        
+    }catch(error)
+    {
+        console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
 module.exports = router;

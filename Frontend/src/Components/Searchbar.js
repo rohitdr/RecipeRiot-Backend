@@ -10,7 +10,7 @@ import Loader from "./Loader";
 export default function Searchbar(props) {
   const context = useContext(RecipeContext)
   const [searchmodal,setsearchmodal]=useState(false)
-  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,getUser,userData,namerecipeloading,setProgress,logoutUser} = context
+  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,getUser,userData,namerecipeloading,setProgress,logoutUser,AdminGetAllUser,AdminGetAllUserByDate,AdminGetAllRecipe,AdminGetAllRecipeByDate,GetAllcontactMessages} = context
 let Navigate = useNavigate();
 useEffect(()=>{
 getUser()
@@ -781,7 +781,128 @@ const collapsecuisineItems = [
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-         { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ?(userData?.user?.email === "rohitdr098@gmail.com" && <Navbar.Link  hideIn="md" onClick={()=>{  Navigate("/Admin")}}> <p className="navbarhome">ADMIN</p> </Navbar.Link>):""}
+         { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") 
+         ?(userData?.user?.email === "rohitdr098@gmail.com" &&
+         
+         <Dropdown isBordered>
+         <Navbar.Item  hideIn="md">
+           <Dropdown.Button
+             auto
+             light
+             css={{
+               px: 0,
+               dflex: "center",
+               svg: { pe: "none" },
+             }}
+             iconRight={<i className="fa-sharp fa-solid fa-chevron-down"></i>}
+             ripple={false}
+           >
+          <p className="fs-6">ControlPanel</p>
+           </Dropdown.Button>
+         </Navbar.Item>
+         <Dropdown.Menu
+           color="warning"
+           isVirtualized={true}
+           aria-label="ACME features"
+           css={{
+             $$dropdownMenuWidth: "340px",
+             $$dropdownItemHeight: "70px",
+             "& .nextui-dropdown-item": {
+               py: "$4",
+               // dropdown item left icon
+               svg: {
+                 color: "$secondary",
+                 mr: "$4",
+               },
+               // dropdown item title
+               "& .nextui-dropdown-item-content": {
+                 w: "100%",
+                 fontWeight: "$semibold",
+               },
+             },
+           }}
+         >
+          
+          <Dropdown.Item
+           
+             key="autoscaling"
+          
+           textColor="success"
+             
+           icon={<i class="fa-sharp fa-solid fa-database fs-4 px-2 text-dark"></i>}
+           
+           >
+          
+           <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}}>
+          Statical Information</div>
+           </Dropdown.Item> 
+         
+           <Dropdown.Item
+             key="production_ready"
+             
+             textColor="primary"
+           icon={<i className="fa-solid fa-user fs-4 px-2 text-primary"></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:1}}); AdminGetAllUser();}}>
+           All Users</div>
+           </Dropdown.Item>
+           <Dropdown.Item
+             key="99_uptime"
+             css={{
+               color:"#17a2b8"
+             }}
+            icon={<i className="fa-solid fa-user-pen fs-4 px-2 text-info"></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:2}}); AdminGetAllUserByDate();}}>
+          User Activites</div>
+           </Dropdown.Item>
+           <Dropdown.Item
+             key="supreme_support"
+             css={{
+               color:"purple"
+             }}
+            icon={<i className="fa-solid fa-bowl-food fs-4 px-2" style={{color:"purple"}}></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:3}}); AdminGetAllRecipe();}}>
+            All Recipes</div>
+           </Dropdown.Item>
+           <Dropdown.Item
+             key="japnese"
+             
+             css={{
+               color:"brown"
+             }}
+            icon={<i className="fa-solid fa-file-pen fs-4 px-2" style={{color:"brown"}}></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:4}}); AdminGetAllRecipeByDate();}}>
+        Recipe Activities</div>
+           </Dropdown.Item>
+           <Dropdown.Item
+             key="maxian"
+         
+             css={{
+               color:"#00695c"
+             }}
+      
+            icon={<i className="fa-solid fa-message fs-4 px-2" style={{color:"#00695c"}}></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:5}}); GetAllcontactMessages();}}>
+          Messages</div>
+           </Dropdown.Item>
+           <Dropdown.Item
+             key="french"
+             css={{
+               color:"#212121"
+             }}
+            icon={<i className="fa-solid fa-plus fs-4 px-2" style={{color:"#212121"}}></i>}
+           >
+             <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:6}}); AdminGetAllUser();}}>
+           Add User</div>
+           </Dropdown.Item>
+         </Dropdown.Menu>
+       </Dropdown>
+         ):
+         ""}
        
        
 

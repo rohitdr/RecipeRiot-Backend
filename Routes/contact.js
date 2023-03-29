@@ -8,7 +8,7 @@ const User = require('../Modals/User')
 // router to post a message 
 router.post("/Message", async (req,res)=>{
 try{
-  const alreadymessage = await Contact.findOne({Email:req.body.Email,Name:req.body.Name})
+  const alreadymessage = await Contact.findOne({Email:{$regex:req.body.Email,$options:"i"},Name:req.body.Name})
 
   if(alreadymessage){
     return res.status(404).json({error:"You Had Already Message Me"})

@@ -5,6 +5,7 @@ import RecipeContext from "./RecipeContext";
 export default function RecipeState(props) {
   
   const [LikedRecipe, setLikedRecipe] = useState([]);
+
   const [recipe, setRecipe] = useState({});
   const [Latest_recipe, setLatest_Recipe] = useState({});
   const [Latest_recipebyid, setLatest_Recipebyid] = useState({});
@@ -35,8 +36,97 @@ const [AdminAllRecipeByDate,setAdminAllRecipeByDate]=useState({})
 const [AllContactMessages, setAllContactMessages]=useState({})
 const [contactsendmessage,setcontactsendmessage]=useState({})
 const [deletemessageresult,setdeletemessageresult]=useState({})
+const [deleteaccount ,setdeleteaccount]=useState({})
+const [deleteaccountAdmin,setdeleteaccountAdmin]=useState({})
+
 
 let Navigate = useNavigate();
+//api for deleting account by admin
+const deleteAccountAdmin=async(id)=>{
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminDeleteAccount`,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token")
+
+        
+        },
+        body: JSON.stringify({id:id})
+      
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setdeleteaccountAdmin(500)
+    
+    } else {
+      let result = await response.json();
+      setProgress(70);
+    showAlert(result,"success")
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setdeleteaccountAdmin(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+}
+//api for deleting account by user its own
+const deleteAccount=async(id)=>{
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/auth/deleteAccount`,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token")
+
+        
+        },
+        body: JSON.stringify({id:id})
+      
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setdeleteaccount(500)
+    
+    } else {
+      let result = await response.json();
+      setProgress(70);
+    
+      localStorage.removeItem("auth-token")
+      sessionStorage.removeItem("auth-token")
+      Navigate("/login")
+    showAlert(result,"success")
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setdeleteaccount(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+}
 //api for logout
 const logoutUser=async()=>{
   try {
@@ -64,6 +154,7 @@ const logoutUser=async()=>{
     
     } else {
       let result = await response.json();
+    
       setProgress(70);
       Navigate("/login")
 
@@ -908,7 +999,11 @@ const AdminGetAllRecipe = async () => {
         contactsendmessage,
         ContactusSubmitApi,
         deletemessage,
-        logoutUser
+        logoutUser,
+        deleteAccount,
+        deleteaccount,
+     deleteaccountAdmin,
+        deleteAccountAdmin
 
       }}
     >

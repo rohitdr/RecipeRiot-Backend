@@ -39,7 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "both": "concurrently \"npm run start\" \"nodemon Backend/index.js\" ",
+    "both": "concurrently \"/Frontend/npm run start\" \"nodemon Backend/index.js\" ",
     "start":"node index.js"
   },
   "eslintConfig": {

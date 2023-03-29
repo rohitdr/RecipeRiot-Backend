@@ -18,6 +18,12 @@ export default function Login() {
 
   const loginclick = async() => {
     try{
+      if(sessionStorage.getItem('auth-token') || localStorage.getItem('auth-token')){
+ 
+        Navigate("/Home")
+        showAlert("You are Already logged in.", "warning")
+      }
+      else{
  setProgress(10)
    
     const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/login`, {
@@ -68,7 +74,7 @@ export default function Login() {
       }, 2000);
     }
    
-    }
+    }}
     catch(e){
       setProgress(100)
 setservererror(500)

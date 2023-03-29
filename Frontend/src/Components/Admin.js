@@ -1,47 +1,128 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RecipeContext from '../Context/RecipeContext'
 import InternalServerError from './InternalServerError';
-import { Button } from '@nextui-org/react';
+import { Button,Modal,Navbar } from '@nextui-org/react';
 import './admin.css'
 import RecipeItem from './RecipeItem';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Collapse, Text,Avatar} from "@nextui-org/react";
 export default function Admin() {
-  const [adminactivepage, setadminactivepage]=useState(0)
+  const [userdeleteconfirmation,setuserdeleteconfirmation]=useState(false)
+  const [deleteaccountid,setdeleteaccountid]=useState("")
+
   let Navigate = useNavigate();
+  const {state}=useLocation();
+ 
+  const {adminActivePageNumber} = state
+  const [adminactivepage, setadminactivepage]=useState(adminActivePageNumber)
   const context = useContext(RecipeContext)
   const {AdminAllUser, AdminGetAllUser,  AdminGetAllRecipe, AdminAllRecipe,  GetAllcontactMessages,
-    AllContactMessages,userData,getUser,   AdminAllRecipeByDate,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate,deletemessage,get}=context
+    AllContactMessages,getUser,   AdminAllRecipeByDate,   deleteaccountAdmin,
+    deleteAccountAdmin,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate,deletemessage}=context
   useEffect(()=>{
-    getUser()
-  },[])
+if(!adminActivePageNumber){
+  Navigate("/Home")
+}
+else{
+  setadminactivepage(adminActivePageNumber)
+}
+if(adminActivePageNumber==1 ){
+AdminGetAllUser()
+}
+if(adminActivePageNumber==2 ){
+  AdminGetAllUserByDate()
+  }
+  if(adminActivePageNumber==3 ){
+    AdminGetAllRecipe()
+    }
+    if(adminActivePageNumber==4 ){
+     AdminAllRecipeByDate();
+      }
+      if(adminActivePageNumber==5 ){
+        GetAllcontactMessages()
+        }
+        
+  
+  },[adminActivePageNumber])
 
   var totalratings=0;
   return (<>
 
 <section className="min-vh-100" >
-            <div className="container py-5">
-{/*        
-            <nav className="">
-  <spna className="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">Active</spna>
-  <span className="flex-sm-fill text-sm-center nav-link" href="#">Longer nav link</span>
-  <spna className="flex-sm-fill text-sm-center nav-link" href="#">Link</spna>
-  <a className="flex-sm-fill text-sm-center nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-</nav> */}
-
-
-       <nav className="nav nav-pills flex-column flex-sm-row hideinlessthan768 ">
-      <span className={`flex-sm-fill text-sm-center nav-link   cursor-pointer ${adminactivepage ==0 ?"active ":""} `} onClick={()=>{ setadminactivepage(0)}}  >Statics</span>
-      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==1?"active":""} `}  onClick={()=>{ AdminGetAllUser(); setadminactivepage(1)}}>Users</span>
-      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==2?"active":""} `}  onClick={()=>{ AdminGetAllUserByDate(); setadminactivepage(2)}}>User Activities</span>
-      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==3?"active":""} `} onClick={()=>{ AdminGetAllRecipe(); setadminactivepage(3)}}>Recipes</span>
-      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==4?"active":""} `} onClick={()=>{ AdminGetAllRecipeByDate(); setadminactivepage(4)}}>Recipes Activities</span>
-      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==5?"active":""} `} onClick={()=>{GetAllcontactMessages();  setadminactivepage(5)}}>Messages</span>
- {/* <Link className={`nav-link ${location.pathname==='/Profile_LikedRecipe'?"active":""} `} to="/Profile_LikedRecipe">LikedRecipes</Link>
- <Link className={`nav-link ${location.pathname==='/AddRecipe'?"active":""} `} to="/AddRecipe">Add Recipe</Link>   */}
+<nav className="nav nav-pills flex-column flex-sm-row mt-3  hideinlessthan768 my-3 ">
+      <span className={`flex-sm-fill text-sm-center nav-link   cursor-pointer ${adminactivepage ==0 ?"active ":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}} >Statics</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==1?"active":""} `}  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:1}}); AdminGetAllUser();}}> All Users</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==2?"active":""} `}  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:2}}); AdminGetAllUserByDate();}}>User Activities</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==3?"active":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:3}}); AdminGetAllRecipe();}}> All Recipes</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==4?"active":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:4}}); AdminGetAllRecipeByDate();}}>Recipes Activities</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==5?"active":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:5}}); GetAllcontactMessages();}}>Messages</span>
+      <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==6?"active":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:6}}); AdminGetAllUser();}}>Add User</span>
   </nav>
-  <hr className=" ms-2 hideinlessthan768 mb-2"/>
+<hr className='hideinlessthan768 '/>
+{/* ui navbar */}
+
+
+
+<Navbar shouldHideOnScroll isBordered   className='hideinmorethan768 '   >
+
+       <Navbar.Brand></Navbar.Brand>
+        
+        
+       
+        <Navbar.Collapse>
+        <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}}>
+       Statical Information
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:1}}); AdminGetAllUser();}}>
+    All Users
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:2}}); AdminGetAllUserByDate();}}>
+       User Activities
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:3}}); AdminGetAllRecipe();}}>
+      All Recipes
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:4}}); AdminGetAllRecipeByDate();}}>
+      Recipe Activities
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:5}}); GetAllcontactMessages();}}>
+      Messages
+           </div>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem key="statical Information">
+           <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:6}}); AdminGetAllUser();}}>
+      Add User
+           </div>
+            </Navbar.CollapseItem>
+      </Navbar.Collapse>
+  
+      <Navbar.Toggle aria-label="toggle navigation"  css={{
+  
+   
+  jc: "flex-end",
+
+}} />
+      </Navbar>
+
+
+
+
+
+            <div className="container py-3">
+
+  
  
 
  
@@ -232,7 +313,7 @@ export default function Admin() {
 
 </div> </>
 }
-   {/* {AdminAllUser==500 ?<InternalServerError></InternalServerError>:  */}
+ 
    {  adminactivepage ==1 && <section className="">
   <div className="container py-5 h-100">
     <div className="row  align-items-center h-100">
@@ -319,7 +400,8 @@ export default function Admin() {
                 </div>
                 <div className="ms-4 small row">
                     <div className="mt-2 col-md-6"> <Button
-                    //  onPress={()=>{deleterecipe(element._id)}} 
+                 
+                 onPress={()=>{setdeleteaccountid(element._id); setuserdeleteconfirmation(true)}}
                      color="error" auto ghost>
                  <i className="fa-sharp fa-solid fa-trash"></i>
                   </Button></div>
@@ -436,7 +518,7 @@ export default function Admin() {
                     <div className="mt-2 col-md-6"> <Button
                     //  onPress={()=>{deleterecipe(element._id)}} 
                      color="error" auto ghost>
-                 <i className="fa-sharp fa-solid fa-trash"></i>
+                 <i className="fa-sharp fa-solid fa-trash" ></i>
                   </Button></div>
                     <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
                     <i className="fa-solid fa-pen-to-square"></i>
@@ -539,6 +621,34 @@ export default function Admin() {
 
 </div>
   </section>
+{/* user delete confirmation modal */}
+<Modal
+        closeButton
+        aria-labelledby="modal-title"
+        open={userdeleteconfirmation}
+   onClose={()=>{setuserdeleteconfirmation(false)}}
+      >
+        <Modal.Header>
+        <Text b size={14}>Are you sure you wanna delete this Account ?</Text>
+        </Modal.Header>
+        <Modal.Body>
+          
+     
+          
+             
+         
+            <Text size={14}>All the Recipe and Contents Related with this account is also deleted</Text>
+         
+        </Modal.Body>
+        <Modal.Footer>
+          <Button auto flat color="success" onPress={()=>{setuserdeleteconfirmation(false)}}>
+           Leave It
+          </Button>
+          <Button auto color="error" onPress={()=>{setuserdeleteconfirmation(false);deleteAccountAdmin(deleteaccountid)}} >
+        Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
 </>
   )
 }

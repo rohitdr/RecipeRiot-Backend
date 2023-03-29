@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react';
 import { useState } from 'react';
 import RecipeContext from '../Context/RecipeContext';
@@ -7,7 +7,10 @@ import InternalServerError from './InternalServerError';
 import AnimatedPage from './AnimatedPage';
 export default function Profile_Security() {
     const context = useContext(RecipeContext)
-const {showAlert,setProgress}= context
+const {showAlert,setProgress, deleteAccount,deleteaccount,getUser,userData}= context
+useEffect(()=>{
+getUser()
+},[])
 let Navigate = useNavigate();
 const [servererror,setservererror]=useState(0)
     const [passwords, setPasswords]= useState({oldpassword:"",newpassword1:"",newpassword2:""})
@@ -16,7 +19,7 @@ const [servererror,setservererror]=useState(0)
     }
     const changepassword=async()=>{
 
-        if(passwords.newpassword1 === passwords.newpassword2){
+        if(passwords.newpassword1 !== passwords.newpassword2){
             showAlert("Both the passwords must be same","danger")
             
         }
@@ -81,7 +84,7 @@ const [servererror,setservererror]=useState(0)
           <div className="row">
             <div className="col-lg-8">
              
-                <div className="card mb-4 box_decrease_size_animation">
+                <div className="card border-info mb-4 box_decrease_size_animation">
                     <div className="card-header">Change Password</div>
                     <div className="card-body">
                         <form onSubmit={onsubmit}>
@@ -100,7 +103,7 @@ const [servererror,setservererror]=useState(0)
                                 <label className="small mb-1" for="newPassword">Confirm Password</label>
                                 <input className="form-control" id="newPassword2" type="password" name="newpassword2" placeholder="Confirm new password" onChange={change}/>
                             </div>
-                            <button className="btn btn-primary" type="button" onClick={changepassword}>Save</button>
+                            <button className="btn btn-primary" type="button" onClick={changepassword}> Save </button>
                         </form>
                     </div>
                 </div>
@@ -161,11 +164,11 @@ const [servererror,setservererror]=useState(0)
                     </div>
                 </div>
              
-                <div className="card mb-4  Moving_in_z_axis_animation_profile_card box_decrease_size_animation">
-                    <div className="card-header">Delete Account</div>
-                    <div className="card-body">
+                <div className="card mb-4 border-danger Moving_in_z_axis_animation_profile_card box_decrease_size_animation">
+                    <div className="card-header border-danger text-danger ">Delete Account</div>
+                    <div className="card-body ">
                         <p>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.</p>
-                        <button className="btn btn-danger-soft text-danger" type="button">I understand, delete my account</button>
+                        <button className="btn btn-danger-soft text-danger border-danger deleteaccountbutton_profile_security" type="button" onClick={()=>{deleteAccount(userData?.user?._id)}}>I understand, delete my account</button>
                     </div>
                 </div>
             </div>

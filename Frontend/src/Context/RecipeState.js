@@ -38,9 +38,51 @@ const [contactsendmessage,setcontactsendmessage]=useState({})
 const [deletemessageresult,setdeletemessageresult]=useState({})
 const [deleteaccount ,setdeleteaccount]=useState({})
 const [deleteaccountAdmin,setdeleteaccountAdmin]=useState({})
-
+const [staticalData,setstaticalData]=useState({})
 
 let Navigate = useNavigate();
+//api for deleting account by admin
+const Admingetallstaticaldata=async()=>{
+  try {
+    setProgress(30);
+    const response = await fetch(
+      `${process.env.REACT_APP_Fetch_Api_Start}/auth/staticalData`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": sessionStorage.getItem("auth-token")
+            ? sessionStorage.getItem("auth-token")
+            : localStorage.getItem("auth-token")
+
+        
+        }
+      
+      
+
+      }
+    );
+    setProgress(60);
+    if (response.status == 500) {
+      setProgress(100);
+      setLoading(false);
+      setstaticalData(500)
+    
+    } else {
+      let result = await response.json();
+      setProgress(70);
+     
+ setstaticalData(result)
+      setProgress(100);
+    }
+  } catch (error) {
+    setProgress(100);
+    setstaticalData(500)
+    setLoading(false);
+    console.log(error.message);
+  }
+}
 //api for deleting account by admin
 const deleteAccountAdmin=async(id)=>{
   try {
@@ -72,6 +114,7 @@ const deleteAccountAdmin=async(id)=>{
     } else {
       let result = await response.json();
       setProgress(70);
+      AdminGetAllUserByDate();
     showAlert(result,"success")
       setProgress(100);
     }
@@ -196,7 +239,7 @@ const deletemessage=async(id)=>{
     } else {
       let result = await response.json();
       setProgress(70);
-
+    GetAllcontactMessages()
     showAlert("This Message is Successfully Deleted","success")
       setProgress(100);
     }
@@ -899,7 +942,7 @@ const AdminGetAllRecipe = async () => {
     }
   };
   // api for delete a recipe
-  const deleteRecipe = async (id) => {
+  const deleteRecipe = async (id,file) => {
     try {
       setLoading(true);
 
@@ -917,14 +960,14 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
-
+      showAlert("Recipe is Successfully deleted. It will be updated Soon","success")
+if(file=="Admindelete"){  AdminGetAllRecipeByDate()}
       const json = await response.json();
       const newRecipe = recipe.filter((element) => {
         return element._id !== id;
       });
-
       setRecipe(newRecipe);
-      allRecipe();
+      allRecipe()
       setLoading(false);
     } catch (error) {
       setRecipe(500);
@@ -1003,7 +1046,9 @@ const AdminGetAllRecipe = async () => {
         deleteAccount,
         deleteaccount,
      deleteaccountAdmin,
-        deleteAccountAdmin
+        deleteAccountAdmin,
+        Admingetallstaticaldata,
+        staticalData
 
       }}
     >

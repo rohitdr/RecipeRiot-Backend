@@ -81,6 +81,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       instruction,
     });
     const user = await User.findById(req.user.id)
+
     const newtotalrecipenumber = await User.findByIdAndUpdate({ _id: req.user.id },
       { $set: { Total_Recipes:user.Total_Recipes+1 } })
     const savedRecipe = await recipe.save();

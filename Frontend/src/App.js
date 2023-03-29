@@ -34,6 +34,7 @@ import EditRecipe from "./Components/EditRecipe";
 import BlankRecipeItemAddRecipe from "./Components/BlankRecipeItemAddRecipe";
 import Admin from "./Components/Admin";
 import { AnimatePresence } from "framer-motion";
+import EditUserAdmin from "./Components/EditUserAdmin";
 
 function App() {
   const context = useContext(RecipeContext)
@@ -395,6 +396,17 @@ function App() {
             element={
               
               <Home></Home>
+         
+         
+           
+            }
+          />
+           <Route
+            exact
+            path="/Edituser"
+            element={
+              
+           <EditUserAdmin></EditUserAdmin>
          
          
            

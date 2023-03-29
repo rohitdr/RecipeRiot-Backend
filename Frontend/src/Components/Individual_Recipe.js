@@ -74,6 +74,7 @@ const {
     } else {
       setProgress(100);
       setVisible(true);
+      RecipeBYId(RecipeItemid)
       setTimeout(() => {
         setVisible(false);
       }, 4000);

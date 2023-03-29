@@ -6,7 +6,8 @@ import './admin.css'
 import RecipeItem from './RecipeItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Collapse, Text,Avatar} from "@nextui-org/react";
+import { Collapse, Text,Avatar,Image} from "@nextui-org/react";
+import SignUp from "./SignUp";
 export default function Admin() {
   const [userdeleteconfirmation,setuserdeleteconfirmation]=useState(false)
   const [deleteaccountid,setdeleteaccountid]=useState("")
@@ -15,18 +16,23 @@ export default function Admin() {
   const {state}=useLocation();
  
   const {adminActivePageNumber} = state
+  
+  const [visibledelete,setvisibledelete]=useState({state:false,id:""})
   const [adminactivepage, setadminactivepage]=useState(adminActivePageNumber)
   const context = useContext(RecipeContext)
   const {AdminAllUser, AdminGetAllUser,  AdminGetAllRecipe, AdminAllRecipe,  GetAllcontactMessages,
     AllContactMessages,getUser,   AdminAllRecipeByDate,   deleteaccountAdmin,
-    deleteAccountAdmin,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate,deletemessage}=context
+    deleteAccountAdmin,  AdminGetAllRecipeByDate, AdminAllUserByDate, AdminGetAllUserByDate,deletemessage,deleteRecipe,Admingetallstaticaldata,staticalData}=context
   useEffect(()=>{
-if(!adminActivePageNumber){
+if(!adminActivePageNumber && adminActivePageNumber!==0){
   Navigate("/Home")
 }
 else{
   setadminactivepage(adminActivePageNumber)
 }
+if(adminActivePageNumber==0){
+ Admingetallstaticaldata();
+  }
 if(adminActivePageNumber==1 ){
 AdminGetAllUser()
 }
@@ -37,7 +43,7 @@ if(adminActivePageNumber==2 ){
     AdminGetAllRecipe()
     }
     if(adminActivePageNumber==4 ){
-     AdminAllRecipeByDate();
+     AdminGetAllRecipeByDate();
       }
       if(adminActivePageNumber==5 ){
         GetAllcontactMessages()
@@ -45,13 +51,15 @@ if(adminActivePageNumber==2 ){
         
   
   },[adminActivePageNumber])
-
+  const deleterecipe=(id)=>{
+    setvisibledelete({state:true,id:id})
+    }
   var totalratings=0;
   return (<>
 
 <section className="min-vh-100" >
 <nav className="nav nav-pills flex-column flex-sm-row mt-3  hideinlessthan768 my-3 ">
-      <span className={`flex-sm-fill text-sm-center nav-link   cursor-pointer ${adminactivepage ==0 ?"active ":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}} >Statics</span>
+      <span className={`flex-sm-fill text-sm-center nav-link   cursor-pointer ${adminactivepage ==0 ?"active ":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}});Admingetallstaticaldata();}} >Statics</span>
       <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==1?"active":""} `}  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:1}}); AdminGetAllUser();}}> All Users</span>
       <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==2?"active":""} `}  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:2}}); AdminGetAllUserByDate();}}>User Activities</span>
       <span className={`flex-sm-fill text-sm-center nav-link  cursor-pointer ${adminactivepage ==3?"active":""} `} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:3}}); AdminGetAllRecipe();}}> All Recipes</span>
@@ -64,44 +72,44 @@ if(adminActivePageNumber==2 ){
 
 
 
-<Navbar shouldHideOnScroll isBordered   className='hideinmorethan768 '   >
+<Navbar shouldHideOnScroll isBordered   className='hideinmorethan768 ' key="adminnavbar"  >
 
        <Navbar.Brand></Navbar.Brand>
         
         
        
         <Navbar.Collapse>
-        <Navbar.CollapseItem key="statical Information">
+        <Navbar.CollapseItem key="AdminStaticalinformation">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}}>
        Statical Information
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="adminAlluser">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:1}}); AdminGetAllUser();}}>
     All Users
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="admimuseractivity">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:2}}); AdminGetAllUserByDate();}}>
        User Activities
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="adminAllrecipes">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:3}}); AdminGetAllRecipe();}}>
       All Recipes
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="adminReciepActivities">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:4}}); AdminGetAllRecipeByDate();}}>
       Recipe Activities
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="adminMessages">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:5}}); GetAllcontactMessages();}}>
       Messages
            </div>
             </Navbar.CollapseItem>
-            <Navbar.CollapseItem key="statical Information">
+            <Navbar.CollapseItem key="adminAdduser">
            <div className="" style={{cursor:"pointer"}} onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:6}}); AdminGetAllUser();}}>
       Add User
            </div>
@@ -120,13 +128,13 @@ if(adminActivePageNumber==2 ){
 
 
 
-            <div className="container py-3">
+            <div className={` container  ${adminactivepage==6?"py-0":"py-3"}`}>
 
   
  
 
  
-{adminactivepage ==0 &&   <><div class="container-fluid">
+{adminactivepage ==0 &&   <><div class="container-fluid ">
 
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -144,11 +152,12 @@ if(adminActivePageNumber==2 ){
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            Total Recieps</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalrecipe}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                 
+                        <i class="fa-solid fa-bowl-food fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -162,11 +171,11 @@ if(adminActivePageNumber==2 ){
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        Total User</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totaluser}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    <i class="fa-solid fa-user fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -179,23 +188,18 @@ if(adminActivePageNumber==2 ){
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pending Messages 
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{staticalData?.totalMessage}</div>
                             </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                        style={{width: "50%"}} aria-valuenow="50" aria-valuemin="0"
-                                        aria-valuemax="100"></div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                   
+                        <i class="fa-solid fa-message fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -209,11 +213,12 @@ if(adminActivePageNumber==2 ){
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        Total Comments</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalComment}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    
+                        <i class="fa-sharp fa-solid fa-comments fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -232,9 +237,9 @@ if(adminActivePageNumber==2 ){
     <div class="col-lg-6 mb-4">
 
        
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4" style={{opacity:0.5}}>
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Projects (Working on Information.......)</h6>
             </div>
             <div class="card-body">
                 <h4 class="small font-weight-bold">Server Migration <span
@@ -287,9 +292,7 @@ if(adminActivePageNumber==2 ){
                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: "25rem;"}}
                         src="https://img.freepik.com/free-vector/happy-freelancer-with-computer-home-young-man-sitting-armchair-using-laptop-chatting-online-smiling-vector-illustration-distance-work-online-learning-freelance_74855-8401.jpg?w=2000" alt="..."/>
                 </div>
-                <p>Add some quality, svg illustrations to your project courtesy of unDraw, a
-                    constantly updated collection of beautiful svg images that you can use
-                    completely free and without attribution!</p>
+                <p> These websites usually have a vast collection of recipes that are categorized based on the meal type, cuisine, dietary restrictions, and more.</p>
              
             </div>
         </div>
@@ -300,11 +303,8 @@ if(adminActivePageNumber==2 ){
                 <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
             </div>
             <div class="card-body">
-                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                    CSS bloat and poor page performance. Custom CSS classes are used to create
-                    custom components and custom utility classes.</p>
-                <p class="mb-0">Before working with this theme, you should become familiar with the
-                    Bootstrap framework, especially the utility classes.</p>
+                <p>Developing a recipe search website requires a systematic approach and a clear understanding of the goals and requirements of the website</p>
+                <p class="mb-0">Determine who your target audience is, what they're looking for in a recipe search website, and what unique features or content you can offer to meet their needs.</p>
             </div>
         </div>
 
@@ -405,7 +405,7 @@ if(adminActivePageNumber==2 ){
                      color="error" auto ghost>
                  <i className="fa-sharp fa-solid fa-trash"></i>
                   </Button></div>
-                    <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
+                    <div className='col-md-6 mt-2'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edituser",{state:{userid:element._id}})}}>
                     <i className="fa-solid fa-pen-to-square"></i>
                   </Button></div>
                 </div>
@@ -505,7 +505,7 @@ if(adminActivePageNumber==2 ){
         <div className="card-body px-0 min-vh-100">
        { AdminAllRecipeByDate?.AllRecipe && AdminAllRecipeByDate?.AllRecipe?.map((element)=>{
 
-           return <><div className="d-flex align-items-center  justify-content-between p-4 my-2 latestrecipelibox" key={element._id}>
+           return <div key={element._id}><div className="d-flex align-items-center  justify-content-between p-4 my-2 latestrecipelibox" >
                 <div className="d-flex align-items-center">
                 <img src={element.image}
               className="img-fluid shadow-1-strong rounded latest_recipe_image Profile_activity_latest_image " alt="Latest Recipe Image" />
@@ -515,8 +515,8 @@ if(adminActivePageNumber==2 ){
                     </div>
                 </div>
                 <div className="ms-4 small row">
-                    <div className="mt-2 col-md-6"> <Button
-                    //  onPress={()=>{deleterecipe(element._id)}} 
+                    <div className="mt-2 col-md-6" > <Button
+                  onPress={()=>{deleterecipe(element._id)}}
                      color="error" auto ghost>
                  <i className="fa-sharp fa-solid fa-trash" ></i>
                   </Button></div>
@@ -525,7 +525,7 @@ if(adminActivePageNumber==2 ){
                   </Button></div>
                 </div>
             </div>
-           </>
+           </div>
           
        })}
           
@@ -612,19 +612,19 @@ if(adminActivePageNumber==2 ){
 </div>}
 
 
-{/* } */}
-     
 
-    
 
-  
 
-</div>
+     </div>
+{adminactivepage ==6  && <SignUp usingfile="Admin" ></SignUp> }
   </section>
+
 {/* user delete confirmation modal */}
 <Modal
+key="adminmodal"
         closeButton
-        aria-labelledby="modal-title"
+        preventClose
+      
         open={userdeleteconfirmation}
    onClose={()=>{setuserdeleteconfirmation(false)}}
       >
@@ -649,6 +649,32 @@ if(adminActivePageNumber==2 ){
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* modal for recipe delete confirmation
+       */}
+       <Modal closeButton open={visibledelete.state} onClose={()=>{setvisibledelete({state:false,id:""})}} preventClose key="adminrecipedelete" blur>
+       <Modal.Header>
+        <Text b size={14}>Are you sure you wanna delete this Account ?</Text>
+        </Modal.Header>
+        <Modal.Body>
+          
+     
+          
+             
+         
+            <Text size={14}>All the Recipe and Contents Related with this account is also deleted</Text>
+         
+        </Modal.Body>
+        <Modal.Footer>
+          <Button auto flat color="success"  onClick={()=>{setvisibledelete({state:false,id:""})}} >
+         Leave It
+          </Button>
+          <Button auto color="error" onClick={()=>{deleteRecipe(visibledelete.id,"Admindelete"); setvisibledelete({state:false,id:""})} } >
+          Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+       {/* modal for recipe delete confirmation
+       */}
 </>
   )
 }

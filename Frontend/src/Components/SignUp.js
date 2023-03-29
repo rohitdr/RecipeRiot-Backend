@@ -12,7 +12,7 @@ import e from "cors";
 import InternalServerError from "./InternalServerError";
 import AnimatedPage from "./AnimatedPage";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const { value, reset, bindings } = useInput("");
   const [signupdetail, setsignupdetails] = useState({
     phone_number: "",
@@ -312,7 +312,7 @@ const changethird=(e)=>{
               <div className="col-lg-5 mb-5 mb-lg-0 position-relative">
                 <div className="card singupcard border-success align-items-center box_decrease_size_animation">
                   <div className="card-header singupcardheder b d-flex justify-content-center box_decrease_size_animationforlogin">
-                    <h5 className="fw-bold pt-4 text-white"><span className="sign_s">S</span><span className="sign_i">i</span><span className="sign_g">g</span><span className="sign_n">n</span> <span className="sign_u">U</span><span className="sign_p">p</span></h5>
+                    <h5 className="fw-bold pt-4 text-white">{props.usingfile=="Admin"?<span>Add User</span>:<><span className="sign_s">S</span><span className="sign_i">i</span><span className="sign_g">g</span><span className="sign_n">n</span> <span className="sign_u">U</span><span className="sign_p">p</span></>}</h5>
                   </div>
                   <div className="card-body box_decrease_size_animationforlogin ">
                     <form>
@@ -330,7 +330,7 @@ const changethird=(e)=>{
                           className="bg-white  "
                       
                           type="email"
-                          label="Your Email"
+                          label={props.usingfile=="Admin"?"Email":`Your Email`}
                           placeholder="Enter Your Email"
                         />
                       </div>

@@ -108,8 +108,8 @@ const [servererror,setservererror]=useState(0)
                     </div>
                 </div>
 
-                <div className="card mb-4 box_decrease_size_animation">
-                    <div className="card-header">Security Preferences</div>
+                <div className="card mb-4 box_decrease_size_animation" style={{opacity:0.3}}>
+                    <div className="card-header">Security Preferences (Coming Soon ........)</div>
                     <div className="card-body">
                        
                         <h5 className="mb-1">Account Privacy</h5>
@@ -143,8 +143,8 @@ const [servererror,setservererror]=useState(0)
             </div>
             <div className="col-lg-4">
                
-                <div className="card mb-4 box_decrease_size_animation">
-                    <div className="card-header">Two-Factor Authentication</div>
+                <div className="card mb-4 box_decrease_size_animation" style={{opacity:0.3}}>
+                    <div className="card-header">Two-Factor Authentication (Coming Soon ........)</div>
                     <div className="card-body">
                         <p>Add another level of security to your account by enabling two-factor authentication. We will send you a text message to verify your login attempts on unrecognized devices and browsers.</p>
                         <form>

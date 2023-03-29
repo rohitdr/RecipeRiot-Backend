@@ -10,7 +10,7 @@ import Loader from "./Loader";
 export default function Searchbar(props) {
   const context = useContext(RecipeContext)
   const [searchmodal,setsearchmodal]=useState(false)
-  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,getUser,userData,namerecipeloading,setProgress,logoutUser,AdminGetAllUser,AdminGetAllUserByDate,AdminGetAllRecipe,AdminGetAllRecipeByDate,GetAllcontactMessages} = context
+  const {recipe,NameRecipe, setName_to_search,name_to_search,searchRecipe,Admingetallstaticaldata,getUser,userData,namerecipeloading,setProgress,logoutUser,AdminGetAllUser,AdminGetAllUserByDate,AdminGetAllRecipe,AdminGetAllRecipeByDate,GetAllcontactMessages} = context
 let Navigate = useNavigate();
 useEffect(()=>{
 getUser()
@@ -825,7 +825,7 @@ const collapsecuisineItems = [
           
           <Dropdown.Item
            
-             key="autoscaling"
+             key="Statical Information"
           
            textColor="success"
              
@@ -833,12 +833,12 @@ const collapsecuisineItems = [
            
            >
           
-           <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}})}}>
+           <div onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}});Admingetallstaticaldata()}}>
           Statical Information</div>
            </Dropdown.Item> 
          
            <Dropdown.Item
-             key="production_ready"
+             key="All User"
              
              textColor="primary"
            icon={<i className="fa-solid fa-user fs-4 px-2 text-primary"></i>}
@@ -847,7 +847,7 @@ const collapsecuisineItems = [
            All Users</div>
            </Dropdown.Item>
            <Dropdown.Item
-             key="99_uptime"
+             key="User activities"
              css={{
                color:"#17a2b8"
              }}
@@ -857,7 +857,7 @@ const collapsecuisineItems = [
           User Activites</div>
            </Dropdown.Item>
            <Dropdown.Item
-             key="supreme_support"
+             key="All Reicpes"
              css={{
                color:"purple"
              }}
@@ -867,7 +867,7 @@ const collapsecuisineItems = [
             All Recipes</div>
            </Dropdown.Item>
            <Dropdown.Item
-             key="japnese"
+             key="Recipe Activities"
              
              css={{
                color:"brown"
@@ -878,7 +878,7 @@ const collapsecuisineItems = [
         Recipe Activities</div>
            </Dropdown.Item>
            <Dropdown.Item
-             key="maxian"
+             key="Messages"
          
              css={{
                color:"#00695c"
@@ -890,7 +890,7 @@ const collapsecuisineItems = [
           Messages</div>
            </Dropdown.Item>
            <Dropdown.Item
-             key="french"
+             key="Add User"
              css={{
                color:"#212121"
              }}
@@ -1012,12 +1012,12 @@ const collapsecuisineItems = [
          
             
            <Collapse.Group   divider={false}>
-           <Collapse  title="Home"  style={{cursor:"pointer"}}   >
+           <Collapse  title="Home"  style={{cursor:"pointer"}}  >
            <Navbar.CollapseItem key="home" onClick={()=>{Navigate(`/home`)}}>
            <div className="">
          Home
            </div></Navbar.CollapseItem>
-           { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ? (userData?.user?.email === process.env.REACT_APP_Admin_Email_id &&  <Navbar.CollapseItem key="ADMIN"  onClick={()=>{Navigate(`/Admin`)}}>
+           { sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token") ? (userData?.user?.email === process.env.REACT_APP_Admin_Email_id &&  <Navbar.CollapseItem key="ADMIN"  onClick={()=>{Navigate("/Admin",{state:{adminActivePageNumber:0}});Admingetallstaticaldata()}}>
            <div className="">
      ADMIN
            </div></Navbar.CollapseItem>):""}

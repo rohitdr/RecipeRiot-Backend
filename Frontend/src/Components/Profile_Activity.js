@@ -78,10 +78,10 @@ export default function Profile_Activity() {
     
 </div>
 
-        <div className="card-body px-0">
+        <div className="card-body border-primary px-0">
        { Latest_recipebyid.recipe && Latest_recipebyid.recipe.map((element)=>{
 
-           return <><div className="d-flex align-items-center justify-content-between px-4" key={element._id}>
+           return <div key={element._id}><div className="d-flex align-items-center justify-content-between px-4 latestrecipelibox py-2" >
                 <div className="d-flex align-items-center">
                 <img src={element.image}
               className="img-fluid shadow-1-strong rounded latest_recipe_image Profile_activity_latest_image " alt="Latest Recipe Image" />
@@ -92,14 +92,15 @@ export default function Profile_Activity() {
                 </div>
                 <div className="ms-4 small d-flex justify-content-around">
                     <div className="me-2"> <Button onPress={()=>{deleterecipe(element._id)}} color="error" auto ghost>
-                   Delete
+                    <i className="fa-sharp fa-solid fa-trash"></i>
+
                   </Button></div>
                     <div><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
-                 Edit
+                    <i className="fa-solid fa-pen-to-square"></i>
                   </Button></div>
                 </div>
             </div>
-            <hr/></>
+            <hr/></div>
           
        })}
           

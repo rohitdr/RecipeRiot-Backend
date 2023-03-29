@@ -315,9 +315,9 @@ router.post('/AdminGetAllUser', fetchUser,async(req,res)=>{
             return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
         }
       let allUser = await User.find().select("-password")
+
           res.json({AllUser:allUser})     
-         
-         
+           
           
         
     }catch(error)
@@ -383,6 +383,112 @@ router.delete('/AdminDeleteAccount', fetchUser,async(req,res)=>{
     }catch(error)
     {
         console.log(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+/// uploading image or changing image of profile by admin
+router.post('/changeuploadimageAdmin', fetchUser, async (req, res) => {
+    try {
+        let admin = await User.findById(req.user.id)
+        if(admin.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+       const image = req.body.image;
+        const id = req.body.id;
+        const user = await User.findById(id) 
+          if(!user){
+            return res.status(400).json({ 'error': "Sorry user does not exist" })
+          }
+        const updatedUser = await User.update({ _id:id}  ,{ $set: { Profile_Image: image  } } )
+        res.json(updatedUser)
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).send({ error: "Internal server Erorr" });
+    }
+})
+//update users details
+router.put('/updateuserAdmin', fetchUser, async (req, res) => {
+    try {
+      const {
+      username,email,first_name,last_name,phone_number,git,facebook,twitter,web
+      } = req.body;
+  
+      const newuser = {};
+      if(git){
+        newuser.git=git
+      }
+      if(facebook){
+        newuser.facebook=facebook
+      }
+      if(twitter){
+        newuser.twitter=twitter
+      }
+      if(web){
+        newuser.web=web
+      }
+    if(username){
+        newuser.username=username
+        let userbyusername=await User.findOne({username:username})
+        if(userbyusername){
+            return res.status(404).send({error:"This username is not avialable "})
+        }
+
+    }
+    if(email){
+        newuser.email=email
+        let userbyemail=await User.findOne({email:{$regex:email,$options:"i"}})
+    if(userbyemail){
+        return res.status(404).send({error:"The given Email is already linked with other account"})
+    }
+    }
+    if(first_name){
+        newuser.first_name=first_name
+    }
+    if(last_name){
+        newuser.last_name=last_name
+    }
+    if(phone_number){
+        newuser.phone_number
+        let userbyphone=await User.findOne({phone_number:phone_number})
+        if(userbyphone){
+            return res.status(404).send({error:"The given Phone Number is already linked with other account"})
+        }
+    }
+   
+    
+ 
+    
+     //allowing only owner to update the his account
+     let user = await User.findById(req.user.id)
+     if(user.email !== "rohitdr098@gmail.com"){
+         return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+     }
+   let updateduser =await User.findByIdAndUpdate(req.body.id,{$set:newuser},{new:true})
+   res.json(" The details has been successfully updated")
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send({error:"INTERNAL SERVER ERROR"});
+    }
+  });
+  router.post('/staticalData', fetchUser, async (req, res) => {
+    try {
+        let admin = await User.findById(req.user.id)
+        if(admin.email !== "rohitdr098@gmail.com"){
+            return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+        }
+      let totaluser=await User.find()
+        let totalrecipe = await Recipe.find()
+        let totalMessage=await ContactUs.find()
+        var totalComments=0
+        totalrecipe.map((element)=>{
+            totalComments=totalComments+ element.Comments.length;
+        })
+
+        res.json({totaluser:totaluser.length,totalrecipe:totalrecipe.length,totalMessage:totalMessage.length,totalComment:totalComments})
+    }
+    catch (error) {
+        console.error(error.message)
         res.status(500).send({ error: "Internal server Erorr" });
     }
 })

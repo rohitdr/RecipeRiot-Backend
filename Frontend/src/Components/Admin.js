@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Collapse, Text,Avatar,Image} from "@nextui-org/react";
 import SignUp from "./SignUp";
+import NoResult from './NoResult';
 export default function Admin() {
   const [userdeleteconfirmation,setuserdeleteconfirmation]=useState(false)
   const [deleteaccountid,setdeleteaccountid]=useState("")
@@ -388,7 +389,7 @@ if(adminActivePageNumber==2 ){
                 <div className="d-flex align-items-center ">
                   <div>
                 <img src={element.Profile_Image}
-              className="img-fluid shadow-1-strong rounded border border-success latest_recipe_image Profile_activity_latest_image  " alt="Latest Recipe Image" />
+              className="img-fluid shadow-1-strong rounded border border-success  Profile_activity_latest_imageforadminalluser  " alt="Latest Recipe Image" />
                  
                  </div>   <div className="ms-4">
                         <div className="small">{element.first_name} {element.last_name}</div>
@@ -508,7 +509,7 @@ if(adminActivePageNumber==2 ){
            return <div key={element._id}><div className="d-flex align-items-center  justify-content-between p-4 my-2 latestrecipelibox" >
                 <div className="d-flex align-items-center">
                 <img src={element.image}
-              className="img-fluid shadow-1-strong rounded latest_recipe_image Profile_activity_latest_image " alt="Latest Recipe Image" />
+              className="img-fluid shadow-1-strong rounded  Profile_activity_latest_image " alt="Latest Recipe Image" />
                     <div className="ms-4">
                         <div className="small">{element.label}</div>
                         <div className="text-xs text-muted">{(new Date(element.date).toLocaleString())}</div>
@@ -534,6 +535,7 @@ if(adminActivePageNumber==2 ){
         </div>
     </div>}
   {adminactivepage ==5 && <div className="container">
+    {!AllContactMessages ? <NoResult img="https://media.tenor.com/unvXyxtdn3oAAAAC/no-result.gif" heading="No Result found" paragraph="Whoops.... You had not uploaded any Recipe yet"></NoResult> :
 <div className="row d-flex justify-content-center">
 <div className="col-md-8">
 	<div className="chat_container">
@@ -608,7 +610,7 @@ if(adminActivePageNumber==2 ){
 		</div>
 	</div>
 </div>
-</div>
+</div>}
 </div>}
 
 

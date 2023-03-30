@@ -43,7 +43,7 @@ export default function Login() {
     let loginresult= await response.json();
    
   
-    if(response.status !== 404){
+    if(response.status == 200){
       setProgress(70)
      //if remember me is checked than store auth-token in localstorage else in session storage
      if(document.querySelector('.rememberme').checked){
@@ -64,7 +64,7 @@ export default function Login() {
     
 
     }
-    if(response.status== 404){
+    else if(response.status== 404){
 
       setProgress(100)
       setvisiblemodal(true)
@@ -72,6 +72,12 @@ export default function Login() {
       setTimeout(() => {
         setvisiblemodal(false)
       }, 2000);
+    }
+    else{
+      setProgress(100)
+      setservererror(500)
+      showAlert(loginresult.error,"danger")
+    
     }
    
     }}
@@ -106,17 +112,21 @@ setservererror(500)
     setProgress(50)
     let result = await response.json();
     setProgress(70)
-    if(response.status != 404){
+    if(response.status == 200){
       setProgress(100)
       setvisibleforgetmodal(false)
       showAlert(result.succcess,"success")
       setvisibleforgetmodal(false)
       
     }
-    if(response.status==404){
+    else if(response.status==404){
       setProgress(100)
       setvisibleforgetmodal(false)
       showAlert(result.error,"danger")
+    }
+    else{
+      setProgress(100)
+      setservererror(500)
     }
   }catch(e){
     setProgress(100)
@@ -127,7 +137,6 @@ setservererror(500)
   }
 // function to change password
 const changeforgetpassword=()=>{
-  console.log(forgetdetail)
  forgetpassapi()
 }
 
@@ -331,6 +340,7 @@ const changeforgetpassword=()=>{
         </Modal.Header>
         <Modal.Body>
           <Input
+          contentLeft={<i class="fa-solid fa-envelope"></i>}
             clearable
             bordered
             fullWidth
@@ -343,6 +353,7 @@ const changeforgetpassword=()=>{
        
           />
           <Input
+          contentLeft={<i class="fa-solid fa-user"></i>}
             clearable
             bordered
             fullWidth
@@ -356,6 +367,7 @@ const changeforgetpassword=()=>{
           <Input
             clearable
             bordered
+            contentLeft={<i class="fa-solid fa-lock"></i>}
             fullWidth
             color="primary"
             size="lg"
@@ -366,6 +378,7 @@ const changeforgetpassword=()=>{
             onChange={forgetinputchange}
           />
            <Input
+           contentLeft={<i class="fa-solid fa-lock"></i>}
             clearable
             bordered
             fullWidth
@@ -383,7 +396,7 @@ const changeforgetpassword=()=>{
           <Button auto flat color="error" onPress={()=>{setvisibleforgetmodal(false)}}>
             Close
           </Button>
-          <Button auto onPress={changeforgetpassword} >
+          <Button auto onPress={changeforgetpassword} disabled={forgetdetail.email.length<5 || forgetdetail.username.length<8 || forgetdetail.password.length<8 || forgetdetail.confirm_password.length<8 || (forgetdetail.password !== forgetdetail.confirm_password)} >
           Change Password
           </Button>
         </Modal.Footer>

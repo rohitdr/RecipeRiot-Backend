@@ -24,9 +24,9 @@ try{
     })
 
     if(!message){
-        return res.status(404).json('Please Try Again')
+        return res.status(404).json({error:'Please Try Again'})
     }
-    res.json({success:"success"})
+    res.status(200).json({success:"success"})
 }
 catch(error){
     res.status(500).json(error.message)
@@ -38,9 +38,9 @@ router.get("/GetAllMessages", async (req,res)=>{
     try{
       const AllMessages = await Contact.find().sort({date:-1})
     if(!AllMessages){
-            return res.status(404).json("No Message Found")
+            return res.status(404).json({error:"No Message Found"})
         }
-        res.json({AllMessages:AllMessages})
+        res.status(200).json({AllMessages:AllMessages})
     }
     catch(error){
         res.status(500).json(error.message)
@@ -56,11 +56,11 @@ router.delete("/delete/:id",fetchUser,async(req,res)=>{
         }
         const Messages = await Contact.findById(req.params.id)
       if(!Messages){
-              return res.status(404).json("No Message Found")
+              return res.status(404).json({error:"No Message Found"})
           }
    const deletemessage = await Contact.findByIdAndDelete(req.params.id)
 
-          res.json("successfully deleted the message")
+          res.status(200).json("successfully deleted the message")
       }
       catch(error){
           res.status(500).json(error.message)

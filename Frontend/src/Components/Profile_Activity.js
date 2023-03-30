@@ -90,18 +90,20 @@ export default function Profile_Activity() {
                         <div className="text-xs text-muted">{(new Date(element.date).toLocaleString())}</div>
                     </div>
                 </div>
-                <div className="ms-4 small d-flex justify-content-around">
-                    <div className="me-2"> <Button onPress={()=>{deleterecipe(element._id)}} color="error" auto ghost>
+                <div className="ms-4 small row">
+                    <div className="me-2 p-1 col"> <Button onPress={()=>{deleterecipe(element._id)}} color="error" auto ghost>
                     <i className="fa-sharp fa-solid fa-trash"></i>
 
                   </Button></div>
-                    <div><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
+                    <div className='col p-1'><Button color="primary" auto ghost onPress={()=>{Navigate("/Edit",{state:{EditingRecipeId:element._id}})}}>
                     <i className="fa-solid fa-pen-to-square"></i>
                   </Button></div>
                 </div>
             </div>
             <hr/></div>
           
+
+       
        })}
           
            

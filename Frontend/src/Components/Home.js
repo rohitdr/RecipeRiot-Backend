@@ -91,7 +91,7 @@ ContactusSubmitApi(contactmessage)
               
               <i className="fa-solid fa-bolt"></i>
               </div>
-              <h4><a href="" className="stretched-link text-dark">Recipe collections</a></h4>
+              <h4><a  className="stretched-link">Recipe collections</a></h4>
               <p className='fs-6'> A way for users to save their favorite recipes and create their own recipe collections.</p>
             </div> </motion.div>
           </div>
@@ -100,7 +100,7 @@ ContactusSubmitApi(contactmessage)
           <motion.div initial={{opacity:0 ,x:100}} whileInView={{opacity:1,x:0}} viewport={{once:true}}  transition={{duration:2,delay:1}} >
             <div className="service-item position-relative box_decrease_size_animationforservices bg-white ">
               <div className="icon"><i className="fa-solid fa-tower-broadcast"></i></div>
-              <h4><a href="" className="stretched-link">Search Anything</a></h4>
+              <h4><a  className="stretched-link">Search Anything</a></h4>
               <p className='fs-6'>We have a search bar where user can enter keywords to find recipes.</p>
             </div></motion.div>
           </div>
@@ -109,7 +109,7 @@ ContactusSubmitApi(contactmessage)
           <motion.div initial={{opacity:0 ,x:-100}} whileInView={{opacity:1,x:0}} viewport={{once:true}}  transition={{duration:2,delay:1}} >
             <div className="service-item position-relative box_decrease_size_animationforservices ">
               <div className="icon">  <i className="fa-sharp fa-solid fa-disease"></i></div>
-              <h4><a href="" className="stretched-link">User account</a></h4>
+              <h4><a className="stretched-link">User account</a></h4>
               <p className='fs-6'>This allow users to create an account where they can save their favorite recipes, create a shopping list, and receive personalized recommendations.</p>
             </div></motion.div>
           </div>
@@ -118,7 +118,7 @@ ContactusSubmitApi(contactmessage)
           <motion.div initial={{opacity:0 ,x:-300}} whileInView={{opacity:1,x:0}} viewport={{once:true}}  transition={{duration:2,delay:1}} >
             <div className="service-item position-relative box_decrease_size_animationforservices ">
               <div className="icon"><i className="fa-solid fa-box"></i></div>
-              <h4><a href="" className="stretched-link ">User-generated content</a></h4>
+              <h4><a  className="stretched-link ">User-generated content</a></h4>
               <p className='fs-6'>A section that allows users to submit their own recipes, which can be reviewed and added to the site if they meet certain criteria.</p>
             </div></motion.div>
           </div>
@@ -321,7 +321,7 @@ ContactusSubmitApi(contactmessage)
       })
       element.Comments.length!=0?(totalratings=reciperating/element.Comments.length):totalratings=0;
       reciperating=0;
-      animation_number+=0.8
+    
      
        //sending rating to recipeitem
       if(fourth<5){
@@ -330,7 +330,7 @@ ContactusSubmitApi(contactmessage)
 
                   <RecipeItem
                     id={element._id}
-                    delay={animation_number}
+                  
                     rating={totalratings}
                       title={element.label}
                       topLeftColor={"dark"}
@@ -418,7 +418,7 @@ ContactusSubmitApi(contactmessage)
       cuisinenumber++
       //setting recipe for recipitm
       var reciperating=0;
-      animation_delay_cuisine +=0.8
+    
       element.Comments.map((ele)=>{
     
       reciperating =reciperating+ ele.rating;
@@ -431,7 +431,7 @@ ContactusSubmitApi(contactmessage)
       return <div className="col-md-3 mt-4 homerecipenew  homerecipe" key={element._id}>
                   <RecipeItem
                     id={element._id}
-                    delay={animation_delay_cuisine}
+                 
                       title={element.label}
                       topLeftColor={"dark"}
                       headingColor={"dark"}

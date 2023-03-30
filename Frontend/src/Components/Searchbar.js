@@ -963,12 +963,12 @@ const collapsecuisineItems = [
               <div onClick={()=>{Navigate("/Profile_Activity")}}>
               <p className=" pt-3 text-dark searchbardropdown w-100">Activity</p></div>
               </Dropdown.Item>
-              <Dropdown.Item key="analytics" withDivider>
+              <Dropdown.Item key="analytics" >
              
                  <div onClick={()=>{Navigate("/Profile_Security")}}>
               <p className=" pt-3 text-dark searchbardropdown w-100">Security</p></div>
               </Dropdown.Item>
-              <Dropdown.Item key="system">
+              <Dropdown.Item key="system" withDivider>
               <div onClick={()=>{Navigate("/Profile_Recipe")}}>
               <p className=" pt-3 text-dark searchbardropdown w-100">My Recipes</p></div>
               </Dropdown.Item>
@@ -977,6 +977,11 @@ const collapsecuisineItems = [
                 <div onClick={()=>{Navigate("/Profile_LikedRecipe")}}>
               <p className=" pt-3 text-dark searchbardropdown w-100">Favourite Recipes</p></div>
                 </Dropdown.Item>
+                <Dropdown.Item key="addrecipe" >
+                <div onClick={()=>{Navigate("/AddRecipe")}}>
+              <p className=" pt-3 text-dark searchbardropdown w-100"> Add Recipe</p></div>
+             
+              </Dropdown.Item>
             
               <Dropdown.Item key="logout" withDivider color="error">
                <span onClick={logout}>Log Out</span> 
@@ -987,18 +992,19 @@ const collapsecuisineItems = [
               onAction={(actionKey) => console.log({ actionKey })}
             >
               
-              <Dropdown.Item key="settings" >
+              <Dropdown.Item key="loginsearch" >
                 <div onClick={()=>{Navigate("/login")}}>
               <p className="px-4 pt-3 text-dark searchbardropdown w-100"> Login</p></div>
              
               </Dropdown.Item>
               
-              <Dropdown.Item key="analytics" >
+              <Dropdown.Item key="signupsearch" >
               <div onClick={()=>{Navigate("/signUp")}}>
               <p className="px-4 pt-2 text-dark searchbardropdown w-100"> Sign Up</p></div>
               </Dropdown.Item>
              
-       
+        
+             
               
             </Dropdown.Menu>}
             

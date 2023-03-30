@@ -85,7 +85,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
     const newtotalrecipenumber = await User.findByIdAndUpdate({ _id: req.user.id },
       { $set: { Total_Recipes:user.Total_Recipes+1 } })
     const savedRecipe = await recipe.save();
-    res.json(savedRecipe);
+    res.status(200).json(savedRecipe);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -165,12 +165,10 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
     let recipe = await Recipe.findById(req.params.id);
     //checking recipe exist of not
     if (!recipe) {
-      return res.status(404).send(" Recipe not found");
+      return res.status(404).send({error:"Recipe not found"});
     }
     //allowing only owner to update the recipe
-    if (recipe.user.toString() !== req.user.id) {
-      return res.status(401).send("Not allowed");
-    }
+    
     recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
       { $set: newrecipe },
@@ -476,7 +474,7 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
     const incrementTotalComment= await User.findByIdAndUpdate( { _id: req.user.id },
       { $set: { Total_Comments:user.Total_Comments+1 } })
 
-    res.json(commentedRecipe.Comments);
+    res.status(200).json(commentedRecipe.Comments);
    
   } catch (error) {
     console.log(error.message);

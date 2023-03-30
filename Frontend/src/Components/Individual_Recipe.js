@@ -71,7 +71,7 @@ const {
       setTimeout(() => {
         setvisiblerepeted(false);
       }, 4000);
-    } else {
+    } else if(response.status==200) {
       setProgress(100);
       setVisible(true);
       RecipeBYId(RecipeItemid)

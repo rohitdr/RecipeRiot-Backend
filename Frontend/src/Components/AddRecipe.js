@@ -5,16 +5,19 @@ import { useContext } from "react";
 import { motion } from "framer-motion";
 import RecipeContext from "../Context/RecipeContext";
 import AnimatedPage from "./AnimatedPage";
+import { useNavigate } from "react-router-dom";
+import InternalServerError from "./InternalServerError";
 export default function AddRecipe() {
   const [pageno, setpageno] = useState(0);
   const context=useContext(RecipeContext)
-  const {showAlert}=context
+  const {showAlert,setProgress}=context
   const [totalingrediants,settotalingrediants]=useState("secondary")
   const [Ingrediantsmodalstate,settotalingrediantsmodalstate]=useState(false)
   const [totalingrediantsnumber,settotalingrediantsnumber]=useState(0)
   const [filesize,setfilesize]=useState(0)
   const [image,setimage]=useState("")
-
+  const [addrecipeserver,setaddrecipeserver]=useState({})
+let Navigate=useNavigate()
     //converting image to base64
     const toBase64=(file)=>
     new Promise((resolve,reject)=>{
@@ -317,11 +320,9 @@ const firstpage=()=>{
  
 //const api to add recipe
 const Addapi=async()=>{
- 
-      
-  
-     
-     const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/addRecipe`, {
+  try{
+    setProgress(30)
+ const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/addRecipe`, {
          method: 'POST',
          mode: "cors",
          headers: {
@@ -335,10 +336,23 @@ const Addapi=async()=>{
        
      
        });
-       if(response.status != 404){
-        showAlert("success","success")
+       setProgress(50)
+       if(response.status == 200){
+        setProgress(70)
+        Navigate("/Home")
+        setProgress(100)
+        showAlert("You have successfully added recipe","success")
        }
-      
+       else {
+        setProgress(100)
+setaddrecipeserver(500)
+       }
+  }
+  catch(error){
+    setProgress(100)
+    setaddrecipeserver(500)
+    console.log(error.message)
+  }
       
      
 
@@ -352,11 +366,11 @@ const Addapi=async()=>{
 
 Addapi();
 
-  // console.log(recipe)
+
   }
   return (
     <><AnimatedPage>
-      <section className="intro py-5">
+      { addrecipeserver == 500 ? <InternalServerError></InternalServerError>: <section className="intro py-5">
         <div className="bg-image h-100">
           <div className="mask d-flex align-items-center h-100">
             <div className="container">
@@ -506,8 +520,7 @@ Addapi();
          name="url" 
          onChange={onchange} 
          type="url" 
-         labelLeft="https://"
-         labelRight=".com"
+         
        /> </div>
         <div className="col">
 
@@ -516,7 +529,7 @@ Addapi();
 bordered
 color="secondary"
 value={recipe.cautions}
-label="Enter the Cautions of the recipe"
+label=" Cautions of the recipe"
 type="text"
 name="cautions"
 id="cautions"
@@ -557,22 +570,22 @@ onChange={onchange}
 
               
 
-      <option value="balanced"> balanced  </option>
+      <option value="Balanced"> balanced  </option>
 
 
-      <option value="high-fiber"> high-fiber  </option>
+      <option value="High-Fiber"> high-fiber  </option>
 
 
-      <option value="high-protein"> high-protein  </option>
+      <option value="High-Protein"> high-protein  </option>
 
 
-      <option value="low-carb"> low-carb  </option>
+      <option value="Low-Carb"> low-carb  </option>
 
 
-      <option value="low-fat"> low-fat  </option>
+      <option value="Low-Fat"> low-fat  </option>
 
 
-      <option value="low-sodium"> low-sodium  </option>
+      <option value="Low-Sodium"> low-sodium  </option>
 
 
   </select>
@@ -582,77 +595,77 @@ onChange={onchange}
                   Choose the Health Labels
                 </label>
                 <select multiple="multiple" className="form-select" name="healthLabels" id="healthLabels" size="3" onChange={onchangearray} >
-                  <option value="alcohol-cocktail"> alcohol-cocktail </option>
+                  <option value="Alcohol-Cocktail"> alcohol-cocktail </option>
 
-                  <option value="alcohol-free"> alcohol-free </option>
+                  <option value="Alcohol-Free"> alcohol-free </option>
 
-                  <option value="celery-free"> celery-free </option>
+                  <option value="Celery-Free"> celery-free </option>
 
-                  <option value="crustacean-free"> crustacean-free </option>
+                  <option value="Crustacean-Free"> crustacean-free </option>
 
-                  <option value="dairy-free"> dairy-free </option>
+                  <option value="Dairy-Free"> dairy-free </option>
 
                   <option value="DASH"> DASH </option>
 
-                  <option value="egg-free"> egg-free </option>
+                  <option value="Egg-Free"> egg-free </option>
 
-                  <option value="fish-free"> fish-free </option>
+                  <option value="Fish-Free"> fish-free </option>
 
-                  <option value="fodmap-free"> fodmap-free </option>
+                  <option value="Fodmap-Free"> fodmap-free </option>
 
-                  <option value="gluten-free"> gluten-free </option>
+                  <option value="Gluten-Free"> gluten-free </option>
 
-                  <option value="immuno-supportive"> immuno-supportive </option>
+                  <option value="Immuno-Supportive"> immuno-supportive </option>
 
-                  <option value="keto-friendly"> keto-friendly </option>
+                  <option value="Keto-Friendly"> keto-friendly </option>
 
-                  <option value="kidney-friendly"> kidney-friendly </option>
+                  <option value="Kidney-Friendly"> kidney-friendly </option>
 
                   <option value="kosher"> kosher </option>
 
-                  <option value="low-fat-abs"> low-fat-abs </option>
+                  <option value="Low-Fat-Abs"> low-fat-abs </option>
 
-                  <option value="low-potassium"> low-potassium </option>
+                  <option value="Low-Potassium"> low-potassium </option>
 
-                  <option value="low-sugar"> low-sugar </option>
+                  <option value="Low-Sugar"> low-sugar </option>
 
-                  <option value="lupine-free"> lupine-free </option>
+                  <option value="Lupine-Free"> lupine-free </option>
 
                   <option value="Mediterranean"> Mediterranean </option>
 
-                  <option value="mollusk-free"> mollusk-free </option>
+                  <option value="Mollusk-Free"> mollusk-free </option>
 
-                  <option value="mustard-free"> mustard-free </option>
+                  <option value="Mustard-Free"> mustard-free </option>
 
                   <option value="no-oil-added"> no-oil-added </option>
 
-                  <option value="paleo"> paleo </option>
+                  <option value="Paleo"> paleo </option>
 
-                  <option value="peanut-free"> peanut-free </option>
+                  <option value="Peanut-Free"> peanut-free </option>
 
-                  <option value="pescatarian"> pescatarian </option>
+                  <option value="Pescatarian"> pescatarian </option>
 
-                  <option value="pork-free"> pork-free </option>
+                  <option value="Pork-Free"> pork-free </option>
 
-                  <option value="red-meat-free"> red-meat-free </option>
+                  <option value="Red-Meat-Free"> red-meat-free </option>
 
-                  <option value="sesame-free"> sesame-free </option>
+                  <option value="Sesame-Free"> sesame-free </option>
 
-                  <option value="shellfish-free"> shellfish-free </option>
+                  <option value="Shellfish-Free"> shellfish-free </option>
 
-                  <option value="soy-free"> soy-free </option>
+                  <option value="Soy-Free"> soy-free </option>
 
-                  <option value="sugar-conscious"> sugar-conscious </option>
+                  <option value="Sugar-Conscious"> sugar-conscious </option>
 
-                  <option value="sulfite-free"> sulfite-free </option>
+                  <option value="Sulfite-Free"> sulfite-free </option>
 
-                  <option value="tree-nut-free"> tree-nut-free </option>
+                  <option value="Tree-Nut-Free"> tree-nut-free </option>
 
-                  <option value="vegan"> vegan </option>
+                  <option value="Vegan"> vegan </option>
 
-                  <option value="vegetarian"> vegetarian </option>
+                  <option value="Vegetarian"> vegetarian </option>
 
-                  <option value="wheat-free"> wheat-free </option>
+                  <option value="Wheat-Free"> wheat-free </option>
                 </select>
                           </div>
                         </div>
@@ -669,41 +682,41 @@ onChange={onchange}
                   id="cuisineType"
                   onChange={onchangearray}
                 >
-                  <option value="American"> American </option>
+                  <option value="american"> American </option>
 
-                  <option value="Asian"> Asian </option>
+                  <option value="asian"> Asian </option>
 
-                  <option value="British"> British </option>
+                  <option value="british"> British </option>
 
-                  <option value="Caribbean"> Caribbean </option>
+                  <option value="caribbean"> Caribbean </option>
 
-                  <option value="Central Europe"> Central Europe </option>
+                  <option value="central europe"> Central Europe </option>
 
-                  <option value="Chinese"> Chinese </option>
+                  <option value="chinese"> Chinese </option>
 
-                  <option value="Eastern Europe"> Eastern Europe </option>
+                  <option value="eastern europe"> Eastern Europe </option>
 
-                  <option value="French"> French </option>
+                  <option value="french"> French </option>
 
-                  <option value="Indian"> Indian </option>
+                  <option value="indian"> Indian </option>
 
-                  <option value="Italian"> Italian </option>
+                  <option value="italian"> Italian </option>
 
-                  <option value="Japanese"> Japanese </option>
+                  <option value="japanese"> Japanese </option>
 
-                  <option value="Kosher"> Kosher </option>
+                  <option value="dosher"> Kosher </option>
 
-                  <option value="Mediterranean"> Mediterranean </option>
+                  <option value="mediterranean"> Mediterranean </option>
 
-                  <option value="Mexican"> Mexican </option>
+                  <option value="mexican"> Mexican </option>
 
-                  <option value="Middle Eastern"> Middle Eastern </option>
+                  <option value="middle eastern"> Middle Eastern </option>
 
-                  <option value="Nordic"> Nordic </option>
+                  <option value="nordic"> Nordic </option>
 
-                  <option value="South American"> South American </option>
+                  <option value="south american"> South American </option>
 
-                  <option value="South East Asian"> South East Asian </option>
+                  <option value="south east asian"> South East Asian </option>
                 </select>
                         </div>
                         <div className="col">
@@ -711,15 +724,15 @@ onChange={onchange}
                   Choose the Meal Type
                 </label>
                 <select multiple="multiple" className="form-select" name="mealType" id="mealType" size="3" onChange={onchangearray}  >
-                  <option value="Breakfast"> Breakfast </option>
+                  <option value="breakfast"> Breakfast </option>
 
-                  <option value="Dinner"> Dinner </option>
+                  <option value="dinner"> Dinner </option>
 
-                  <option value="Lunch"> Lunch </option>
+                  <option value="lunch"> Lunch </option>
 
-                  <option value="Snack"> Snack </option>
+                  <option value="snack"> Snack </option>
 
-                  <option value="Teatime"> Teatime </option>
+                  <option value="teatime"> Teatime </option>
                 </select>
                           </div>
                       </div>
@@ -735,38 +748,38 @@ onChange={onchange}
                     Biscuits and cookies{" "}
                   </option>
 
-                  <option value="Bread"> Bread </option>
+                  <option value="bread"> Bread </option>
 
-                  <option value="Cereals"> Cereals </option>
+                  <option value="cereals"> Cereals </option>
 
-                  <option value="Condiments and sauces">
+                  <option value="condiments and sauces">
                     {" "}
                     Condiments and sauces{" "}
                   </option>
 
-                  <option value="Desserts"> Desserts </option>
+                  <option value="desserts"> Desserts </option>
 
-                  <option value="Drinks"> Drinks </option>
+                  <option value="drinks"> Drinks </option>
 
-                  <option value="Main course"> Main course </option>
+                  <option value="main course"> Main course </option>
 
-                  <option value="Pancake"> Pancake </option>
+                  <option value="pancake"> Pancake </option>
 
-                  <option value="Preps"> Preps </option>
+                  <option value="preps"> Preps </option>
 
-                  <option value="Preserve"> Preserve </option>
+                  <option value="preserve"> Preserve </option>
 
-                  <option value="Salad"> Salad </option>
+                  <option value="salad"> Salad </option>
 
-                  <option value="Sandwiches"> Sandwiches </option>
+                  <option value="sandwiches"> Sandwiches </option>
 
-                  <option value="Side dish"> Side dish </option>
+                  <option value="side dish"> Side dish </option>
 
-                  <option value="Soup"> Soup </option>
+                  <option value="soup"> Soup </option>
 
-                  <option value="Starter"> Starter </option>
+                  <option value="starter"> Starter </option>
 
-                  <option value="Sweets"> Sweets </option>
+                  <option value="sweets"> Sweets </option>
                 </select>
   </div>
 
@@ -2070,7 +2083,7 @@ onChange={onchange}
             </div>
           </div>
         </div>
-      </section></AnimatedPage>
+      </section>}</AnimatedPage>
 
 
     

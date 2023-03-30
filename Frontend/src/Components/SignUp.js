@@ -90,7 +90,7 @@ twitter:""
       );
 
       let result = await response.json();
-      if (!result) {
+      if (response.status == 404) {
       
         setusernamecolor("error");
         sethelpercolorusername("error");
@@ -100,7 +100,7 @@ twitter:""
           <i className="fa-solid text-danger fa-circle-exclamation"></i>
         );
       }
-      if (result) {
+      else if (response.status == 200) {
         setusernamecolor("success");
 
         sethelpercolorusername("success");
@@ -108,6 +108,9 @@ twitter:""
         setusernamecontentright(
           <i className="fa-solid text-success fa-circle-check"></i>
         );
+      }
+      else{
+        setservererror(500)
       }
     } catch (e) {
       setservererror(500)
@@ -245,8 +248,7 @@ const changethird=(e)=>{
   let Navigate = useNavigate();
   const signupapi = async() => {
     try{
-    setProgress(10)
-      
+    setProgress(10)  
        const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/createUser`, {
          method: 'POST',
          mode: "cors",
@@ -264,24 +266,22 @@ const changethird=(e)=>{
        let signupresult= await response.json();
     
      
-       if(response.status !== 400){
+       if(response.status == 200){
          setProgress(70)
-       
-      
-         
-        
+
          setProgress(100)
    
            Navigate("/login")
-           showAlert("Your had successfully Signed Up","success")
-      
-        
-       
-   
+           showAlert("Your  account is successfully created , Now You can login.","success")
+
        }
-       if(response.status=== 400){
+       else if(response.status== 404){
          setProgress(100)
          showAlert(signupresult.error,"danger")
+       }
+       else{
+        setProgress(100)
+        setservererror(500)
        }
       
      

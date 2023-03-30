@@ -430,7 +430,7 @@ function App() {
             element={
               <section style={{backgroundColor: "#eee"}}>
             <div className="container py-5">
-              <Profile_Top></Profile_Top>
+              {/* <Profile_Top></Profile_Top> */}
  <AddRecipe></AddRecipe>
   </div>
 
@@ -479,7 +479,7 @@ function App() {
                 element={
                   <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile_Profile></Profile_Profile>
       </div>
  
@@ -555,7 +555,7 @@ function App() {
                 path='/Profile_Profile'
                 element={ <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile_Profile></Profile_Profile>
       </div>
  
@@ -567,7 +567,7 @@ function App() {
                 path='/Profile_Security'
                 element={ <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile_Security></Profile_Security>
       </div>
  
@@ -579,7 +579,7 @@ function App() {
                 path='/Profile_Recipe'
                 element={ <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile></Profile>
       </div>
  
@@ -591,7 +591,7 @@ function App() {
                 path='/Profile_LikedRecipe'
                 element={ <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile_LikedRecipe></Profile_LikedRecipe>
       </div>
  
@@ -603,7 +603,7 @@ function App() {
                 path='/Profile_Activity'
                 element={ <section style={{backgroundColor: "#eee"}}>
                 <div className="container py-5">
-                  <Profile_Top></Profile_Top>
+                  {/* <Profile_Top></Profile_Top> */}
       <Profile_Activity></Profile_Activity>
       </div>
  

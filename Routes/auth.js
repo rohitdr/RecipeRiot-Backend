@@ -19,16 +19,16 @@ router.post('/createUser', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ error: errors.array() });
+        return res.status(404).json({ error: errors.array() });
     }
     try {
         let emailcheck = await User.findOne({ 'email': req.body.email });
         if (emailcheck) {
-            return res.status(400).json({ 'error': "Sorry user already exists with this email" })
+            return res.status(404).json({ 'error': "Sorry user already exists with this email" })
         }
         let numberCheck = await User.findOne({ 'phone_number': req.body.phone_number })
         if (numberCheck) {
-            return res.status(400).json({ 'error': "Sorry user already exists with this phone Number" })
+            return res.status(404).json({ 'error': "Sorry user already exists with this phone Number" })
         }
         const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
@@ -54,7 +54,7 @@ router.post('/createUser', [
         }
         const auth_token = jwt.sign(data, jwtSecret);
 
-        res.json({ auth_token })
+        res.status(200).json({ auth_token })
 
 
     } catch (error) {
@@ -91,7 +91,7 @@ router.post('/login', [
         const onlinestatus = await User.findByIdAndUpdate({_id :user.id}, { $set: {OnLine : true  } })
         const auth_token = jwt.sign(data, jwtSecret)
         let success = "true"
-        res.json({ success ,auth_token })
+        res.status(200).json({ success ,auth_token })
 
     }
     catch (error) {
@@ -110,7 +110,7 @@ router.post('/logout', fetchUser, async (req, res) => {
             return res.status(404).json({error:"something is not Correct"})
         }
         const onlinestatus = await User.findByIdAndUpdate({_id:id},{$set:{OnLine:false}})
-     res.json("Now Your are Offline")
+     res.status(200).json("Now Your are Offline")
     }
     catch (error) {
         console.error(error.message)
@@ -158,20 +158,20 @@ router.post('/changePassword', fetchUser,async(req,res)=>{
           const id = req.user.id;
           const user = await User.findById(id) 
           if(!user){
-            return res.status(400).json({ 'error': "Sorry user does not exist" })
+            return res.status(404).json({ 'error': "Sorry user does not exist" })
           }
           let passCompare = await bcrypt.compare(req.body.oldpassword, user.password)
           if (!passCompare) {
-            return res.status(400).json({ 'error': "Please use correct correndentials" })
+            return res.status(404).json({ 'error': "Please use correct correndentials" })
         }
           const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
         const updatedUser = await User.update({ _id:id}  ,{ $set: {password : securedpass  } } )
 
         if(!updatedUser){
-           return res.status(400).send({ error: "Their is something wrong ! Try again "});
+           return res.status(404).send({ error: "Their is something wrong ! Try again "});
         }
-        res.send({"succcess":"successfully password updated"})
+        res.status(200).send({"succcess":"successfully password updated"})
         
     }catch(error)
     {
@@ -185,11 +185,11 @@ router.post('/checkUsername',async(req,res)=>{
         
           const user = await User.findOne({username:req.body.username})
           if(user){
-            return res.status(400).send(false)
+            return res.status(404).send(false)
           }
           
           
-        res.send(true)
+        res.status(200).send(true)
         
     }catch(error)
     {
@@ -204,10 +204,10 @@ router.post('/changeuploadimage', fetchUser, async (req, res) => {
         const id = req.user.id;
         const user = await User.findById(id) 
           if(!user){
-            return res.status(400).json({ 'error': "Sorry user does not exist" })
+            return res.status(404).json({ 'error': "Sorry user does not exist" })
           }
         const updatedUser = await User.update({ _id:id}  ,{ $set: { Profile_Image: image  } } )
-        res.json(updatedUser)
+        res.status(200).json(updatedUser)
     }
     catch (error) {
         console.error(error.message)
@@ -272,7 +272,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
       return res.status(404).send({ error:"You can't update details of other user Not allowed"})
      }
    let updateduser =await User.findByIdAndUpdate(req.user.id,{$set:newuser},{new:true})
-   res.json(" The details has been successfully updated")
+   res.status(200).json(" The details has been successfully updated")
     } catch (error) {
       console.log(error.message);
       res.status(500).send({error:"INTERNAL SERVER ERROR"});
@@ -284,7 +284,12 @@ router.put('/updateuser', fetchUser, async (req, res) => {
     try{
           const email = req.body.email;
           const username=req.body.username;
+        
           const user = await User.findOne({email:{$regex:email,$options:"i"}}) 
+          let passCompare = await bcrypt.compare(req.body.password, user.password)
+          if (passCompare) {
+              return res.status(404).json({ 'error': "New password Must be different form the old password" })
+          }
           if(!user){
             return res.status(404).json({ error: "Sorry user does not exist with this email" })
           }
@@ -292,6 +297,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
           if (username != user.username) {
             return res.status(404).json({ error: "Please use correct correndentials" })
         }
+        
           const salt = await bcrypt.genSalt(10);
         const securedpass = await bcrypt.hash(req.body.password, salt)
         const updatedUser = await User.updateOne({email:{$regex:email,$options:"i"}}  ,{ $set: {password : securedpass  } } )
@@ -299,7 +305,7 @@ router.put('/updateuser', fetchUser, async (req, res) => {
         if(!updatedUser){
            return res.status(404).json({ error: "Their is something wrong ! Try again "});
         }
-        res.json({succcess:"successfully password updated"})
+        res.status(200).json({succcess:"Your Password has been successfully  updated"})
         
     }catch(error)
     {
@@ -355,7 +361,7 @@ router.delete('/deleteAccount', fetchUser,async(req,res)=>{
         }
         let deleted_user=await User.deleteOne({_id:req.user.id})
          let delete_recipe=await Recipe.deleteMany({user:req.user.id})
-         res.json("Your account and Your Recipes are deleted is successfully deleted")
+         res.status(200).json("Your account and Your Recipes are deleted is successfully deleted")
          
           
         
@@ -376,7 +382,7 @@ router.delete('/AdminDeleteAccount', fetchUser,async(req,res)=>{
         
         let deleted_user=await User.deleteOne({_id:req.body.id})
          let delete_recipe=await Recipe.deleteMany({user:req.body.id})
-         res.json("This account and his Recipes are deleted successfully ")
+         res.status(200).json("This account and his Recipes are deleted successfully ")
          
           
         
@@ -485,7 +491,7 @@ router.put('/updateuserAdmin', fetchUser, async (req, res) => {
             totalComments=totalComments+ element.Comments.length;
         })
 
-        res.json({totaluser:totaluser.length,totalrecipe:totalrecipe.length,totalMessage:totalMessage.length,totalComment:totalComments})
+        res.status(200).json({totaluser:totaluser.length,totalrecipe:totalrecipe.length,totalMessage:totalMessage.length,totalComment:totalComments})
     }
     catch (error) {
         console.error(error.message)

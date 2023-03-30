@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Addreicpe.css";
 import { Input,Button,Modal,Text,Textarea } from "@nextui-org/react";
 import { useContext } from "react";
-import {useLocation } from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
 import RecipeContext from "../Context/RecipeContext";
 import { useEffect } from "react";
 import AnimatedPage from "./AnimatedPage";
@@ -10,14 +10,17 @@ export default function EditRecipe() {
   const [pageno, setpageno] = useState(0);
  
   const context=useContext(RecipeContext)
-  const {showAlert,CurrentRecipeItem,RecipeBYId}=context
+  const {showAlert,CurrentRecipeItem,RecipeBYId,setProgress}=context
   const [totalingrediants,settotalingrediants]=useState("secondary")
   const [Ingrediantsmodalstate,settotalingrediantsmodalstate]=useState(false)
   const [totalingrediantsnumber,settotalingrediantsnumber]=useState(0)
   const [filesize,setfilesize]=useState(0)
   const [image,setimage]=useState("")
+  const [editserver,seteditserver]=useState({})
   const {state} = useLocation();
   const {EditingRecipeId}=state;
+  const [recipe,setRecipe]=useState({})
+  let Navigate=useNavigate()
 
     //converting image to base64
     const toBase64=(file)=>
@@ -27,10 +30,15 @@ export default function EditRecipe() {
       reader.onload=()=>resolve(reader.result);
       reader.onerror=(error)=>reject(error);
     });
+  
 
 useEffect(()=>{
 
 RecipeBYId(EditingRecipeId)
+
+if(CurrentRecipeItem){
+  CurrentRecipeItem?.recipe?.map((element)=>{setRecipe(element)  })
+}
 
 },[])
     //image preview
@@ -48,146 +56,147 @@ const imagepreview=async (e)=>{
   
   }
 
-  const [recipe, setRecipe]=useState({
-    label:"",
-    image:"",
+  // const [recipe, setRecipe]=useState({
+  //   label:"",
+  //   image:"",
     
-    source: "",
-    url: "",
+  //   source: "",
+  //   url: "",
     
-    dietLabels: [],
-    instruction:[],
-    healthLabels: [],
-    cautions: [],
-    ingredientLines: [],
-    ingredients:[],
-   calories: 0,
-    totalWeight:0,
-    totalTime: 0,
-    cuisineType: [
-    ],
-    mealType: [
+  //   dietLabels: [],
+  //   instruction:[],
+  //   healthLabels: [],
+  //   cautions: [],
+  //   ingredientLines: [],
+  //   ingredients:[],
+  //  calories: 0,
+  //   totalWeight:0,
+  //   totalTime: 0,
+  //   cuisineType: [
+  //   ],
+  //   mealType: [
    
-    ],
-    dishType: [
+  //   ],
+  //   dishType: [
   
-    ],
-    totalNutrients: {
-    ENERC_KCAL: {
-    label: "Energy",
-    quantity: 0,
-    unit: "kcal"
-    },
-    FAT: {
-    label: "Fat",
-    quantity: 0,
-    unit: "g"
-    },
-    CHOCDF: {
-    label: "Carbs",
-    quantity: 0,
-    unit: "g"
-    },
+  //   ],
+  //   totalNutrients: {
+  //   ENERC_KCAL: {
+  //   label: "Energy",
+  //   quantity: 0,
+  //   unit: "kcal"
+  //   },
+  //   FAT: {
+  //   label: "Fat",
+  //   quantity: 0,
+  //   unit: "g"
+  //   },
+  //   CHOCDF: {
+  //   label: "Carbs",
+  //   quantity: 0,
+  //   unit: "g"
+  //   },
   
-    FIBTG: {
-    label: "Fiber",
-    quantity:0,
-    unit: "g"
-    },
-    SUGAR: {
-    label: "Sugars",
-    quantity: 0,
-    unit: "g"
-    },
+  //   FIBTG: {
+  //   label: "Fiber",
+  //   quantity:0,
+  //   unit: "g"
+  //   },
+  //   SUGAR: {
+  //   label: "Sugars",
+  //   quantity: 0,
+  //   unit: "g"
+  //   },
    
-    PROCNT: {
-    label: "Protein",
-    quantity: 0,
-    unit: "g"
-    },
-    CHOLE: {
-    label: "Cholesterol",
-    quantity: 0,
-    unit: "mg"
-    },
+  //   PROCNT: {
+  //   label: "Protein",
+  //   quantity: 0,
+  //   unit: "g"
+  //   },
+  //   CHOLE: {
+  //   label: "Cholesterol",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
    
-    CA: {
-    label: "Calcium",
-    quantity: 0,
-    unit: "mg"
-    },
+  //   CA: {
+  //   label: "Calcium",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
    
    
-    FE: {
-    label: "Iron",
-    quantity: 0,
-    unit: "mg"
-    },
+  //   FE: {
+  //   label: "Iron",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
    
     
-    VITA_RAE: {
-    label: "Vitamin A",
-    quantity: 0,
-    unit: "µg"
-    },
-    VITC: {
-    label: "Vitamin C",
-    quantity:0,
-    unit: "mg"
-    },
-    THIA: {
-    label: "Thiamin (B1)",
-    quantity: 0,
-    unit: "mg"
-    },
-    RIBF: {
-    label: "Riboflavin (B2)",
-    quantity: 0,
-    unit: "mg"
-    },
-    NIA: {
-    label: "Niacin (B3)",
-    quantity: 0,
-    unit: "mg"
-    },
-    VITB6A: {
-    label: "Vitamin B6",
-    quantity: 0,
-    unit: "mg"
-    },
+  //   VITA_RAE: {
+  //   label: "Vitamin A",
+  //   quantity: 0,
+  //   unit: "µg"
+  //   },
+  //   VITC: {
+  //   label: "Vitamin C",
+  //   quantity:0,
+  //   unit: "mg"
+  //   },
+  //   THIA: {
+  //   label: "Thiamin (B1)",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
+  //   RIBF: {
+  //   label: "Riboflavin (B2)",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
+  //   NIA: {
+  //   label: "Niacin (B3)",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
+  //   VITB6A: {
+  //   label: "Vitamin B6",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
     
    
    
-    VITB12: {
-    label: "Vitamin B12",
-    quantity: 0,
-    unit: "µg"
-    },
-    VITD: {
-    label: "Vitamin D",
-    quantity: 0,
-    unit: "µg"
-    },
-    TOCPHA: {
-    label: "Vitamin E",
-    quantity: 0,
-    unit: "mg"
-    },
-    VITK1: {
-    label: "Vitamin K",
-    quantity: 0,
-    unit: "µg"
-    },
+  //   VITB12: {
+  //   label: "Vitamin B12",
+  //   quantity: 0,
+  //   unit: "µg"
+  //   },
+  //   VITD: {
+  //   label: "Vitamin D",
+  //   quantity: 0,
+  //   unit: "µg"
+  //   },
+  //   TOCPHA: {
+  //   label: "Vitamin E",
+  //   quantity: 0,
+  //   unit: "mg"
+  //   },
+  //   VITK1: {
+  //   label: "Vitamin K",
+  //   quantity: 0,
+  //   unit: "µg"
+  //   },
    
-    WATER: {
-    label: "Water",
-    quantity: 0,
-    unit: "g"
-    }}
-  }
-    )
+  //   WATER: {
+  //   label: "Water",
+  //   quantity: 0,
+  //   unit: "g"
+  //   }}
+  // }
+  //   )
   
     // intialization of ingrediants variables
+  
     var first_ingede_text,second_ingede_text,third_ingede_text,fourth_ingede_text,fifth_ingede_text,sixth_ingede_text,seventh_ingede_text,eight_ingede_text,nineth_ingede_text,tenth_ingede_text=null
     var first_ingede_weight,second_ingede_weight,third_ingede_weight,fourth_ingede_weight,fifth_ingede_weight,sixth_ingede_weight,seventh_ingede_weight,eight_ingede_weight,nineth_ingede_weight,tenth_ingede_weight=null
     var first_ingede_image,second_ingede_image,third_ingede_image,fourth_ingede_image,fifth_ingede_image,sixth_ingede_image,seventh_ingede_image,eight_ingede_image,nineth_ingede_image,tenth_ingede_image=null
@@ -311,31 +320,48 @@ const ingredientsfifthpage=async()=>{
 }
  
 //const api to add recipe
-const Addapi=async()=>{
- 
-      
+const Addapi=async(id)=>{
   
+ try{
+  setProgress(30)
+  const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/updateRecipe/${id}`, {
+    method: 'PUT',
+    mode: "cors",
+    headers: {
+      'Content-Type': 'application/json',
      
-     const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/addRecipe`, {
-         method: 'POST',
-         mode: "cors",
-         headers: {
-           'Content-Type': 'application/json',
-          
-           'auth-token':sessionStorage.getItem("auth-token")?sessionStorage.getItem("auth-token"):localStorage.getItem("auth-token")
+      'auth-token':sessionStorage.getItem("auth-token")?sessionStorage.getItem("auth-token"):localStorage.getItem("auth-token")
 
-          
-         },
-         body: JSON.stringify(recipe)
-       
      
-       });
-       if(response.status != 404){
-        showAlert("success","success")
-       }
-      
-      
-     
+    },
+    body: JSON.stringify(recipe)
+  
+
+  });
+  setProgress(60)
+  let result =await response.json();
+  if(response.status == 200){
+    setProgress(100)
+   showAlert("Wow! Recipe is successfully Updated","success")
+ 
+  }
+  else if(response.status==404){
+    setProgress(100)
+    showAlert(result.error,"danger")
+
+  }
+  else{
+    setProgress(100)
+    seteditserver(500)
+  }
+
+
+ }
+ catch(error){
+  setProgress(100)
+  seteditserver(500)
+  console.log(error.message)
+ }
 
 }
 //on changing of a instruction
@@ -344,14 +370,8 @@ const instructionchange=(e)=>{
 }
   //final page
   const insertRecipe=()=>{
- 
-//     if(document.getElementById('instructionrecipe')){
-//       recipe.instruction=document.getElementById('instructionrecipe').value.split(".")
-//     }
-
-// Addapi();
-
-  console.log(recipe)
+    Addapi(EditingRecipeId);
+    Navigate("/Home")
   }
   return (
     <><AnimatedPage>
@@ -405,17 +425,18 @@ const instructionchange=(e)=>{
                               width="80%"
           underlined 
           id="label"
+       
           name="label"
           key={element.label}
       initialValue={element.label}
-          labelPlaceholder="Enter the title of the recipe" 
+          label="Enter the title of the recipe" 
           color="secondary" 
           onChange={onchangelabel}
         />
                               </div>
                             </form>
                             <div className="mt-2 d-flex justify-content-end">
-                            <Button color="primary" auto ghost onPress={()=>{setpageno(1)}}>
+                            <Button color="primary" auto ghost onPress={()=>{setpageno(1);console.log(recipe)}}>
          Next
         </Button>
                             </div>
@@ -540,22 +561,22 @@ onChange={onchange}
 
               
 
-      <option value="balanced" selected={element.dietLabels.includes("Balanced")} > balanced  </option>
+      <option value="Balanced" selected={element.dietLabels.includes("Balanced")} > balanced  </option>
 
 
-      <option value="high-fiber" selected={element.dietLabels.includes("High-Fiber")}> high-fiber  </option>
+      <option value="High-Fiber" selected={element.dietLabels.includes("High-Fiber")}> high-fiber  </option>
 
 
-      <option value="high-protein" selected={element.dietLabels.includes("High-Protein")}> high-protein  </option>
+      <option value="High-Protein" selected={element.dietLabels.includes("High-Protein")}> high-protein  </option>
 
 
-      <option value="low-carb" selected={element.dietLabels.includes("Low-Carb")}> low-carb  </option>
+      <option value="Low-Carb" selected={element.dietLabels.includes("Low-Carb")}> low-carb  </option>
 
 
-      <option value="low-fat" selected={element.dietLabels.includes("Low-Fat")}> low-fat  </option>
+      <option value="Low-Fat" selected={element.dietLabels.includes("Low-Fat")}> low-fat  </option>
 
 
-      <option value="low-sodium" selected={element.dietLabels.includes("Low-Sodium")}> low-sodium  </option>
+      <option value="Low-Sodium" selected={element.dietLabels.includes("Low-Sodium")}> low-sodium  </option>
 
 
   </select>

@@ -45,25 +45,22 @@ const [servererror,setservererror]=useState(0)
         let loginresult= await response.json();
      
       
-        if(response.status !== 400){
+        if(response.status ==200){
           setProgress(70)
-          
-       
-          
-         
-          setProgress(100)
-    
-           
+setProgress(100)
             showAlert("Your Password has been successfully changed","success")
        Navigate("/login")
          
         }
     
       
-        if(response.status=== 400){
-          
+        else if(response.status=== 404){
           showAlert(loginresult.error,"danger")
           setProgress(100)
+        }
+        else{
+            setservererror(500)
+            setProgress(100)
         }
     }
     catch(error){

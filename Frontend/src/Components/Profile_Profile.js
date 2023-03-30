@@ -71,11 +71,21 @@ setProgress(30)
     
   let result = await response.json()
   setProgress(70)
-if(result){
+  if(response.status==404){
+    setProgress(100)
+    showAlert(result,"danger")
+  }
+else if(response.status==200){
+  setProgress(100)
   showAlert("Image has been changed","success")
 }
+else{
+ 
+  setProgress(100)
+  setservererror(500)
+}
   
-setProgress(100)
+
   }
   catch(error){
     setProgress(100)
@@ -165,14 +175,14 @@ const updateaccountdetail=async (data)=>{
     showAlert(result.error,"danger")
     setProgress(100)
   }
-  else if(response.status==500){
-    setProgress(100)
-    setservererror(500)
-  
-  }
-  else{
+ 
+  else if(response.status==200){
     showAlert(result,"success")
     setProgress(100)
+  }
+  else{
+    setProgress(100)
+    setservererror(500)
   }
 }
 catch(error){

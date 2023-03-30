@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -64,17 +65,24 @@ const Admingetallstaticaldata=async()=>{
       }
     );
     setProgress(60);
-    if (response.status == 500) {
-      setProgress(100);
-      setLoading(false);
-      setstaticalData(500)
+    let result = await response.json();
+    if(response.status==404){
+      setProgress(100)
+      setLoading(false)
+      showAlert(result.error,"danger")
+    }
+     else if(response.status==200) {
     
-    } else {
-      let result = await response.json();
       setProgress(70);
      
  setstaticalData(result)
       setProgress(100);
+    }
+    else {
+      setProgress(100);
+      setLoading(false);
+      setstaticalData(500)
+    
     }
   } catch (error) {
     setProgress(100);
@@ -106,17 +114,24 @@ const deleteAccountAdmin=async(id)=>{
       }
     );
     setProgress(60);
-    if (response.status == 500) {
-      setProgress(100);
-      setLoading(false);
-      setdeleteaccountAdmin(500)
+    let result = await response.json();
+   if( response.status==404){
+    setProgress(100);
+    setLoading(false);
+   showAlert(result.error,"danger")
+   }
+     else if(response.status == 200) {
     
-    } else {
-      let result = await response.json();
       setProgress(70);
       AdminGetAllUserByDate();
     showAlert(result,"success")
       setProgress(100);
+    }
+    else {
+      setProgress(100);
+      setLoading(false);
+      setdeleteaccountAdmin(500)
+    
     }
   } catch (error) {
     setProgress(100);
@@ -148,13 +163,14 @@ const deleteAccount=async(id)=>{
       }
     );
     setProgress(60);
-    if (response.status == 500) {
-      setProgress(100);
+    let result = await response.json();
+    if(response.status==404){
       setLoading(false);
-      setdeleteaccount(500)
+      showAlert(result.error,"danger")
+      setProgress(100);
+    }
+     else if(response.status==200) {
     
-    } else {
-      let result = await response.json();
       setProgress(70);
     
       localStorage.removeItem("auth-token")
@@ -162,6 +178,12 @@ const deleteAccount=async(id)=>{
       Navigate("/login")
     showAlert(result,"success")
       setProgress(100);
+    }
+    else {
+      setProgress(100);
+      setLoading(false);
+      setdeleteaccount(500)
+    
     }
   } catch (error) {
     setProgress(100);
@@ -191,22 +213,29 @@ const logoutUser=async()=>{
       }
     );
     setProgress(60);
-    if (response.status == 500) {
+    let result = await response.json();
+    if(response.status==404){
       setProgress(100);
+      showAlert(result.error,"danger")
       setLoading(false);
-    
-    } else {
-      let result = await response.json();
-    
+    }
+   else if(response.status==200) {
+
       setProgress(70);
       Navigate("/login")
 
     showAlert("You Are Successfully Logged Out ","success")
       setProgress(100);
     }
+    else {
+      setProgress(100);
+      showAlert("Their is Problem in our Server, Try again","danger")
+      setLoading(false);
+    
+    } 
   } catch (error) {
     setProgress(100);
-  
+    showAlert("Their is Problem in our Server, Try again","danger")
     setLoading(false);
     console.log(error.message);
   }
@@ -232,16 +261,23 @@ const deletemessage=async(id)=>{
       }
     );
     setProgress(60);
-    if (response.status == 500) {
-      setProgress(100);
-      setLoading(false);
-      setdeletemessageresult(500)
-    } else {
-      let result = await response.json();
+    let result = await response.json();
+    if(response.status==404){
+setProgress(100)
+showAlert(result.error,"danger")
+setLoading(false);
+    }
+     else if(response.status==200) {
+    
       setProgress(70);
     GetAllcontactMessages()
     showAlert("This Message is Successfully Deleted","success")
       setProgress(100);
+    }
+    else {
+      setProgress(100);
+      setLoading(false);
+      setdeletemessageresult(500)
     }
   } catch (error) {
     setProgress(100);
@@ -268,15 +304,22 @@ const ContactusSubmitApi = async (message) => {
       }
     );
     setProgress(60);
-    if (response.status == 500) {
+    let result = await response.json();
+    if(response.status==404){
       setProgress(100);
       setLoading(false);
-      setcontactsendmessage(500)
-    } else {
-      let result = await response.json();
+      showAlert(result.error,"danger")
+    }
+     else if(response.status==200) {
+      
       setProgress(70);
     showAlert("We Will contact You Soon","success")
       setProgress(100);
+    }
+    else {
+      setProgress(100);
+      setLoading(false);
+      setcontactsendmessage(500)
     }
   } catch (error) {
     setProgress(100);
@@ -301,16 +344,22 @@ const GetAllcontactMessages = async () => {
       }
     );
     setProgress(60);
-    if (response.status == 500) {
+    let result = await response.json();
+    if(response.status==404){
+      setAllContactMessages(false)
       setProgress(100);
-      setLoading(false);
-     setAllContactMessages(500)
-    } else {
-      let result = await response.json();
+    }
+  else if(response.status==200) {
+    
       setProgress(70);
       setAllContactMessages(result)
       setProgress(100);
     }
+    else {
+      setProgress(100);
+      setLoading(false);
+     setAllContactMessages(500)
+    } 
   } catch (error) {
     setProgress(100);
     setAllContactMessages(500)
@@ -793,7 +842,7 @@ const AdminGetAllRecipe = async () => {
       },
       setTimeout(() => {
         setAlert(null);
-      }, 2000)
+      }, 3000)
     );
   };
   //api for recipe search

@@ -29,6 +29,7 @@ export default function Individual_Recipe() {
  /* Calling the getUser() function and RecipeBYId(RecipeItemid) function when the RecipeItemid and
  CurrentRecipeItem?.recipe?.Comments changes. */
   useEffect(() => {
+    document.title=`RecipeRiot`
     getUser();
     RecipeBYId(RecipeItemid);
   }, [RecipeItemid, CurrentRecipeItem?.recipe?.Comments]);

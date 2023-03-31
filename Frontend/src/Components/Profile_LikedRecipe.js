@@ -15,6 +15,7 @@ export default function Profile_LikedRecipe() {
   let Navigate = useNavigate();
  /* Checking if the user is logged in or not. If not then it will redirect to login page. */
   useEffect(() => {
+    document.title=`RecipeRiot-Favourite Recipe`
     if (
       !sessionStorage.getItem("auth-token") &&
       !localStorage.getItem("auth-token")
@@ -49,7 +50,7 @@ export default function Profile_LikedRecipe() {
                       animation: "drop .4s linear forwards 1s",
                     }}
                   >
-                    Your Liked Recipes
+                    Your Favourite Recipes
                   </h1>
                   {loading && <Loader></Loader> && (
                     <BlankRecipeItem></BlankRecipeItem>

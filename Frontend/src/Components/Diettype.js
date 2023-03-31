@@ -23,6 +23,7 @@ export default function Diettype() {
   const { type } = state;
  /* Calling the diettype function with the type parameter. */
   useEffect(() => {
+    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
     diettype(type);
   }, [type]);
   var totalratings = 0;
@@ -42,7 +43,7 @@ export default function Diettype() {
                 }}
               >
            
-              
+           {firstCapital(type)}  Recipes
               </h1>
 
               {dietdata.recipe &&
@@ -59,7 +60,7 @@ export default function Diettype() {
                   //setting recipe for recipitm
                   return (
                     <div
-                      className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
+                      className="col-md-3 mt-4 profilerecipe "
                       key={element._id}
                     >
                       <RecipeItem

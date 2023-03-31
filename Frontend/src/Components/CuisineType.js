@@ -24,6 +24,7 @@ export default function CuisineType() {
   const { type } = state;
  /* Calling the cuisine function with the type parameter. */
   useEffect(() => {
+    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
     cuisine(type);
   }, [type]);
   return (
@@ -58,7 +59,7 @@ export default function CuisineType() {
                   //setting recipe for recipitm
                   return (
                     <div
-                      className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
+                      className="col-md-3 mt-4 profilerecipe "
                       key={element._id}
                     >
                       <RecipeItem

@@ -28,6 +28,7 @@ export default function Profile_Activity() {
 /* Checking if the user is logged in or not. If the user is not logged in, it will redirect the user to
 the login page. */
   useEffect(() => {
+    document.title=`RecipeRiot-Activities`
     if (
       !sessionStorage.getItem("auth-token") &&
       !localStorage.getItem("auth-token")

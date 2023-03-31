@@ -18,6 +18,7 @@ export default function Profile_Security() {
   } = context;
 /* Calling the getUser function when the component mounts. */
   useEffect(() => {
+    document.title=`RecipeRiot-Security`
     getUser();
   }, []);
 /* Creating a variable called Navigate that is using the useNavigate hook. */

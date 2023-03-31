@@ -35,6 +35,7 @@ called setshowfile. */
   let Navigate = useNavigate();
  /* Checking if the user is logged in or not. If not, it will redirect the user to the login page. */
   useEffect(() => {
+    document.title=`RecipeRiot-My Profile`
     if (
       !sessionStorage.getItem("auth-token") &&
       !localStorage.getItem("auth-token")

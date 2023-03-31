@@ -40,6 +40,7 @@ export default function EditRecipe() {
 
   /* Setting the recipe state to the current recipe item. */
   useEffect(() => {
+    document.title=`RecipeRiot-Edit Recipe`
     RecipeBYId(EditingRecipeId);
 
     if (CurrentRecipeItem) {

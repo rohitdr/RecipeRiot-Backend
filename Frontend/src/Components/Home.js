@@ -40,6 +40,7 @@ export default function Home() {
 
   /* Calling the function cuisine and LatesRecipe when the component mounts. */
   useEffect(() => {
+    document.title=`RecipeRiot-Home`
     cuisine("indian");
     LatesRecipe();
   }, []);
@@ -618,7 +619,7 @@ export default function Home() {
                       if (fourth < 13) {
                         return (
                           <div
-                          className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
+                          className="col-md-3 mt-4 profilerecipe "
                             key={element._id}
                           >
                             <RecipeItem
@@ -809,7 +810,7 @@ export default function Home() {
                       if (cuisinenumber < 13) {
                         return (
                           <div
-                          className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
+                          className="col-md-3 mt-4 profilerecipe "
                             key={element._id}
                           >
                             <RecipeItem

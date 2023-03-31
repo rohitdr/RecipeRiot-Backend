@@ -24,6 +24,7 @@ export default function Dishtype() {
   const { type } = state;
  /* Calling the function `dishtype` with the argument `type` whenever the `type` changes. */
   useEffect(() => {
+    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
     dishtype(type);
   }, [type]);
   var totalratings = 0;
@@ -59,7 +60,7 @@ export default function Dishtype() {
                   //setting recipe for recipitm
                   return (
                     <div
-                      className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
+                      className="col-md-3 mt-4 profilerecipe "
                       key={element._id}
                     >
                       <RecipeItem

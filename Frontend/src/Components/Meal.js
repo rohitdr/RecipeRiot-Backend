@@ -25,6 +25,7 @@ export default function Meal() {
   const { type, on } = state;
   /* A hook that is used to perform side effects in a functional component. */
   useEffect(() => {
+    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
     mealtype(type);
   }, [type]);
   return (

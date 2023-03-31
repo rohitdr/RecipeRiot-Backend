@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import "./SignUp.css";
@@ -77,9 +77,14 @@ twitter:""
     };
   }, [value]);
 
+useEffect(()=>{
+document.title="RecipeRiot-Sign up"
+},[])
+
   ///for validation of username
  /**
-  * It checks if the username is available or not.
+  * It checks if the 
+  * username is available or not.
   * </code>
   */
   const checkusername = async () => {

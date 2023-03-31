@@ -15,6 +15,7 @@ export default function SearchResult() {
   let Navigate = useNavigate();
  /* This is a react hook that is used to perform side effects in function components. */
   useEffect(() => {
+    document.title=`RecipeRiot-Searched Recipe`
     if (!searchrecipename) {
       Navigate("/Home");
     }

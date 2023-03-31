@@ -16,6 +16,7 @@ export default function Profile(props) {
   const { recipe, allRecipe, loading } = context;
  /* Calling the function allRecipe() which is defined in the context.js file. */
   useEffect(() => {
+    document.title=`RecipeRiot-Your Recipe`
     allRecipe();
   }, []);
   var totalratings = 0;

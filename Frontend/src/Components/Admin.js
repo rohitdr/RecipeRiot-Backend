@@ -50,27 +50,34 @@ function called setvisibledelete. */
   /* Checking if the adminActivePageNumber is not null or undefined and if it is not then it is setting
 the adminactivepage state to the adminActivePageNumber. */
   useEffect(() => {
+  
     if (!adminActivePageNumber && adminActivePageNumber !== 0) {
       Navigate("/Home");
     } else {
       setadminactivepage(adminActivePageNumber);
     }
     if (adminActivePageNumber == 0) {
+      document.title="RecipeRiot-Statical Data"
       Admingetallstaticaldata();
     }
     if (adminActivePageNumber == 1) {
+      document.title="RecipeRiot-All Users"
       AdminGetAllUser();
     }
     if (adminActivePageNumber == 2) {
+      document.title="RecipeRiot-User Activities"
       AdminGetAllUserByDate();
     }
     if (adminActivePageNumber == 3) {
+      document.title="RecipeRiot-All Recipes"
       AdminGetAllRecipe();
     }
     if (adminActivePageNumber == 4) {
+      document.title="RecipeRiot-Recipe Activities"
       AdminGetAllRecipeByDate();
     }
     if (adminActivePageNumber == 5) {
+      document.title="RecipeRiot-All Messages"
       GetAllcontactMessages();
     }
   }, [adminActivePageNumber]);

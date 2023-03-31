@@ -39,6 +39,7 @@ export default function EditUserAdmin() {
   /* Checking if the userid is not null, if it is not null then it will navigate to the home page. If
   it is not null then it will call the getUserbyid function. */
   useEffect(() => {
+    document.title=`RecipeRiot-Edit Recipe`
     if (!userid) {
       Navigate("/Home");
     } else {

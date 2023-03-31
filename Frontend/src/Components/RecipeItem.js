@@ -86,9 +86,9 @@ export default function RecipeItem(props) {
       >
         <div className="scene  " onLoad={settingheart}>
           <div
-            className="recipecard  card "
+            className="recipecard  card border-success"
             id={`${props.id}`}
-            style={{ Width: "18rem" }}
+            style={{ Width: "18rem",height:"525px" }}
           >
             <div className="face front" style={{height:"525px"}}>
               <img

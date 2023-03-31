@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Addreicpe.css";
 import { Input, Button, Modal, Text, Textarea } from "@nextui-org/react";
 import { useContext } from "react";
@@ -22,6 +22,10 @@ export default function AddRecipe() {
   /* Using the useNavigate hook to navigate to a different page. */
   let Navigate = useNavigate();
 
+  /* Setting the title of the page to "RecipeRiot-Add Recipe" */
+  useEffect(() => {
+    document.title = "RecipeRiot-Add Recipe";
+  }, []);
   /**
    * It takes a file and returns a promise that resolves to the base64 representation of the file
    * @param file - The file to be converted to base64

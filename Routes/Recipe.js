@@ -1,3 +1,4 @@
+/* Importing the required packages and modules. */
 const express = require("express");
 const fetchuser = require("../Middleware/fetchUser");
 const Recipe = require("../Modals/Recipe.js");
@@ -6,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User.js");
 
-//fectching all recipes
+/* Fetching all the recipes from the database. */
 router.get("/allRecipes", fetchuser, async (req, res) => {
   try {
     const recipe = await Recipe.find({ user: req.user.id });
@@ -22,7 +23,8 @@ router.get("/allRecipes", fetchuser, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-// fetching recipe by id
+
+/* Fetching the recipe by id. */
 router.get("/recipebyid/:id", fetchuser, async (req, res) => {
   try {
     const recipe = await Recipe.find({ _id: req.params.id });
@@ -41,6 +43,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
   }
 });
 //crating  or adding a new Recipe , login require
+/* The above code is adding a recipe to the database. */
 router.post("/addRecipe", fetchuser, async (req, res) => {
   try {
     const {
@@ -80,10 +83,12 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       totalNutrients,
       instruction,
     });
-    const user = await User.findById(req.user.id)
+    const user = await User.findById(req.user.id);
 
-    const newtotalrecipenumber = await User.findByIdAndUpdate({ _id: req.user.id },
-      { $set: { Total_Recipes:user.Total_Recipes+1 } })
+    const newtotalrecipenumber = await User.findByIdAndUpdate(
+      { _id: req.user.id },
+      { $set: { Total_Recipes: user.Total_Recipes + 1 } }
+    );
     const savedRecipe = await recipe.save();
     res.status(200).json(savedRecipe);
   } catch (error) {
@@ -92,6 +97,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
   }
 });
 //updating a existing recipe , login required
+/* The above code is updating the recipe. */
 router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
   try {
     const {
@@ -165,10 +171,10 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
     let recipe = await Recipe.findById(req.params.id);
     //checking recipe exist of not
     if (!recipe) {
-      return res.status(404).send({error:"Recipe not found"});
+      return res.status(404).send({ error: "Recipe not found" });
     }
     //allowing only owner to update the recipe
-    
+
     recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
       { $set: newrecipe },
@@ -181,6 +187,7 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
   }
 });
 //deleting a recipe
+/* The above code is deleting a recipe from the database. */
 router.delete("/deleteRecipe/:id", fetchuser, async (req, res) => {
   try {
     //finding the Recipe
@@ -200,6 +207,7 @@ router.delete("/deleteRecipe/:id", fetchuser, async (req, res) => {
   }
 });
 //feching recipe by name
+/* Searching for a recipe with a name that contains the name that is passed in the url. */
 router.get("/allRecipeswith/:name", async (req, res) => {
   try {
     const exp = req.params.name;
@@ -217,36 +225,45 @@ router.get("/allRecipeswith/:name", async (req, res) => {
   }
 });
 //fetching all reicpes of database for admin
-router.get("/AdminGetAllRecipes",fetchUser, async (req, res) => {
+/* The above code is fetching all the recipes from the database and sending it to the client. */
+router.get("/AdminGetAllRecipes", fetchUser, async (req, res) => {
   try {
-    let user = await User.findById(req.user.id)
-    if(user.email !== "rohitdr098@gmail.com"){
-        return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+    let user = await User.findById(req.user.id);
+    if (user.email !== "rohitdr098@gmail.com") {
+      return res
+        .status(404)
+        .json({
+          error: "Your cannot Access the information! You are not a admin",
+        });
     }
-  let allRecipe = await Recipe.find()
-      res.json({AllRecipe:allRecipe})     
-     
+    let allRecipe = await Recipe.find();
+    res.json({ AllRecipe: allRecipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
   }
 });
 //fetching all reicpes of database for admin according to date
-router.get("/AdminGetAllRecipesByDate",fetchUser, async (req, res) => {
+/* The above code is fetching all the recipes from the database and sending it to the client side. */
+router.get("/AdminGetAllRecipesByDate", fetchUser, async (req, res) => {
   try {
-    let user = await User.findById(req.user.id)
-    if(user.email !== "rohitdr098@gmail.com"){
-        return res.status(404).json({ error: "Your cannot Access the information! You are not a admin" })
+    let user = await User.findById(req.user.id);
+    if (user.email !== "rohitdr098@gmail.com") {
+      return res
+        .status(404)
+        .json({
+          error: "Your cannot Access the information! You are not a admin",
+        });
     }
-  let allRecipe = await Recipe.find().sort({ date: -1 });
-      res.json({AllRecipe:allRecipe})     
-     
+    let allRecipe = await Recipe.find().sort({ date: -1 });
+    res.json({ AllRecipe: allRecipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
   }
 });
 //feching recipe by dietLabels
+/* The above code is a GET request that is searching for a recipe with a specific diet label. */
 router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
   try {
     const exp = req.params.diet_label;
@@ -264,6 +281,7 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
 });
 
 //feching recipe by cusineType
+/* The above code is a route that is used to get all the recipes with a specific cuisine type. */
 router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
   try {
     const type = req.params.cuisine_Type;
@@ -281,6 +299,7 @@ router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
 });
 
 //feching recipe by health tags
+/* The above code is a route that is used to get all recipes with a specific health label. */
 router.get("/allRecipeswithhealthlabels/:health", async (req, res) => {
   try {
     const type = req.params.health;
@@ -297,6 +316,7 @@ router.get("/allRecipeswithhealthlabels/:health", async (req, res) => {
   }
 });
 //fetching all recipe with specific mealtype
+/* The above code is a route that is used to get all recipes with a specific meal type. */
 router.get("/allRecipeswithmealtype/:mealtype", async (req, res) => {
   try {
     const type = req.params.mealtype;
@@ -313,6 +333,8 @@ router.get("/allRecipeswithmealtype/:mealtype", async (req, res) => {
   }
 });
 //fetching all recipe with meal type lunchdinenr
+/* The above code is a GET request to the server to get all the recipes with the mealType of
+lunch/dinner. */
 router.get("/allRecipeswithmealtypelunchdinner", async (req, res) => {
   try {
     const recipe = await Recipe.find({ mealType: "lunch/dinner" });
@@ -328,6 +350,7 @@ router.get("/allRecipeswithmealtypelunchdinner", async (req, res) => {
   }
 });
 //fetching all recipe with meal type lunchdinenr
+/* The above code is a route that is used to get all the recipes with a specific dish type. */
 router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
   try {
     const type = req.params.dishtype;
@@ -344,6 +367,7 @@ router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
   }
 });
 /// fecthing all recipes sorting by time
+/* Getting the latest recipes from the database. */
 router.get("/LatestRecipes", async (req, res) => {
   try {
     const recipe = await Recipe.find().sort({ date: -1 });
@@ -359,6 +383,7 @@ router.get("/LatestRecipes", async (req, res) => {
   }
 });
 //fetching all latest recipe by id
+/* Fetching the latest recipe by id. */
 router.get("/LatestRecipesbyid", fetchUser, async (req, res) => {
   try {
     const recipe = await Recipe.find({ user: req.user.id }).sort({ date: -1 });
@@ -374,6 +399,7 @@ router.get("/LatestRecipesbyid", fetchUser, async (req, res) => {
   }
 });
 /// Like a recipe
+/* The above code is a route that is used to like a recipe. */
 router.post("/like", fetchUser, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -404,6 +430,7 @@ router.post("/like", fetchUser, async (req, res) => {
   }
 });
 //unliking the recipe
+/* The above code is for unliking a recipe. */
 router.post("/unlike", fetchUser, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -434,6 +461,7 @@ router.post("/unlike", fetchUser, async (req, res) => {
   }
 });
 //fectching all recipes by id
+/* The above code is fetching all the liked recipes of the user. */
 router.get("/allLikedRecipe", fetchuser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.id });
@@ -453,6 +481,7 @@ router.get("/allLikedRecipe", fetchuser, async (req, res) => {
 });
 
 /// api for commenting on recipe
+/* The above code is for commenting on a recipe. */
 router.post("/commentreicpe", fetchuser, async (req, res) => {
   try {
     const userid = req.user.id;
@@ -461,9 +490,9 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
     let state = true;
 
     let stateelement = recipe.Comments.filter((element) => {
-      return (element.user == req.user.id);
+      return element.user == req.user.id;
     });
- 
+
     if (stateelement.length > 0) {
       return res.status(404).json("You had already Comment on this recipe");
     }
@@ -471,11 +500,12 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
       { _id: req.body.id },
       { $set: { Comments: recipe.Comments.concat(req.body.comment) } }
     );
-    const incrementTotalComment= await User.findByIdAndUpdate( { _id: req.user.id },
-      { $set: { Total_Comments:user.Total_Comments+1 } })
+    const incrementTotalComment = await User.findByIdAndUpdate(
+      { _id: req.user.id },
+      { $set: { Total_Comments: user.Total_Comments + 1 } }
+    );
 
     res.status(200).json(commentedRecipe.Comments);
-   
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");

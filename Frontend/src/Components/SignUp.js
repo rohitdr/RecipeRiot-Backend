@@ -1,18 +1,17 @@
 import React from "react";
 import { useState } from "react";
-// import First from "./Signuppages/First";
-// import Second from "./Signuppages/Second";
-// import Third from "./Signuppages/Third";
+
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import RecipeContext from "../Context/RecipeContext";
-import { Input, useInput, Button, Radio, Textarea } from "@nextui-org/react";
-import e from "cors";
+import { Input, useInput, Button,} from "@nextui-org/react";
+
 import InternalServerError from "./InternalServerError";
 import AnimatedPage from "./AnimatedPage";
 
 export default function SignUp(props) {
+ /* Setting the state of the component. */
   const { value, reset, bindings } = useInput("");
   const [signupdetail, setsignupdetails] = useState({
     phone_number: "",
@@ -55,9 +54,15 @@ twitter:""
   const [last_namehelpertext,setlast_namehelpertext]=useState("")
   const [servererror,setservererror]=useState(0)
   ///for validation of email
+ /**
+  * It validates an email address.
+  * @param value - The value of the input field.
+  * @returns A function that takes a value and returns a boolean.
+  */
   const validateEmail = (value) => {
     return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   };
+/* A React hook that is used to validate the email. */
   const helper = React.useMemo(() => {
     if (!value)
       return {
@@ -73,6 +78,10 @@ twitter:""
   }, [value]);
 
   ///for validation of username
+ /**
+  * It checks if the username is available or not.
+  * </code>
+  */
   const checkusername = async () => {
     try {
       const response = await fetch(
@@ -121,6 +130,13 @@ twitter:""
   //onload to store data for prev button
 
   //// onchanger effect on usrename
+/**
+ * When the username input changes, update the username in the signupdetail object, and if the username
+ * is less than 8 characters, set the usernamecolor to error and the helpertextusername to 'username
+ * must be of 8 digits', otherwise set the helpertextusername to an empty string and check the
+ * username.
+ * @param e - the event object
+ */
   const onchangeusername = (e) => {
     setsignupdetails({ ...signupdetail, username: e.target.value });
 
@@ -133,6 +149,11 @@ twitter:""
     }
   };
 
+ /**
+  * It's a function that takes an event as an argument and sets the state of the component based on the
+  * value of the event.
+  * @param e - the event object
+  */
   const onchange = (e) => {
     setsignupdetails({ ...signupdetail, [e.target.name]: e.target.value });
     //validation for number
@@ -201,6 +222,9 @@ setlast_namehelpertext("Last name should be of more than 3 words")
   };
 
   /// validation for next page button of first page
+ /**
+  * It takes the value of the input field and sets it to the state.
+  */
   const next = () => {
     setsignupdetails({ ...signupdetail, email: bindings.value });
     console.log(signupdetail);
@@ -231,10 +255,18 @@ setlast_namehelpertext("Last name should be of more than 3 words")
 
 
   //for third page
+/**
+ * It takes an event object as an argument, and then it uses the event object to update the state of
+ * the signupdetails object.
+ * @param e - the event object
+ */
 const changethird=(e)=>{
   setsignupdetails({...signupdetail,[e.target.name]:e.target.value})
 }
 //onclick prev button of third page
+/**
+ * When the user clicks the back button, the third page will disappear and the second page will appear.
+ */
   const third_prev = () => {
     document
       .getElementById("thirdpage")
@@ -244,8 +276,13 @@ const changethird=(e)=>{
     }, 350);
  
   };
-  //sign up api call
+
+/* Creating a variable called Navigate that is using the useNavigate hook. */
   let Navigate = useNavigate();
+  /**
+   * It's a function that sends a POST request to a server, and if the server responds with a 200
+   * status code, it navigates to a different page.
+   */
   const signupapi = async() => {
     try{
     setProgress(10)  
@@ -293,6 +330,9 @@ const changethird=(e)=>{
       }
      };
   //onclick of skip button of third Page
+ /**
+  * Signupapi() is called, and then after 2 seconds, setsignuppage(0) is called.
+  */
   const signup=()=>{
  signupapi();
  setTimeout(() => {

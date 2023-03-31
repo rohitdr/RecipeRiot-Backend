@@ -37,9 +37,9 @@ import { AnimatePresence } from "framer-motion";
 import EditUserAdmin from "./Components/EditUserAdmin";
 
 function App() {
-  const context = useContext(RecipeContext)
-  const {alert,progress,setProgress,progressheight} = context
- 
+  const context = useContext(RecipeContext);
+  const { alert, progress, setProgress, progressheight } = context;
+
   const Recipe_category = [
     {
       path: "/Dinner",
@@ -326,7 +326,6 @@ function App() {
       category: "cuisineType=Japanese",
     },
   ];
- 
 
   const [mode, setMode] = useState("light mode");
   const [button_label, setButton_label] = useState("Dark mode");
@@ -364,97 +363,58 @@ function App() {
       setheadingColor("dark");
     }
   };
-  let location=useLocation();
+  let location = useLocation();
   return (
     <>
       <LoadingBar
-        color='blue'
+        color="blue"
         progress={progress}
         height={progressheight}
         onLoaderFinished={() => setProgress(0)}
       />
-   
-        <Sidebar color={textColor} crossColor={color}></Sidebar>
-        {/* <div className="container-fluid">
+
+      <Sidebar color={textColor} crossColor={color}></Sidebar>
+      {/* <div className="container-fluid">
           <div className="row">
             <div className="col min-vh-120"> */}
-        <Searchbar
-          onClick={Mode_handler}
-          size="large"
-          label={button_label}
-          type={color}
-          textcolor={textColor_button}
-        ></Searchbar>
-<Alert alert={alert}></Alert>
-<AnimatePresence mode='wait'>
+      <Searchbar
+        onClick={Mode_handler}
+        size="large"
+        label={button_label}
+        type={color}
+        textcolor={textColor_button}
+      ></Searchbar>
+      <Alert alert={alert}></Alert>
+      <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
           <Route exact path="/login" element={<Login></Login>} />
 
+          <Route exact path="/home" element={<Home></Home>} />
           <Route
             exact
-            path="/home"
-            element={
-              
-              <Home></Home>
-         
-         
-           
-            }
-          />
-           <Route
-            exact
             path="/Edituser"
-            element={
-              
-           <EditUserAdmin></EditUserAdmin>
-         
-         
-           
-            }
+            element={<EditUserAdmin></EditUserAdmin>}
           />
-           <Route
-            exact
-            path="/Admin"
-            element={
-              
-             
-             <Admin></Admin>
-         
-           
-            }
-          />
-          
+          <Route exact path="/Admin" element={<Admin></Admin>} />
+
           <Route
             exact
             path="/AddRecipe"
             element={
-              <section style={{backgroundColor: "#eee"}}>
-            <div className="container py-5">
-              {/* <Profile_Top></Profile_Top> */}
- <AddRecipe></AddRecipe>
-  </div>
-
-</section>
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <AddRecipe></AddRecipe>
+                </div>
+              </section>
             }
           />
-           <Route
-            exact
-            path="/signUp"
-            element={
-          <SignUp></SignUp>
-            }
-          />
-          <Route
-            exact
-            path="/Edit"
-            element={
-    <EditRecipe></EditRecipe>
-            }
-          />
+          <Route exact path="/signUp" element={<SignUp></SignUp>} />
+          <Route exact path="/Edit" element={<EditRecipe></EditRecipe>} />
           {Recipe_category.map((element) => {
             return (
               <Route
-              key={element.key}
+                key={element.key}
                 exact
                 path={`${element.path}`}
                 element={
@@ -473,157 +433,110 @@ function App() {
               />
             );
           })}
-           <Route
-                exact
-                path='/Profile'
-                element={
-                  <section style={{backgroundColor: "#eee"}}>
+          <Route
+            exact
+            path="/Profile"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
                 <div className="container py-5">
                   {/* <Profile_Top></Profile_Top> */}
-      <Profile_Profile></Profile_Profile>
-      </div>
- 
- </section>
-                }
+                  <Profile_Profile></Profile_Profile>
+                </div>
+              </section>
+            }
+          />
+          <Route exact path="/Add_Recipe" element={<AddRecipe></AddRecipe>} />
+          <Route exact path="/health" element={<Health></Health>} />
+          <Route exact path="/mealtype" element={<Meal></Meal>} />
+          <Route exact path="/diettype" element={<Diettype></Diettype>} />
+          <Route exact path="/dishtype" element={<Dishtype></Dishtype>} />
+          <Route
+            exact
+            path="/cuisineType"
+            element={<CuisineType></CuisineType>}
+          />
+          <Route exact path="/" element={<Home></Home>} />
+          <Route
+            exact
+            path="/SearchResult"
+            element={<SearchResult></SearchResult>}
+          />
+          <Route
+            exact
+            path="/RecipeItself"
+            element={<Individual_Recipe></Individual_Recipe>}
+          />
+          <Route
+            exact
+            path="/Profile_Profile"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <Profile_Profile></Profile_Profile>
+                </div>
+              </section>
+            }
+          />
+          <Route
+            exact
+            path="/Profile_Security"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <Profile_Security></Profile_Security>
+                </div>
+              </section>
+            }
+          />
+          <Route
+            exact
+            path="/Profile_Recipe"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <Profile></Profile>
+                </div>
+              </section>
+            }
+          />
+          <Route
+            exact
+            path="/Profile_LikedRecipe"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <Profile_LikedRecipe></Profile_LikedRecipe>
+                </div>
+              </section>
+            }
+          />
+          <Route
+            exact
+            path="/Profile_Activity"
+            element={
+              <section style={{ backgroundColor: "#eee" }}>
+                <div className="container py-5">
+                  {/* <Profile_Top></Profile_Top> */}
+                  <Profile_Activity></Profile_Activity>
+                </div>
+              </section>
+            }
+          />
 
-              />
-              <Route
-                exact
-                path='/Add_Recipe'
-                element={
-      <AddRecipe></AddRecipe>
-                }
-              />
-               <Route
-                exact
-                path='/health'
-                element={
-<Health></Health>
-                }
-              />
-               <Route
-                exact
-                path='/mealtype'
-                element={
-<Meal></Meal>
-                }
-              />
-               <Route
-                exact
-                path='/diettype'
-                element={
-<Diettype></Diettype>
-                }
-              />
-               <Route
-                exact
-                path='/dishtype'
-                element={
-<Dishtype></Dishtype>
-                }
-              />
-              <Route
-                exact
-                path='/cuisineType'
-                element={
-      <CuisineType></CuisineType>
-                }
-              />
-                <Route
-                exact
-                path='/'
-                element={
-      <Home></Home>
-                }
-              />
-              <Route
-                exact
-                path='/SearchResult'
-                element={
-     <SearchResult></SearchResult>
-                }
-              />
-              <Route
-                exact
-                path='/RecipeItself'
-                element={
-   <Individual_Recipe></Individual_Recipe>
-                }
-              />
-              <Route
-                exact
-                path='/Profile_Profile'
-                element={ <section style={{backgroundColor: "#eee"}}>
-                <div className="container py-5">
-                  {/* <Profile_Top></Profile_Top> */}
-      <Profile_Profile></Profile_Profile>
-      </div>
- 
- </section>
-                }
-              />
-               <Route
-                exact
-                path='/Profile_Security'
-                element={ <section style={{backgroundColor: "#eee"}}>
-                <div className="container py-5">
-                  {/* <Profile_Top></Profile_Top> */}
-      <Profile_Security></Profile_Security>
-      </div>
- 
- </section>
-                }
-              />
-              <Route
-                exact
-                path='/Profile_Recipe'
-                element={ <section style={{backgroundColor: "#eee"}}>
-                <div className="container py-5">
-                  {/* <Profile_Top></Profile_Top> */}
-      <Profile></Profile>
-      </div>
- 
- </section>
-                }
-              />
-               <Route
-                exact
-                path='/Profile_LikedRecipe'
-                element={ <section style={{backgroundColor: "#eee"}}>
-                <div className="container py-5">
-                  {/* <Profile_Top></Profile_Top> */}
-      <Profile_LikedRecipe></Profile_LikedRecipe>
-      </div>
- 
- </section>
-                }
-              />
-              <Route
-                exact
-                path='/Profile_Activity'
-                element={ <section style={{backgroundColor: "#eee"}}>
-                <div className="container py-5">
-                  {/* <Profile_Top></Profile_Top> */}
-      <Profile_Activity></Profile_Activity>
-      </div>
- 
- </section>
-                }
-              />
-              
-               <Route
-                exact
-                path='/Individual_description'
-                element={<>
-                 
-                  <Individual_Recipe></Individual_Recipe>
+          <Route
+            exact
+            path="/Individual_description"
+            element={
+              <>
+                <Individual_Recipe></Individual_Recipe>
+              </>
+            }
+          />
 
-              
-                </>
-                
-                }
-              />
-              
           {/* <Route
             exact
             path="/Dinner"
@@ -1365,17 +1278,15 @@ function App() {
             }
           /> */}
         </Routes>
-        </AnimatePresence>
-        {/* </div>
+      </AnimatePresence>
+      {/* </div>
           </div>
         </div> */}
-        <Footer></Footer>
-      
+      <Footer></Footer>
 
       {/* <Individual_Recipe></Individual_Recipe> */}
     </>
   );
-
 }
 
 export default App;

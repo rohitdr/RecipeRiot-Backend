@@ -1,8 +1,14 @@
-const mongoose =require('mongoose')
-const {Mongoose_uri} =require('./Config/Keys')
-const mongooseConnectToDb=()=>{
-mongoose.connect((Mongoose_uri), ()=>{
+/* Importing the `mongoose` module. */
+const mongoose = require("mongoose");
+/* Importing the `Mongoose_uri` from the `Keys.js` file. */
+const { Mongoose_uri } = require("./Config/Keys");
+/**
+ * It connects to the mongoose database.
+ */
+const mongooseConnectToDb = () => {
+  mongoose.connect(Mongoose_uri, () => {
     console.log("connected to mongo db");
-})
-}
-module.exports= mongooseConnectToDb;
+  });
+};
+/* Exporting the function `mongooseConnectToDb` to be used in other files. */
+module.exports = mongooseConnectToDb;

@@ -1,74 +1,69 @@
+/* Importing the mongoose library and the schema from mongoose. */
 const { Collection } = require("mongoose");
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
+/* Creating a schema for the recipe model. */
 const RecipeSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  instruction:{
-    type:Array
-  }
-   ,
-
+  instruction: {
+    type: Array,
+  },
   date: {
     type: Date,
     default: Date.now,
   },
-  Comments:[ {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+  Comments: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      comment: {
+        type: String,
+      },
+      rating: {
+        type: Number,
+      },
+      username: {
+        type: String,
+      },
+      Profileimage: {
+        type: String,
+      },
     },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
-    comment: {
-      type: String,
-    },
-    rating: {
-      type: Number,
-    },
-    username:{
-      type: String,
-    },
-    Profileimage: {
-      type: String,
-    },
-  }],
+  ],
   Likes: {
     type: Number,
     default: 0,
   },
   label: {
     type: String,
-    
   },
   image: {
     type: String,
-    
   },
   source: {
     type: String,
-    
   },
   dietLabels: {
     type: Array,
-    
   },
   healthLabels: {
     type: Array,
-    
   },
   cautions: {
     type: Array,
-    
   },
   ingredientLines: {
     type: Array,
-    
   },
   ingredients: [
     {
@@ -95,15 +90,12 @@ const RecipeSchema = new Schema({
   },
   cuisineType: {
     type: Array,
-    
   },
   mealType: {
     type: Array,
-    
   },
   dishType: {
     type: Array,
-    
   },
   totalNutrients: {
     ENERC_KCAL: {

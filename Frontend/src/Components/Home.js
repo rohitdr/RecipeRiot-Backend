@@ -51,26 +51,26 @@ ContactusSubmitApi(contactmessage)
    { cuisinedata ==500 || contactsendmessage==500|| Latest_recipe==500? <InternalServerError></InternalServerError>: <div >
 
 
-  <section id="hero" class="d-flex align-items-center mb-4">
+  <section id="hero" className="d-flex align-items-center mb-4">
 
-    <div class="container">
-      <div class="row">
+    <div className="container">
+      <div className="row">
   
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
+        <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
         <motion.div initial={{opacity:0,y:200}} animate={{opacity:1,y:0}} transition={{duration:1, delay:1}}>
           <h1>Better Solutions For Your Business</h1>
           <h2>We are team of talented designers making websites with Bootstrap</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video">
+          <div className="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" className="btn-get-started scrollto">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" className="glightbox btn-watch-video">
             <motion.div whileHover={{rotate:[0,360,720,1080,1440]}} transition={{duration:3}}>
-              <i class="fa-regular pt-3 fa-circle-play"></i></motion.div>
+              <i className="fa-regular pt-3 fa-circle-play"></i></motion.div>
               <span>Watch Video</span></a>
           </div></motion.div>
         </div> 
-        <div class="col-lg-6 order-1 order-lg-2 hero-img animated  " >
+        <div className="col-lg-6 order-1 order-lg-2 hero-img animated  " >
         <motion.div initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition={{duration:1,delay:1}} >
-          <img src="https://assets.epicurious.com/photos/59b7ec7c1387461e2e0d5789/4:3/w_2240,h_1680,c_limit/smallplates-hero-foreverloop.gif" class="img-fluid box_decrease_size_animationforlogin  " alt=""/>
+          <img src="https://assets.epicurious.com/photos/59b7ec7c1387461e2e0d5789/4:3/w_2240,h_1680,c_limit/smallplates-hero-foreverloop.gif" className="img-fluid box_decrease_size_animationforlogin  " alt=""/>
           </motion.div>
         </div>
       </div>

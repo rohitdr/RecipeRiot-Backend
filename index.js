@@ -9,9 +9,7 @@ const port = process.env.PORT || 5000
 
 app.use(express.json({limit: '50mb'}))
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+
 app.use('/api/auth',require('./Routes/auth'))
 app.use('/api/contact',require('./Routes/contact.js'))
 app.use('/api/recipe',require('./Routes/Recipe.js'))

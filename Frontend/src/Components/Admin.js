@@ -135,30 +135,30 @@ if(adminActivePageNumber==2 ){
  
 
  
-{adminactivepage ==0 &&   <><div class="container-fluid ">
+{adminactivepage ==0 &&   <><div className="container-fluid ">
 
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+<div className="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
   
 </div>
 
 
-<div class="row">
+<div className="row">
 
   
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2 ">
-            <div class="card-body ">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+    <div className="col-xl-3 col-md-6 mb-4">
+        <div className="card border-left-primary shadow h-100 py-2 ">
+            <div className="card-body ">
+                <div className="row no-gutters align-items-center">
+                    <div className="col mr-2">
+                        <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Total Recieps</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalrecipe}</div>
+                        <div className="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalrecipe}</div>
                     </div>
-                    <div class="col-auto">
+                    <div className="col-auto">
                  
-                        <i class="fa-solid fa-bowl-food fa-2x text-gray-300"></i>
+                        <i className="fa-solid fa-bowl-food fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -166,17 +166,17 @@ if(adminActivePageNumber==2 ){
     </div>
 
   
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+    <div className="col-xl-3 col-md-6 mb-4">
+        <div className="card border-left-success shadow h-100 py-2">
+            <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                    <div className="col mr-2">
+                        <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Total User</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totaluser}</div>
+                        <div className="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totaluser}</div>
                     </div>
-                    <div class="col-auto">
-                    <i class="fa-solid fa-user fa-2x text-gray-300"></i>
+                    <div className="col-auto">
+                    <i className="fa-solid fa-user fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -184,23 +184,23 @@ if(adminActivePageNumber==2 ){
     </div>
 
     
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pending Messages 
+    <div className="col-xl-3 col-md-6 mb-4">
+        <div className="card border-left-info shadow h-100 py-2">
+            <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                    <div className="col mr-2">
+                        <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pending Messages 
                         </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{staticalData?.totalMessage}</div>
+                        <div className="row no-gutters align-items-center">
+                            <div className="col-auto">
+                                <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{staticalData?.totalMessage}</div>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <div className="col-auto">
                    
-                        <i class="fa-solid fa-message fa-2x text-gray-300"></i>
+                        <i className="fa-solid fa-message fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -208,18 +208,18 @@ if(adminActivePageNumber==2 ){
     </div>
 
    
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+    <div className="col-xl-3 col-md-6 mb-4">
+        <div className="card border-left-warning shadow h-100 py-2">
+            <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                    <div className="col mr-2">
+                        <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
                         Total Comments</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalComment}</div>
+                        <div className="h5 mb-0 font-weight-bold text-gray-800">{staticalData?.totalComment}</div>
                     </div>
-                    <div class="col-auto">
+                    <div className="col-auto">
                     
-                        <i class="fa-sharp fa-solid fa-comments fa-2x text-gray-300"></i>
+                        <i className="fa-sharp fa-solid fa-comments fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -232,45 +232,45 @@ if(adminActivePageNumber==2 ){
 
 
 
-<div class="row">
+<div className="row">
 
 
-    <div class="col-lg-6 mb-4">
+    <div className="col-lg-6 mb-4">
 
        
-        <div class="card shadow mb-4" style={{opacity:0.5}}>
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Projects (Working on Information.......)</h6>
+        <div className="card shadow mb-4" style={{opacity:0.5}}>
+            <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-primary">Projects (Working on Information.......)</h6>
             </div>
-            <div class="card-body">
-                <h4 class="small font-weight-bold">Server Migration <span
-                        class="float-right">20%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style={{width: "20%"}}
+            <div className="card-body">
+                <h4 className="small font-weight-bold">Server Migration <span
+                        className="float-right">20%</span></h4>
+                <div className="progress mb-4">
+                    <div className="progress-bar bg-danger" role="progressbar" style={{width: "20%"}}
                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Sales Tracking <span
-                        class="float-right">40%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style={{width: "40%"}}
+                <h4 className="small font-weight-bold">Sales Tracking <span
+                        className="float-right">40%</span></h4>
+                <div className="progress mb-4">
+                    <div className="progress-bar bg-warning" role="progressbar" style={{width: "40%"}}
                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Customer Database <span
-                        class="float-right">60%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style={{width: "60%"}}
+                <h4 className="small font-weight-bold">Customer Database <span
+                        className="float-right">60%</span></h4>
+                <div className="progress mb-4">
+                    <div className="progress-bar" role="progressbar" style={{width: "60%"}}
                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Payout Details <span
-                        class="float-right">80%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style={{width: "80%"}}
+                <h4 className="small font-weight-bold">Payout Details <span
+                        className="float-right">80%</span></h4>
+                <div className="progress mb-4">
+                    <div className="progress-bar bg-info" role="progressbar" style={{width: "80%"}}
                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Account Setup <span
-                        class="float-right">Complete!</span></h4>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style={{width: "100%"}}
+                <h4 className="small font-weight-bold">Account Setup <span
+                        className="float-right">Complete!</span></h4>
+                <div className="progress">
+                    <div className="progress-bar bg-success" role="progressbar" style={{width: "100%"}}
                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
@@ -281,16 +281,16 @@ if(adminActivePageNumber==2 ){
 
     </div>
 
-    <div class="col-lg-6 mb-4">
+    <div className="col-lg-6 mb-4">
 
       
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+        <div className="card shadow mb-4">
+            <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
             </div>
-            <div class="card-body">
-                <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: "25rem;"}}
+            <div className="card-body">
+                <div className="text-center">
+                    <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: "25rem;"}}
                         src="https://img.freepik.com/free-vector/happy-freelancer-with-computer-home-young-man-sitting-armchair-using-laptop-chatting-online-smiling-vector-illustration-distance-work-online-learning-freelance_74855-8401.jpg?w=2000" alt="..."/>
                 </div>
                 <p> These websites usually have a vast collection of recipes that are categorized based on the meal type, cuisine, dietary restrictions, and more.</p>
@@ -299,13 +299,13 @@ if(adminActivePageNumber==2 ){
         </div>
 
    
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+        <div className="card shadow mb-4">
+            <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-primary">Development Approach</h6>
             </div>
-            <div class="card-body">
+            <div className="card-body">
                 <p>Developing a recipe search website requires a systematic approach and a clear understanding of the goals and requirements of the website</p>
-                <p class="mb-0">Determine who your target audience is, what they're looking for in a recipe search website, and what unique features or content you can offer to meet their needs.</p>
+                <p className="mb-0">Determine who your target audience is, what they're looking for in a recipe search website, and what unique features or content you can offer to meet their needs.</p>
             </div>
         </div>
 
@@ -393,8 +393,8 @@ if(adminActivePageNumber==2 ){
                  
                  </div>   <div className="ms-4">
                         <div className="small">{element.first_name} {element.last_name}</div>
-                        {element.OnLine? <span class="badge rounded-pill bg-success">Online</span>:""}
-                        {!element.OnLine? <span class="badge rounded-pill bg-secondary">Offline</span>:""}
+                        {element.OnLine? <span className="badge rounded-pill bg-success">Online</span>:""}
+                        {!element.OnLine? <span className="badge rounded-pill bg-secondary">Offline</span>:""}
                         <div className="text-xs text-muted">{(new Date(element.date).toLocaleString())}</div>
                     </div>
                    
@@ -566,7 +566,7 @@ if(adminActivePageNumber==2 ){
          
            return   <Collapse
            key={element._id}
-           arrowIcon={ <i class="fa-sharp fa-solid text-danger fa-trash" onClick={()=>{deletemessage(element._id); GetAllcontactMessages();}}></i>}
+           arrowIcon={ <i className="fa-sharp fa-solid text-danger fa-trash" onClick={()=>{deletemessage(element._id); GetAllcontactMessages();}}></i>}
            title={<Text h4>{element.Name}</Text>}
            subtitle={<div className='d-none d-md-block'>{element.Email}</div> }
           

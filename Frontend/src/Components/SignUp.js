@@ -304,7 +304,7 @@ const changethird=(e)=>{
     { servererror == 500 ? <InternalServerError></InternalServerError> :<div>
       {signuppage == 0 && (
         <section className="background-radial-gradient overflow-hidden">
-          <div
+          <div 
             className="container px-4 py-5 px-md-5 text-center text-lg-start my-5 appear_component"
             id="signup_first_component"
           >

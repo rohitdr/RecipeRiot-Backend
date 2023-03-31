@@ -396,8 +396,7 @@ Uploaded By Rohit
                           </a>
                         </div>
                         <a
-                      
-                          className="btn btn-lg btn-info waves-effect waves-light"
+                            className="btn btn-lg btn-info waves-effect waves-light"
                         >
                           Checkout All Reviews
                         </a>

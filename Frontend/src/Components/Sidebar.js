@@ -114,7 +114,7 @@ export default function Sidebar(props) {
               <i className="fa-solid fa-utensils p-1 text-dark"></i>
                 <span className="ms-1">Snacks</span>{" "}
               </Link>
-            </li>
+            </li> 
             <li className={` li ${location.pathname ==="/Teatime"?"customers":""}`}>
               <Link to="/Teatime" className="nav-link text-truncate text-white fw-bold">
               <i className="fa-solid fa-utensils p-1 text-dark"></i>

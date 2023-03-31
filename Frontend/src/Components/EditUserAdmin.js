@@ -75,7 +75,7 @@ setProgress(30)
         "image":file,
         id:userid
        })
-     
+    
   
     });
   setProgress(50)

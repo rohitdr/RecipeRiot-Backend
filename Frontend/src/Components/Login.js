@@ -89,6 +89,7 @@ setservererror(500)
      }
 
   };
+ 
   const forgetinputchange=(e)=>{
     setforgetdetail({...forgetdetail,[e.target.name]:e.target.value})
   }
@@ -340,7 +341,7 @@ const changeforgetpassword=()=>{
         </Modal.Header>
         <Modal.Body>
           <Input
-          contentLeft={<i class="fa-solid fa-envelope"></i>}
+          contentLeft={<i className="fa-solid fa-envelope"></i>}
             clearable
             bordered
             fullWidth
@@ -353,7 +354,7 @@ const changeforgetpassword=()=>{
        
           />
           <Input
-          contentLeft={<i class="fa-solid fa-user"></i>}
+          contentLeft={<i className="fa-solid fa-user"></i>}
             clearable
             bordered
             fullWidth
@@ -367,7 +368,7 @@ const changeforgetpassword=()=>{
           <Input
             clearable
             bordered
-            contentLeft={<i class="fa-solid fa-lock"></i>}
+            contentLeft={<i className="fa-solid fa-lock"></i>}
             fullWidth
             color="primary"
             size="lg"
@@ -378,7 +379,7 @@ const changeforgetpassword=()=>{
             onChange={forgetinputchange}
           />
            <Input
-           contentLeft={<i class="fa-solid fa-lock"></i>}
+           contentLeft={<i className="fa-solid fa-lock"></i>}
             clearable
             bordered
             fullWidth

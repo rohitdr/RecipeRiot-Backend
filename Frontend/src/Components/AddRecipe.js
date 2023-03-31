@@ -371,6 +371,7 @@ Addapi();
   return (
     <><AnimatedPage>
       { addrecipeserver == 500 ? <InternalServerError></InternalServerError>: <section className="intro py-5">
+    
         <div className="bg-image h-100">
           <div className="mask d-flex align-items-center h-100">
             <div className="container">

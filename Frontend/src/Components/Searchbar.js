@@ -829,7 +829,7 @@ const collapsecuisineItems = [
           
            textColor="success"
              
-           icon={<i class="fa-sharp fa-solid fa-database fs-4 px-2 text-dark"></i>}
+           icon={<i className="fa-sharp fa-solid fa-database fs-4 px-2 text-dark"></i>}
            
            >
           

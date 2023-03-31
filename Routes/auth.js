@@ -145,7 +145,7 @@ router.post("/getUser", fetchUser, async (req, res) => {
 
     const recipe_lenght = recipe.length;
     const user = await User.findById(id).select("-password");
-    res.json({ user: user, totalResults: recipe_lenght });
+    res.status(200).json({ user: user, totalResults: recipe_lenght });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ error: "Internal server Erorr" });
@@ -164,7 +164,7 @@ router.post("/getUserbyid", async (req, res) => {
     });
     const recipe_lenght = recipe.length;
     const user = await User.findById(id).select("-password");
-    res.json({
+    res.status(200).json({
       user: user,
       totalResults: recipe_lenght,
       TotalCommnts: totalComments,
@@ -395,7 +395,7 @@ router.post("/AdminGetAllUser", fetchUser, async (req, res) => {
     }
     let allUser = await User.find().select("-password");
 
-    res.json({ AllUser: allUser });
+    res.status(200).json({ AllUser: allUser });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ error: "Internal server Erorr" });
@@ -414,7 +414,7 @@ router.post("/AdminGetAllUserByDate", fetchUser, async (req, res) => {
         });
     }
     let allUser = await User.find().select("-password").sort({ date: -1 });
-    res.json({ AllUser: allUser });
+    res.status(200).json({ AllUser: allUser });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ error: "Internal server Erorr" });
@@ -617,3 +617,11 @@ router.post("/staticalData", fetchUser, async (req, res) => {
   }
 });
 module.exports = router;
+/**
+ * It fetches the user data from the server and sets the user data in the state.
+ * </code>
+ */
+/**
+ * It fetches all the recipes from the database and sets the state of the recipe to the fetched data.
+ * </code>
+ */

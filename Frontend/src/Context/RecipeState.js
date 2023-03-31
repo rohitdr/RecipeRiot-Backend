@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import RecipeContext from "./RecipeContext";
 export default function RecipeState(props) {
-  
+  /* Setting the state of the component. */
   const [LikedRecipe, setLikedRecipe] = useState([]);
 
   const [recipe, setRecipe] = useState({});
@@ -30,449 +29,454 @@ export default function RecipeState(props) {
   const [dishdata, setdishdata] = useState({});
   const [dietdata, setdietdata] = useState({});
   const [namerecipeloading, setnamereicpeloading] = useState(false);
-  const [AdminAllUser,setAdminAllUser]=useState({})
-  const [AdminAllUserByDate,setAdminAllUserByDate]=useState({})
-const [AdminAllRecipe,setAdminAllRecipe]=useState({})
-const [AdminAllRecipeByDate,setAdminAllRecipeByDate]=useState({})
-const [AllContactMessages, setAllContactMessages]=useState({})
-const [contactsendmessage,setcontactsendmessage]=useState({})
-const [deletemessageresult,setdeletemessageresult]=useState({})
-const [deleteaccount ,setdeleteaccount]=useState({})
-const [deleteaccountAdmin,setdeleteaccountAdmin]=useState({})
-const [staticalData,setstaticalData]=useState({})
+  const [AdminAllUser, setAdminAllUser] = useState({});
+  const [AdminAllUserByDate, setAdminAllUserByDate] = useState({});
+  const [AdminAllRecipe, setAdminAllRecipe] = useState({});
+  const [AdminAllRecipeByDate, setAdminAllRecipeByDate] = useState({});
+  const [AllContactMessages, setAllContactMessages] = useState({});
+  const [contactsendmessage, setcontactsendmessage] = useState({});
+  const [deletemessageresult, setdeletemessageresult] = useState({});
+  const [deleteaccount, setdeleteaccount] = useState({});
+  const [deleteaccountAdmin, setdeleteaccountAdmin] = useState({});
+  const [staticalData, setstaticalData] = useState({});
 
-let Navigate = useNavigate();
-//api for deleting account by admin
-const Admingetallstaticaldata=async()=>{
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/auth/staticalData`,
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token")
-
-        
+  /* Creating a variable called Navigate and assigning it the useNavigate hook. */
+  let Navigate = useNavigate();
+  //api for deleting account by admin
+  /**
+   * It fetches data from the server and sets the data to the state.
+   */
+  const Admingetallstaticaldata = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/staticalData`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
         }
-      
-      
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        setLoading(false);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
 
+        setstaticalData(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setstaticalData(500);
       }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
-      setProgress(100)
-      setLoading(false)
-      showAlert(result.error,"danger")
-    }
-     else if(response.status==200) {
-    
-      setProgress(70);
-     
- setstaticalData(result)
+    } catch (error) {
       setProgress(100);
-    }
-    else {
-      setProgress(100);
+      setstaticalData(500);
       setLoading(false);
-      setstaticalData(500)
-    
+      console.log(error.message);
     }
-  } catch (error) {
-    setProgress(100);
-    setstaticalData(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-}
-//api for deleting account by admin
-const deleteAccountAdmin=async(id)=>{
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminDeleteAccount`,
-      {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token")
-
-        
-        },
-        body: JSON.stringify({id:id})
-      
-
-      }
-    );
-    setProgress(60);
-    let result = await response.json();
-   if( response.status==404){
-    setProgress(100);
-    setLoading(false);
-   showAlert(result.error,"danger")
-   }
-     else if(response.status == 200) {
-    
-      setProgress(70);
-      AdminGetAllUserByDate();
-    showAlert(result,"success")
-      setProgress(100);
-    }
-    else {
-      setProgress(100);
-      setLoading(false);
-      setdeleteaccountAdmin(500)
-    
-    }
-  } catch (error) {
-    setProgress(100);
-    setdeleteaccountAdmin(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-}
-//api for deleting account by user its own
-const deleteAccount=async(id)=>{
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/auth/deleteAccount`,
-      {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token")
-
-        
-        },
-        body: JSON.stringify({id:id})
-      
-
-      }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
-      setLoading(false);
-      showAlert(result.error,"danger")
-      setProgress(100);
-    }
-     else if(response.status==200) {
-    
-      setProgress(70);
-    
-      localStorage.removeItem("auth-token")
-      sessionStorage.removeItem("auth-token")
-      Navigate("/login")
-    showAlert(result,"success")
-      setProgress(100);
-    }
-    else {
-      setProgress(100);
-      setLoading(false);
-      setdeleteaccount(500)
-    
-    }
-  } catch (error) {
-    setProgress(100);
-    setdeleteaccount(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-}
-//api for logout
-const logoutUser=async()=>{
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/auth/logout`,
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token")
-        
+  };
+  //api for deleting account by admin
+  /**
+   * It deletes an account from the database.
+   * @param id - id of the user to be deleted
+   */
+  const deleteAccountAdmin = async (id) => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminDeleteAccount`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+          body: JSON.stringify({ id: id }),
         }
-    
-
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        setLoading(false);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        AdminGetAllUserByDate();
+        showAlert(result, "success");
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setdeleteaccountAdmin(500);
       }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
+    } catch (error) {
       setProgress(100);
-      showAlert(result.error,"danger")
+      setdeleteaccountAdmin(500);
       setLoading(false);
+      console.log(error.message);
     }
-   else if(response.status==200) {
-
-      setProgress(70);
-      Navigate("/login")
-
-    showAlert("You Are Successfully Logged Out ","success")
-      setProgress(100);
-    }
-    else {
-      setProgress(100);
-      showAlert("Their is Problem in our Server, Try again","danger")
-      setLoading(false);
-    
-    } 
-  } catch (error) {
-    setProgress(100);
-    showAlert("Their is Problem in our Server, Try again","danger")
-    setLoading(false);
-    console.log(error.message);
-  }
-}
-//api for deleting the message 
-const deletemessage=async(id)=>{
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/contact/delete/${id}`,
-      {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token")
-        
+  };
+  //api for deleting account by user its own
+  /**
+   * It deletes the user's account from the database.
+   * @param id - the id of the user
+   */
+  const deleteAccount = async (id) => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/deleteAccount`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+          body: JSON.stringify({ id: id }),
         }
-    
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setLoading(false);
+        showAlert(result.error, "danger");
+        setProgress(100);
+      } else if (response.status == 200) {
+        setProgress(70);
 
+        localStorage.removeItem("auth-token");
+        sessionStorage.removeItem("auth-token");
+        Navigate("/login");
+        showAlert(result, "success");
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setdeleteaccount(500);
       }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
-setProgress(100)
-showAlert(result.error,"danger")
-setLoading(false);
-    }
-     else if(response.status==200) {
-    
-      setProgress(70);
-    GetAllcontactMessages()
-    showAlert("This Message is Successfully Deleted","success")
+    } catch (error) {
       setProgress(100);
-    }
-    else {
-      setProgress(100);
+      setdeleteaccount(500);
       setLoading(false);
-      setdeletemessageresult(500)
+      console.log(error.message);
     }
-  } catch (error) {
-    setProgress(100);
-    setdeletemessageresult(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-}
-//api for contact us form
-const ContactusSubmitApi = async (message) => {
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/contact/Message`,
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        
-        },
-        body: JSON.stringify(message),
+  };
+  //api for logout
+  /**
+   * It's a function that sends a POST request to the server, and then logs the user out.
+   */
+  const logoutUser = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/logout`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+        setLoading(false);
+      } else if (response.status == 200) {
+        setProgress(70);
+        Navigate("/login");
 
+        showAlert("You Are Successfully Logged Out ", "success");
+        setProgress(100);
+      } else {
+        setProgress(100);
+        showAlert("Their is Problem in our Server, Try again", "danger");
+        setLoading(false);
       }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
+    } catch (error) {
       setProgress(100);
+      showAlert("Their is Problem in our Server, Try again", "danger");
       setLoading(false);
-      showAlert(result.error,"danger")
+      console.log(error.message);
     }
-     else if(response.status==200) {
-      
-      setProgress(70);
-    showAlert("We Will contact You Soon","success")
-      setProgress(100);
-    }
-    else {
-      setProgress(100);
-      setLoading(false);
-      setcontactsendmessage(500)
-    }
-  } catch (error) {
-    setProgress(100);
-    setcontactsendmessage(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-};
-//api to get all Messages for admin
-const GetAllcontactMessages = async () => {
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/Contact/GetAllMessages`,
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        
-        },
-      }
-    );
-    setProgress(60);
-    let result = await response.json();
-    if(response.status==404){
-      setAllContactMessages(false)
-      setProgress(100);
-    }
-  else if(response.status==200) {
-    
-      setProgress(70);
-      setAllContactMessages(result)
-      setProgress(100);
-    }
-    else {
-      setProgress(100);
-      setLoading(false);
-     setAllContactMessages(500)
-    } 
-  } catch (error) {
-    setProgress(100);
-    setAllContactMessages(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-};
- //api to get all user details for admin
- const AdminGetAllUserByDate = async () => {
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminGetAllUserByDate`,
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token"),
-        },
-      }
-    );
-    setProgress(60);
-    if (response.status == 500) {
-      setProgress(100);
-      setLoading(false);
-      setAdminAllUserByDate(500)
-    } else {
+  };
+  //api for deleting the message
+  /**
+   * It deletes a message from the database.
+   * </code>
+   * @param id - the id of the message to be deleted
+   */
+  const deletemessage = async (id) => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/contact/delete/${id}`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
       let result = await response.json();
-      setProgress(70);
-   setAdminAllUserByDate(result)
-      setProgress(100);
-    }
-  } catch (error) {
-    setProgress(100);
-  setAdminAllUserByDate(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-};
-//api to get all Recipes for admin
-const AdminGetAllRecipeByDate = async () => {
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipesByDate`,
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token"),
-        },
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+        setLoading(false);
+      } else if (response.status == 200) {
+        setProgress(70);
+        GetAllcontactMessages();
+        showAlert("This Message is Successfully Deleted", "success");
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setdeletemessageresult(500);
       }
-    );
-    setProgress(60);
-    if (response.status == 500) {
+    } catch (error) {
       setProgress(100);
+      setdeletemessageresult(500);
       setLoading(false);
-     setAdminAllRecipeByDate(500)
-    } else {
-      let result = await response.json();
-      setProgress(70);
-      setAdminAllRecipeByDate(result)
-      setProgress(100);
+      console.log(error.message);
     }
-  } catch (error) {
-    setProgress(100);
-    setAdminAllRecipeByDate(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-};
-//api to get all Recipes for admin
-const AdminGetAllRecipe = async () => {
-  try {
-    setProgress(30);
-    const response = await fetch(
-      `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipes`,
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token"),
-        },
+  };
+  //api for contact us form
+  /**
+   * It sends a POST request to the server with the message object, and if the response is 200, it sets
+   * the progress to 70, and if the response is 404, it sets the progress to 100.
+   * @param message - {
+   */
+  const ContactusSubmitApi = async (message) => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/contact/Message`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(message),
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        setLoading(false);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        showAlert("We Will contact You Soon", "success");
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setcontactsendmessage(500);
       }
-    );
-    setProgress(60);
-    if (response.status == 500) {
+    } catch (error) {
       setProgress(100);
+      setcontactsendmessage(500);
       setLoading(false);
-     setAdminAllRecipe(500)
-    } else {
-      let result = await response.json();
-      setProgress(70);
-      setAdminAllRecipe(result)
-      setProgress(100);
+      console.log(error.message);
     }
-  } catch (error) {
-    setProgress(100);
-    setAdminAllRecipe(500)
-    setLoading(false);
-    console.log(error.message);
-  }
-};
+  };
+  //api to get all Messages for admin
+  /**
+   * It fetches all the messages from the database and sets the state of the messages to the result
+   */
+  const GetAllcontactMessages = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/Contact/GetAllMessages`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setAllContactMessages(false);
+        setProgress(100);
+      } else if (response.status == 200) {
+        setProgress(70);
+        setAllContactMessages(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setAllContactMessages(500);
+      }
+    } catch (error) {
+      setProgress(100);
+      setAllContactMessages(500);
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
   //api to get all user details for admin
+  /**
+   * It fetches data from the server and sets the data to the state.
+   */
+  const AdminGetAllUserByDate = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/auth/AdminGetAllUserByDate`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setAdminAllUserByDate(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setAdminAllUserByDate(500);
+      }
+    } catch (error) {
+      setProgress(100);
+      setAdminAllUserByDate(500);
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
+  //api to get all Recipes for admin
+  /**
+   * It fetches all recipes from the database and displays them in a table.
+   * </code>
+   */
+  const AdminGetAllRecipeByDate = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipesByDate`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setAdminAllRecipeByDate(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setAdminAllRecipeByDate(500);
+      }
+    } catch (error) {
+      setProgress(100);
+      setAdminAllRecipeByDate(500);
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
+  //api to get all Recipes for admin
+  /**
+   * It fetches all the recipes from the database and sets the state of the recipes to the fetched
+   * recipes.
+   * </code>
+   */
+  const AdminGetAllRecipe = async () => {
+    try {
+      setProgress(30);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipes`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      setProgress(60);
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setAdminAllRecipe(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setAdminAllRecipe(500);
+      }
+    } catch (error) {
+      setProgress(100);
+      setAdminAllRecipe(500);
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
+  //api to get all user details for admin
+  /**
+   * It fetches data from the server and sets the data to the state.
+   */
   const AdminGetAllUser = async () => {
     try {
       setProgress(30);
@@ -490,24 +494,31 @@ const AdminGetAllRecipe = async () => {
         }
       );
       setProgress(60);
-      if (response.status == 500) {
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setAdminAllUser(result);
+        setProgress(100);
+      } else {
         setProgress(100);
         setLoading(false);
-        setAdminAllUser(500)
-      } else {
-        let result = await response.json();
-        setProgress(70);
-     setAdminAllUser(result)
-        setProgress(100);
+        setAdminAllUser(500);
       }
     } catch (error) {
       setProgress(100);
-    setAdminAllUser(500)
+      setAdminAllUser(500);
       setLoading(false);
       console.log(error.message);
     }
   };
   //api to get recipe who has a particular mealtype
+  /**
+   * It fetches data from an API and sets the data to a state.
+   * @param type - the type of diet you want to search for
+   */
   const diettype = async (type) => {
     try {
       setProgress(30);
@@ -522,15 +533,18 @@ const AdminGetAllRecipe = async () => {
         }
       );
       setProgress(60);
-      if (response.status == 500) {
+      let result = await response.json();
+      if (response.status == 404) {
         setProgress(100);
-        setLoading(false);
-        setdietdata(500);
-      } else {
-        let result = await response.json();
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
         setProgress(70);
         setdietdata(result);
         setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setdietdata(500);
       }
     } catch (error) {
       setProgress(100);
@@ -540,6 +554,10 @@ const AdminGetAllRecipe = async () => {
     }
   };
   //api to get recipe who has a particular mealtype
+  /**
+   * It fetches data from an API and sets the data to a state.
+   * @param type - The type of dish you want to search for.
+   */
   const dishtype = async (type) => {
     try {
       setProgress(30);
@@ -555,9 +573,19 @@ const AdminGetAllRecipe = async () => {
       );
       setProgress(50);
       let result = await response.json();
-      setProgress(70);
-      setdishdata(result);
-      setProgress(100);
+      if (response.status == 404) {
+        setProgress(100);
+
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setdishdata(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setdishdata(500);
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
@@ -566,6 +594,10 @@ const AdminGetAllRecipe = async () => {
     }
   };
   //api to get recipe who has a particular mealtype
+  /**
+   * It fetches data from an API and sets the data to a state.
+   * @param type - the type of meal you want to fetch
+   */
   const mealtype = async (type) => {
     try {
       setProgress(30);
@@ -583,11 +615,20 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
-      setProgress(50);
+      setProgress(60);
       let result = await response.json();
-      setProgress(70);
-      setmealdata(result);
-      setProgress(100);
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        setmealdata(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setmealdata(500);
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
@@ -596,9 +637,13 @@ const AdminGetAllRecipe = async () => {
     }
   };
   //api to get recipe who has a particular healthlabel
+  /**
+   * It fetches data from an API and sets the data to a state.
+   * </code>
+   * @param type - the type of health label
+   */
   const health = async (type) => {
     try {
-      sethealthloading(true);
       setProgress(30);
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithhealthlabels/${type}`,
@@ -612,18 +657,30 @@ const AdminGetAllRecipe = async () => {
       );
       setProgress(50);
       let result = await response.json();
-      setProgress(70);
-      sethealthdata(result);
-      setProgress(100);
-      sethealthloading(false);
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(70);
+        sethealthdata(result);
+        setProgress(100);
+      } else {
+        setProgress(100);
+
+        sethealthdata(500);
+      }
     } catch (error) {
       setProgress(100);
-      setLoading(false);
+
       sethealthdata(500);
       console.log(error.message);
     }
   };
   //api to get recipe according to cuisine type
+  /**
+   * It fetches data from an API and sets the data to a state.
+   * @param type - The type of cuisine you want to search for.
+   */
   const cuisine = async (type) => {
     try {
       setProgress(30);
@@ -637,15 +694,19 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
+      setProgress(50);
+      let result = await response.json();
       if (response.status == 404) {
-        showAlert(response.error, "danger");
         setProgress(100);
-      } else {
-        setProgress(50);
-        let result = await response.json();
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
         setProgress(70);
         setcuisinedata(result);
         setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setcuisinedata(500);
       }
     } catch (error) {
       setProgress(100);
@@ -655,6 +716,11 @@ const AdminGetAllRecipe = async () => {
     }
   };
   ////api to get user detail by giving id
+  /**
+   * I'm trying to fetch data from the server and if the response is 200, I'm setting the state to the
+   * response data, else I'm setting the state to 500.
+   * @param id - id,
+   */
   const getUserbyid = async (id) => {
     try {
       setLoading(true);
@@ -673,8 +739,14 @@ const AdminGetAllRecipe = async () => {
       );
 
       let userDetail = await response.json();
-      setuserbyid(userDetail);
-      setLoading(false);
+      if (response.status == 200) {
+        setuserbyid(userDetail);
+        setLoading(false);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setuserbyid(500);
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
@@ -684,6 +756,12 @@ const AdminGetAllRecipe = async () => {
   };
 
   ///api to search recipe by id
+  /**
+   * It fetches a recipe by id from the server and sets the state of the recipe item to the fetched
+   * recipe.
+   * </code>
+   * @param id - the id of the recipe
+   */
   const RecipeBYId = async (id) => {
     try {
       setLoading(true);
@@ -703,9 +781,17 @@ const AdminGetAllRecipe = async () => {
       );
       setProgress(60);
       let current = await response.json();
-
-      setCurrentRecipeItem(current);
-      setProgress(100);
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(current.error, "danger");
+      } else if (response.status == 200) {
+        setCurrentRecipeItem(current);
+        setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setCurrentRecipeItem(500);
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
@@ -713,6 +799,10 @@ const AdminGetAllRecipe = async () => {
       console.log(error.message);
     }
   };
+
+  /**
+   * It fetches all the liked recipes from the database and sets the state of the component.
+   */
   const AllLikedRecipe = async () => {
     try {
       setProgress(30);
@@ -731,15 +821,19 @@ const AdminGetAllRecipe = async () => {
         }
       );
       setProgress(50);
+      let Liked = await response.json();
       if (response.status == 404) {
         setLikedRecipe(false);
         setLoading(false);
         setProgress(100);
-      } else {
-        let Liked = await response.json();
+      } else if (response.status == 200) {
         setLikedRecipe(Liked);
         setLoading(false);
         setProgress(100);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setLikedRecipe(500);
       }
     } catch (e) {
       setProgress(100);
@@ -750,27 +844,40 @@ const AdminGetAllRecipe = async () => {
   };
 
   //api to get user details
+  /**
+   * It fetches the user data from the server and sets the user data in the state.
+   */
   const getUser = async () => {
     try {
       if (
         sessionStorage.getItem("auth-token") ||
         localStorage.getItem("auth-token")
       ) {
-        const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/auth/getUser`, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            // 'auth-token':sessionStorage.getItem("auth-token")
-            "auth-token": sessionStorage.getItem("auth-token")
-              ? sessionStorage.getItem("auth-token")
-              : localStorage.getItem("auth-token"),
-          },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_Fetch_Api_Start}/auth/getUser`,
+          {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+              // 'auth-token':sessionStorage.getItem("auth-token")
+              "auth-token": sessionStorage.getItem("auth-token")
+                ? sessionStorage.getItem("auth-token")
+                : localStorage.getItem("auth-token"),
+            },
+          }
+        );
 
-        let userDetail = await response.json();
-
-        setUserData(userDetail);
+        if (response.status == 200) {
+          let userDetail = await response.json();
+          setProgress(100);
+          setLoading(false);
+          setUserData(userDetail);
+        } else {
+          setProgress(100);
+          setLoading(false);
+          setUserData(500);
+        }
       }
     } catch (e) {
       setProgress(100);
@@ -781,59 +888,101 @@ const AdminGetAllRecipe = async () => {
   };
 
   //api to unlike a recipe
+  /**
+   * It sends a POST request to the server with the recipe id and the user's auth-token
+   * @param recipeid - The id of the recipe to be liked
+   */
   const UnLikeRecipe = async (recipeid) => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/unlike`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          // 'auth-token':sessionStorage.getItem("auth-token")
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token"),
-        },
-        body: JSON.stringify({
-          id: recipeid,
-        }),
-      });
-
-      setLoading(false);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/unlike`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            // 'auth-token':sessionStorage.getItem("auth-token")
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+          body: JSON.stringify({
+            id: recipeid,
+          }),
+        }
+      );
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setLoading(false);
+        setProgress(100);
+      } else {
+        setLoading(false);
+        setProgress(100);
+        showAlert("Their is Problem in out server", "danger");
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
+      showAlert("Their is Problem in out server", "danger");
       console.log(error.message);
     }
   };
   //api to like a recipe
+  /**
+   * It sends a POST request to the server with the recipe id and the user's auth-token
+   * @param recipeid - the id of the recipe that the user wants to like
+   */
   const LikeRecipe = async (recipeid) => {
     try {
       setLoading(true);
 
-      const response = await fetch(`${process.env.REACT_APP_Fetch_Api_Start}/recipe/like`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          // 'auth-token':sessionStorage.getItem("auth-token")
-          "auth-token": sessionStorage.getItem("auth-token")
-            ? sessionStorage.getItem("auth-token")
-            : localStorage.getItem("auth-token"),
-        },
-        body: JSON.stringify({
-          id: recipeid,
-        }),
-      });
-
-      setLoading(false);
+      const response = await fetch(
+        `${process.env.REACT_APP_Fetch_Api_Start}/recipe/like`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            // 'auth-token':sessionStorage.getItem("auth-token")
+            "auth-token": sessionStorage.getItem("auth-token")
+              ? sessionStorage.getItem("auth-token")
+              : localStorage.getItem("auth-token"),
+          },
+          body: JSON.stringify({
+            id: recipeid,
+          }),
+        }
+      );
+      let result = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(result.error, "danger");
+      } else if (response.status == 200) {
+        setLoading(false);
+        setProgress(100);
+      } else {
+        setLoading(false);
+        setProgress(100);
+        showAlert("Their is Problem in out server", "danger");
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
+      showAlert("Their is Problem in out server", "danger");
       console.log(error.message);
     }
   };
   //to show alert on top
+  /**
+   * The showAlert function takes a message and a type as arguments, sets the alert state to an object
+   * with the message and type, and then sets a timeout to clear the alert state after 3 seconds.
+   * @param msg - The message you want to display
+   * @param type - 'success' or 'danger'
+   */
   const showAlert = (msg, type) => {
     setAlert(
       {
@@ -864,15 +1013,23 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
+      let Name_recipe = await response.json();
+      if (response.status == 404) {
+        setProgress(100);
 
-      if (response.status !== 404) {
-        let Name_recipe = await response.json();
+        setsearchedRecipe(false);
+        setnamereicpeloading(false);
+      }
+       else if (response.status == 200) {
+        setProgress(100);
         setnamereicpeloading(false);
 
         setsearchedRecipe(Name_recipe);
-      } else {
-        setsearchedRecipe(false);
-        setnamereicpeloading(false);
+      } 
+      else {
+        setsearchedRecipe(500);
+        setProgress(100);
+        setLoading(false);
       }
     } catch (error) {
       setsearchedRecipe(500);
@@ -882,6 +1039,11 @@ const AdminGetAllRecipe = async () => {
     }
   };
   //api for latest recipes
+  /**
+   * I'm trying to fetch data from the server and if the response is 200, I want to set the state to the
+   * data I got from the server. If the response is 404, I want to set the state to 404. If the response
+   * is 500, I want to set the state to 500.
+   */
   const LatesRecipe = async () => {
     try {
       setLoading(true);
@@ -895,12 +1057,17 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
-
       let Latest_recipe = await response.json();
-
-      setLatest_Recipe(Latest_recipe);
-
-      setLoading(false);
+      if (response.status == 404) {
+        setLoading(false);
+      } else if ((response.status == 200)) {
+        setLoading(false);
+        setLatest_Recipe(Latest_recipe);
+      } else {
+        setLatest_Recipe(500);
+        setProgress(100);
+        setLoading(false);
+      }
     } catch (error) {
       setLatest_Recipe(500);
       setProgress(100);
@@ -909,6 +1076,9 @@ const AdminGetAllRecipe = async () => {
     }
   };
   //api for latest recipe of a parrticular user
+  /**
+   * It fetches data from the server and sets the data to the state.
+   */
   const LatestRecipebyid = async () => {
     try {
       setProgress(30);
@@ -932,13 +1102,17 @@ const AdminGetAllRecipe = async () => {
         setProgress(100);
         setLatest_Recipebyid(false);
         setLoading(false);
-      } else {
+      } else if (response.status == 200) {
         setProgress(100);
         let Latest_recipebyid = await response.json();
 
         setLatest_Recipebyid(Latest_recipebyid);
 
         setLoading(false);
+      } else {
+        setProgress(100);
+        setLoading(false);
+        setLatest_Recipebyid(500);
       }
     } catch (error) {
       setProgress(100);
@@ -948,6 +1122,10 @@ const AdminGetAllRecipe = async () => {
     }
   };
   // api for all recipes related to a user
+  /**
+   * It fetches all the recipes from the database and sets the state of the recipe to the fetched data.
+   * </code>
+   */
   const allRecipe = async () => {
     try {
       setProgress(30);
@@ -972,15 +1150,15 @@ const AdminGetAllRecipe = async () => {
         setProgress(100);
         setRecipe(false);
         setLoading(false);
-      } else if (response.status == 500) {
-        setProgress(100);
-        setRecipe(500);
-        setLoading(false);
-      } else {
+      } else if (response.status == 200) {
         setProgress(100);
         let allrecipe = await response.json();
         setRecipe(allrecipe);
 
+        setLoading(false);
+      } else {
+        setProgress(100);
+        setRecipe(500);
         setLoading(false);
       }
     } catch (e) {
@@ -991,8 +1169,14 @@ const AdminGetAllRecipe = async () => {
     }
   };
   // api for delete a recipe
-  const deleteRecipe = async (id,file) => {
+ /**
+  * It deletes a recipe from the database and updates the recipe list
+  * @param id - the id of the recipe to be deleted
+  * @param file - "Admindelete"
+  */
+  const deleteRecipe = async (id, file) => {
     try {
+      setProgress(30);
       setLoading(true);
 
       const response = await fetch(
@@ -1009,15 +1193,33 @@ const AdminGetAllRecipe = async () => {
           },
         }
       );
-      showAlert("Recipe is Successfully deleted. It will be updated Soon","success")
-if(file=="Admindelete"){  AdminGetAllRecipeByDate()}
+
+      setProgress(60);
       const json = await response.json();
-      const newRecipe = recipe.filter((element) => {
-        return element._id !== id;
-      });
-      setRecipe(newRecipe);
-      allRecipe()
-      setLoading(false);
+      if (response.status == 404) {
+        setProgress(100);
+        showAlert(json.error, "danger");
+      } else if (response.status == 200) {
+        setProgress(100);
+        showAlert(
+          "Recipe is Successfully deleted. It will be updated Soon",
+          "success"
+        );
+        if (file == "Admindelete") {
+          AdminGetAllRecipeByDate();
+        }
+
+        const newRecipe = recipe.filter((element) => {
+          return element._id !== id;
+        });
+        setRecipe(newRecipe);
+        allRecipe();
+        setLoading(false);
+      } else {
+        setRecipe(500);
+        setProgress(100);
+        setLoading(false);
+      }
     } catch (error) {
       setRecipe(500);
       setProgress(100);
@@ -1026,6 +1228,7 @@ if(file=="Admindelete"){  AdminGetAllRecipeByDate()}
     }
   };
   return (
+
     <RecipeContext.Provider
       value={{
         namerecipeloading,
@@ -1094,11 +1297,10 @@ if(file=="Admindelete"){  AdminGetAllRecipeByDate()}
         logoutUser,
         deleteAccount,
         deleteaccount,
-     deleteaccountAdmin,
+        deleteaccountAdmin,
         deleteAccountAdmin,
         Admingetallstaticaldata,
-        staticalData
-
+        staticalData,
       }}
     >
       {props.children}

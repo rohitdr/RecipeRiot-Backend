@@ -22,7 +22,8 @@ export default function NoResult(props) {
                   <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
                     {props.paragraph}
                   </p>
-                  {props.button}
+                  <div className="d-flex justify-content-center">  {props.button}</div>
+                
                 </div>
 
                 <div className="col-lg-6 mb-5 mb-lg-0">

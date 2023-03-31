@@ -14,10 +14,10 @@ router.get("/allRecipes", fetchuser, async (req, res) => {
 
     const recipe_lenght = recipe.length;
     if (recipe_lenght == 0) {
-      return res.status(404).send("Their is no Recipes avialable in database");
+      return res.status(404).json({error:"Their is no Recipes avialable in database"});
     }
 
-    res.json({ recipe: recipe, totalResults: recipe_lenght });
+    res.status(200).json({ recipe: recipe, totalResults: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -33,10 +33,10 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
     if (recipe_lenght == 0) {
       return res
         .status(404)
-        .json("Their is no Recipes avialable in database with this id");
+        .json({error:"Their is no Recipes avialable in database with this id"});
     }
 
-    res.json({ recipe });
+    res.status(200).json({ recipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -193,14 +193,14 @@ router.delete("/deleteRecipe/:id", fetchuser, async (req, res) => {
     //finding the Recipe
     let recipe = await Recipe.findById(req.params.id);
     if (!recipe) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
     //verfing user
     if (recipe.user.toString() !== req.user.id) {
-      return res.status(401).send("Not allowed");
+      return res.status(404).json({error:" You Are Not allowed"});
     }
     recipe = await Recipe.findByIdAndDelete(req.params.id);
-    res.json({ succes: "Recipe has been deleted", recipe: recipe });
+    res.status(200).json({ succes: "Recipe has been deleted", recipe: recipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("INTERNAL SERVER ERROR");
@@ -214,11 +214,11 @@ router.get("/allRecipeswith/:name", async (req, res) => {
 
     const recipe = await Recipe.find({ label: { $regex: exp, $options: "i" } });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -237,7 +237,7 @@ router.get("/AdminGetAllRecipes", fetchUser, async (req, res) => {
         });
     }
     let allRecipe = await Recipe.find();
-    res.json({ AllRecipe: allRecipe });
+    res.status(200).json({ AllRecipe: allRecipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -256,7 +256,7 @@ router.get("/AdminGetAllRecipesByDate", fetchUser, async (req, res) => {
         });
     }
     let allRecipe = await Recipe.find().sort({ date: -1 });
-    res.json({ AllRecipe: allRecipe });
+    res.status(200).json({ AllRecipe: allRecipe });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -269,11 +269,11 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
     const exp = req.params.diet_label;
     const recipe = await Recipe.find({ dietLabels: exp });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -287,11 +287,11 @@ router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
     const type = req.params.cuisine_Type;
     const recipe = await Recipe.find({ cuisineType: type });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -305,11 +305,11 @@ router.get("/allRecipeswithhealthlabels/:health", async (req, res) => {
     const type = req.params.health;
     const recipe = await Recipe.find({ healthLabels: type });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -322,11 +322,11 @@ router.get("/allRecipeswithmealtype/:mealtype", async (req, res) => {
     const type = req.params.mealtype;
     const recipe = await Recipe.find({ mealType: type });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -339,11 +339,11 @@ router.get("/allRecipeswithmealtypelunchdinner", async (req, res) => {
   try {
     const recipe = await Recipe.find({ mealType: "lunch/dinner" });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -356,11 +356,11 @@ router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
     const type = req.params.dishtype;
     const recipe = await Recipe.find({ dishType: type });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -372,11 +372,11 @@ router.get("/LatestRecipes", async (req, res) => {
   try {
     const recipe = await Recipe.find().sort({ date: -1 });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -388,11 +388,11 @@ router.get("/LatestRecipesbyid", fetchUser, async (req, res) => {
   try {
     const recipe = await Recipe.find({ user: req.user.id }).sort({ date: -1 });
     if (recipe.length === 0) {
-      return res.status(404).send("Recipe not found");
+      return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -411,7 +411,7 @@ router.post("/like", fetchUser, async (req, res) => {
     const LikesofRecipe = likes.Likes;
     const LikedRecipes = user.Liked_Recipe;
     if (LikedRecipes.includes(recipeId)) {
-      return res.status(400).send("Your already Liked this recipe");
+      return res.status(404).json({error:"Your already Liked this recipe"});
     }
 
     const NewLikedRecipes = await User.findByIdAndUpdate(
@@ -423,7 +423,7 @@ router.post("/like", fetchUser, async (req, res) => {
       { $set: { Likes: LikesofRecipe + 1 } }
     );
 
-    res.json("success ! You had liked the recipe");
+    res.status(200).json("success ! You had liked the recipe");
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -442,7 +442,7 @@ router.post("/unlike", fetchUser, async (req, res) => {
     const LikesofRecipe = likes.Likes;
     const LikedRecipes = user.Liked_Recipe;
     if (!LikedRecipes.includes(recipeId)) {
-      return res.status(400).send("Your already UnLiked this recipe");
+      return res.status(404).json({error:"Your already UnLiked this recipe"});
     }
     LikedRecipes.splice(LikedRecipes.indexOf(recipeId), 1);
     const NewLikedRecipes = await User.findByIdAndUpdate(
@@ -454,7 +454,7 @@ router.post("/unlike", fetchUser, async (req, res) => {
       { $set: { Likes: LikesofRecipe - 1 } }
     );
 
-    res.json("success ! You had Unliked the recipe");
+    res.status(200).json("success ! You had Unliked the recipe");
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -466,14 +466,14 @@ router.get("/allLikedRecipe", fetchuser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.id });
     if (user.Liked_Recipe.length < 1) {
-      return res.status(404).send("You had Not liked any recipe yet");
+      return res.status(404).json({error:"You had Not liked any recipe yet"});
     }
     var recipe = [];
     for (let i = 0; i < user.Liked_Recipe.length; i++) {
       recipe[i] = await Recipe.findById(user.Liked_Recipe[i]);
     }
 
-    res.json(recipe);
+    res.status(200).json(recipe);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");

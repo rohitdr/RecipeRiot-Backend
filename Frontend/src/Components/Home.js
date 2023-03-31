@@ -615,10 +615,10 @@ export default function Home() {
                       reciperating = 0;
 
                       //sending rating to recipeitem
-                      if (fourth < 5) {
+                      if (fourth < 13) {
                         return (
                           <div
-                            className="col-md-3 mt-4  homerecipe homenewrecipe"
+                          className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
                             key={element._id}
                           >
                             <RecipeItem
@@ -806,10 +806,10 @@ export default function Home() {
                         : (totalratings = 0);
                       reciperating = 0;
                       //setting recipe for recipitm
-                      if (cuisinenumber < 5) {
+                      if (cuisinenumber < 13) {
                         return (
                           <div
-                            className="col-md-3 mt-4 homerecipenew  homerecipe"
+                          className="col-md-3 mt-4 profilerecipe box_decrease_size_animation_for_recipeitem"
                             key={element._id}
                           >
                             <RecipeItem

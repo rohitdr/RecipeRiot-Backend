@@ -84,13 +84,13 @@ export default function RecipeItem(props) {
         viewport={{ once: true }}
         transition={{ duration: 1, delay: props.delay }}
       >
-        <div className="scene " onLoad={settingheart}>
+        <div className="scene  " onLoad={settingheart}>
           <div
-            className="recipecard  card border-success "
+            className="recipecard  card "
             id={`${props.id}`}
             style={{ Width: "18rem" }}
           >
-            <div className="face front">
+            <div className="face front" style={{height:"525px"}}>
               <img
                 src={props.ImageUrl}
                 className="card-img-top recipeitemimageopacity box_decrease_size_animation"

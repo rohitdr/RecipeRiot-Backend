@@ -59,10 +59,10 @@ export default function RecipeItem(props) {
       <Popover.Header as="h3">Share</Popover.Header>
       <Popover.Body>
         <div className="d-flex me-4 justify-content-between">
-          <i className="fa-brands fa-whatsapp me-4 fs-2 fw-bold text-success"></i>
-          <i className="fa-brands fa-instagram me-4  fs-2 fw-bold text-danger"></i>
-          <i className="fa-brands fa-facebook me-4  fs-2 fw-bold text-primary"></i>
-          <i className="fa-brands fa-snapchat fs-2 me-4  fw-bold text-warning  "></i>
+          <i className="fa-brands fa-whatsapp me-4 fs-2 fw-bold text-success" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
+          <i className="fa-brands fa-instagram me-4  fs-2 fw-bold text-danger" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
+          <i className="fa-brands fa-facebook me-4  fs-2 fw-bold text-primary" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
+          <i className="fa-brands fa-snapchat fs-2 me-4  fw-bold text-warning  " onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
         </div>
       </Popover.Body>
     </Popover>

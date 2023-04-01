@@ -93,7 +93,7 @@ export default function Profile_Security() {
   return (
     <>
       <AnimatedPage>
-        {servererror == 500 ? (
+        {servererror == 500 || deleteaccount==500? (
           <InternalServerError></InternalServerError>
         ) : (
           <div>

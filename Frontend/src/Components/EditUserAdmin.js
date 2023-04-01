@@ -107,15 +107,24 @@ export default function EditUserAdmin() {
           }
         );
         setProgress(50);
-
-        let result = await response.json();
+       let result = await response.json();
+       if(response.status==404){
+         setProgress(100)
+         showAlert(result.error,"danger")
+       }
+       else if(response.status==200){
         setProgress(70);
         getUserbyid(userid);
-        if (result) {
+
           showAlert("Image has been changed", "success");
-        }
 
         setProgress(100);
+       }
+       else{
+        setProgress(100);
+        setservererror(500);
+       }
+       
       }
     } catch (error) {
       setProgress(100);
@@ -228,14 +237,15 @@ export default function EditUserAdmin() {
       if (response.status == 404) {
         showAlert(result.error, "danger");
         setProgress(100);
-      } else if (response.status == 500) {
-        setProgress(100);
-        setservererror(500);
-      } else {
+      }
+      else  if (response.status == 200){
         getUserbyid(userid);
         showAlert(result, "success");
         setProgress(100);
-      }
+      } else {
+        setProgress(100);
+        setservererror(500);
+      } 
     } catch (error) {
       setProgress(100);
       setservererror(500);
@@ -323,7 +333,7 @@ export default function EditUserAdmin() {
   return (
     <>
       <AnimatedPage>
-        {servererror == 500 ? (
+        {servererror == 500 ||userbyid==500 ? (
           <InternalServerError></InternalServerError>
         ) : (
           <div>

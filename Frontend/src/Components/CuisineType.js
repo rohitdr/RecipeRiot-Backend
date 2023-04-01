@@ -18,14 +18,14 @@ export default function CuisineType() {
     return lower.charAt(0).toUpperCase() + lower.slice(1);
   };
   var totalratings = 0;
-/* Destructuring the context and the state. */
+  /* Destructuring the context and the state. */
   const context = useContext(RecipeContext);
   const { cuisine, cuisinedata } = context;
   const { state } = useLocation();
   const { type } = state;
- /* Calling the cuisine function with the type parameter. */
+  /* Calling the cuisine function with the type parameter. */
   useEffect(() => {
-    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
+    document.title = `RecipeRiot-${firstCapital(type)}  Recipes`;
     cuisine(type);
   }, [type]);
   return (
@@ -33,8 +33,9 @@ export default function CuisineType() {
       <AnimatedPage>
         {cuisinedata == 500 ? (
           <InternalServerError></InternalServerError>
-        ) : (<>
-          <section
+        ) : (
+          <>
+            <section
               id="about"
               className="about mt-3 mb-0 pt-3"
               style={{ backgroundColor: "#f7fbfe" }}
@@ -42,7 +43,7 @@ export default function CuisineType() {
               <div className="container">
                 <div className="row ">
                   <h3 className="text-primary fs-1 fw-bold text-center">
-                    Cuisine Type  Recipes
+                    Cuisine Type Recipes
                   </h3>
                   <div
                     className="col-lg-6 order-1 order-lg-2 py-4"
@@ -74,27 +75,36 @@ export default function CuisineType() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <p className="fst-italic">
-                      The recipe category of cuisine refers to the style of
-                       cooking and food preparation associated with a particular culture or region
+                        The recipe category of cuisine refers to the style of
+                        cooking and food preparation associated with a
+                        particular culture or region
                       </p>
                       <ul>
                         <li>
-                          <i className="fa-solid fa-square-check mt-2"></i>At
-                          It is a collection of recipes that represent the unique flavors,
-                           ingredients, and cooking techniques of a specific cuisine.{" "}
+                          <i className="fa-solid fa-square-check mt-2"></i>At It
+                          is a collection of recipes that represent the unique
+                          flavors, ingredients, and cooking techniques of a
+                          specific cuisine.{" "}
                         </li>
                         <li>
-                          <i className="fa-solid fa-square-check"></i>Recipes in the cuisine category are often 
-                          influenced by the cultural, historical, and geographical factors of a region.
+                          <i className="fa-solid fa-square-check"></i>Recipes in
+                          the cuisine category are often influenced by the
+                          cultural, historical, and geographical factors of a
+                          region.
                         </li>
                         <li>
-                          <i className="fa-solid fa-square-check"></i>The cuisine category 
-                          of recipes also reflects the social and culinary traditions of a culture
+                          <i className="fa-solid fa-square-check"></i>The
+                          cuisine category of recipes also reflects the social
+                          and culinary traditions of a culture
                         </li>
                       </ul>
                       <p>
-                      Overall, the cuisine category of recipes is a celebration of the unique flavors and culinary traditions of different cultures and regions. It allows us to explore and appreciate 
-                      the diverse range of cuisines that exist around the world, and to learn about the history and culture behind the food we eat.
+                        Overall, the cuisine category of recipes is a
+                        celebration of the unique flavors and culinary
+                        traditions of different cultures and regions. It allows
+                        us to explore and appreciate the diverse range of
+                        cuisines that exist around the world, and to learn about
+                        the history and culture behind the food we eat.
                       </p>
                     </motion.div>
                   </div>
@@ -102,74 +112,73 @@ export default function CuisineType() {
               </div>
             </section>
 
+            <div className="container min-vh-100">
+              <div className="row my-3">
+                <h1
+                  className="text-center my-4 fw-bold text-dark"
+                  style={{
+                    opacity: "0",
+                    animation: "drop .4s linear forwards 1s",
+                  }}
+                >
+                  {firstCapital(type)} Recipes
+                </h1>
 
-          <div className="container min-vh-100">
-            <div className="row my-3">
-            <h1
-                className="text-center my-4 fw-bold text-dark"
-                style={{
-                  opacity: "0",
-                  animation: "drop .4s linear forwards 1s",
-                }}
-              >
-                {firstCapital(type)} Recipes
-              </h1>
-
-              {cuisinedata.recipe &&
-                cuisinedata.recipe.map((element) => {
-                  //setting recipe for recipitm
-                  var reciperating = 0;
-                  element.Comments.map((ele) => {
-                    reciperating = reciperating + ele.rating;
-                  });
-                  element.Comments.length != 0
-                    ? (totalratings = reciperating / element.Comments.length)
-                    : (totalratings = 0);
-                  reciperating = 0;
-                  //setting recipe for recipitm
-                  return (
-                    <div
-                      className="col-md-3 mt-4 profilerecipe "
-                      key={element._id}
-                    >
-                      <RecipeItem
-                        id={element._id}
-                        rating={totalratings}
-                        title={element.label}
-                        topLeftColor={"dark"}
-                        headingColor={"dark"}
-                        ImageUrl={element.image}
-                        user={element.user}
-                        date={element.date}
-                        health_labels={element.healthLabels}
-                        Ingridiants={element.ingredientLines
-                          .toString()
-                          .replace(",", " and ")
-                          .substring(0, 60)}
-                        caleroies={Math.ceil(element.calories)}
-                        fat={
-                          element.totalNutrients.FAT.quantity
-                            ? Math.ceil(element.totalNutrients.FAT.quantity)
-                            : " "
-                        }
-                        caution={element.cautions}
-                        time={element.totalTime}
-                        source={element.source}
-                        sugar={element.totalNutrients.SUGAR.quantity}
-                        water={element.totalNutrients.WATER.quantity}
-                        chole={element.totalNutrients.CHOLE.quantity}
-                        vitamin_a={element.totalNutrients.VITA_RAE.quantity}
-                        vitamin_c={element.totalNutrients.VITC.quantity}
-                        vitamin_b6={element.totalNutrients.VITB6A.quantity}
-                        vitamin_d={element.totalNutrients.VITD.quantity}
-                        vitamin_e={element.totalNutrients.TOCPHA.quantity}
-                      ></RecipeItem>
-                    </div>
-                  );
-                })}
+                {cuisinedata.recipe &&
+                  cuisinedata.recipe.map((element) => {
+                    //setting recipe for recipitm
+                    var reciperating = 0;
+                    element.Comments.map((ele) => {
+                      reciperating = reciperating + ele.rating;
+                    });
+                    element.Comments.length != 0
+                      ? (totalratings = reciperating / element.Comments.length)
+                      : (totalratings = 0);
+                    reciperating = 0;
+                    //setting recipe for recipitm
+                    return (
+                      <div
+                        className="col-md-3 mt-4 profilerecipe "
+                        key={element._id}
+                      >
+                        <RecipeItem
+                          id={element._id}
+                          rating={totalratings}
+                          title={element.label}
+                          topLeftColor={"dark"}
+                          headingColor={"dark"}
+                          ImageUrl={element.image}
+                          user={element.user}
+                          date={element.date}
+                          health_labels={element.healthLabels}
+                          Ingridiants={element.ingredientLines
+                            .toString()
+                            .replace(",", " and ")
+                            .substring(0, 60)}
+                          caleroies={Math.ceil(element.calories)}
+                          fat={
+                            element.totalNutrients.FAT.quantity
+                              ? Math.ceil(element.totalNutrients.FAT.quantity)
+                              : " "
+                          }
+                          caution={element.cautions}
+                          time={element.totalTime}
+                          source={element.source}
+                          sugar={element.totalNutrients.SUGAR.quantity}
+                          water={element.totalNutrients.WATER.quantity}
+                          chole={element.totalNutrients.CHOLE.quantity}
+                          vitamin_a={element.totalNutrients.VITA_RAE.quantity}
+                          vitamin_c={element.totalNutrients.VITC.quantity}
+                          vitamin_b6={element.totalNutrients.VITB6A.quantity}
+                          vitamin_d={element.totalNutrients.VITD.quantity}
+                          vitamin_e={element.totalNutrients.TOCPHA.quantity}
+                        ></RecipeItem>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
-        </>
+          </>
         )}
       </AnimatedPage>
     </>

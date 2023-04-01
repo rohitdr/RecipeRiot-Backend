@@ -52,7 +52,7 @@ the login page. */
   return (
     <>
       <AnimatedPage>
-        {userData == 500 || Latest_recipebyid == 500 ? (
+        {userData == 500 || Latest_recipebyid == 500 ||recipe==500 ? (
           <InternalServerError></InternalServerError>
         ) : (
           <div>

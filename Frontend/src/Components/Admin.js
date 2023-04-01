@@ -35,7 +35,7 @@ function called setvisibledelete. */
     AdminAllRecipe,
     GetAllcontactMessages,
     AllContactMessages,
-    getUser,
+
     AdminAllRecipeByDate,
     deleteaccountAdmin,
     deleteAccountAdmin,
@@ -43,7 +43,9 @@ function called setvisibledelete. */
     AdminAllUserByDate,
     AdminGetAllUserByDate,
     deletemessage,
+    deletemessageresult,
     deleteRecipe,
+    recipe,
     Admingetallstaticaldata,
     staticalData,
   } = context;
@@ -91,7 +93,7 @@ the adminactivepage state to the adminActivePageNumber. */
   };
   var totalratings = 0;
   return (
-    <>
+    <>  {AdminAllUser ==500 || AdminAllRecipe==500|| AdminAllUserByDate==500||AdminAllRecipeByDate==500 ||AllContactMessages==500 ||deleteaccountAdmin==500 || deletemessageresult==500|| recipe==500|| staticalData==500 ? <InternalServerError></InternalServerError>:
       <section className="min-vh-100">
         <nav className="nav nav-pills flex-column flex-sm-row mt-3  hideinlessthan768 my-3 ">
           <span
@@ -866,7 +868,7 @@ the adminactivepage state to the adminActivePageNumber. */
                           </div>
                         </div>
                         <div className="inbox-message">
-                          <Collapse.Group shadow splitted>
+                          <Collapse.Group shadow >
                             {AllContactMessages?.AllMessages &&
                               AllContactMessages?.AllMessages?.map(
                                 (element) => {
@@ -927,7 +929,7 @@ the adminactivepage state to the adminActivePageNumber. */
           )}
         </div>
         {adminactivepage == 6 && <SignUp usingfile="Admin"></SignUp>}
-      </section>
+      </section>}
 
       {/* user delete confirmation modal */}
       <Modal

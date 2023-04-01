@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import RecipeContext from "../Context/RecipeContext";
 import { useEffect } from "react";
 import AnimatedPage from "./AnimatedPage";
+import InternalServerError from "./InternalServerError";
 export default function EditRecipe() {
   const [pageno, setpageno] = useState(0);
   /* The above code is setting the state of the recipe. */
@@ -40,7 +41,7 @@ export default function EditRecipe() {
 
   /* Setting the recipe state to the current recipe item. */
   useEffect(() => {
-    document.title=`RecipeRiot-Edit Recipe`
+    document.title = `RecipeRiot-Edit Recipe`;
     RecipeBYId(EditingRecipeId);
 
     if (CurrentRecipeItem) {
@@ -68,8 +69,8 @@ export default function EditRecipe() {
     setimage(base64);
   };
 
-/* Declaring the variables. */
- 
+  /* Declaring the variables. */
+
   var first_ingede_text,
     second_ingede_text,
     third_ingede_text,
@@ -111,46 +112,46 @@ export default function EditRecipe() {
     var Values = Array.from(options).map(({ value }) => value);
     return Values;
   };
- /**
-  * When the label input changes, set the recipe state to the current recipe state, but with the label
-  * property set to the value of the input.
-  * @param e - the event object
-  */
+  /**
+   * When the label input changes, set the recipe state to the current recipe state, but with the label
+   * property set to the value of the input.
+   * @param e - the event object
+   */
   const onchangelabel = (e) => {
     setRecipe({ ...recipe, label: e.target.value });
   };
 
- /**
-  * When the user changes the value of an input, update the state of the recipe object with the new
-  * value.
-  * @param e - the event object
-  */
+  /**
+   * When the user changes the value of an input, update the state of the recipe object with the new
+   * value.
+   * @param e - the event object
+   */
   const onchange = (e) => {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
   };
 
- /**
-  * It takes the name of the input element and uses it to get the selected values from the array of
-  * objects.
-  * @param e - the event object
-  */
+  /**
+   * It takes the name of the input element and uses it to get the selected values from the array of
+   * objects.
+   * @param e - the event object
+   */
   const onchangearray = (e) => {
     let Values = getselectedElement(e.target.name);
     setRecipe({ ...recipe, [e.target.name]: Values });
   };
 
   //ingrediants first page, nextpage button
- /**
-  * If the first_ingede_text and first_ingede_weight are not empty, then push the first_ingede_text to
-  * the recipe.ingredientLines array, and if the first_ingede_image is not empty, then convert the
-  * first_ingede_image to base64 and push the first_ingede_text, first_ingede_weight, and
-  * first_ingede_image to the recipe.ingredients array.
-  * 
-  * If the second_ingede_text and second_ingede_weight are not empty, then push the second_ingede_text
-  * to the recipe.ingredientLines array, and if the second_ingede_image is not empty, then convert the
-  * second_ingede_image to base64 and push the second_ingede_text, second_ingede_weight, and
-  * second_ingede_image to the recipe.ingredients array
-  */
+  /**
+   * If the first_ingede_text and first_ingede_weight are not empty, then push the first_ingede_text to
+   * the recipe.ingredientLines array, and if the first_ingede_image is not empty, then convert the
+   * first_ingede_image to base64 and push the first_ingede_text, first_ingede_weight, and
+   * first_ingede_image to the recipe.ingredients array.
+   *
+   * If the second_ingede_text and second_ingede_weight are not empty, then push the second_ingede_text
+   * to the recipe.ingredientLines array, and if the second_ingede_image is not empty, then convert the
+   * second_ingede_image to base64 and push the second_ingede_text, second_ingede_weight, and
+   * second_ingede_image to the recipe.ingredients array
+   */
   const ingredientsfirstpage = async () => {
     if (first_ingede_text && first_ingede_weight) {
       recipe.ingredientLines.push(first_ingede_text);
@@ -178,17 +179,17 @@ export default function EditRecipe() {
     setpageno(4);
   };
   //ingrediants second page, nextpage button
-/**
- * If the user has entered text and weight for the third ingredient, then add the ingredient text to
- * the ingredientLines array, convert the image to base64, and add the ingredient to the ingredients
- * array.
- * 
- * If the user has entered text and weight for the fourth ingredient, then add the ingredient text to
- * the ingredientLines array, convert the image to base64, and add the ingredient to the ingredients
- * array.
- * 
- * Then set the page number to 5.
- */
+  /**
+   * If the user has entered text and weight for the third ingredient, then add the ingredient text to
+   * the ingredientLines array, convert the image to base64, and add the ingredient to the ingredients
+   * array.
+   *
+   * If the user has entered text and weight for the fourth ingredient, then add the ingredient text to
+   * the ingredientLines array, convert the image to base64, and add the ingredient to the ingredients
+   * array.
+   *
+   * Then set the page number to 5.
+   */
   const ingredientssecondpage = async () => {
     if (third_ingede_text && third_ingede_weight) {
       recipe.ingredientLines.push(third_ingede_text);
@@ -248,17 +249,17 @@ export default function EditRecipe() {
     setpageno(6);
   };
   //ingrediants fourth page, nextpage button
-/**
- * If the user has entered text and weight for the seventh ingredient, then add the text to the
- * ingredientLines array, convert the image to base64, and add the ingredient to the ingredients array.
- * 
- * 
- * If the user has entered text and weight for the eighth ingredient, then add the text to the
- * ingredientLines array, convert the image to base64, and add the ingredient to the ingredients array.
- * 
- * 
- * Finally, set the page number to 7.
- */
+  /**
+   * If the user has entered text and weight for the seventh ingredient, then add the text to the
+   * ingredientLines array, convert the image to base64, and add the ingredient to the ingredients array.
+   *
+   *
+   * If the user has entered text and weight for the eighth ingredient, then add the text to the
+   * ingredientLines array, convert the image to base64, and add the ingredient to the ingredients array.
+   *
+   *
+   * Finally, set the page number to 7.
+   */
   const ingredientsfouthpage = async () => {
     if (seventh_ingede_text && seventh_ingede_weight) {
       recipe.ingredientLines.push(seventh_ingede_text);
@@ -285,13 +286,13 @@ export default function EditRecipe() {
 
     setpageno(7);
   }; //ingrediants fifth page, nextpage button
-/**
- * If the user has entered text and weight for the 9th ingredient, add the text to the ingredientLines
- * array and add the text, weight and image (if there is one) to the ingredients array.
- * If the user has entered text and weight for the 10th ingredient, add the text to the ingredientLines
- * array and add the text, weight and image (if there is one) to the ingredients array.
- * Then set the page number to 8.
- */
+  /**
+   * If the user has entered text and weight for the 9th ingredient, add the text to the ingredientLines
+   * array and add the text, weight and image (if there is one) to the ingredients array.
+   * If the user has entered text and weight for the 10th ingredient, add the text to the ingredientLines
+   * array and add the text, weight and image (if there is one) to the ingredients array.
+   * Then set the page number to 8.
+   */
   const ingredientsfifthpage = async () => {
     if (nineth_ingede_text && nineth_ingede_weight) {
       recipe.ingredientLines.push(nineth_ingede_text);
@@ -320,10 +321,10 @@ export default function EditRecipe() {
   };
 
   //const api to add recipe
- /**
-  * It's a function that sends a PUT request to the server with the recipe object as the body.
-  * @param id - the id of the recipe
-  */
+  /**
+   * It's a function that sends a PUT request to the server with the recipe object as the body.
+   * @param id - the id of the recipe
+   */
   const Addapi = async (id) => {
     try {
       setProgress(30);
@@ -361,7 +362,7 @@ export default function EditRecipe() {
     }
   };
   //on changing of a instruction
- /**
+  /**
   * It takes the value of the textarea, replaces all instances of ".\n" with ".", and then splits the
   * string into an array of strings, each string being a sentence. 
  
@@ -374,18 +375,18 @@ export default function EditRecipe() {
     });
   };
   //final page
-/**
- * When the user clicks the submit button, the function will call the Addapi function, which will add
- * the recipe to the database, and then navigate the user to the home page.
- */
+  /**
+   * When the user clicks the submit button, the function will call the Addapi function, which will add
+   * the recipe to the database, and then navigate the user to the home page.
+   */
   const insertRecipe = () => {
     Addapi(EditingRecipeId);
     Navigate("/Home");
   };
   return (
     <>
-      <AnimatedPage>
-        {CurrentRecipeItem.recipe &&
+      <AnimatedPage> {editserver==500? <InternalServerError></InternalServerError>:
+        CurrentRecipeItem.recipe &&
           CurrentRecipeItem.recipe.map((element) => {
             return (
               <section

@@ -4,10 +4,10 @@ export default function BlankRecipeItem() {
   return (
     <>
       <div className="col-md-3">
-        <div className="scene ">
+        <div className="scene " style={{height:"525px"}}>
           <div
             className="recipecard  card border-success "
-            style={{ Width: "18rem" }}
+            style={{ Width: "18rem",height:"525px" }}
             aria-hidden="true"
           >
             <img src="..." className="card-img-top" alt="..." />

@@ -17,11 +17,11 @@ export default function Login() {
     password: "",
     confirm_password: "",
   });
-  const [rememberme, setrememberme] = useState(false);
+
   const [visibleforgetmodal, setvisibleforgetmodal] = useState(false);
   const context = useContext(RecipeContext);
   const [servererror, setservererror] = useState(0);
-  const { login, showAlert, setProgress } = context;
+  const { login, showAlert, setProgress ,logoutUser} = context;
 
  /**
   * It checks if the user is already logged in, if not, it sends a POST request to the server with the
@@ -61,8 +61,16 @@ export default function Login() {
           setProgress(70);
           //if remember me is checked than store auth-token in localstorage else in session storage
           if (document.querySelector(".rememberme").checked) {
-            localStorage.setItem("auth-token", loginresult.auth_token, 1);
+            
+            localStorage.setItem("auth-token", loginresult.auth_token);
             localStorage.setItem("success", loginresult.succcess);
+            setInterval(() => {
+              logoutUser()
+              localStorage.removeItem("auth-token")
+              localStorage.removeItem("success")
+              Navigate("/login")
+            }, 3600000);
+          
           } else {
             sessionStorage.setItem("auth-token", loginresult.auth_token);
             sessionStorage.setItem("success", loginresult.succcess);

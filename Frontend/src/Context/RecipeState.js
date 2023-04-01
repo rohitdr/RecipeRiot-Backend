@@ -743,12 +743,12 @@ export default function RecipeState(props) {
         setuserbyid(userDetail);
         setLoading(false);
       } else {
-        setProgress(100);
+       
         setLoading(false);
         setuserbyid(500);
       }
     } catch (error) {
-      setProgress(100);
+     
       setLoading(false);
       setuserbyid(500);
       console.log(error.message);
@@ -870,17 +870,17 @@ export default function RecipeState(props) {
 
         if (response.status == 200) {
           let userDetail = await response.json();
-          setProgress(100);
+       
           setLoading(false);
           setUserData(userDetail);
         } else {
-          setProgress(100);
+        
           setLoading(false);
           setUserData(500);
         }
       }
     } catch (e) {
-      setProgress(100);
+   
       setLoading(false);
       setUserData(500);
       console.log(e.message);
@@ -998,6 +998,7 @@ export default function RecipeState(props) {
   const NameRecipe = async (recipename) => {
     try {
       setnamereicpeloading(true);
+      setProgress(30)
 
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswith${recipename}`,
@@ -1013,6 +1014,7 @@ export default function RecipeState(props) {
           },
         }
       );
+      setProgress(60)
       let Name_recipe = await response.json();
       if (response.status == 404) {
         setProgress(100);
@@ -1294,6 +1296,7 @@ export default function RecipeState(props) {
         contactsendmessage,
         ContactusSubmitApi,
         deletemessage,
+        deletemessageresult,
         logoutUser,
         deleteAccount,
         deleteaccount,

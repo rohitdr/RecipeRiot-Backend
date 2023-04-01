@@ -25,7 +25,7 @@ export default function Health() {
   const { type } = state;
   /* Calling the health function from the RecipeContext. */
   useEffect(() => {
-    document.title=`RecipeRiot-${firstCapital(type)}  Recipes`
+    document.title = `RecipeRiot-${firstCapital(type)}  Recipes`;
     health(type);
   }, [type]);
   var totalratings = 0;
@@ -34,8 +34,9 @@ export default function Health() {
       <AnimatedPage>
         {healthdata == 500 ? (
           <InternalServerError></InternalServerError>
-        ) : (<>
-          <section
+        ) : (
+          <>
+            <section
               id="about"
               className="about mt-3 mb-0 pt-3"
               style={{ backgroundColor: "#f7fbfe" }}
@@ -43,7 +44,7 @@ export default function Health() {
               <div className="container">
                 <div className="row ">
                   <h3 className="text-primary fs-1 fw-bold text-center">
-                    Health Type  Recipes
+                    Health Type Recipes
                   </h3>
                   <div
                     className="col-lg-6 order-1 order-lg-2 py-4"
@@ -75,98 +76,113 @@ export default function Health() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <p className="fst-italic">
-                      This category of health focuses on the idea that the food we eat can have a significant impact on our physical and mental well-being, 
-                      and that making healthy choices in our diets can help prevent disease and promote overall health.
+                        This category of health focuses on the idea that the
+                        food we eat can have a significant impact on our
+                        physical and mental well-being, and that making healthy
+                        choices in our diets can help prevent disease and
+                        promote overall health.
                       </p>
                       <ul>
                         <li>
-                          <i className="fa-solid fa-square-check mt-2"></i>Recipes in the health category often use ingredients that are high 
-                          in nutrients, such as fruits, vegetables, whole grains, lean proteins, and healthy fats.{" "}
+                          <i className="fa-solid fa-square-check mt-2"></i>
+                          Recipes in the health category often use ingredients
+                          that are high in nutrients, such as fruits,
+                          vegetables, whole grains, lean proteins, and healthy
+                          fats.{" "}
                         </li>
                         <li>
-                          <i className="fa-solid fa-square-check"></i>These ingredients provide essential vitamins, minerals, fiber, and antioxidants
-                           that support the body's immune system, improve digestion, and promote healthy weight management.
+                          <i className="fa-solid fa-square-check"></i>These
+                          ingredients provide essential vitamins, minerals,
+                          fiber, and antioxidants that support the body's immune
+                          system, improve digestion, and promote healthy weight
+                          management.
                         </li>
                         <li>
-                          <i className="fa-solid fa-square-check"></i>Many recipes in this category also avoid or limit the use of ingredients that are high in saturated fat, added sugars, and sodium, which can contribute to
-                           chronic health conditions such as heart disease, diabetes, and high blood pressure.
+                          <i className="fa-solid fa-square-check"></i>Many
+                          recipes in this category also avoid or limit the use
+                          of ingredients that are high in saturated fat, added
+                          sugars, and sodium, which can contribute to chronic
+                          health conditions such as heart disease, diabetes, and
+                          high blood pressure.
                         </li>
                       </ul>
                       <p>
-                      Overall, the recipe category of health promotes the idea that making conscious choices about the foods we eat can have a profound impact on our health and well-being.
-</p>
+                        Overall, the recipe category of health promotes the idea
+                        that making conscious choices about the foods we eat can
+                        have a profound impact on our health and well-being.
+                      </p>
                     </motion.div>
                   </div>
                 </div>
               </div>
             </section>
-          <div className="container min-vh-100">
-            <div className="row my-3">
-              <h1
-                className="text-center my-4 fw-bold text-dark"
-                style={{
-                  opacity: "0",
-                  animation: "drop .4s linear forwards 1s",
-                }}
-              >
-                {firstCapital(type)} Recipes
-              </h1>
+            <div className="container min-vh-100">
+              <div className="row my-3">
+                <h1
+                  className="text-center my-4 fw-bold text-dark"
+                  style={{
+                    opacity: "0",
+                    animation: "drop .4s linear forwards 1s",
+                  }}
+                >
+                  {firstCapital(type)} Recipes
+                </h1>
 
-              {healthdata.recipe &&
-                healthdata.recipe.map((element) => {
-                  //setting recipe for recipitm
-                  var reciperating = 0;
-                  element.Comments.map((ele) => {
-                    reciperating = reciperating + ele.rating;
-                  });
-                  element.Comments.length != 0
-                    ? (totalratings = reciperating / element.Comments.length)
-                    : (totalratings = 0);
-                  reciperating = 0;
-                  //setting recipe for recipitm
-                  return (
-                    <div
-                      className="col-md-3 mt-4 profilerecipe "
-                      key={element._id}
-                    >
-                      <RecipeItem
-                        id={element._id}
-                        rating={totalratings}
-                        title={element.label}
-                        topLeftColor={"dark"}
-                        headingColor={"dark"}
-                        ImageUrl={element.image}
-                        user={element.user}
-                        date={element.date}
-                        health_labels={element.healthLabels}
-                        Ingridiants={element.ingredientLines
-                          .toString()
-                          .replace(",", " and ")
-                          .substring(0, 60)}
-                        caleroies={Math.ceil(element.calories)}
-                        fat={
-                          element.totalNutrients.FAT.quantity
-                            ? Math.ceil(element.totalNutrients.FAT.quantity)
-                            : " "
-                        }
-                        caution={element.cautions}
-                        time={element.totalTime}
-                        source={element.source}
-                        sugar={element.totalNutrients.SUGAR.quantity}
-                        water={element.totalNutrients.WATER.quantity}
-                        chole={element.totalNutrients.CHOLE.quantity}
-                        vitamin_a={element.totalNutrients.VITA_RAE.quantity}
-                        vitamin_c={element.totalNutrients.VITC.quantity}
-                        vitamin_b6={element.totalNutrients.VITB6A.quantity}
-                        vitamin_d={element.totalNutrients.VITD.quantity}
-                        vitamin_e={element.totalNutrients.TOCPHA.quantity}
-                      ></RecipeItem>
-                    </div>
-                  );
-                })}
+                {healthdata.recipe &&
+                  healthdata.recipe.map((element) => {
+                    //setting recipe for recipitm
+                    var reciperating = 0;
+                    element.Comments.map((ele) => {
+                      reciperating = reciperating + ele.rating;
+                    });
+                    element.Comments.length != 0
+                      ? (totalratings = reciperating / element.Comments.length)
+                      : (totalratings = 0);
+                    reciperating = 0;
+                    //setting recipe for recipitm
+                    return (
+                      <div
+                        className="col-md-3 mt-4 profilerecipe "
+                        key={element._id}
+                      >
+                        <RecipeItem
+                          id={element._id}
+                          rating={totalratings}
+                          title={element.label}
+                          topLeftColor={"dark"}
+                          headingColor={"dark"}
+                          ImageUrl={element.image}
+                          user={element.user}
+                          date={element.date}
+                          health_labels={element.healthLabels}
+                          Ingridiants={element.ingredientLines
+                            .toString()
+                            .replace(",", " and ")
+                            .substring(0, 60)}
+                          caleroies={Math.ceil(element.calories)}
+                          fat={
+                            element.totalNutrients.FAT.quantity
+                              ? Math.ceil(element.totalNutrients.FAT.quantity)
+                              : " "
+                          }
+                          caution={element.cautions}
+                          time={element.totalTime}
+                          source={element.source}
+                          sugar={element.totalNutrients.SUGAR.quantity}
+                          water={element.totalNutrients.WATER.quantity}
+                          chole={element.totalNutrients.CHOLE.quantity}
+                          vitamin_a={element.totalNutrients.VITA_RAE.quantity}
+                          vitamin_c={element.totalNutrients.VITC.quantity}
+                          vitamin_b6={element.totalNutrients.VITB6A.quantity}
+                          vitamin_d={element.totalNutrients.VITD.quantity}
+                          vitamin_e={element.totalNutrients.TOCPHA.quantity}
+                        ></RecipeItem>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
-        </>
+          </>
         )}
       </AnimatedPage>
     </>

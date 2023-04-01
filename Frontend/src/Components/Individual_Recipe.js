@@ -11,6 +11,7 @@ export default function Individual_Recipe() {
   const { state } = useLocation();
   const location = useLocation();
   const { RecipeItemid } = state;
+  const [Individiual_recipeserver,setIndividiual_recipeserver]=useState({})
 /* Creating a variable called Navigate that is using the useNavigate hook. */
   let Navigate = useNavigate();
   const [pageno, setpageno] = useState(0);
@@ -94,9 +95,15 @@ export default function Individual_Recipe() {
           setVisible(false);
         }, 4000);
       }
+      else{
+        setProgress(100);
+        setLoading(false);
+        setIndividiual_recipeserver(500)
+      }
     } catch (error) {
       setProgress(100);
       setLoading(false);
+      setIndividiual_recipeserver(500)
       console.log(error.message);
     }
   };
@@ -112,7 +119,7 @@ export default function Individual_Recipe() {
   return (
     <>
       <AnimatedPage>
-        {userData == 500 || CurrentRecipeItem == 500 ? (
+        {userData == 500 || CurrentRecipeItem == 500  || Individiual_recipeserver==500? (
           <InternalServerError></InternalServerError>
         ) : (
           <div className="min-vh-100">
@@ -366,9 +373,9 @@ export default function Individual_Recipe() {
                                             id="product-section"
                                           >
                                             <div className="row">
-                                              <div className="col-md-6">
+                                              <div className="col-md-6 mb-3">
                                                 <div
-                                                  className="accordion box_decrease_size_animation"
+                                                  className="accordion box_decrease_size_animationforindividualrecipe"
                                                   id="accordionExample"
                                                 >
                                                   <div className="accordion-item">
@@ -543,9 +550,9 @@ export default function Individual_Recipe() {
                                                 </div>
                                               </div>
 
-                                              <div className="col-md-6">
-                                                <ul className="list-group box_decrease_size_animation">
-                                                  <li className="list-group-item d-flex justify-content-between align-items-start">
+                                              <div className="col-md-6 p-0">
+                                                <ul className="list-group box_decrease_size_animationforindividualrecipe">
+                                                  <li className="list-group-item d-flex justify-content-between align-items-start mb-0">
                                                     <div className="ms-2 me-auto">
                                                       <div className="fw-bold mb-0">
                                                         Instructions
@@ -588,8 +595,8 @@ export default function Individual_Recipe() {
                                     >
                                       <div className="container ">
                                         <div className="row">
-                                          <div className="col-lg-12">
-                                            <div className="card border border-primary ">
+                                          <div className="col-lg-12 px-0">
+                                            <div className="card border border-primary box_decrease_size_animationforindividualrecipe ">
                                               <div className="row">
                                                 <div className="col-sm-12 col-lg-4">
                                                   <div className="card-body">
@@ -673,9 +680,9 @@ export default function Individual_Recipe() {
                                                     </a>
                                                   </div>
                                                 </div>
-                                                <div className="col-sm-12 col-lg-8 border-left">
-                                                  <div className="card-body">
-                                                    <ul className="list-style-none">
+                                                <div className="col-sm-12 col-lg-8 border-left ">
+                                                  <div className="card-body px-0">
+                                                    <ul className="list-style-none px-0">
                                                       <li className="mt-4">
                                                         <div className="d-flex align-items-center">
                                                           <i className="fa fa-smile-o display-5ratingview text-muted  me-2"></i>
@@ -789,7 +796,7 @@ export default function Individual_Recipe() {
 
                                       {/* // Reviews */}
 
-                                      <div className="bg-white rounded shadow-sm p-4 my-4 restaurant-detailed-ratings-and-reviews border border-primary ">
+                                      <div className="bg-white rounded shadow-sm p-4 my-4 box_decrease_size_animationforindividualrecipe restaurant-detailed-ratings-and-reviews border border-primary ">
                                         <a className="btn btn-outline-primary btn-sm float-right">
                                           Top Rated
                                         </a>
@@ -902,7 +909,7 @@ export default function Individual_Recipe() {
                                       </div>
 
                                       {/* leave a comment */}
-                                      <div className="bg-white border border-primary rounded shadow-sm p-4  rating-review-select-page">
+                                      <div className="bg-white border border-primary rounded shadow-sm box_decrease_size_animationforindividualrecipe p-4  rating-review-select-page">
                                         <h5 className="mb-4">Leave Comment</h5>
                                         <p className="mb-2">Rate the Place</p>
                                         <div className="mb-4">
@@ -1052,7 +1059,7 @@ export default function Individual_Recipe() {
                                                         <div className="col-md-4">
                                                           <img
                                                             src={ele.image}
-                                                            className="img-fluid rounded-start"
+                                                            className="img-fluid rounded-start w-100 h-100"
                                                             alt="..."
                                                           />
                                                         </div>
@@ -1097,11 +1104,11 @@ export default function Individual_Recipe() {
                                     <section className="intro">
                                       <div className=" h-100">
                                         <div className="mask d-flex align-items-center h-100">
-                                          <div className="container">
+                                          <div className="container p-0 m-0">
                                             <div className="row justify-content-center">
                                               <div className="col-12">
                                                 <div
-                                                  className="card shadow-2-strong box_decrease_size_animation"
+                                                  className="card shadow-2-strong box_decrease_size_animationforindividualrecipe"
                                                   style={{
                                                     backgroundColor: "#f5f7fa",
                                                   }}

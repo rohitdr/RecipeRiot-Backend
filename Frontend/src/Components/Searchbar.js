@@ -16,7 +16,7 @@ import {
 } from "@nextui-org/react";
 
 import Loader from "./Loader";
-export default function Searchbar(props) {
+export default function Searchbar() {
   /* Destructuring the context object and assigning it to the variables. */
   const context = useContext(RecipeContext);
   const [searchmodal, setsearchmodal] = useState(false);
@@ -1502,11 +1502,7 @@ export default function Searchbar(props) {
                 </Dropdown.Item>
               </Dropdown.Menu>
             ) : (
-              <Dropdown.Menu
-                aria-label="User menu actions"
-                color="secondary"
-                onAction={(actionKey) => console.log({ actionKey })}
-              >
+              <Dropdown.Menu aria-label="User menu actions" color="secondary">
                 <Dropdown.Item key="loginsearch">
                   <div
                     onClick={() => {

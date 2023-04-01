@@ -483,13 +483,13 @@ router.post("/changeuploadimageAdmin", fetchUser, async (req, res) => {
     const id = req.body.id;
     const user = await User.findById(id);
     if (!user) {
-      return res.status(400).json({ error: "Sorry user does not exist" });
+      return res.status(404).json({ error: "Sorry user does not exist" });
     }
     const updatedUser = await User.update(
       { _id: id },
       { $set: { Profile_Image: image } }
     );
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ error: "Internal server Erorr" });
@@ -618,11 +618,3 @@ router.post("/staticalData", fetchUser, async (req, res) => {
   }
 });
 module.exports = router;
-/**
- * It fetches the user data from the server and sets the user data in the state.
- * </code>
- */
-/**
- * It fetches all the recipes from the database and sets the state of the recipe to the fetched data.
- * </code>
- */

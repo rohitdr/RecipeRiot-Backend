@@ -27,7 +27,7 @@ export default function Home() {
   /* Destructuring the context object and assigning it to the variables. */
   const context = useContext(RecipeContext);
   const {
-    loading,
+
     LatesRecipe,
     Latest_recipe,
     getUser,
@@ -40,7 +40,7 @@ export default function Home() {
 
   /* Calling the function cuisine and LatesRecipe when the component mounts. */
   useEffect(() => {
-    document.title=`RecipeRiot-Home`
+    document.title = `RecipeRiot-Home`;
     cuisine("indian");
     LatesRecipe();
   }, []);
@@ -92,7 +92,7 @@ export default function Home() {
                           Get Started
                         </a>
                         <a
-                        href="#portfolio"
+                          href="#portfolio"
                           className="glightbox btn-watch-video"
                         >
                           <motion.div
@@ -447,7 +447,8 @@ export default function Home() {
                             <h3>Create and upload</h3>
                           </a>
                           <p>
-                         Uers can upload their own recipes and delete them if needed.
+                            Uers can upload their own recipes and delete them if
+                            needed.
                           </p>
                           <a href="#" className="stretched-link"></a>
                         </div>
@@ -491,8 +492,9 @@ export default function Home() {
                             <h3>Recipe Search</h3>
                           </a>
                           <p>
-                          Users can search for specific recipes by name, ingredient,
-                    cuisine, cooking time, or dietary requirements.
+                            Users can search for specific recipes by name,
+                            ingredient, cuisine, cooking time, or dietary
+                            requirements.
                           </p>
                           <a href="#" className="stretched-link"></a>
                         </div>
@@ -616,7 +618,7 @@ export default function Home() {
                       if (fourth < 13) {
                         return (
                           <div
-                          className="col-md-3 mt-4 profilerecipe "
+                            className="col-md-3 mt-4 profilerecipe "
                             key={element._id}
                           >
                             <RecipeItem
@@ -807,7 +809,7 @@ export default function Home() {
                       if (cuisinenumber < 13) {
                         return (
                           <div
-                          className="col-md-3 mt-4 profilerecipe "
+                            className="col-md-3 mt-4 profilerecipe "
                             key={element._id}
                           >
                             <RecipeItem

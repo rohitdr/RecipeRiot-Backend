@@ -4,6 +4,7 @@ import RecipeContext from "../Context/RecipeContext";
 import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
+import { motion } from "framer-motion";
 
 export default function Dishtype() {
  /**
@@ -33,7 +34,73 @@ export default function Dishtype() {
       <>
         {dishdata == 500 ? (
           <InternalServerError></InternalServerError>
-        ) : (
+        ) : (<>
+          <section
+              id="about"
+              className="about mt-3 mb-0 pt-3"
+              style={{ backgroundColor: "#f7fbfe" }}
+            >
+              <div className="container">
+                <div className="row ">
+                  <h3 className="text-primary fs-1 fw-bold text-center">
+                   Dish Type  Recipes
+                  </h3>
+                  <div
+                    className="col-lg-6 order-1 order-lg-2 py-4"
+                    id="about_img"
+                    data-aos="fade-left"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: 100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <img
+                        src="Other/dishtype.webp"
+                        className="img-fluid  box_decrease_size_animationforlogin"
+                        alt=""
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div
+                    className="col-lg-6 py-4 pt-lg-0 order-2 order-lg-1 content "
+                    id="about_content"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: -100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <p className="fst-italic">
+                      The recipe category of dish type
+                       refers to the classification of recipes based on the type of dish they represent. 
+                      </p>
+                      <ul>
+                        <li>
+                          <i className="fa-solid fa-square-check mt-2"></i>This category of recipes includes recipes for a variety
+                           of dishes, such as appetizers, soups, salads, entrees, desserts, and more.{" "}
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>Recipes in the dish type category are designed to provide inspiration for different courses 
+                          of a meal, or to serve as the main dish for a particular occasion or event. 
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>Recipes in the dish type category often 
+                          have specific preparation and cooking methods that are unique to that type of dish. 
+                        </li>
+                      </ul>
+                      <p>
+                      Overall, the dish type category of recipes is a reflection of the diverse types of dishes that exist within culinary traditions, 
+                      and serves as a resource for individuals seeking to create delicious and nutritious meals for any occasion.
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </section>
           <div className="container min-vh-100">
             <div className="row my-3">
               <h1
@@ -100,6 +167,7 @@ export default function Dishtype() {
                 })}
             </div>
           </div>
+        </>
         )}
       </>
     </AnimatedPage>

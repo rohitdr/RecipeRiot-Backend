@@ -4,6 +4,7 @@ import RecipeContext from "../Context/RecipeContext";
 import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
+import { motion } from "framer-motion";
 
 export default function Health() {
   /**
@@ -33,7 +34,72 @@ export default function Health() {
       <AnimatedPage>
         {healthdata == 500 ? (
           <InternalServerError></InternalServerError>
-        ) : (
+        ) : (<>
+          <section
+              id="about"
+              className="about mt-3 mb-0 pt-3"
+              style={{ backgroundColor: "#f7fbfe" }}
+            >
+              <div className="container">
+                <div className="row ">
+                  <h3 className="text-primary fs-1 fw-bold text-center">
+                    Health Type  Recipes
+                  </h3>
+                  <div
+                    className="col-lg-6 order-1 order-lg-2 py-4"
+                    id="about_img"
+                    data-aos="fade-left"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: 100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <img
+                        src="Other/healthtype.webp"
+                        className="img-fluid  box_decrease_size_animationforlogin"
+                        alt=""
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div
+                    className="col-lg-6 py-4 pt-lg-0 order-2 order-lg-1 content "
+                    id="about_content"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: -100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <p className="fst-italic">
+                      This category of health focuses on the idea that the food we eat can have a significant impact on our physical and mental well-being, 
+                      and that making healthy choices in our diets can help prevent disease and promote overall health.
+                      </p>
+                      <ul>
+                        <li>
+                          <i className="fa-solid fa-square-check mt-2"></i>Recipes in the health category often use ingredients that are high 
+                          in nutrients, such as fruits, vegetables, whole grains, lean proteins, and healthy fats.{" "}
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>These ingredients provide essential vitamins, minerals, fiber, and antioxidants
+                           that support the body's immune system, improve digestion, and promote healthy weight management.
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>Many recipes in this category also avoid or limit the use of ingredients that are high in saturated fat, added sugars, and sodium, which can contribute to
+                           chronic health conditions such as heart disease, diabetes, and high blood pressure.
+                        </li>
+                      </ul>
+                      <p>
+                      Overall, the recipe category of health promotes the idea that making conscious choices about the foods we eat can have a profound impact on our health and well-being.
+</p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </section>
           <div className="container min-vh-100">
             <div className="row my-3">
               <h1
@@ -100,6 +166,7 @@ export default function Health() {
                 })}
             </div>
           </div>
+        </>
         )}
       </AnimatedPage>
     </>

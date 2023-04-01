@@ -4,6 +4,7 @@ import RecipeContext from "../Context/RecipeContext";
 import RecipeItem from "./RecipeItem";
 import InternalServerError from "./InternalServerError";
 import AnimatedPage from "./AnimatedPage";
+import { motion } from "framer-motion";
 export default function Diettype() {
  /**
   * It takes a string, makes it lowercase, then capitalizes the first letter and returns the new
@@ -32,18 +33,84 @@ export default function Diettype() {
       <AnimatedPage>
         {dietdata == 500 ? (
           <InternalServerError></InternalServerError>
-        ) : (
+        ) : (<> 
+          <section
+              id="about"
+              className="about mt-3 mb-0 pt-3"
+              style={{ backgroundColor: "#f7fbfe" }}
+            >
+              <div className="container">
+                <div className="row ">
+                  <h3 className="text-primary fs-1 fw-bold text-center">
+                    Diet Type  Recipes
+                  </h3>
+                  <div
+                    className="col-lg-6 order-1 order-lg-2 py-4"
+                    id="about_img"
+                    data-aos="fade-left"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: 100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <img
+                        src="Other/diettype.webp"
+                        className="img-fluid  box_decrease_size_animationforlogin"
+                        alt=""
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div
+                    className="col-lg-6 py-4 pt-lg-0 order-2 order-lg-1 content "
+                    id="about_content"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, x: -100 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 1 }}
+                    >
+                      <p className="fst-italic">
+                      The recipe category of diet type refers to the classification of
+                       recipes based on their suitability for specific dietary needs or preferences.
+                      </p>
+                      <ul>
+                        <li>
+                          <i className="fa-solid fa-square-check mt-2"></i>At
+                          This category of recipes includes recipes that cater to a variety of diets,
+                           including vegetarian, vegan, gluten-free, dairy-free, paleo, keto, and many others.{" "}
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>Recipes in the diet type category are designed to meet the unique nutritional
+                           requirements of individuals with specific dietary restrictions or preferences.
+                        </li>
+                        <li>
+                          <i className="fa-solid fa-square-check"></i>Recipes in the diet type category often rely on alternative 
+                          ingredients and substitutes to achieve the desired flavor and texture.
+                        </li>
+                      </ul>
+                      <p>
+                      Overall, the diet type category of recipes is a reflection of the diverse dietary needs and preferences of individuals,
+                       and serves as a resource for individuals seeking to maintain a healthy and balanced diet that meets their unique nutritional requirements.
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </section>
           <div className="container min-vh-100">
             <div className="row my-3">
-              <h1
+            <h1
                 className="text-center my-4 fw-bold text-dark"
                 style={{
                   opacity: "0",
                   animation: "drop .4s linear forwards 1s",
                 }}
               >
-           
-           {firstCapital(type)}  Recipes
+                {firstCapital(type)} Recipes
               </h1>
 
               {dietdata.recipe &&
@@ -100,6 +167,8 @@ export default function Diettype() {
                 })}
             </div>
           </div>
+        
+        </>
         )}
       </AnimatedPage>
     </>

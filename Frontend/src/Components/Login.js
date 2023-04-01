@@ -223,7 +223,7 @@ export default function Login() {
                       className="position-absolute shadow-5-strong"
                     ></div>
 
-                    <div className="card bg-glass box_decrease_size_animation">
+                    <div className="card  bg-glass box_decrease_size_animation">
                       <div className="card-body px-4 py-5 px-md-5 logincardbody">
                         <div className="card-header card-header-primary loginformheader text-center box_decrease_size_animationforlogin  ">
                           <h4 className="card-title ">Login</h4>
@@ -249,7 +249,7 @@ export default function Login() {
                           </div>{" "}
                         </div>
                         <form
-                          className="loginform box_decrease_size_animation"
+                          className="loginform box_decrease_size_animationforloginform"
                           onSubmit={onsubmit}
                         >
                           <div className="form-floating mb-3 mt-3  ">
@@ -290,7 +290,7 @@ export default function Login() {
                                   id="rememberme"
                                 />
                                 <label
-                                  className="form-check-label mx-0 px-0 "
+                                  className="form-check-label px10fontless360 mx-0 px-0 "
                                   for="rememberme"
                                 >
                                   {" "}
@@ -301,6 +301,7 @@ export default function Login() {
 
                             <div className="col">
                               <a
+                              className="px10fontless360"
                                 onClick={() => {
                                   setvisibleforgetmodal(true);
                                 }}
@@ -322,10 +323,10 @@ export default function Login() {
                           </button>
                           <hr className="my-4" />
                           <div className="d-flex align-items-center justify-content-center pb-4">
-                            <p className="mb-0 me-2">Don't have an account?</p>
+                            <p className="mb-0 me-2 px10fontless360">Don't have an account?</p>
                             <button
                               type="button"
-                              className="btn btn-outline-danger"
+                              className="btn btn-outline-success px10fontless360"
                               onClick={() => {
                                 Navigate("/signUp");
                               }}

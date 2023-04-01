@@ -92,7 +92,7 @@ export default function Home() {
                           Get Started
                         </a>
                         <a
-                          href="https://www.youtube.com/watch?v=jDDaplaOz7Q"
+                        href="#portfolio"
                           className="glightbox btn-watch-video"
                         >
                           <motion.div
@@ -101,7 +101,7 @@ export default function Home() {
                           >
                             <i className="fa-regular pt-3 fa-circle-play"></i>
                           </motion.div>
-                          <span>Watch Video</span>
+                          <span>Watch Recipes</span>
                         </a>
                       </div>
                     </motion.div>
@@ -113,7 +113,7 @@ export default function Home() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <img
-                        src="https://assets.epicurious.com/photos/59b7ec7c1387461e2e0d5789/4:3/w_2240,h_1680,c_limit/smallplates-hero-foreverloop.gif"
+                        src="Other/homepagetoprecipeiage.gif"
                         className="img-fluid box_decrease_size_animationforlogin  "
                         alt=""
                       />
@@ -228,7 +228,7 @@ export default function Home() {
             <section id="services" className="services ">
               <div className="container">
                 <div className="section-header text-center ">
-                  <h2 className="fw-bold fs-1 text-primary">Recipe Search</h2>
+                  <h2 className="fw-bold fs-1 text-primary">Our Aspects</h2>
                   <p>
                     Users can search for specific recipes by name, ingredient,
                     cuisine, cooking time, or dietary requirements.
@@ -246,7 +246,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://www.dish-works.com/wp-content/uploads/CBD-Hummus-min.gif"
+                            src="Other/ouraspects1.gif"
                             className="img-fluid"
                             alt=""
                           />
@@ -289,7 +289,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://cdn.dribbble.com/users/608874/screenshots/6370753/a.gif"
+                            src="Other/ouraspects2.gif"
                             className="img-fluid"
                             alt=""
                           />
@@ -334,7 +334,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://media.womensweekly.com.sg/public/2020/08/10-Easy-Indulgent-Cheesecake-Recipes-You-Must-Try.gif"
+                            src="Other/ouraspects3.webp"
                             className="img-fluid"
                             alt=""
                           />
@@ -379,7 +379,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/cooking-for-newsletter_ver_1.gif"
+                            src="Other/ouraspects4.gif"
                             className="img-fluid"
                             alt=""
                           />
@@ -425,7 +425,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://image-tc.galaxy.tf/wigif-57n22u0bjtunlpxduoyl4lqfa/cny-goodies-gif.gif?width=700"
+                            src="Other/ouraspects5.gif"
                             className="img-fluid"
                             alt=""
                           />
@@ -444,12 +444,10 @@ export default function Home() {
                             </motion.div>
                           </div>
                           <a href="#" className="stretched-link">
-                            <h3>Create and</h3>
+                            <h3>Create and upload</h3>
                           </a>
                           <p>
-                            Cumque et suscipit saepe. Est maiores autem enim
-                            facilis ut aut ipsam corporis aut. Sed animi at
-                            autem alias eius labore.
+                         Uers can upload their own recipes and delete them if needed.
                           </p>
                           <a href="#" className="stretched-link"></a>
                         </div>
@@ -471,7 +469,7 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="https://www.chocolatesandchai.com/wp-content/uploads/2015/03/Drizzle-GIF-2.gif"
+                            src="Other/ouraspects6.gif"
                             className="img-fluid"
                             alt=""
                           />
@@ -490,12 +488,11 @@ export default function Home() {
                             </motion.div>
                           </div>
                           <a href="#" className="stretched-link">
-                            <h3>Dolori Architecto</h3>
+                            <h3>Recipe Search</h3>
                           </a>
                           <p>
-                            Hic molestias ea quibusdam eos. Fugiat enim
-                            doloremque aut neque non et debitis iure. Corrupti
-                            recusandae ducimus enim.
+                          Users can search for specific recipes by name, ingredient,
+                    cuisine, cooking time, or dietary requirements.
                           </p>
                           <a href="#" className="stretched-link"></a>
                         </div>
@@ -528,7 +525,7 @@ export default function Home() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <img
-                        src="https://www.thespruceeats.com/thmb/B3nv-naxP17fALp5NGkUTNXGzcc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/what-is-burrata-591165-Final_V2-15f6ed3bc72f4f96bc977202005a92be.gif"
+                        src="Other/aboutus.gif"
                         className="img-fluid  box_decrease_size_animationforlogin"
                         alt=""
                       />

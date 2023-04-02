@@ -147,6 +147,7 @@ export default function Health() {
                       >
                         <RecipeItem
                           id={element._id}
+                          userData={element.userData}
                           rating={totalratings}
                           title={element.label}
                           topLeftColor={"dark"}

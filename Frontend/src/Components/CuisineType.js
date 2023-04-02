@@ -142,6 +142,7 @@ export default function CuisineType() {
                         key={element._id}
                       >
                         <RecipeItem
+                          userData={element.userData}
                           id={element._id}
                           rating={totalratings}
                           title={element.label}

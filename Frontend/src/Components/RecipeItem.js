@@ -14,12 +14,12 @@ export default function RecipeItem(props) {
 /* Creating a variable called Navigate that is using the useNavigate hook. */
   let Navigate = useNavigate();
   //to captalize first character
-
+const {userData}=props
 
 /* Calling the getUserbyid and getUser functions when the component mounts. */
   useEffect(() => {
-    getUserbyid(props.user);
-    getUser();
+   
+
   }, []);
 /* Setting the state of the heart to regular. */
 
@@ -34,7 +34,7 @@ export default function RecipeItem(props) {
     getUserbyid,
     userbyid,
     getUser,
-    userData,
+ 
   } = context;
 
   const [star, setstar] = useState(0);
@@ -70,6 +70,7 @@ export default function RecipeItem(props) {
 
   var deg = 180;
   const onclickRotate = () => {
+    //  getUserbyid(props.user);
     document.getElementById(
       `${props.id}`
     ).style.transform = `rotateY(${deg}deg)`;
@@ -252,61 +253,25 @@ export default function RecipeItem(props) {
             <div className="back ">
               <div className="card testimonial-card pt-4 ">
                 <div className="card-up"></div>
-                <div className="avatar mx-auto bg-white">
+                <div className="avatar mb-1 mx-auto bg-white">
                   <img
-                    src={userbyid?.user?.Profile_Image}
+                    src={userData?.Profile_Image}
                     className="rounded-circle img-fluid"
                     style={{ height: "250px" }}
                   />
                 </div>
                 <div className="card-body text-center pt-2">
                   <h3 className="mb-2 fw-bold card-title">
-                    {userbyid?.user?.name}
+                    {userData?.first_name} {userData?.last_name}
                   </h3>
                   <hr />
                   <ul className="list-group list-group-flush">
                     <div className="card-text text-dark mb- d-flex justify-content-between">
-                      <p>
-                        <i
-                          className={`fa-${
-                            star > 0 ? "solid" : "regular"
-                          } text-danger recipeitemstar fa-star`}
-                          onClick={() => {
-                            setstar(1);
-                          }}
-                        ></i>
-                        <i
-                          className={`fa-${
-                            star > 1 ? "solid" : "regular"
-                          } text-danger fa-star`}
-                          onClick={() => {
-                            setstar(2);
-                          }}
-                        ></i>
-                        <i
-                          className={`fa-${
-                            star > 2 ? "solid" : "regular"
-                          } text-danger fa-star`}
-                          onClick={() => {
-                            setstar(3);
-                          }}
-                        ></i>
-                        <i
-                          className={`fa-${
-                            star > 3 ? "solid" : "regular"
-                          } text-danger fa-star`}
-                          onClick={() => {
-                            setstar(4);
-                          }}
-                        ></i>
-                        <i
-                          className={`fa-${
-                            star > 4 ? "solid" : "regular"
-                          } text-danger fa-star`}
-                          onClick={() => {
-                            setstar(5);
-                          }}
-                        ></i>
+                      <p className="text-dark">
+                        <i 
+                          className={`fa-solid text-danger recipeitemstar fa-star`}
+                         
+                        > </i> {userData?.Total_Comments} +
                       </p>
                       <i
                         className="fa-solid fa-right-left "
@@ -314,22 +279,22 @@ export default function RecipeItem(props) {
                       ></i>
                     </div>
 
-                    <div className="card-text text-dark d-flex justify-content-evenly">
+                    <div className="card-text mb-3 text-dark d-flex justify-content-evenly">
                       <h6 className="text-dark">
-                        {userbyid?.user?.Liked_Recipe?.length}
+                        {userData?.Liked_Recipe?.length}
                       </h6>
-                      <h6 className="text-dark">{userbyid?.totalResults}</h6>
-                      <p className="text-dark">{userbyid?.TotalCommnts}</p>
+                      <h6 className="text-dark">{userData?.Total_Recipes}</h6>
+                      <h6 className="text-dark">{userData?.Total_Comments}</h6>
                     </div>
-                    <p className="card-text text-dark d-flex justify-content-evenly">
+                    <p className="card-text text-dark mb-3 d-flex justify-content-evenly">
                       <i className="fa-heart fa-solid fs-4 text-danger"></i>
                       <i className="fa-solid fa-utensils fs-4 "></i>
                       <i className="fa-solid fs-4 fa-comment"></i>
                     </p>
-                    <p className="card-text text-dark d-flex justify-content-around">
-                      <i className="fa-brands fa-whatsapp  fs-2 fw-bold text-success"></i>
-                      <i className="fa-brands fa-instagram   fs-2 fw-bold text-danger"></i>
-                      <i className="fa-brands fa-facebook   fs-2 fw-bold text-primary"></i>
+                    <p className="card-text text-dark d-flex justify-content-around">   
+                      <i className="fas fa-globe  fs-2 fw-bold text-success" onClick={()=>{window.location.href=userData?.git}}></i>
+                      <i className=" fab fa-github  fs-2 fw-bold text-danger" onClick={()=>{window.location.href=userData?.web}}></i>
+                      <i className="fa-brands fa-facebook   fs-2 fw-bold text-primary" onClick={()=>{window.location.href=userData?.facebook}}> </i>
                     </p>
                   </ul>
                 </div>

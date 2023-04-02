@@ -67,6 +67,7 @@ export default function Profile(props) {
                       >
                         <RecipeItem
                           id={element._id}
+                          userData={element.userData}
                           rating={totalratings}
                           title={element.label}
                           topLeftColor={"dark"}

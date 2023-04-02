@@ -138,6 +138,7 @@ export default function Meal() {
                         key={element._id}
                       >
                         <RecipeItem
+                          userData={element.userData}
                           id={element._id}
                           delay={animationdelay}
                           title={element.label}

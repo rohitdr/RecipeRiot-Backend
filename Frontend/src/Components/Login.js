@@ -39,7 +39,7 @@ export default function Login() {
         Navigate("/Home");
         showAlert("You are Already logged in.", "warning");
       } else {
-        setProgress(10);
+        setProgress(30);
 
         const response = await fetch(
           `${process.env.REACT_APP_Fetch_Api_Start}/auth/login`,

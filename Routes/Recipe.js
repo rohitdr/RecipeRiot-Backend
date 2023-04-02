@@ -65,6 +65,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       totalNutrients,
       instruction,
     } = req.body;
+    const userdata=await User.findById(req.user.id)
     const recipe = new Recipe({
       totalTime,
       totalWeight,
@@ -83,6 +84,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       ingredients,
       totalNutrients,
       instruction,
+      userData:userdata
     });
     const user = await User.findById(req.user.id);
 
@@ -375,6 +377,7 @@ router.get("/LatestRecipes", async (req, res) => {
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }
+   
 
     const recipe_lenght = recipe.length;
     res.status(200).json({ recipe, count: recipe_lenght });
@@ -512,4 +515,28 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+/* Updating the userData field in the Recipe collection with the user data from the User collection. */
+// router.post("/upadtinmodal",  async (req, res) => {
+//   try {
+//    const recipe = await Recipe.find()
+//    recipe.map(async (element)=>{
+//     const user = await User.findOne({_id:element.user}).select("-password")
+//     const updaterecipe = await Recipe.findByIdAndUpdate(
+//       { _id: element._id },
+//       { $set: { userData: user }},
+//       {new:true} 
+//     );
+    
+ 
+//         })
+        
+   
+
+//     res.status(200).json("success");
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 module.exports = router;

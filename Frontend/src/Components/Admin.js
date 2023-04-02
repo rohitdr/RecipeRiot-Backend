@@ -471,7 +471,7 @@ the adminactivepage state to the adminActivePageNumber. */
                         <div className="text-center">
                           <img
                             className="img-fluid px-3 px-sm-4 mt-3 mb-4"
-                            style={{ width: "25rem;" }}
+                            style={{ width: "25rem" }}
                             src="https://img.freepik.com/free-vector/happy-freelancer-with-computer-home-young-man-sitting-armchair-using-laptop-chatting-online-smiling-vector-illustration-distance-work-online-learning-freelance_74855-8401.jpg?w=2000"
                             alt="..."
                           />
@@ -742,6 +742,7 @@ the adminactivepage state to the adminActivePageNumber. */
                       >
                         <RecipeItem
                           id={element._id}
+                          userData={element.userData}
                           rating={totalratings}
                           title={element.label}
                           topLeftColor={"dark"}

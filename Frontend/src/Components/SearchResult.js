@@ -47,6 +47,7 @@ export default function SearchResult() {
               return (
                 <div className="col-md-3 mt-4 " key={element._id}>
                   <RecipeItem
+                    userData={element.userData}
                     id={element._id}
                     title={element.label}
                     topLeftColor={"dark"}
@@ -185,6 +186,7 @@ export default function SearchResult() {
                             key={element._id}
                           >
                             <RecipeItem
+                              userData={element.userData}
                               id={element._id}
                               rating={totalratings}
                               title={element.label}

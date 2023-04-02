@@ -1048,7 +1048,7 @@ export default function RecipeState(props) {
    */
   const LatesRecipe = async () => {
     try {
-      setLoading(true);
+    setProgress(30)
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/LatestRecipes`,
         {
@@ -1059,10 +1059,13 @@ export default function RecipeState(props) {
           },
         }
       );
+      setProgress(50)
       let Latest_recipe = await response.json();
       if (response.status == 404) {
+        setProgress(100)
         setLoading(false);
       } else if (response.status == 200) {
+        setProgress(100)
         setLoading(false);
         setLatest_Recipe(Latest_recipe);
       } else {

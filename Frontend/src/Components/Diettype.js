@@ -141,6 +141,7 @@ export default function Diettype() {
                         key={element._id}
                       >
                         <RecipeItem
+                          userData={element.userData}
                           id={element._id}
                           rating={totalratings}
                           title={element.label}

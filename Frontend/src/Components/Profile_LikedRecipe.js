@@ -76,6 +76,7 @@ export default function Profile_LikedRecipe() {
                         >
                           <RecipeItem
                             id={element._id}
+                            userData={element.userData}
                             rating={totalratings}
                             title={element.label}
                             topLeftColor={"dark"}

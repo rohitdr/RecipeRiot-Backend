@@ -623,6 +623,7 @@ export default function Home() {
                           >
                             <RecipeItem
                               id={element._id}
+                              userData={element.userData}
                               rating={totalratings}
                               title={element.label}
                               topLeftColor={"dark"}
@@ -814,6 +815,7 @@ export default function Home() {
                           >
                             <RecipeItem
                               id={element._id}
+                              userData={element.userData}
                               title={element.label}
                               topLeftColor={"dark"}
                               headingColor={"dark"}

@@ -132,6 +132,7 @@ export default function Dishtype() {
                     >
                       <RecipeItem
                         rating={totalratings}
+                        userData={element.userData}
                         id={element._id}
                         title={element.label}
                         topLeftColor={"dark"}

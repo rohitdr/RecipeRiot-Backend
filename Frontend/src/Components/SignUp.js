@@ -345,7 +345,8 @@ const changethird=(e)=>{
 }, 2000);
   }
 
-  return (<><AnimatedPage>
+  return (
+  <><AnimatedPage>
     { servererror == 500 ? <InternalServerError></InternalServerError> :<div>
       {signuppage == 0 && (
         <section className="background-radial-gradient overflow-hidden">

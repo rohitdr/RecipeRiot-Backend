@@ -4,6 +4,7 @@ import RecipeContext from "../Context/RecipeContext";
 import InternalServerError from "./InternalServerError";
 import {Modal,Image,Text,Input,Button,} from "@nextui-org/react";
 import "./login.css";
+import 'animate.css'
 import AnimatedPage from "./AnimatedPage";
 
 export default function Login() {
@@ -193,7 +194,7 @@ export default function Login() {
         {servererror == 500 ? (
           <InternalServerError></InternalServerError>
         ) : (
-          <div>
+          <div className="animate__rollIn">
             <section className="background-radial-gradient overflow-hidden">
               <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
                 <div className="row gx-lg-5 align-items-center mb-5">

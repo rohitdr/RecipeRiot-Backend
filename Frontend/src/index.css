@@ -1,6 +1,9 @@
 .blankRecipe{
 opacity: 0;
 }
+html{
+  scroll-behavior: smooth;
+}
 
   .drop-text{
 

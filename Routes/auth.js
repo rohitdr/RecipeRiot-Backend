@@ -10,6 +10,7 @@ const { jwtSecret } = require("../Config/Keys");
 const Recipe = require("../Modals/Recipe.js");
 const ContactUs = require("../Modals/ContactUs.js");
 
+
 /* The above code is creating a user. */
 router.post(
   "/createUser",
@@ -617,4 +618,6 @@ router.post("/staticalData", fetchUser, async (req, res) => {
     res.status(500).send({ error: "Internal server Erorr" });
   }
 });
+
+
 module.exports = router;

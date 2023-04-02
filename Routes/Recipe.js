@@ -6,6 +6,7 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User.js");
+const {AdminEmail}=require("../Config/Keys");
 
 /* Fetching all the recipes from the database. */
 router.get("/allRecipes", fetchuser, async (req, res) => {
@@ -229,7 +230,7 @@ router.get("/allRecipeswith/:name", async (req, res) => {
 router.get("/AdminGetAllRecipes", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({
@@ -248,7 +249,7 @@ router.get("/AdminGetAllRecipes", fetchUser, async (req, res) => {
 router.get("/AdminGetAllRecipesByDate", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({

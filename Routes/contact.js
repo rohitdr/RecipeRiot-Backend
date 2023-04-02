@@ -5,7 +5,7 @@ const router = express.Router();
 const Contact = require("../Modals/ContactUs");
 const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User");
-const {AdminEmail}=require("../Config/Keys");
+
 
 /* This is a router to post a message. */
 router.post("/Message", async (req, res) => {
@@ -54,7 +54,7 @@ router.get("/GetAllMessages", async (req, res) => {
 router.delete("/delete/:id", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== AdminEmail) {
+    if (user.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({

@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchUser = require("../Middleware/fetchUser.js");
 const { jwtSecret } = require("../Config/Keys");
-const {AdminEmail}=require("../Config/Keys");
+
 const Recipe = require("../Modals/Recipe.js");
 const ContactUs = require("../Modals/ContactUs.js");
 
@@ -389,7 +389,7 @@ router.post("/forgetPassword", async (req, res) => {
 router.post("/AdminGetAllUser", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== AdminEmail) {
+    if (user.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({
@@ -409,7 +409,7 @@ router.post("/AdminGetAllUser", fetchUser, async (req, res) => {
 router.post("/AdminGetAllUserByDate", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== AdminEmail) {
+    if (user.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({
@@ -451,7 +451,7 @@ router.delete("/deleteAccount", fetchUser, async (req, res) => {
 router.delete("/AdminDeleteAccount", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== AdminEmail) {
+    if (user.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({
@@ -474,7 +474,7 @@ router.delete("/AdminDeleteAccount", fetchUser, async (req, res) => {
 router.post("/changeuploadimageAdmin", fetchUser, async (req, res) => {
   try {
     let admin = await User.findById(req.user.id);
-    if (admin.email !== AdminEmail) {
+    if (admin.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({
@@ -569,7 +569,7 @@ router.put("/updateuserAdmin", fetchUser, async (req, res) => {
 
     //allowing only owner to update the his account
     let user = await User.findById(req.user.id);
-    if (user.email !== AdminEmail) {
+    if (user.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({
@@ -591,7 +591,7 @@ router.put("/updateuserAdmin", fetchUser, async (req, res) => {
 router.post("/staticalData", fetchUser, async (req, res) => {
   try {
     let admin = await User.findById(req.user.id);
-    if (admin.email !== AdminEmail) {
+    if (admin.email !== "rohitdr098@gmail.com") {
       return res
         .status(404)
         .json({

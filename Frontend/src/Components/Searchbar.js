@@ -45,7 +45,7 @@ export default function Searchbar() {
     getUser();
   }, [
     localStorage.getItem("auth-token"),
-    sessionStorage.getItem("auth-token"),
+    sessionStorage.getItem("auth-token")
   ]);
 
   /**

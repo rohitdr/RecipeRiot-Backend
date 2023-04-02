@@ -22,7 +22,7 @@ export default function Login() {
   const [visibleforgetmodal, setvisibleforgetmodal] = useState(false);
   const context = useContext(RecipeContext);
   const [servererror, setservererror] = useState(0);
-  const { login, showAlert, setProgress ,logoutUser} = context;
+  const { login, showAlert, setProgress ,logoutUser,getUser} = context;
 
  /**
   * It checks if the user is already logged in, if not, it sends a POST request to the server with the
@@ -78,7 +78,7 @@ export default function Login() {
           }
 
           setProgress(100);
-
+          getUser()
           Navigate("/Home");
           showAlert("Your had successfully logged in", "success");
         } else if (response.status == 404) {

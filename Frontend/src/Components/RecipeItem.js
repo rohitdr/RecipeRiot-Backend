@@ -209,7 +209,17 @@ export default function RecipeItem(props) {
                   </OverlayTrigger>
                 </li>
               </ul>
-              <div className="card-img-overlay">
+              <div className="card-img-overlay"  onClick={() => {
+                        Navigate(
+                          `${
+                            !sessionStorage.getItem("auth-token") &&
+                            !localStorage.getItem("auth-token")
+                              ? "/login"
+                              : "/Individual_description"
+                          }`,
+                          { state: { RecipeItemid: props.id } }
+                        );
+                      }}>
                 <div className="row">
                   <div className="col-md-2">
                     <p className="badge recipeitembadgeopacity text-success fw-bold  fs-5 m-1">

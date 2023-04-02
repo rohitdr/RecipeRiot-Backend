@@ -863,8 +863,8 @@ export default function RecipeState(props) {
               // 'auth-token':sessionStorage.getItem("auth-token")
               "auth-token": sessionStorage.getItem("auth-token")
                 ? sessionStorage.getItem("auth-token")
-                : localStorage.getItem("auth-token")
-            }
+                : localStorage.getItem("auth-token"),
+            },
           }
         );
         let userDetail = await response.json();

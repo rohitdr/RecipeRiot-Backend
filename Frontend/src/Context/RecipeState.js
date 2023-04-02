@@ -863,13 +863,13 @@ export default function RecipeState(props) {
               // 'auth-token':sessionStorage.getItem("auth-token")
               "auth-token": sessionStorage.getItem("auth-token")
                 ? sessionStorage.getItem("auth-token")
-                : localStorage.getItem("auth-token"),
-            },
+                : localStorage.getItem("auth-token")
+            }
           }
         );
-
+        let userDetail = await response.json();
         if (response.status == 200) {
-          let userDetail = await response.json();
+         
        
           setLoading(false);
           setUserData(userDetail);
@@ -1062,7 +1062,7 @@ export default function RecipeState(props) {
       let Latest_recipe = await response.json();
       if (response.status == 404) {
         setLoading(false);
-      } else if ((response.status == 200)) {
+      } else if (response.status == 200) {
         setLoading(false);
         setLatest_Recipe(Latest_recipe);
       } else {

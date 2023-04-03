@@ -31,7 +31,7 @@ export default function Individual_Recipe() {
  CurrentRecipeItem?.recipe?.Comments changes. */
   useEffect(() => {
     document.title=`RecipeRiot`
-    getUser();
+ 
     RecipeBYId(RecipeItemid);
   }, [RecipeItemid, CurrentRecipeItem?.recipe?.Comments]);
 

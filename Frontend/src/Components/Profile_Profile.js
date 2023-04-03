@@ -42,7 +42,7 @@ called setshowfile. */
     ) {
       Navigate("/login");
     } else {
-      getUser();
+     
     }
   }, [userData]);
   //converting image to base64
@@ -110,6 +110,7 @@ called setshowfile. */
         showAlert(result, "danger");
       } else if (response.status == 200) {
         setProgress(100);
+        getUser();
         showAlert("Image has been changed", "success");
       } else {
         setProgress(100);
@@ -230,6 +231,7 @@ called setshowfile. */
         setProgress(100);
       } else if (response.status == 200) {
         showAlert(result, "success");
+        getUser();
         setProgress(100);
       } else {
         setProgress(100);
@@ -344,7 +346,7 @@ called setshowfile. */
                             style={{ display: "none" }}
                           >
                             <label
-                              for="profileimage"
+                              htmlFor="profileimage"
                               className="profileimagelabel"
                             >
                               Select Image
@@ -541,7 +543,7 @@ called setshowfile. */
                           }}
                         >
                           <div className="mb-3 col-7">
-                            <label className="small mb-1" for="inputUsername">
+                            <label className="small mb-1" htmlFor="inputUsername">
                               Username{" "}
                             </label>
                             <input
@@ -565,7 +567,7 @@ called setshowfile. */
                             <div className="col-md-6">
                               <label
                                 className="small mb-1"
-                                for="inputFirstName"
+                                htmlFor="inputFirstName"
                               >
                                 First name
                               </label>
@@ -581,7 +583,7 @@ called setshowfile. */
                             </div>
 
                             <div className="col-md-6">
-                              <label className="small mb-1" for="inputLastName">
+                              <label className="small mb-1" htmlFor="inputLastName">
                                 Last name
                               </label>
                               <input
@@ -599,7 +601,7 @@ called setshowfile. */
                           <div className="mb-3 col-7">
                             <label
                               className="small mb-1"
-                              for="inputEmailAddress"
+                              htmlFor="inputEmailAddress"
                             >
                               Email address
                             </label>
@@ -616,7 +618,7 @@ called setshowfile. */
 
                           <div className="row gx-3 mb-3">
                             <div className="col-md-6">
-                              <label className="small mb-1" for="inputPhone">
+                              <label className="small mb-1" htmlFor="inputPhone">
                                 Phone number
                               </label>
                               <input

@@ -35,7 +35,7 @@ the login page. */
     ) {
       Navigate("/login");
     } else {
-      getUser();
+   
 
       LatestRecipebyid();
     }

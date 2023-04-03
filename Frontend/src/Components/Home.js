@@ -30,12 +30,13 @@ export default function Home() {
 
     LatesRecipe,
     Latest_recipe,
-    getUser,
+  
     cuisine,
     cuisinedata,
     cuisineloading,
     ContactusSubmitApi,
     contactsendmessage,
+    latestrecipeloading,
   } = context;
 
   /* Calling the function cuisine and LatesRecipe when the component mounts. */
@@ -599,6 +600,7 @@ export default function Home() {
                 </div>
 
                 <div className="row">
+                  {latestrecipeloading && <Loader></Loader>}
                   {Latest_recipe.recipe &&
                     Latest_recipe.recipe.map((element) => {
                       fourth++;

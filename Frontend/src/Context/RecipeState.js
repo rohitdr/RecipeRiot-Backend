@@ -5,7 +5,7 @@ import RecipeContext from "./RecipeContext";
 export default function RecipeState(props) {
   /* Setting the state of the component. */
   const [LikedRecipe, setLikedRecipe] = useState([]);
-
+const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const [recipe, setRecipe] = useState({});
   const [Latest_recipe, setLatest_Recipe] = useState({});
   const [Latest_recipebyid, setLatest_Recipebyid] = useState({});
@@ -1049,6 +1049,7 @@ export default function RecipeState(props) {
   const LatesRecipe = async () => {
     try {
     setProgress(30)
+    setlatestrecipeloading(true)
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/LatestRecipes`,
         {
@@ -1062,21 +1063,26 @@ export default function RecipeState(props) {
       setProgress(50)
       let Latest_recipe = await response.json();
       if (response.status == 404) {
+        setlatestrecipeloading(false)
         setProgress(100)
-        setLoading(false);
+   
       } else if (response.status == 200) {
-        setProgress(100)
-        setLoading(false);
+      
+    
         setLatest_Recipe(Latest_recipe);
+        setProgress(100)
+        setlatestrecipeloading(false)
       } else {
         setLatest_Recipe(500);
         setProgress(100);
-        setLoading(false);
+    
+        setlatestrecipeloading(false)
       }
     } catch (error) {
       setLatest_Recipe(500);
       setProgress(100);
-      setLoading(false);
+     
+      setlatestrecipeloading(false)
       console.log(error.message);
     }
   };
@@ -1285,6 +1291,7 @@ export default function RecipeState(props) {
         name_to_search,
         setName_to_search,
         searchRecipe,
+        latestrecipeloading,
         setsearchedRecipe,
         AdminAllUser,
         AdminGetAllUser,

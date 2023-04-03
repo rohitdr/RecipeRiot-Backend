@@ -279,12 +279,12 @@ export default function Login() {
                               className="form-control loginform-control rounded-3"
                               id="password"
                               name="password"
-                              autocomplete="off"
+                           
                               placeholder="Password"
                               value={logindetail.password}
                               onChange={loginchange}
                             />
-                            <label for="loginPassword">Password</label>
+                            <label htmlFor="loginPassword">Password</label>
                           </div>
                           {/* not a member */}
                           <div
@@ -300,7 +300,7 @@ export default function Login() {
                                 />
                                 <label
                                   className="form-check-label px10fontless360 mx-0 px-0 "
-                                  for="rememberme"
+                                  htmlFor="rememberme"
                                 >
                                   {" "}
                                   Remember me{" "}

@@ -553,7 +553,7 @@ export default function AddRecipe() {
                                     </div>
                                     <div className="d-flex justify-content-center">
                                       <label
-                                        for="profileimage"
+                                        htmlFor="profileimage"
                                         className="profileimagelabel"
                                       >
                                         Select Image
@@ -1314,7 +1314,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1335,7 +1335,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1459,7 +1459,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1480,7 +1480,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1604,7 +1604,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1625,7 +1625,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1749,7 +1749,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1771,7 +1771,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1895,7 +1895,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlfor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image
@@ -1916,7 +1916,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            for="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image

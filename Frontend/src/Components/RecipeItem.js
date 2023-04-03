@@ -11,20 +11,12 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function RecipeItem(props) {
-/* Creating a variable called Navigate that is using the useNavigate hook. */
-  let Navigate = useNavigate();
-  //to captalize first character
-const {userData}=props
-
-/* Calling the getUserbyid and getUser functions when the component mounts. */
-  useEffect(() => {
-   
-
-  }, []);
-/* Setting the state of the heart to regular. */
-
   const [heart, setHeart] = useState("regular");
   const context = useContext(RecipeContext);
+ 
+
+  const [star, setstar] = useState(0);
+  let location = useLocation();
   const {
     deleteRecipe,
     RecipeBYId,
@@ -32,25 +24,35 @@ const {userData}=props
     UnLikeRecipe,
     setCurrentRecipeItemid,
     getUserbyid,
-    userbyid,
+   userData,
     getUser,
  
   } = context;
+/* Creating a variable called Navigate that is using the useNavigate hook. */
+  let Navigate = useNavigate();
+  //to captalize first character
 
-  const [star, setstar] = useState(0);
-  let location = useLocation();
+
+/* Calling the getUserbyid and getUser functions when the component mounts. */
+  useEffect(() => {
+  
+      if (userData?.user?.Liked_Recipe?.includes(props.id)) {
+        setHeart("solid");
+      } else {
+        setHeart("regular");
+      }
+
+
+  }, [userData]);
+/* Setting the state of the heart to regular. */
+
+
 
  /**
   * If the userData object has a user object that has a Liked_Recipe object that includes the props.id,
   * then set the heart to solid. Otherwise, set the heart to regular.
   */
-  const settingheart = () => {
-    if (userData?.user?.Liked_Recipe?.includes(props.id)) {
-      setHeart("solid");
-    } else {
-      setHeart("regular");
-    }
-  };
+ 
 /* A React hook that is used to run code after a component renders. */
   React.useEffect(() => {}, [location]);
 
@@ -85,7 +87,7 @@ const {userData}=props
         viewport={{ once: true }}
         transition={{ duration: 1, delay: props.delay }}
       >
-        <div className="scene  " onLoad={settingheart}>
+        <div className="scene  " >
           <div
             className="recipecard  card border-success"
             id={`${props.id}`}
@@ -94,7 +96,7 @@ const {userData}=props
             <div className="face front" style={{height:"525px"}}>
               <img
                 src={props.ImageUrl}
-                className="card-img-top recipeitemimageopacity box_decrease_size_animation"
+                className="card-img-top border-primary recipeitemimageopacity box_decrease_size_animation"
                 alt="..."
               />
               <div className="card-body">
@@ -255,14 +257,14 @@ const {userData}=props
                 <div className="card-up"></div>
                 <div className="avatar mb-1 mx-auto bg-white">
                   <img
-                    src={userData?.Profile_Image}
+                    src={props.userData?.Profile_Image}
                     className="rounded-circle img-fluid"
                     style={{ height: "250px" }}
                   />
                 </div>
                 <div className="card-body text-center pt-2">
                   <h3 className="mb-2 fw-bold card-title">
-                    {userData?.first_name} {userData?.last_name}
+                    {props.userData?.first_name} {userData?.last_name}
                   </h3>
                   <hr />
                   <ul className="list-group list-group-flush">
@@ -271,7 +273,7 @@ const {userData}=props
                         <i 
                           className={`fa-solid text-danger recipeitemstar fa-star`}
                          
-                        > </i> {userData?.Total_Comments} +
+                        > </i> {props.userData?.Total_Comments} +
                       </p>
                       <i
                         className="fa-solid fa-right-left "
@@ -281,10 +283,10 @@ const {userData}=props
 
                     <div className="card-text mb-3 text-dark d-flex justify-content-evenly">
                       <h6 className="text-dark">
-                        {userData?.Liked_Recipe?.length}
+                        {props.userData?.Liked_Recipe?.length}
                       </h6>
-                      <h6 className="text-dark">{userData?.Total_Recipes}</h6>
-                      <h6 className="text-dark">{userData?.Total_Comments}</h6>
+                      <h6 className="text-dark">{props.userData?.Total_Recipes}</h6>
+                      <h6 className="text-dark">{props.userData?.Total_Comments}</h6>
                     </div>
                     <p className="card-text text-dark mb-3 d-flex justify-content-evenly">
                       <i className="fa-heart fa-solid fs-4 text-danger"></i>
@@ -292,9 +294,9 @@ const {userData}=props
                       <i className="fa-solid fs-4 fa-comment"></i>
                     </p>
                     <p className="card-text text-dark d-flex justify-content-around">   
-                      <i className="fas fa-globe  fs-2 fw-bold text-success" onClick={()=>{window.location.href=userData?.git}}></i>
-                      <i className=" fab fa-github  fs-2 fw-bold text-danger" onClick={()=>{window.location.href=userData?.web}}></i>
-                      <i className="fa-brands fa-facebook   fs-2 fw-bold text-primary" onClick={()=>{window.location.href=userData?.facebook}}> </i>
+                      <i className="fas fa-globe  fs-2 fw-bold text-success" onClick={()=>{window.location.href=props.userData?.git}}></i>
+                      <i className=" fab fa-github  fs-2 fw-bold text-danger" onClick={()=>{window.location.href=props.userData?.web}}></i>
+                      <i className="fa-brands fa-facebook   fs-2 fw-bold text-primary" onClick={()=>{window.location.href=props.userData?.facebook}}> </i>
                     </p>
                   </ul>
                 </div>

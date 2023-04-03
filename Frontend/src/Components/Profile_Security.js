@@ -19,7 +19,7 @@ export default function Profile_Security() {
 /* Calling the getUser function when the component mounts. */
   useEffect(() => {
     document.title=`RecipeRiot-Security`
-    getUser();
+   
   }, []);
 /* Creating a variable called Navigate that is using the useNavigate hook. */
   let Navigate = useNavigate();
@@ -105,7 +105,7 @@ export default function Profile_Security() {
                     <div className="card-body">
                       <form onSubmit={onsubmit}>
                         <div className="mb-3">
-                          <label className="small mb-1" for="oldpassword">
+                          <label className="small mb-1" htmlFor="oldpassword">
                             Current Password
                           </label>
                           <input
@@ -119,7 +119,7 @@ export default function Profile_Security() {
                         </div>
 
                         <div className="mb-3">
-                          <label className="small mb-1" for="newpassword1">
+                          <label className="small mb-1" htmlFor="newpassword1">
                             New Password
                           </label>
                           <input
@@ -133,7 +133,7 @@ export default function Profile_Security() {
                         </div>
 
                         <div className="mb-3">
-                          <label className="small mb-1" for="newPassword">
+                          <label className="small mb-1" htmlFor="newPassword">
                             Confirm Password
                           </label>
                           <input
@@ -182,7 +182,7 @@ export default function Profile_Security() {
                           />
                           <label
                             className="form-check-label"
-                            for="radioPrivacy1"
+                            htmlFor="radioPrivacy1"
                           >
                             Public (posts are available to all users)
                           </label>
@@ -196,7 +196,7 @@ export default function Profile_Security() {
                           />
                           <label
                             className="form-check-label"
-                            for="radioPrivacy2"
+                            htmlFor="radioPrivacy2"
                           >
                             Private (posts are available to only users in your
                             groups)
@@ -223,7 +223,7 @@ export default function Profile_Security() {
                             name="radioUsage"
                             checked=""
                           />
-                          <label className="form-check-label" for="radioUsage1">
+                          <label className="form-check-label" htmlFor="radioUsage1">
                             Yes, share data and crash reports with app
                             developers
                           </label>
@@ -235,7 +235,7 @@ export default function Profile_Security() {
                             type="radio"
                             name="radioUsage"
                           />
-                          <label className="form-check-label" for="radioUsage2">
+                          <label className="form-check-label" htmlFor="radioUsage2">
                             No, limit my data sharing with app developers
                           </label>
                         </div>
@@ -267,7 +267,7 @@ export default function Profile_Security() {
                             name="twoFactor"
                             checked=""
                           />
-                          <label className="form-check-label" for="twoFactorOn">
+                          <label className="form-check-label" htmlFor="twoFactorOn">
                             On
                           </label>
                         </div>
@@ -280,13 +280,13 @@ export default function Profile_Security() {
                           />
                           <label
                             className="form-check-label"
-                            for="twoFactorOff"
+                            htmlFor="twoFactorOff"
                           >
                             Off
                           </label>
                         </div>
                         <div className="mt-3">
-                          <label className="small mb-1" for="twoFactorSMS">
+                          <label className="small mb-1" htmlFor="twoFactorSMS">
                             SMS Number
                           </label>
                           <input

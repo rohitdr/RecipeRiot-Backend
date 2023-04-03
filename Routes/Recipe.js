@@ -517,26 +517,15 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
 });
 
 /* Updating the userData field in the Recipe collection with the user data from the User collection. */
-// router.post("/upadtinmodal",  async (req, res) => {
-//   try {
-//    const recipe = await Recipe.find()
-//    recipe.map(async (element)=>{
-//     const user = await User.findOne({_id:element.user}).select("-password")
-//     const updaterecipe = await Recipe.findByIdAndUpdate(
-//       { _id: element._id },
-//       { $set: { userData: user }},
-//       {new:true} 
-//     );
-    
- 
-//         })
-        
-   
+router.post("/upadtinmodal",  async (req, res) => {
+  try {
+   const user = await User.find();
 
-//     res.status(200).json("success");
-//   } catch (error) {
-//     console.log(error.message);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
+
+    res.status(200).send(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 module.exports = router;

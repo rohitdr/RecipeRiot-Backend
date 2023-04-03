@@ -1023,10 +1023,11 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         setnamereicpeloading(false);
       }
        else if (response.status == 200) {
-        setProgress(100);
+      
         setnamereicpeloading(false);
 
         setsearchedRecipe(Name_recipe);
+        setProgress(100);
       } 
       else {
         setsearchedRecipe(500);
@@ -1070,8 +1071,9 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       
     
         setLatest_Recipe(Latest_recipe);
-        setProgress(100)
+       
         setlatestrecipeloading(false)
+        setProgress(100)
       } else {
         setLatest_Recipe(500);
         setProgress(100);
@@ -1114,12 +1116,13 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         setLatest_Recipebyid(false);
         setLoading(false);
       } else if (response.status == 200) {
-        setProgress(100);
+       
         let Latest_recipebyid = await response.json();
 
         setLatest_Recipebyid(Latest_recipebyid);
 
         setLoading(false);
+        setProgress(100);
       } else {
         setProgress(100);
         setLoading(false);
@@ -1162,11 +1165,12 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         setRecipe(false);
         setLoading(false);
       } else if (response.status == 200) {
-        setProgress(100);
+       
         let allrecipe = await response.json();
         setRecipe(allrecipe);
 
         setLoading(false);
+        setProgress(100);
       } else {
         setProgress(100);
         setRecipe(500);
@@ -1211,7 +1215,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         setProgress(100);
         showAlert(json.error, "danger");
       } else if (response.status == 200) {
-        setProgress(100);
+       
         showAlert(
           "Recipe is Successfully deleted. It will be updated Soon",
           "success"
@@ -1226,6 +1230,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         setRecipe(newRecipe);
         allRecipe();
         setLoading(false);
+        setProgress(100);
       } else {
         setRecipe(500);
         setProgress(100);

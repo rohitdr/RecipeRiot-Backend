@@ -16,7 +16,7 @@ const RecipeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  userData:{
+  userData: {
     email: {
       type: String,
       required: true,
@@ -55,7 +55,7 @@ const RecipeSchema = new Schema({
       type: Number,
       default: 0,
     },
-  
+
     facebook: {
       type: String,
     },
@@ -68,7 +68,7 @@ const RecipeSchema = new Schema({
     web: {
       type: String,
     },
-  
+
     first_name: {
       type: String,
     },

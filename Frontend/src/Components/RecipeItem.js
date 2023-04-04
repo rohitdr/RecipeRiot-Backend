@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "./RecipeItem.css";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
+
 import RecipeContext from "../Context/RecipeContext";
 import { useNavigate } from "react-router-dom";
 
@@ -56,19 +55,7 @@ export default function RecipeItem(props) {
 /* A React hook that is used to run code after a component renders. */
   React.useEffect(() => {}, [location]);
 
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Share</Popover.Header>
-      <Popover.Body>
-        <div className="d-flex me-4 justify-content-between">
-          <i className="fa-brands fa-whatsapp me-4 fs-2 fw-bold text-success" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
-          <i className="fa-brands fa-instagram me-4  fs-2 fw-bold text-danger" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
-          <i className="fa-brands fa-facebook me-4  fs-2 fw-bold text-primary" onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
-          <i className="fa-brands fa-snapchat fs-2 me-4  fw-bold text-warning  " onClick={()=>{window.location.href='https://whatsapp://send?text=Your message here'}}></i>
-        </div>
-      </Popover.Body>
-    </Popover>
-  );
+ 
 
   var deg = 180;
   const onclickRotate = () => {
@@ -126,12 +113,12 @@ export default function RecipeItem(props) {
                 <h4 className="card-subtitle mb-2 text-dark fw-bold recipeitemtext ">
                   {props.title}
                 </h4>
-                <p className="card-text text-dark recipeitemtext">
+                <p className="card-text mb-0 text-dark recipeitemtext">
                   {" "}
                   {props.Ingridiants}
                 </p>
 
-                <div className="card-text text-dark d-flex justify-content-between">
+                <div className="card-text mb-0 text-dark d-flex justify-content-between">
                   <p>
                     <i
                       className={`fa-${
@@ -181,9 +168,19 @@ export default function RecipeItem(props) {
                 </div>
               </div>
               <ul className="list-group list-group-flush ">
-                <li className="list-group-item d-flex justify-content-between">
-                  <i className="fa-solid fs-5 fa-comment"></i>
-                  <i
+                <li className="list-group-item  mb-0 d-flex justify-content-between">
+                  <i className="fa-solid fs-5 fa-comment"  onClick={() => {
+                        Navigate(
+                          `${
+                            !sessionStorage.getItem("auth-token") &&
+                            !localStorage.getItem("auth-token")
+                              ? "/login"
+                              : "/Individual_description"
+                          }`,
+                          { state: { RecipeItemid: props.id } }
+                        );
+                      }}></i>
+                  <motion.p initial={{scale:0.8}} whileHover={{scale:1.5}} ><i
                     className={`fa-${heart} fa-heart fs-5 recipeitemlike text-danger`}
                     onClick={() => {
                       if (
@@ -202,14 +199,8 @@ export default function RecipeItem(props) {
                         }
                       }
                     }}
-                  ></i>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <i className="fa-solid fs-5 fa-share-nodes"></i>
-                  </OverlayTrigger>
+                  ></i></motion.p>
+                
                 </li>
               </ul>
               <div className="card-img-overlay"  onClick={() => {

@@ -8,7 +8,7 @@ import NoResult from "./NoResult";
 import InternalServerError from "./InternalServerError";
 import { Modal, Image, Button } from "@nextui-org/react";
 import AnimatedPage from "./AnimatedPage";
-
+import Loader from "./Loader";
 export default function Profile_Activity() {
 /* A hook that is used to store the state of the component. */
   const [visibledelete, setvisibledelete] = useState({ state: false, id: "" });
@@ -21,6 +21,7 @@ export default function Profile_Activity() {
     LatestRecipebyid,
     Latest_recipebyid,
     deleteRecipe,
+    latest_recipebyidloading,
     recipe,
   } = context;
 /* A hook that is used to navigate to a different page. */
@@ -97,8 +98,9 @@ the login page. */
               ) : (
                 <div className="card card-header-actions mb-4 ">
                   <div className="card-header">Latest Recipes</div>
-
+            
                   <div className="card-body border-primary px-0">
+                  {latest_recipebyidloading && <Loader></Loader>}
                     {Latest_recipebyid.recipe &&
                       Latest_recipebyid.recipe.map((element) => {
                         return (
@@ -155,7 +157,7 @@ the login page. */
                 </div>
               )}
             </div>
-
+         
             {/* modal for confirmation of deleting the recipe */}
 
             <Modal noPadding open={visibledelete.state} blur>

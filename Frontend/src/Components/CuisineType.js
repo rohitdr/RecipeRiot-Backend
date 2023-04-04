@@ -7,6 +7,7 @@ import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
 export default function CuisineType() {
   /**
    * It takes a string, makes it lowercase, then capitalizes the first letter and returns the string.
@@ -20,7 +21,7 @@ export default function CuisineType() {
   var totalratings = 0;
   /* Destructuring the context and the state. */
   const context = useContext(RecipeContext);
-  const { cuisine, cuisinedata } = context;
+  const { cuisine, cuisinedata,cuisineloading } = context;
   const { state } = useLocation();
   const { type } = state;
   /* Calling the cuisine function with the type parameter. */
@@ -123,7 +124,7 @@ export default function CuisineType() {
                 >
                   {firstCapital(type)} Recipes
                 </h1>
-
+             {cuisineloading &&<Loader></Loader>}
                 {cuisinedata.recipe &&
                   cuisinedata.recipe.map((element) => {
                     //setting recipe for recipitm

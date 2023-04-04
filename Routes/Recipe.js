@@ -508,6 +508,11 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
       { _id: req.user.id },
       { $set: { Total_Comments: user.Total_Comments + 1 } }
     );
+    const incrementTotalrating = await User.findByIdAndUpdate(
+      { _id: req.user.id },
+      { $set: { Total_Ratings: user.Total_Ratings + 1 } }
+    );
+
 
     res.status(200).json(commentedRecipe.Comments);
   } catch (error) {
@@ -517,15 +522,25 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
 });
 
 /* Updating the userData field in the Recipe collection with the user data from the User collection. */
-router.post("/upadtinmodal",  async (req, res) => {
-  try {
-   const user = await User.find();
+// router.post("/upadtinmodal",  async (req, res) => {
+//   try {
+//     var recipe;
+//    const user = await User.find();
 
-
-    res.status(200).send(user);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send("Internal Server Error");
-  }
-});
+//        user.map( async(element)=>{
+// var totalcomment=0
+//       recipe= await Recipe.find({user:element._id})
+//         recipe.map((element)=>{
+//                totalcomment=totalcomment+ element.Comments.length
+//         })
+//         const currentuser = await User.findByIdAndUpdate({_id:element._id},{$set:{Total_Comments:totalcomment}})
+       
+//        })
+//        res.status(200).send(user);
+   
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 module.exports = router;

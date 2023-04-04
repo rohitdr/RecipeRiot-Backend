@@ -9,6 +9,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const [recipe, setRecipe] = useState({});
   const [Latest_recipe, setLatest_Recipe] = useState({});
   const [Latest_recipebyid, setLatest_Recipebyid] = useState({});
+  const [latest_recipebyidloading,setlatest_recipebyidloading]=useState(false)
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({});
   const [Ingrediant_statepage] = useState([]);
@@ -26,6 +27,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const [healthdata, sethealthdata] = useState({});
   const [healthloading, sethealthloading] = useState(false);
   const [mealdata, setmealdata] = useState({});
+  const [mealloading,setmealloading]=useState(false)
   const [dishdata, setdishdata] = useState({});
   const [dietdata, setdietdata] = useState({});
   const [namerecipeloading, setnamereicpeloading] = useState(false);
@@ -39,6 +41,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const [deleteaccount, setdeleteaccount] = useState({});
   const [deleteaccountAdmin, setdeleteaccountAdmin] = useState({});
   const [staticalData, setstaticalData] = useState({});
+
 
   /* Creating a variable called Navigate and assigning it the useNavigate hook. */
   let Navigate = useNavigate();
@@ -601,6 +604,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const mealtype = async (type) => {
     try {
       setProgress(30);
+      setmealloading(true)
       const response = await fetch(
         `${
           type == "lunch/dinner"
@@ -618,21 +622,27 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       setProgress(60);
       let result = await response.json();
       if (response.status == 404) {
-        setProgress(100);
         showAlert(result.error, "danger");
+        setProgress(100);
+        setmealloading(false)
       } else if (response.status == 200) {
         setProgress(70);
         setmealdata(result);
         setProgress(100);
+        setmealloading(false)
+
       } else {
-        setProgress(100);
-        setLoading(false);
+    
+        
         setmealdata(500);
+        setProgress(100);
+        setmealloading(false)
       }
     } catch (error) {
-      setProgress(100);
-      setLoading(false);
+  
       setmealdata(500);
+      setProgress(100);
+      setmealloading(false)
       console.log(error.message);
     }
   };
@@ -645,6 +655,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const health = async (type) => {
     try {
       setProgress(30);
+      sethealthloading(true)
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithhealthlabels/${type}`,
         {
@@ -658,21 +669,29 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       setProgress(50);
       let result = await response.json();
       if (response.status == 404) {
-        setProgress(100);
+        
+     
         showAlert(result.error, "danger");
+        setProgress(100);
+        sethealthloading(false)
       } else if (response.status == 200) {
         setProgress(70);
         sethealthdata(result);
         setProgress(100);
+        sethealthloading(false)
       } else {
-        setProgress(100);
+      
 
         sethealthdata(500);
+        setProgress(100);
+        sethealthloading(false)
       }
     } catch (error) {
-      setProgress(100);
+   
 
       sethealthdata(500);
+      setProgress(100);
+      sethealthloading(false)
       console.log(error.message);
     }
   };
@@ -684,6 +703,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const cuisine = async (type) => {
     try {
       setProgress(30);
+      setcuisineloading(true)
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/allRecipeswithcuisinetype/${type}`,
         {
@@ -698,19 +718,22 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       let result = await response.json();
       if (response.status == 404) {
         setProgress(100);
+        setcuisineloading(false)
         showAlert(result.error, "danger");
       } else if (response.status == 200) {
         setProgress(70);
         setcuisinedata(result);
         setProgress(100);
+        setcuisineloading(false)
       } else {
         setProgress(100);
-        setLoading(false);
+    
+        setcuisineloading(false)
         setcuisinedata(500);
       }
     } catch (error) {
       setProgress(100);
-      setLoading(false);
+   
       setcuisinedata(500);
       console.log(error.message);
     }
@@ -1095,6 +1118,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const LatestRecipebyid = async () => {
     try {
       setProgress(30);
+      setlatest_recipebyidloading(true)
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/LatestRecipesbyid`,
         {
@@ -1112,26 +1136,28 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       setProgress(50);
 
       if (response.status == 404) {
-        setProgress(100);
+       
         setLatest_Recipebyid(false);
-        setLoading(false);
+        setProgress(100);
+        setlatest_recipebyidloading(false)
       } else if (response.status == 200) {
        
         let Latest_recipebyid = await response.json();
 
         setLatest_Recipebyid(Latest_recipebyid);
 
-        setLoading(false);
         setProgress(100);
+        setlatest_recipebyidloading(false)
       } else {
-        setProgress(100);
-        setLoading(false);
+     
         setLatest_Recipebyid(500);
+        setProgress(100);
+        setlatest_recipebyidloading(false)
       }
     } catch (error) {
-      setProgress(100);
-      setLoading(false);
       setLatest_Recipebyid(500);
+      setProgress(100);
+        setlatest_recipebyidloading(false)
       console.log(error.message);
     }
   };
@@ -1255,6 +1281,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         mealtype,
         mealdata,
         health,
+        healthloading,
         healthdata,
         cuisineloading,
         cuisinedata,
@@ -1318,7 +1345,9 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         deleteaccountAdmin,
         deleteAccountAdmin,
         Admingetallstaticaldata,
+        mealloading,
         staticalData,
+        latest_recipebyidloading
       }}
     >
       {props.children}

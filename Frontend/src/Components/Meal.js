@@ -7,6 +7,7 @@ import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
 
 export default function Meal() {
   /**
@@ -22,7 +23,7 @@ export default function Meal() {
   const { state } = useLocation();
   var animationdelay = 0;
   const context = useContext(RecipeContext);
-  const { mealtype, mealdata } = context;
+  const { mealtype, mealdata,mealloading } = context;
   const { type, on } = state;
   /* A hook that is used to perform side effects in a functional component. */
   useEffect(() => {
@@ -125,7 +126,7 @@ export default function Meal() {
                 >
                   {firstCapital(type)} Recipes
                 </h1>
-
+{mealloading && <Loader/>}
                 {mealdata.recipe &&
                   mealdata.recipe.map((element) => {
                     if (animationdelay >= 2) {

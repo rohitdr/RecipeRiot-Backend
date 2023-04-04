@@ -5,6 +5,7 @@ import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
 
 export default function Health() {
   /**
@@ -21,7 +22,7 @@ export default function Health() {
   RecipeContext. */
   const { state } = useLocation();
   const context = useContext(RecipeContext);
-  const { health, healthdata } = context;
+  const { health, healthdata,healthloading } = context;
   const { type } = state;
   /* Calling the health function from the RecipeContext. */
   useEffect(() => {
@@ -127,7 +128,7 @@ export default function Health() {
                 >
                   {firstCapital(type)} Recipes
                 </h1>
-
+{healthloading && <Loader/>}
                 {healthdata.recipe &&
                   healthdata.recipe.map((element) => {
                     //setting recipe for recipitm

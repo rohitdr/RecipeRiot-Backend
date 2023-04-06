@@ -5,6 +5,7 @@ import RecipeItem from "./RecipeItem";
 import InternalServerError from "./InternalServerError";
 import AnimatedPage from "./AnimatedPage";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
 export default function Diettype() {
   /**
    * It takes a string, makes it lowercase, then capitalizes the first letter and returns the new
@@ -19,7 +20,7 @@ export default function Diettype() {
   };
   const { state } = useLocation();
   const context = useContext(RecipeContext);
-  const { diettype, dietdata } = context;
+  const { diettype, dietdata,dietloading } = context;
   /* Destructuring the state object. */
   const { type } = state;
   /* Calling the diettype function with the type parameter. */
@@ -122,7 +123,7 @@ export default function Diettype() {
                 >
                   {firstCapital(type)} Recipes
                 </h1>
-
+              {dietloading && <Loader></Loader>}
                 {dietdata.recipe &&
                   dietdata.recipe.map((element) => {
                     //setting recipe for recipitm

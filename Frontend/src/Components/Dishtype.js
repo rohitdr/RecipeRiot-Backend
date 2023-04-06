@@ -5,6 +5,7 @@ import AnimatedPage from "./AnimatedPage";
 import InternalServerError from "./InternalServerError";
 import RecipeItem from "./RecipeItem";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
 
 export default function Dishtype() {
  /**
@@ -21,7 +22,7 @@ export default function Dishtype() {
 /* Destructuring the state and context. */
   const { state } = useLocation();
   const context = useContext(RecipeContext);
-  const { dishtype, dishdata } = context;
+  const { dishtype, dishdata,dishloading } = context;
   const { type } = state;
  /* Calling the function `dishtype` with the argument `type` whenever the `type` changes. */
   useEffect(() => {
@@ -112,7 +113,7 @@ export default function Dishtype() {
               >
                 {firstCapital(type)} Recipes
               </h1>
-
+     {dishloading && <Loader></Loader>}
               {dishdata.recipe &&
                 dishdata.recipe.map((element) => {
                   //setting recipe for recipitm

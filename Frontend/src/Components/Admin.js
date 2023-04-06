@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Collapse, Text, Avatar, Image } from "@nextui-org/react";
 import SignUp from "./SignUp";
 import NoResult from "./NoResult";
+import Loader from "./Loader";
 export default function Admin() {
   const [userdeleteconfirmation, setuserdeleteconfirmation] = useState(false);
   const [deleteaccountid, setdeleteaccountid] = useState("");
@@ -35,7 +36,7 @@ function called setvisibledelete. */
     AdminAllRecipe,
     GetAllcontactMessages,
     AllContactMessages,
-
+    admingetalluserbydateloading,
     AdminAllRecipeByDate,
     deleteaccountAdmin,
     deleteAccountAdmin,
@@ -48,6 +49,7 @@ function called setvisibledelete. */
     recipe,
     Admingetallstaticaldata,
     staticalData,
+    admingetalluserloading
   } = context;
   /* Checking if the adminActivePageNumber is not null or undefined and if it is not then it is setting
 the adminactivepage state to the adminActivePageNumber. */
@@ -515,6 +517,7 @@ the adminactivepage state to the adminActivePageNumber. */
             <section className="">
               <div className="container py-5 h-100">
                 <div className="row  align-items-center h-100">
+                  {admingetalluserloading && <Loader></Loader>}
                   {AdminAllUser?.AllUser &&
                     AdminAllUser?.AllUser?.map((element) => {
                       return (
@@ -632,7 +635,8 @@ the adminactivepage state to the adminActivePageNumber. */
               <div className="card-header">Latest Users</div>
 
               <div className="card-body px-0 min-vh-100">
-                {AdminAllUserByDate?.AllUser &&
+                {admingetalluserbydateloading && <Loader></Loader>}
+                { !admingetalluserbydateloading && AdminAllUserByDate?.AllUser &&
                   AdminAllUserByDate?.AllUser?.map((element) => {
                     return (
                       <>

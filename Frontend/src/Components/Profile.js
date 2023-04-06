@@ -13,7 +13,7 @@ import AnimatedPage from "./AnimatedPage";
 export default function Profile(props) {
 /* Destructuring the context. */
   const context = useContext(RecipeContext);
-  const { recipe, allRecipe, loading } = context;
+  const { recipe, allRecipe, allrecipeloading } = context;
  /* Calling the function allRecipe() which is defined in the context.js file. */
   useEffect(() => {
     document.title=`RecipeRiot-Your Recipe`
@@ -44,11 +44,9 @@ export default function Profile(props) {
                 >
                   Your Recipes
                 </h1>
-                {loading && <Loader></Loader> && (
-                  <BlankRecipeItem></BlankRecipeItem>
-                )}
+                {allrecipeloading && <Loader></Loader> }
 
-                {recipe.recipe &&
+                { !allrecipeloading && recipe.recipe &&
                   recipe.recipe.map((element) => {
                     //setting recipe for recipitm
                     var reciperating = 0;

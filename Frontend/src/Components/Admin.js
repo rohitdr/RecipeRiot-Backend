@@ -49,7 +49,10 @@ function called setvisibledelete. */
     recipe,
     Admingetallstaticaldata,
     staticalData,
-    admingetalluserloading
+    admingetalluserloading,
+    Adminallrecipeloading,
+    Adminallrecipebydateloading,
+    Adminallmessageloading
   } = context;
   /* Checking if the adminActivePageNumber is not null or undefined and if it is not then it is setting
 the adminactivepage state to the adminActivePageNumber. */
@@ -518,7 +521,7 @@ the adminactivepage state to the adminActivePageNumber. */
               <div className="container py-5 h-100">
                 <div className="row  align-items-center h-100">
                   {admingetalluserloading && <Loader></Loader>}
-                  {AdminAllUser?.AllUser &&
+                  { !admingetalluserloading && AdminAllUser?.AllUser &&
                     AdminAllUser?.AllUser?.map((element) => {
                       return (
                         <div className=" col-md-6 mb-4 " key={element._id}>
@@ -725,8 +728,8 @@ the adminactivepage state to the adminActivePageNumber. */
                 >
                   All Recipe
                 </h1>
-
-                {AdminAllRecipe?.AllRecipe &&
+                      {Adminallrecipeloading && <Loader></Loader>}
+                {Adminallrecipeloading && !AdminAllRecipe?.AllRecipe &&
                   AdminAllRecipe?.AllRecipe?.map((element) => {
                     //setting recipe for recipitm
                     var reciperating = 0;
@@ -788,7 +791,8 @@ the adminactivepage state to the adminActivePageNumber. */
               <div className="card-header">Latest Recipes</div>
 
               <div className="card-body px-0 min-vh-100">
-                {AdminAllRecipeByDate?.AllRecipe &&
+                {Adminallrecipebydateloading && <Loader></Loader>}
+                { !Adminallrecipebydateloading &&AdminAllRecipeByDate?.AllRecipe &&
                   AdminAllRecipeByDate?.AllRecipe?.map((element) => {
                     return (
                       <div key={element._id}>
@@ -850,7 +854,7 @@ the adminactivepage state to the adminActivePageNumber. */
                   heading="No Result found"
                   paragraph="Whoops.... You had not uploaded any Recipe yet"
                 ></NoResult>
-              ) : (
+              ) : ( Adminallmessageloading ? <Loader></Loader>:
                 <div className="row d-flex justify-content-center">
                   <div className="col-md-8">
                     <div className="chat_container">

@@ -601,7 +601,7 @@ export default function Home() {
 
                 <div className="row">
                   {latestrecipeloading && <Loader></Loader>}
-                  {Latest_recipe.recipe &&
+                  { !latestrecipeloading && Latest_recipe.recipe &&
                     Latest_recipe.recipe.map((element) => {
                       fourth++;
 
@@ -794,7 +794,7 @@ export default function Home() {
                 {cuisineloading && <Loader></Loader>}
 
                 <div className="row" key={cuisineactive}>
-                  {cuisinedata.recipe &&
+                  {!cuisineloading && cuisinedata.recipe &&
                     cuisinedata.recipe.map((element) => {
                       cuisinenumber++;
                       //setting recipe for recipitm

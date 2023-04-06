@@ -498,7 +498,7 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
     });
 
     if (stateelement.length > 0) {
-      return res.status(404).json("You had already Comment on this recipe");
+      return res.status(404).json({error:"You had already Comment on this recipe"});
     }
     const commentedRecipe = await Recipe.findByIdAndUpdate(
       { _id: req.body.id },

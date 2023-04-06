@@ -10,7 +10,7 @@ import AnimatedPage from "./AnimatedPage";
 export default function Profile_LikedRecipe() {
 /* Destructuring the context object. */
   const context = useContext(RecipeContext);
-  const { LikedRecipe, AllLikedRecipe, loading } = context;
+  const { LikedRecipe, AllLikedRecipe, likedrecipeloading } = context;
 /* Used to navigate to a different page. */
   let Navigate = useNavigate();
  /* Checking if the user is logged in or not. If not then it will redirect to login page. */
@@ -45,18 +45,13 @@ export default function Profile_LikedRecipe() {
                 <div className="row my-3">
                   <h1
                     className="text-center my-4 fw-bold text-dark"
-                    style={{
-                      opacity: "0",
-                      animation: "drop .4s linear forwards 1s",
-                    }}
+                   
                   >
                     Your Favourite Recipes
                   </h1>
-                  {loading && <Loader></Loader> && (
-                    <BlankRecipeItem></BlankRecipeItem>
-                  )}
+                  {likedrecipeloading && <Loader></Loader>}
 
-                  {LikedRecipe &&
+                  { !likedrecipeloading &&LikedRecipe &&
                     LikedRecipe.map((element) => {
                       //setting recipe for recipitm
                       var reciperating = 0;

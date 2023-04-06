@@ -88,19 +88,19 @@ the login page. */
                   </div>
                 </div>
               </div>
-
+                 {latest_recipebyidloading && <Loader></Loader>}
               {!Latest_recipebyid ? (
                 <NoResult
                   img="https://media.tenor.com/unvXyxtdn3oAAAAC/no-result.gif"
                   heading="No Result found"
                   paragraph="Whoops.... You had not uploaded any Recipe yet"
                 ></NoResult>
-              ) : (
+              ) : (!latest_recipebyidloading &&
                 <div className="card card-header-actions mb-4 ">
                   <div className="card-header">Latest Recipes</div>
             
                   <div className="card-body border-primary px-0">
-                  {latest_recipebyidloading && <Loader></Loader>}
+                 
                     {Latest_recipebyid.recipe &&
                       Latest_recipebyid.recipe.map((element) => {
                         return (

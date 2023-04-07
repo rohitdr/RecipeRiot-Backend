@@ -288,7 +288,7 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
 router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
   try {
     const type = req.params.cuisine_Type;
-    const recipe = await Recipe.find({ cuisineType: type });
+    const recipe = await Recipe.find({ cuisineType: type }).select("-userData")
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }
@@ -373,7 +373,7 @@ router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
 /* Getting the latest recipes from the database. */
 router.get("/LatestRecipes", async (req, res) => {
   try {
-    const recipe = await Recipe.find().sort({ date: -1 });
+    const recipe = await Recipe.find().sort({ date: -1 }).select("-userData");
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }

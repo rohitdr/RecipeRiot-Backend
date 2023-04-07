@@ -288,14 +288,13 @@ router.get("/allRecipeswithdietLabels/:diet_label", async (req, res) => {
 router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
   try {
     const type = req.params.cuisine_Type;
-    const recipe = await Recipe.find({ cuisineType: type }).select("-userData")
+    const recipe = await Recipe.find({ cuisineType: type });
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
-    console.log(recipe)
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -374,15 +373,14 @@ router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
 /* Getting the latest recipes from the database. */
 router.get("/LatestRecipes", async (req, res) => {
   try {
-    const recipe = await Recipe.find().sort({ date: -1 }).select("-userData");
+    const recipe = await Recipe.find().sort({ date: -1 });
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }
    
 
     const recipe_lenght = recipe.length;
-    res.json({ recipe, count: recipe_lenght });
-    console.log(recipe)
+    res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");

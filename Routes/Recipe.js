@@ -295,6 +295,7 @@ router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
 
     const recipe_lenght = recipe.length;
     res.json({ recipe, count: recipe_lenght });
+    console.log(recipe)
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -381,6 +382,7 @@ router.get("/LatestRecipes", async (req, res) => {
 
     const recipe_lenght = recipe.length;
     res.json({ recipe, count: recipe_lenght });
+    console.log(recipe)
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");

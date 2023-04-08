@@ -83,10 +83,9 @@ export default function Home() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 1, delay: 1 }}
                     >
-                      <h1>Better Solutions For Your Business</h1>
+                      <h1>Discover Delicious Recipes from Around the World!</h1>
                       <h2>
-                        We are team of talented designers making websites with
-                        Bootstrap
+                    This is a user-friendly platform that offers a wide selection of recipes from around the world, with easy search  options to help users find the perfect meal
                       </h2>
                       <div className="d-flex justify-content-center justify-content-lg-start">
                         <a href="#about" className="btn-get-started scrollto">
@@ -114,8 +113,8 @@ export default function Home() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <img
-                        src="Other/homepagetoprecipeiage.gif"
-                        className="img-fluid box_decrease_size_animationforlogin  "
+                        src="Other/homepagetoprecipeiage.jpg"
+                        className="img-fluid homepagetoprecipe box_decrease_size_animationforlogin  "
                         alt=""
                       />
                     </motion.div>
@@ -247,8 +246,8 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="Other/ouraspects1.gif"
-                            className="img-fluid"
+                            src="Other/ouraspects1.jpg"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -290,8 +289,8 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="Other/ouraspects2.gif"
-                            className="img-fluid"
+                            src="Other/ouraspects2.jpg"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -336,7 +335,7 @@ export default function Home() {
                         <div className="img">
                           <img
                             src="Other/ouraspects3.webp"
-                            className="img-fluid"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -380,8 +379,8 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="Other/ouraspects4.gif"
-                            className="img-fluid"
+                            src="Other/ouraspects4.jpg"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -426,8 +425,8 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="Other/ouraspects5.gif"
-                            className="img-fluid"
+                            src="Other/ouraspects5.jpg"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -471,8 +470,8 @@ export default function Home() {
                       <div className="service-item">
                         <div className="img">
                           <img
-                            src="Other/ouraspects6.gif"
-                            className="img-fluid"
+                            src="Other/ouraspects6.jpg"
+                            className="img-fluid service_item_image"
                             alt=""
                           />
                         </div>
@@ -528,7 +527,7 @@ export default function Home() {
                       transition={{ duration: 1, delay: 1 }}
                     >
                       <img
-                        src="Other/aboutus.gif"
+                        src="Other/aboutus.jpg"
                         className="img-fluid  box_decrease_size_animationforlogin"
                         alt=""
                       />

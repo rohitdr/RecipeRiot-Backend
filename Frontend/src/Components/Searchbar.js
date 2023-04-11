@@ -209,9 +209,7 @@ export default function Searchbar() {
                     style={{ color: "#dc3545" }}
                   ></i>
                 }
-                command={
-                  <i className="fa-solid fa-arrow-right fs-4 px-2 text-primary"></i>
-                }
+               
               >
                 <div
                   onClick={() => {
@@ -226,9 +224,11 @@ export default function Searchbar() {
               <Dropdown.Item
                 key="usage_metrics"
                 showFullDescription
+                
                 css={{
                   color: "purple",
                 }}
+              
                 description="Whether you're looking to fuel up for a busy day ahead or simply indulge in a decadent morning treat, this breakfast recipe is sure to please."
                 icon={
                   <i

@@ -241,7 +241,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">
@@ -284,7 +284,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">
@@ -329,7 +329,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">
@@ -374,7 +374,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">
@@ -420,7 +420,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">
@@ -458,14 +458,13 @@ export default function Home() {
 
                   <div
                     className="col-xl-4 col-md-6"
-                    data-aos="zoom-in"
-                    data-aos-delay="700"
+                    
                   >
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1 }}
+                      transition={{ duration: 2 }}
                     >
                       <div className="service-item">
                         <div className="img">

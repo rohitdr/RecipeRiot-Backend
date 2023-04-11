@@ -292,7 +292,11 @@ router.get("/allRecipeswithcuisinetype/:cuisine_Type", async (req, res) => {
     if (recipe.length === 0) {
       return res.status(404).json({error:"Recipe not found"});
     }
-
+    recipe.map( async (element)=>{
+      const user = await User.findById(element.user)
+     
+      const updatereciep=await Recipe.findOneAndUpdate({user:element.user},{$set:{userData:user}})
+     })
     const recipe_lenght = recipe.length;
     res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {
@@ -378,7 +382,11 @@ router.get("/LatestRecipes", async (req, res) => {
       return res.status(404).json({error:"Recipe not found"});
     }
    
-
+   recipe.map( async (element)=>{
+    const user = await User.findById(element.user)
+   
+    const updatereciep=await Recipe.findOneAndUpdate({user:element.user},{$set:{userData:user}})
+   })
     const recipe_lenght = recipe.length;
     res.status(200).json({ recipe, count: recipe_lenght });
   } catch (error) {

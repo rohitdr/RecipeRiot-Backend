@@ -184,17 +184,7 @@ const RecipeSchema = new Schema({
         type: String,
       },
     },
-    FASAT: {
-      label: {
-        type: String,
-      },
-      quantity: {
-        type: Number,
-      },
-      unit: {
-        type: String,
-      },
-    },
+   
     CHOCDF: {
       label: {
         type: String,
@@ -206,7 +196,7 @@ const RecipeSchema = new Schema({
         type: String,
       },
     },
-    FIGBIG: {
+    FIBTG: {
       label: {
         type: String,
       },
@@ -350,6 +340,17 @@ const RecipeSchema = new Schema({
       },
     },
     VITB12: {
+      label: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
+      unit: {
+        type: String,
+      },
+    },
+    VITK1: {
       label: {
         type: String,
       },

@@ -223,9 +223,9 @@ export default function Individual_Recipe() {
                                 {element.Likes}
                               </span>
                             </div>
-                            <div className="col-md-3">
+                            {/* <div className="col-md-3">
                               <span className="monospaced">Write a Review</span>
-                            </div>
+                            </div> */}
                           </div>
                           <div className="col-md-12">
                             <p className="description">
@@ -1160,22 +1160,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .ENERC_KCAL
-                                                                            .label
+                                                                            ?.ENERC_KCAL
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .ENERC_KCAL
-                                                                            .quantity
+                                                                            ?.ENERC_KCAL
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .ENERC_KCAL
-                                                                            .unit
+                                                                            ?.ENERC_KCAL
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1202,22 +1202,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FAT
-                                                                            .label
+                                                                            ?.FAT
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .FAT
-                                                                            .quantity
+                                                                            ?.FAT
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FAT
-                                                                            .unit
+                                                                            ?.FAT
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1244,22 +1244,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FASAT
-                                                                            .label
+                                                                            ?.FIBTG
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .FASAT
-                                                                            .quantity
+                                                                            ?.FIBTG
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FASAT
-                                                                            .unit
+                                                                            ?.FIBTG
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1286,22 +1286,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOCDF
-                                                                            .label
+                                                                            ?.CHOCDF
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOCDF
-                                                                            .quantity
+                                                                            ?.CHOCDF
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOCDF
-                                                                            .unit
+                                                                            ?.CHOCDF
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1328,22 +1328,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .SUGAR
-                                                                            .label
+                                                                            ?.SUGAR
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .SUGAR
-                                                                            .quantity
+                                                                            ?.SUGAR
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .SUGAR
-                                                                            .unit
+                                                                            ?.SUGAR
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1370,22 +1370,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .PROCNT
-                                                                            .label
+                                                                            ?.PROCNT
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .PROCNT
-                                                                            .quantity
+                                                                            ?.PROCNT
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .PROCNT
-                                                                            .unit
+                                                                            ?.PROCNT
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1412,22 +1412,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOLE
-                                                                            .label
+                                                                            ?.CHOLE
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOLE
-                                                                            .quantity
+                                                                            ?.CHOLE
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CHOLE
-                                                                            .unit
+                                                                            ?.CHOLE
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1454,22 +1454,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CA
-                                                                            .label
+                                                                            ?.CA
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .CA
-                                                                            .quantity
+                                                                            ?.CA
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .CA
-                                                                            .unit
+                                                                            ?.CA
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1496,22 +1496,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FE
-                                                                            .label
+                                                                            ?.FE
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .FE
-                                                                            .quantity
+                                                                            ?.FE
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FE
-                                                                            .unit
+                                                                            ?.FE
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1538,22 +1538,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITA_RAE
-                                                                            .label
+                                                                            ?.VITA_RAE
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITA_RAE
-                                                                            .quantity
+                                                                            ?.VITA_RAE
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITA_RAE
-                                                                            .unit
+                                                                            ?.VITA_RAE
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1580,22 +1580,65 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .THIA
-                                                                            .label
+                                                                            ?. VITC
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .THIA
-                                                                            .quantity
+                                                                            ?. VITC
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .THIA
-                                                                            .unit
+                                                                            ?. VITC
+                                                                            ?.unit
+                                                                        }
+                                                                      </td>
+                                                                      <td>
+                                                                        <button
+                                                                          type="button"
+                                                                          className="btn btn-danger btn-sm px-3"
+                                                                        >
+                                                                          <i className="fas fa-times"></i>
+                                                                        </button>
+                                                                      </td>
+                                                                    </tr>
+                                                                    <tr></tr>
+                                                                    <tr>
+                                                                      <th scope="row">
+                                                                        <div className="form-check">
+                                                                          <input
+                                                                            className="form-check-input"
+                                                                            type="checkbox"
+                                                                            id="flexCheckDefault1"
+                                                                          />
+                                                                        </div>
+                                                                      </th>
+
+                                                                      <td>
+                                                                        {
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.THIA
+                                                                            ?.label
+                                                                        }
+                                                                      </td>
+                                                                      <td>
+                                                                        {Math.ceil(
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.THIA
+                                                                            ?.quantity
+                                                                        )}{" "}
+                                                                        {
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.THIA
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1622,22 +1665,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .RIBF
-                                                                            .label
+                                                                            ?.RIBF
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .RIBF
-                                                                            .quantity
+                                                                            ?.RIBF
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .RIBF
-                                                                            .unit
+                                                                            ?.RIBF
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1664,22 +1707,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .NIA
-                                                                            .label
+                                                                            ?.NIA
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .NIA
-                                                                            .quantity
+                                                                            ?.NIA
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .NIA
-                                                                            .unit
+                                                                            ?.NIA
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1706,22 +1749,65 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB6A
-                                                                            .label
+                                                                            ?.VITB6A
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB6A
-                                                                            .quantity
+                                                                            ?.VITB6A
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB6A
-                                                                            .unit
+                                                                            ?.VITB6A
+                                                                            ?.unit
+                                                                        }
+                                                                      </td>
+                                                                      <td>
+                                                                        <button
+                                                                          type="button"
+                                                                          className="btn btn-danger btn-sm px-3"
+                                                                        >
+                                                                          <i className="fas fa-times"></i>
+                                                                        </button>
+                                                                      </td>
+                                                                    </tr>
+                                         
+                                                                    <tr>
+                                                                      <th scope="row">
+                                                                        <div className="form-check">
+                                                                          <input
+                                                                            className="form-check-input"
+                                                                            type="checkbox"
+                                                                            id="flexCheckDefault1"
+                                                                          />
+                                                                        </div>
+                                                                      </th>
+
+                                                                      <td>
+                                                                        {
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.VITB12
+                                                                            ?.label
+                                                                        }
+                                                                      </td>
+                                                                      <td>
+                                                                        {Math.ceil(
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.VITB12
+                                                                            ?.quantity
+                                                                        )}{" "}
+                                                                        {
+                                                                          element
+                                                                            .totalNutrients
+                                                                            ?.VITB12
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1748,22 +1834,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FOLAC
-                                                                            .label
+                                                                            ?.VITD
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .FOLAC
-                                                                            .quantity
+                                                                            ?.VITD
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .FOLAC
-                                                                            .unit
+                                                                           ?.VITD
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1790,22 +1876,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB12
-                                                                            .label
+                                                                            ?.TOCPHA
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB12
-                                                                            .quantity
+                                                                            ?.TOCPHA
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITB12
-                                                                            .unit
+                                                                            ?.TOCPHA
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1832,22 +1918,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITD
-                                                                            .label
+                                                                            ?.VITK1
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITD
-                                                                            .quantity
+                                                                            ?.VITK1
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .VITD
-                                                                            .unit
+                                                                            ?.VITK1
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>
@@ -1859,6 +1945,7 @@ export default function Individual_Recipe() {
                                                                         </button>
                                                                       </td>
                                                                     </tr>
+                                                                    <tr></tr>
                                                                     <tr>
                                                                       <th scope="row">
                                                                         <div className="form-check">
@@ -1874,64 +1961,22 @@ export default function Individual_Recipe() {
                                                                         {
                                                                           element
                                                                             .totalNutrients
-                                                                            .TOCPHA
-                                                                            .label
+                                                                            ?.WATER
+                                                                            ?.label
                                                                         }
                                                                       </td>
                                                                       <td>
                                                                         {Math.ceil(
                                                                           element
-                                                                            .totalNutrients
-                                                                            .TOCPHA
-                                                                            .quantity
+                                                                            ?.totalNutrients
+                                                                            ?.WATER
+                                                                            ?.quantity
                                                                         )}{" "}
                                                                         {
                                                                           element
-                                                                            .totalNutrients
-                                                                            .TOCPHA
-                                                                            .unit
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        <button
-                                                                          type="button"
-                                                                          className="btn btn-danger btn-sm px-3"
-                                                                        >
-                                                                          <i className="fas fa-times"></i>
-                                                                        </button>
-                                                                      </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                      <th scope="row">
-                                                                        <div className="form-check">
-                                                                          <input
-                                                                            className="form-check-input"
-                                                                            type="checkbox"
-                                                                            id="flexCheckDefault1"
-                                                                          />
-                                                                        </div>
-                                                                      </th>
-
-                                                                      <td>
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            .WATER
-                                                                            .label
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        {Math.ceil(
-                                                                          element
-                                                                            .totalNutrients
-                                                                            .WATER
-                                                                            .quantity
-                                                                        )}{" "}
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            .WATER
-                                                                            .unit
+                                                                            ?.totalNutrients
+                                                                            ?.WATER
+                                                                            ?.unit
                                                                         }
                                                                       </td>
                                                                       <td>

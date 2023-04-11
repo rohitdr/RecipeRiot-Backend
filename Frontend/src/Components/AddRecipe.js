@@ -2683,6 +2683,7 @@ export default function AddRecipe() {
                                                 onChange={(e) => {
                                                   recipe.totalNutrients.VITK1.quantity =
                                                     e.target.value;
+                                                    
                                                 }}
                                               />
                                             </div>

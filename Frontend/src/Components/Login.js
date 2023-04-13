@@ -12,6 +12,7 @@ export default function Login() {
   let Navigate = useNavigate();
  /* Setting the state of the component. */
   const [visiblemodal, setvisiblemodal] = useState(false);
+  const  [visiblemodalerror,setvisiblemodalerror]=useState("")
   const [forgetdetail, setforgetdetail] = useState({
     email: "",
     username: "",
@@ -82,12 +83,13 @@ export default function Login() {
           Navigate("/Home");
           showAlert("Your had successfully logged in", "success");
         } else if (response.status == 404) {
+          setvisiblemodalerror(loginresult.error)
           setProgress(100);
           setvisiblemodal(true);
-          showAlert(loginresult.error, "danger");
-          setTimeout(() => {
-            setvisiblemodal(false);
-          }, 2000);
+          // showAlert(loginresult.error, "danger");
+          // setTimeout(() => {
+          //   setvisiblemodal(false);
+          // }, 2000);
         } else {
           setProgress(100);
           setservererror(500);
@@ -394,19 +396,51 @@ export default function Login() {
       </Modal> */}
 
             {/* modal for wrong credentials */}
-            <Modal noPadding open={visiblemodal} blur>
-              <Modal.Header
-                css={{ position: "absolute", zIndex: "$1", top: 5, right: 8 }}
-              ></Modal.Header>
-              <Modal.Body>
-                <Image
-                  showSkeleton
-                  src="https://media.tenor.com/96H5g9JcobEAAAAd/jethalal-angry-tarak-mehta-ka-ooltah-chashmah.gif"
-                  width={400}
-                  height={490}
-                />
-              </Modal.Body>
-            </Modal>
+           
+             <Modal
+        key="adminmodal"
+    
+        preventClose
+        open={visiblemodal}
+     
+       closeButton
+       onClose={()=>{
+        setvisiblemodal(false)
+       }}
+      >
+        <Modal.Header>
+          <Text b size={14} color="error" >
+          Attention Required!
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+          <Text size={18} >
+            {visiblemodalerror}
+          </Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            auto
+            flat
+            color="success"
+            onPress={() => {
+            setvisiblemodal(false)
+            }}
+          >
+            Leave It
+          </Button>
+          <Button
+            auto
+            color="error"
+            onPress={() => {
+              setvisiblemodal(false)
+         
+            }}
+          >
+           Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
             {/* modal for forget password */}
             <Modal

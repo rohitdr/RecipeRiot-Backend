@@ -1266,8 +1266,8 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   */
   const deleteRecipe = async (id, file) => {
     try {
-      setProgress(30);
-      setLoading(true);
+ 
+      
 
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/deleteRecipe/${id}`,
@@ -1284,10 +1284,10 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         }
       );
 
-      setProgress(60);
+
       const json = await response.json();
       if (response.status == 404) {
-        setProgress(100);
+     
         showAlert(json.error, "danger");
       } else if (response.status == 200) {
        
@@ -1298,23 +1298,19 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
         if (file == "Admindelete") {
           AdminGetAllRecipeByDate();
         }
-
-        const newRecipe = recipe.filter((element) => {
-          return element._id !== id;
-        });
-        setRecipe(newRecipe);
-        allRecipe();
-        setLoading(false);
-        setProgress(100);
+        
+      getUser()
+      LatestRecipebyid();
+    
+     
+ 
       } else {
         setRecipe(500);
-        setProgress(100);
-        setLoading(false);
+      
       }
     } catch (error) {
       setRecipe(500);
-      setProgress(100);
-      setLoading(false);
+ 
       console.log(error.message);
     }
   };

@@ -94,11 +94,7 @@ export default function AddRecipe() {
         unit: "g",
       },
 
-      FIBTG: {
-        label: "Fiber",
-        quantity: 0,
-        unit: "g",
-      },
+    
       SUGAR: {
         label: "Sugars",
         quantity: 0,
@@ -174,11 +170,7 @@ export default function AddRecipe() {
         quantity: 0,
         unit: "mg",
       },
-      VITK1: {
-        label: "Vitamin K",
-        quantity: 0,
-        unit: "µg",
-      },
+      
 
       WATER: {
         label: "Water",
@@ -2090,43 +2082,10 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
 
-                                        <tr>
-                                          <th scope="row">4</th>
-                                          <td>Fiber</td>
-                                          <td>
-                                            <div className="form-outline">
-                                              <input
-                                                type="number"
-                                                id="FIBTG"
-                                                name="FIBTG"
-                                                className="form-control"
-                                                placeholder="Enter Quantity"
-                                                required
-                                                onChange={(e) => {
-                                                  recipe.totalNutrients.FIBTG.quantity =
-                                                    e.target.value;
-                                                }}
-                                              />
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <div className="form-outline">
-                                              <input
-                                                type="text"
-                                                id="typeNumber"
-                                                className="form-control"
-                                                placeholder="Enter the units"
-                                                onChange={(e) => {
-                                                  recipe.totalNutrients.FIBTG.unit =
-                                                    e.target.value;
-                                                }}
-                                              />
-                                            </div>
-                                          </td>
-                                        </tr>
+                                      
 
                                         <tr>
-                                          <th scope="row">5</th>
+                                          <th scope="row">4</th>
                                           <td>Sugars</td>
                                           <td>
                                             <div className="form-outline">
@@ -2160,7 +2119,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">6</th>
+                                          <th scope="row">5</th>
                                           <td>Protein</td>
                                           <td>
                                             <div className="form-outline">
@@ -2234,7 +2193,7 @@ export default function AddRecipe() {
                                     <table className="table">
                                       <tbody>
                                         <tr>
-                                          <th scope="row">7</th>
+                                          <th scope="row">6</th>
                                           <td>Cholesterol</td>
                                           <td>
                                             <div className="form-outline">
@@ -2268,7 +2227,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">8</th>
+                                          <th scope="row">7</th>
                                           <td>Calcium</td>
                                           <td>
                                             <div className="form-outline">
@@ -2303,7 +2262,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">9</th>
+                                          <th scope="row">8</th>
                                           <td>Iron</td>
                                           <td>
                                             <div className="form-outline">
@@ -2336,7 +2295,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">10</th>
+                                          <th scope="row">9</th>
                                           <td>Vitamin A</td>
                                           <td>
                                             <div className="form-outline">
@@ -2369,7 +2328,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">11</th>
+                                          <th scope="row">10</th>
                                           <td>Vitamin C</td>
                                           <td>
                                             <div className="form-outline">
@@ -2402,7 +2361,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">12</th>
+                                          <th scope="row">11</th>
                                           <td>Thiamin B1</td>
                                           <td>
                                             <div className="form-outline">
@@ -2435,7 +2394,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">13</th>
+                                          <th scope="row">12</th>
                                           <td>Riboflavin B2</td>
                                           <td>
                                             <div className="form-outline">
@@ -2509,7 +2468,7 @@ export default function AddRecipe() {
                                     <table className="table">
                                       <tbody>
                                         <tr>
-                                          <th scope="row">14</th>
+                                          <th scope="row">13</th>
                                           <td>Niacin B3</td>
                                           <td>
                                             <div className="form-outline">
@@ -2538,7 +2497,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">15</th>
+                                          <th scope="row">14</th>
                                           <td>Vitamin B6</td>
                                           <td>
                                             <div className="form-outline">
@@ -2571,7 +2530,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">16</th>
+                                          <th scope="row">15</th>
                                           <td> Vitamin B12</td>
                                           <td>
                                             <div className="form-outline">
@@ -2604,7 +2563,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">17</th>
+                                          <th scope="row">16</th>
                                           <td>Vitamin D</td>
                                           <td>
                                             <div className="form-outline">
@@ -2637,7 +2596,7 @@ export default function AddRecipe() {
                                           </td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">18</th>
+                                          <th scope="row">17</th>
                                           <td>Vitamin E</td>
                                           <td>
                                             <div className="form-outline">
@@ -2669,42 +2628,9 @@ export default function AddRecipe() {
                                             </div>
                                           </td>
                                         </tr>
+                                        
                                         <tr>
-                                          <th scope="row">19</th>
-                                          <td>Vitamin K</td>
-                                          <td>
-                                            <div className="form-outline">
-                                              <input
-                                                type="number"
-                                                id="VITK1"
-                                                name="VITK1"
-                                                className="form-control"
-                                                placeholder="Enter Quantity"
-                                                onChange={(e) => {
-                                                  recipe.totalNutrients.VITK1.quantity =
-                                                    e.target.value;
-                                                    
-                                                }}
-                                              />
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <div className="form-outline">
-                                              <input
-                                                type="text"
-                                                id="typeNumber"
-                                                className="form-control"
-                                                placeholder="Enter the units"
-                                                onChange={(e) => {
-                                                  recipe.totalNutrients.VITK1.unit =
-                                                    e.target.value;
-                                                }}
-                                              />
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">20</th>
+                                          <th scope="row">18</th>
                                           <td>Water</td>
                                           <td>
                                             <div className="form-outline">

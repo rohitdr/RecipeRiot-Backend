@@ -162,7 +162,7 @@ document.title="RecipeRiot-Sign up"
   const onchange = (e) => {
     setsignupdetails({ ...signupdetail, [e.target.name]: e.target.value });
     //validation for number
-    if(signupdetail.phone_number.length !== 10){
+    if(document.getElementById('phone_number').value.length != 10){
       setphone_number_helper_text("Phone Number should be of 10 digits")
       setphone_numberhelpercolor("error")
       setphone_numbercolor("error")
@@ -177,7 +177,7 @@ document.title="RecipeRiot-Sign up"
       setphone_numbercontentright(<i className="fa-solid text-success fa-circle-check"></i>)
     }
     // validation for password
-    if(signupdetail.password.length<8)
+    if(document.getElementById('password').value.length<8)
     {
      setpasswordhelpertext("Password should of 8 words")
      setpasswordhelpercolor("error")
@@ -190,7 +190,7 @@ setpasswordhelpercolor("success")
 setpasswordhelpertext("This Looks Nice ")
     }
     //validation for confirm password
-    if(signupdetail.password !== signupdetail.confirm_password)
+    if(signupdetail.password != document.getElementById('confirm_password').value)
     {
      setconfirm_passwordcolor("error")
      setconfirm_passwordhelpercolor("error")
@@ -232,20 +232,23 @@ setlast_namehelpertext("Last name should be of more than 3 words")
   */
   const next = () => {
     setsignupdetails({ ...signupdetail, email: bindings.value });
-    console.log(signupdetail);
-
-    if (signupdetail.first_name.length < 3) {
+   
+        if(signupdetail.email.length<8){
+          showAlert("OOPs!, Email is not valid", "danger");
+        }
+    else if (signupdetail.first_name.length < 3) {
       showAlert("OOPs!, First Name must have 3 words", "danger");
     } else if (signupdetail.last_name.length < 3) {
       showAlert("OOPs!, Last Name must have 3 words", "danger");
     } else if (signupdetail.phone_number.length != 10) {
       showAlert("OOPs!, Phone Number Must be of 10 digits", "danger");
-    } else if (signupdetail.password.length < 8) {
+    }
+   else if (signupdetail.password.length < 8) {
       showAlert("OOPs!, Password must have 8 digits", "danger");
     } else if (signupdetail.password != signupdetail.confirm_password) {
       showAlert("OOPs!, Password and Confirm password must be same", "danger");
     } else {
-      console.log(signupdetail);
+    
       document
         .getElementById("signup_first_component")
         .setAttribute("className", "disapear_component");
@@ -277,7 +280,7 @@ const changethird=(e)=>{
       .getElementById("thirdpage")
       .setAttribute("className", "disapear_component");
     setTimeout(() => {
-      setsignuppage(1);
+      setsignuppage(0);
     }, 350);
  
   };
@@ -456,7 +459,7 @@ const changethird=(e)=>{
                             id="phone_number"
                             // color="success"
                             color={phone_numbercolor}
-                            type="Phone number"
+                            type="phone number"
                             label="Phone Number"
                             placeholder="Enter Your Phone Number"
                           />

@@ -27,7 +27,7 @@ export default function Home() {
   /* Destructuring the context object and assigning it to the variables. */
   const context = useContext(RecipeContext);
   const {
-
+   showAlert,
     LatesRecipe,
     Latest_recipe,
   
@@ -62,7 +62,22 @@ export default function Home() {
    * contactmessage as an argument.
    */
   const contactussubmitBUTTON = () => {
-    ContactusSubmitApi(contactmessage);
+    if(document.getElementById('Name').value.length<3){
+      showAlert("Name must be atleast 3 Characters","danger")
+    }
+    else if(document.getElementById('Email').value.length<8){
+      showAlert("Email must be atleast 8 Characters","danger")
+    }
+    else if(document.getElementById('Subject').value.length<10){
+      showAlert("Subject must be atleast 10 Characters","danger")
+    }
+    else if(document.getElementById('Message').value.length<3){
+      showAlert("Messsage must be atleast 20 Characters","danger")
+    }
+   else{
+
+     ContactusSubmitApi(contactmessage);
+   }
   };
 
   return (
@@ -237,12 +252,12 @@ export default function Home() {
 
                 <div className="row gy-5">
                   <div className="col-xl-4 col-md-6">
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -273,19 +288,19 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
 
                   <div
                     className="col-xl-4 col-md-6 zoom-in"
                     data-aos-delay="300"
                   >
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -317,7 +332,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
 
                   <div
@@ -325,12 +340,12 @@ export default function Home() {
                     data-aos="zoom-in"
                     data-aos-delay="400"
                   >
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -362,7 +377,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
 
                   <div
@@ -370,12 +385,12 @@ export default function Home() {
                     data-aos="zoom-in"
                     data-aos-delay="500"
                   >
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -408,7 +423,7 @@ export default function Home() {
                           <a href="#" className="stretched-link"></a>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
 
                   <div
@@ -416,12 +431,12 @@ export default function Home() {
                     data-aos="zoom-in"
                     data-aos-delay="600"
                   >
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -453,19 +468,19 @@ export default function Home() {
                           <a href="#" className="stretched-link"></a>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
 
                   <div
                     className="col-xl-4 col-md-6"
                     
                   >
-                    <motion.div
+                    {/* <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 2 }}
-                    >
+                      transition={{ duration: 0.1 }}
+                    > */}
                       <div className="service-item">
                         <div className="img">
                           <img
@@ -498,7 +513,7 @@ export default function Home() {
                           <a href="#" className="stretched-link"></a>
                         </div>
                       </div>
-                    </motion.div>
+                    {/* </motion.div> */}
                   </div>
                 </div>
               </div>
@@ -869,10 +884,9 @@ export default function Home() {
             >
               <div className="container">
                 <div className="section-title text-center fw-bold pt-3">
-                  <h2>Contact</h2>
+                  <h2>Contact Us</h2>
                   <p>
-                    Magnam dolores commodi suscipit eius consequatur ex aliquid
-                    fuga
+                  We're here to help. If you have any questions or concerns, please don't hesitate to reach out to us.
                   </p>
                 </div>
 

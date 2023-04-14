@@ -1229,48 +1229,7 @@ export default function Individual_Recipe() {
                                                                         </button>
                                                                       </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                      <th scope="row">
-                                                                        <div className="form-check">
-                                                                          <input
-                                                                            className="form-check-input"
-                                                                            type="checkbox"
-                                                                            id="flexCheckDefault1"
-                                                                          />
-                                                                        </div>
-                                                                      </th>
-
-                                                                      <td>
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.FIBTG
-                                                                            ?.label
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        {Math.ceil(
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.FIBTG
-                                                                            ?.quantity
-                                                                        )}{" "}
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.FIBTG
-                                                                            ?.unit
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        <button
-                                                                          type="button"
-                                                                          className="btn btn-danger btn-sm px-3"
-                                                                        >
-                                                                          <i className="fas fa-times"></i>
-                                                                        </button>
-                                                                      </td>
-                                                                    </tr>
+                                                                   
                                                                     <tr>
                                                                       <th scope="row">
                                                                         <div className="form-check">
@@ -1903,49 +1862,7 @@ export default function Individual_Recipe() {
                                                                         </button>
                                                                       </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                      <th scope="row">
-                                                                        <div className="form-check">
-                                                                          <input
-                                                                            className="form-check-input"
-                                                                            type="checkbox"
-                                                                            id="flexCheckDefault1"
-                                                                          />
-                                                                        </div>
-                                                                      </th>
-
-                                                                      <td>
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.VITK1
-                                                                            ?.label
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        {Math.ceil(
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.VITK1
-                                                                            ?.quantity
-                                                                        )}{" "}
-                                                                        {
-                                                                          element
-                                                                            .totalNutrients
-                                                                            ?.VITK1
-                                                                            ?.unit
-                                                                        }
-                                                                      </td>
-                                                                      <td>
-                                                                        <button
-                                                                          type="button"
-                                                                          className="btn btn-danger btn-sm px-3"
-                                                                        >
-                                                                          <i className="fas fa-times"></i>
-                                                                        </button>
-                                                                      </td>
-                                                                    </tr>
-                                                                    <tr></tr>
+                                                                  
                                                                     <tr>
                                                                       <th scope="row">
                                                                         <div className="form-check">

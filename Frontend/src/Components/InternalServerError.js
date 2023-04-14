@@ -23,7 +23,7 @@ export default function InternalServerError() {
             </Button>
           }
           paragraph="the server encountered an unexpected condition that prevented it from fulfilling the request."
-          img="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
+          img="Other/internalservererror.gif"
         ></NoResult>
       </AnimatedPage>
     </>

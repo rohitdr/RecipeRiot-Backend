@@ -34,7 +34,7 @@ export default function RecipeItem(props) {
 
 /* Calling the getUserbyid and getUser functions when the component mounts. */
   useEffect(() => {
-  
+
       if (userData?.user?.Liked_Recipe?.includes(props.id)) {
         setHeart("solid");
       } else {
@@ -42,7 +42,7 @@ export default function RecipeItem(props) {
       }
 
 
-  }, [userData]);
+  }, [sessionStorage.getItem('auth-token'),localStorage.getItem('auth-token')]);
 /* Setting the state of the heart to regular. */
 
 

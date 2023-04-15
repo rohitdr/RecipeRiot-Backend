@@ -14,6 +14,7 @@ export default function Profile_Security() {
     deleteAccount,
     deleteaccount,
     getUser,
+    logoutUser,
     userData,
   } = context;
 /* Calling the getUser function when the component mounts. */
@@ -67,8 +68,11 @@ export default function Profile_Security() {
           setProgress(70);
           setProgress(100);
           showAlert("Your Password has been successfully changed", "success");
+          logoutUser()
+         sessionStorage.getItem('auth-token')?sessionStorage.removeItem('auth-token'):localStorage.removeItem('auth-token')
+        
           Navigate("/login");
-        } else if (response.status === 404) {
+        } else if (response.status == 404) {
           showAlert(loginresult.error, "danger");
           setProgress(100);
         } else {

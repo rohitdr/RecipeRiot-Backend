@@ -194,7 +194,7 @@ router.post("/changePassword", fetchUser, async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     const securedpass = await bcrypt.hash(req.body.password, salt);
-    const updatedUser = await User.update(
+    const updatedUser = await User.updateOne(
       { _id: id },
       { $set: { password: securedpass } }
     );
@@ -235,7 +235,7 @@ router.post("/changeuploadimage", fetchUser, async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Sorry user does not exist" });
     }
-    const updatedUser = await User.update(
+    const updatedUser = await User.updateOne(
       { _id: id },
       { $set: { Profile_Image: image } }
     );
@@ -487,7 +487,7 @@ router.post("/changeuploadimageAdmin", fetchUser, async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Sorry user does not exist" });
     }
-    const updatedUser = await User.update(
+    const updatedUser = await User.updateOne(
       { _id: id },
       { $set: { Profile_Image: image } }
     );

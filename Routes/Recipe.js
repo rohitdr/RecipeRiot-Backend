@@ -476,7 +476,7 @@ router.post("/unlike", fetchUser, async (req, res) => {
 /* The above code is fetching all the liked recipes of the user. */
 router.get("/allLikedRecipe", fetchuser, async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.id });
+    const user = await User.findById(req.user.id)
     if (user.Liked_Recipe.length < 1) {
       return res.status(404).json({error:"You had Not liked any recipe yet"});
     }
@@ -485,7 +485,7 @@ router.get("/allLikedRecipe", fetchuser, async (req, res) => {
       recipe[i] = await Recipe.findById(user.Liked_Recipe[i]);
     }
 
-    res.status(200).json(recipe);
+    res.status(200).json({LikedRecipe:recipe});
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");

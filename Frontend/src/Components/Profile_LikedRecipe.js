@@ -23,6 +23,7 @@ export default function Profile_LikedRecipe() {
       Navigate("/login");
     } else {
       AllLikedRecipe();
+    
     }
   }, []);
   var totalratings = 0;
@@ -51,16 +52,16 @@ export default function Profile_LikedRecipe() {
                   </h1>
                   {likedrecipeloading && <Loader></Loader>}
 
-                  { !likedrecipeloading &&LikedRecipe &&
-                    LikedRecipe.map((element) => {
+                  { !likedrecipeloading && LikedRecipe?.LikedRecipe &&
+                    LikedRecipe?.LikedRecipe?.map((element) => {
                       //setting recipe for recipitm
                       var reciperating = 0;
-                      element.Comments.map((ele) => {
-                        reciperating = reciperating + ele.rating;
+                      element?.Comments?.map((ele) => {
+                        reciperating = reciperating + ele?.rating;
                       });
-                      element.Comments.length != 0
+                      element?.Comments?.length != 0
                         ? (totalratings =
-                            reciperating / element.Comments.length)
+                            reciperating / element?.Comments?.length)
                         : (totalratings = 0);
                       reciperating = 0;
                       //setting recipe for recipitm

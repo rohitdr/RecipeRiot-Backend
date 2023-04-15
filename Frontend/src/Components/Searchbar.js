@@ -37,6 +37,7 @@ export default function Searchbar() {
     AdminGetAllRecipe,
     AdminGetAllRecipeByDate,
     GetAllcontactMessages,
+    AllLikedRecipe
   } = context;
   /* Creating a variable called Navigate and assigning it the value of the useNavigate() function. */
   let Navigate = useNavigate();
@@ -1416,7 +1417,7 @@ export default function Searchbar() {
               <Dropdown.Menu
                 aria-label="User menu actions"
                 color="secondary"
-                onAction={(actionKey) => console.log({ actionKey })}
+             
               >
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
                   <Text b color="inherit" css={{ d: "flex" }}>
@@ -1440,7 +1441,9 @@ export default function Searchbar() {
                 <Dropdown.Item key="team_settings">
                   <div
                     onClick={() => {
+                    
                       Navigate("/Profile_Activity");
+                     
                     }}
                   >
                     <p className=" pt-3 text-dark searchbardropdown w-100">

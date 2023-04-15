@@ -348,6 +348,7 @@ export default function EditRecipe() {
       if (response.status == 200) {
         setProgress(100);
         showAlert("Wow! Recipe is successfully Updated", "success");
+        Navigate("/Profile_Activity");
       } else if (response.status == 404) {
         setProgress(100);
         showAlert(result.error, "danger");
@@ -381,10 +382,11 @@ export default function EditRecipe() {
    */
   const insertRecipe = () => {
     Addapi(EditingRecipeId);
-    Navigate("/Home");
+   
   };
   return (
-    <>
+    <div className="min-vh-100">
+
       <AnimatedPage> {editserver==500? <InternalServerError></InternalServerError>:
         CurrentRecipeItem.recipe &&
           CurrentRecipeItem.recipe.map((element) => {
@@ -472,7 +474,7 @@ export default function EditRecipe() {
                                         ghost
                                         onPress={() => {
                                           setpageno(1);
-                                          console.log(recipe);
+                                         
                                         }}
                                       >
                                         Next
@@ -3314,6 +3316,6 @@ export default function EditRecipe() {
             );
           })}
       </AnimatedPage>
-    </>
+    </div>
   );
 }

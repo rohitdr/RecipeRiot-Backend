@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import RecipeContext from "./RecipeContext";
 export default function RecipeState(props) {
   /* Setting the state of the component. */
-  const [LikedRecipe, setLikedRecipe] = useState([]);
+  const [LikedRecipe, setLikedRecipe] = useState({});
 const [latestrecipeloading,setlatestrecipeloading]=useState(false)
   const [recipe, setRecipe] = useState({});
   const [allrecipeloading,setallrecipeloading]=useState(false)
@@ -468,7 +468,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
     try {
       // setProgress(30);
       setAdminallrecipeloading(true)
-      setAdminallrecipeloading(false)
+     
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/Recipe/AdminGetAllRecipes`,
         {
@@ -891,19 +891,23 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       );
       // setProgress(50);
       let Liked = await response.json();
+   
       if (response.status == 404) {
         setLikedRecipe(false);
      setlikedrecipeloading(false)
         setProgress(100);
       } else if (response.status == 200) {
+    
         setLikedRecipe(Liked);
      setlikedrecipeloading(false)
         setProgress(100);
+    
       } else {
         setProgress(100);
         setlikedrecipeloading(false)
         setLikedRecipe(500);
       }
+      console.log(LikedRecipe)
     } catch (e) {
       setProgress(100);
       setlikedrecipeloading(false)

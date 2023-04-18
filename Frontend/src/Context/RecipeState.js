@@ -711,7 +711,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
           },
         }
       );
-      setProgress(50);
+      // setProgress(50);
       let result = await response.json();
       if (response.status == 404) {
         
@@ -895,21 +895,21 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
       if (response.status == 404) {
         setLikedRecipe(false);
      setlikedrecipeloading(false)
-        setProgress(100);
+        // setProgress(100);
       } else if (response.status == 200) {
     
         setLikedRecipe(Liked);
      setlikedrecipeloading(false)
-        setProgress(100);
+        // setProgress(100);
     
       } else {
-        setProgress(100);
+        // setProgress(100);
         setlikedrecipeloading(false)
         setLikedRecipe(500);
       }
-      console.log(LikedRecipe)
+    
     } catch (e) {
-      setProgress(100);
+      // setProgress(100);
       setlikedrecipeloading(false)
       setLikedRecipe(500);
       console.log(e.message);
@@ -967,6 +967,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
    */
   const UnLikeRecipe = async (recipeid) => {
     try {
+      setProgress(30)
       setLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_Fetch_Api_Start}/recipe/unlike`,
@@ -985,6 +986,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
           }),
         }
       );
+      setProgress(60)
       let result = await response.json();
       if (response.status == 404) {
         setProgress(100);
@@ -1011,6 +1013,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
    */
   const LikeRecipe = async (recipeid) => {
     try {
+      setProgress(30)
       setLoading(true);
 
       const response = await fetch(
@@ -1030,6 +1033,7 @@ const [latestrecipeloading,setlatestrecipeloading]=useState(false)
           }),
         }
       );
+      setProgress(60)
       let result = await response.json();
       if (response.status == 404) {
         setProgress(100);

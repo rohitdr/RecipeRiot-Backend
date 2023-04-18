@@ -1887,7 +1887,7 @@ export default function AddRecipe() {
                                       <div className="col">
                                         <div className="mb-3">
                                           <label
-                                            htmlfor="formFile"
+                                            htmlFor="formFile"
                                             className="form-label"
                                           >
                                             Choose the image

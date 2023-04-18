@@ -368,7 +368,7 @@ const changethird=(e)=>{
                       <div className="row px-2 mt-3 box_decrease_size_animationemailsignup   mb-1">
                         <Input
                           {...bindings}
-                          contentLeft={<i class="fa-solid text-warning fa-envelope"></i>}
+                          contentLeft={<i className="fa-solid text-warning fa-envelope"></i>}
                           shadow={false}
                           onClearClick={reset}
                           required
@@ -390,7 +390,7 @@ const changethird=(e)=>{
                             size="md"
                             bordered
                             rounded
-                            contentLeft={<i class="fa-solid text-info fa-signature"></i>}
+                            contentLeft={<i className="fa-solid text-info fa-signature"></i>}
                            helperColor={first_namehelpercolor}
                            helperText={first_namehelpertext}
                            color={first_namecolor}
@@ -408,7 +408,7 @@ const changethird=(e)=>{
                             bordered
                             className="bg-white"
                             rounded
-                            contentLeft={<i class="fa-solid text-info fa-signature"></i>}
+                            contentLeft={<i className="fa-solid text-info fa-signature"></i>}
                             helperColor={last_namehelpercolor}
                             helperText={last_namehelpertext}
                             color={last_namecolor}
@@ -428,7 +428,7 @@ const changethird=(e)=>{
                           <Input
                             className="bg-white"
                             size="md"
-                            contentLeft={<i class="fa-solid text-primary fa-user"></i>}
+                            contentLeft={<i className="fa-solid text-primary fa-user"></i>}
                             bordered
                             rounded
                             value={signupdetail.username}
@@ -449,7 +449,7 @@ const changethird=(e)=>{
                            
                             bordered
                             rounded
-                            contentLeft={<i class="fa-solid text-success fa-phone"></i>}
+                            contentLeft={<i className="fa-solid text-success fa-phone"></i>}
                             helperColor={phone_numberhelpercolor}
                             helperText={phone_number_helper_text}
                             onChange={onchange}
@@ -469,7 +469,7 @@ const changethird=(e)=>{
                         <div className="px-3 box_decrease_size_animationforlogin mb-1">
                           <Input.Password
                             className="bg-white"
-                            contentLeft={<i class="fa-solid text-danger fa-key"></i>}
+                            contentLeft={<i className="fa-solid text-danger fa-key"></i>}
                             bordered
                             rounded
                             onChange={onchange}
@@ -492,7 +492,7 @@ const changethird=(e)=>{
                            
                             bordered
                             rounded
-                            contentLeft={<i class="fa-solid text-danger fa-key"></i>}
+                            contentLeft={<i className="fa-solid text-danger fa-key"></i>}
                             helperColor={confirm_passwordhelpercolor}
                             helperText={confirm_passwordhelpercolortext}
                             color={confirm_passwordcolor}

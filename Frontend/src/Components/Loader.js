@@ -12,11 +12,11 @@ export default function Loader() {
           <span className="sr-only"></span>
         </div>
       </div> */}
-    <div class="loadercontainer">
-<div class="loader-circle-11">
-  <div class="arc"></div>
-  <div class="arc"></div>
-  <div class="arc"></div>
+    <div className="loadercontainer">
+<div className="loader-circle-11">
+  <div className="arc"></div>
+  <div className="arc"></div>
+  <div className="arc"></div>
 </div>
 </div>
     </>

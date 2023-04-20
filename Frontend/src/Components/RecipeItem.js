@@ -161,10 +161,10 @@ export default function RecipeItem(props) {
                       }}
                     ></i>
                   </p>
-                  <i
+                  {/* <i
                     className="fa-solid fa-right-left"
                     onClick={onclickRotate}
-                  ></i>
+                  ></i> */}
                 </div>
               </div>
               <ul className="list-group list-group-flush ">
@@ -203,7 +203,7 @@ export default function RecipeItem(props) {
                 
                 </li>
               </ul>
-              <div className="card-img-overlay"  onClick={() => {
+              <div className="card-img-overlay " style={{cursor:"pointer"}}  onClick={() => {
                         Navigate(
                           `${
                             !sessionStorage.getItem("auth-token") &&
@@ -243,7 +243,7 @@ export default function RecipeItem(props) {
               </div>
             </div>
 
-            <div className="back ">
+            {/* <div className="back ">
               <div className="card testimonial-card pt-4 ">
                 <div className="card-up"></div>
                 <div className="avatar mb-1 mx-auto bg-white">
@@ -292,7 +292,7 @@ export default function RecipeItem(props) {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </motion.div>

@@ -525,9 +525,9 @@ router.post("/commentreicpe", fetchuser, async (req, res) => {
 router.post("/upadtinmodal",  async (req, res) => {
   try {
   const recipe = Recipe.find();
-   const update= await recipe.updateMany({},{$unset:{userData:""}})
+   const update= await Recipe.updateMany({},{$unset:{userData:1}} , {multi: true})
 
-       res.status(200).send("success");
+       res.status(200).send("s");
    
   } catch (error) {
     console.log(error.message);

@@ -1,7 +1,7 @@
 /* Importing the express module and the cors module. */
 const mongooseConnectToDb = require("./db");
 const express = require("express");
-var cors = require("cors");
+const  cors = require("cors");
 /* Connecting to the database. */
 mongooseConnectToDb();
 

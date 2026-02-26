@@ -5,10 +5,14 @@ const { Mongoose_uri } = require("./Config/Keys");
 /**
  * It connects to the mongoose database.
  */
-const mongooseConnectToDb = () => {
-  mongoose.connect(Mongoose_uri, () => {
-    console.log("connected to mongo db");
-  });
+const mongooseConnectToDb = async () => {
+  try {
+    await mongoose.connect("mongodb+srv://Rohitdr098:lhELXL2pR5u9BBlC@cluster0.sne14ef.mongodb.net/Recipe");
+    console.log("✅ Connected to MongoDB");
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    process.exit(1);
+  }
 };
 /* Exporting the function `mongooseConnectToDb` to be used in other files. */
 module.exports = mongooseConnectToDb;

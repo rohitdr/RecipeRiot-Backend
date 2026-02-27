@@ -23,8 +23,13 @@ const userSchema = new Schema({
     type: Array,
   },
   Profile_Image: {
-    type: String,
-    default: "UserImages/default.jpg",
+     url: {
+      type: String,
+       default: "UserImages/default.jpg"
+    },
+    public_id: {
+      type: String,
+    }
   },
   username: {
     type: String,

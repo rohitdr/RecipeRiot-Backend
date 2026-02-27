@@ -6,7 +6,8 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User.js");
-
+const upload = require("../Middleware/Upload")
+const cloudinary = require("../Config/cloudinary");
 
 /* Fetching all the recipes from the database. */
 router.get("/allRecipes", fetchuser, async (req, res) => {
@@ -45,7 +46,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
 });
 //crating  or adding a new Recipe , login require
 /* The above code is adding a recipe to the database. */
-router.post("/addRecipe", fetchuser, async (req, res) => {
+router.post("/addRecipe",upload.single("image"), fetchuser, async (req, res) => {
   try {
     const {
       totalTime,
@@ -56,7 +57,6 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       healthLabels,
       dietLabels,
       source,
-      image,
       label,
       dishType,
       mealType,
@@ -65,7 +65,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       totalNutrients,
       instruction,
     } = req.body;
-  
+
     const recipe = new Recipe({
       totalTime,
       totalWeight,
@@ -75,7 +75,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
       healthLabels,
       dietLabels,
       source,
-      image,
+      image:{url:req.file.path,public_id:req.file.filename},
       label,
       dishType,
       mealType,
@@ -101,7 +101,7 @@ router.post("/addRecipe", fetchuser, async (req, res) => {
 });
 //updating a existing recipe , login required
 /* The above code is updating the recipe. */
-router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
+router.put("/updateRecipe/:id",upload.single("image"), fetchuser, async (req, res) => {
   try {
     const {
       totalTime,
@@ -112,7 +112,6 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
       healthLabels,
       dietLabels,
       source,
-      image,
       label,
       dishType,
       mealType,
@@ -150,9 +149,6 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
     if (source) {
       newrecipe.source = source;
     }
-    if (image) {
-      newrecipe.image = image;
-    }
     if (label) {
       newrecipe.label = label;
     }
@@ -171,13 +167,25 @@ router.put("/updateRecipe/:id", fetchuser, async (req, res) => {
     if (totalNutrients) {
       newrecipe.totalNutrients = totalNutrients;
     }
+
+
+    //for image we have to delete it form cloudinary and replace 
+
+      if (req.file.path) {
+      newrecipe.image ={url:req.file.path,public_id:req.file.filename};
+    
+    }
     let recipe = await Recipe.findById(req.params.id);
     //checking recipe exist of not
     if (!recipe) {
       return res.status(404).send({ error: "Recipe not found" });
+      
+    }
+    //deleteing image form cloudinary if it exists 
+    if(recipe.image.url){
+          await cloudinary.uploader.destroy(recipe.image.public_id);
     }
     //allowing only owner to update the recipe
-
     recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
       { $set: newrecipe },
@@ -202,7 +210,9 @@ router.delete("/deleteRecipe/:id", fetchuser, async (req, res) => {
     if (recipe.user.toString() !== req.user.id) {
       return res.status(404).json({error:" You Are Not allowed"});
     }
+      await cloudinary.uploader.destroy(recipe.image.public_id);
     recipe = await Recipe.findByIdAndDelete(req.params.id);
+  
     res.status(200).json({ succes: "Recipe has been deleted", recipe: recipe });
   } catch (error) {
     console.log(error.message);

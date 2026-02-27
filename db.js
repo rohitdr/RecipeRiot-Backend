@@ -7,7 +7,7 @@ const { Mongoose_uri } = require("./Config/Keys");
  */
 const mongooseConnectToDb = async () => {
   try {
-    await mongoose.connect("mongodb+srv://Rohitdr098:lhELXL2pR5u9BBlC@cluster0.sne14ef.mongodb.net/Recipe");
+    await mongoose.connect(Mongoose_uri);
     console.log("✅ Connected to MongoDB");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);

@@ -6,10 +6,11 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchUser = require("../Middleware/fetchUser.js");
-const { jwtSecret } = require("../Config/Keys");
-
+const { jwtSecret,AdminEmail } = require("../Config/Keys");
+const uploadUserImage = require("../Middleware/UploadUserImage")
 const Recipe = require("../Modals/Recipe.js");
 const ContactUs = require("../Modals/ContactUs.js");
+const cloudinary = require("../Config/cloudinary");
 
 
 /* The above code is creating a user. */
@@ -227,18 +228,23 @@ router.post("/checkUsername", async (req, res) => {
 });
 
 /* The above code is updating the user profile image. */
-router.post("/changeuploadimage", fetchUser, async (req, res) => {
+router.post("/changeuploadimage",uploadUserImage.single("image"), fetchUser, async (req, res) => {
   try {
-    const image = req.body.image;
+   
     const id = req.user.id;
     const user = await User.findById(id);
+
     if (!user) {
       return res.status(404).json({ error: "Sorry user does not exist" });
     }
+if(user.Profile_Image.url && user.Profile_Image.url!=="UserImages/default.jpg"){
+              await cloudinary.uploader.destroy(user.Profile_Image.public_id);
+        }
     const updatedUser = await User.updateOne(
       { _id: id },
-      { $set: { Profile_Image: image } }
+      { $set: { Profile_Image: {url:req.file.path,public_id:req.file.filename} } }
     );
+    
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error.message);
@@ -389,7 +395,7 @@ router.post("/forgetPassword", async (req, res) => {
 router.post("/AdminGetAllUser", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({
@@ -409,7 +415,7 @@ router.post("/AdminGetAllUser", fetchUser, async (req, res) => {
 router.post("/AdminGetAllUserByDate", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({
@@ -434,12 +440,18 @@ router.delete("/deleteAccount", fetchUser, async (req, res) => {
           error: "Your cannot Access the Action , Its not Your Account",
         });
     }
+      const user= await User.findById(req.user.id)
+     if(user.Profile_Image.url !=="UserImages/default.jpg"){
+ await cloudinary.uploader.destroy(user.Profile_Image.public_id);
+    } 
     let deleted_user = await User.deleteOne({ _id: req.user.id });
     let delete_recipe = await Recipe.deleteMany({ user: req.user.id });
+  
+      
     res
       .status(200)
       .json(
-        "Your account and Your Recipes are deleted is successfully deleted"
+        "Your account and Your Recipes are deleted"
       );
   } catch (error) {
     console.log(error.message);
@@ -451,14 +463,17 @@ router.delete("/deleteAccount", fetchUser, async (req, res) => {
 router.delete("/AdminDeleteAccount", fetchUser, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({
           error: "Your cannot Access the information! You are not a admin",
         });
-    }
-
+    } 
+     user= await User.findById(req.body.id)
+     if(user.Profile_Image.url !=="UserImages/default.jpg"){
+ await cloudinary.uploader.destroy(user.Profile_Image.public_id);
+    } 
     let deleted_user = await User.deleteOne({ _id: req.body.id });
     let delete_recipe = await Recipe.deleteMany({ user: req.body.id });
     res
@@ -471,25 +486,28 @@ router.delete("/AdminDeleteAccount", fetchUser, async (req, res) => {
 });
 
 /* The above code is updating the user profile image. */
-router.post("/changeuploadimageAdmin", fetchUser, async (req, res) => {
+router.post("/changeuploadimageAdmin",uploadUserImage.single("image"), fetchUser, async (req, res) => {
   try {
     let admin = await User.findById(req.user.id);
-    if (admin.email !== "rohitdr098@gmail.com") {
+    if (admin.email !== AdminEmail) {
       return res
         .status(404)
         .json({
           error: "Your cannot Access the information! You are not a admin",
         });
     }
-    const image = req.body.image;
+    
     const id = req.body.id;
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ error: "Sorry user does not exist" });
     }
+     if(user.Profile_Image.url !=="UserImages/default.jpg"){
+ await cloudinary.uploader.destroy(user.Profile_Image.public_id);
+    } 
     const updatedUser = await User.updateOne(
       { _id: id },
-      { $set: { Profile_Image: image } }
+      { $set: { Profile_Image:{url:req.file.path,public_id:req.file.filename} } }
     );
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -569,7 +587,7 @@ router.put("/updateuserAdmin", fetchUser, async (req, res) => {
 
     //allowing only owner to update the his account
     let user = await User.findById(req.user.id);
-    if (user.email !== "rohitdr098@gmail.com") {
+    if (user.email !== AdminEmail) {
       return res
         .status(404)
         .json({
@@ -591,7 +609,7 @@ router.put("/updateuserAdmin", fetchUser, async (req, res) => {
 router.post("/staticalData", fetchUser, async (req, res) => {
   try {
     let admin = await User.findById(req.user.id);
-    if (admin.email !== "rohitdr098@gmail.com") {
+    if (admin.email !== AdminEmail) {
       return res
         .status(404)
         .json({

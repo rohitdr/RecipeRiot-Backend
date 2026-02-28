@@ -230,9 +230,10 @@ router.post("/checkUsername", async (req, res) => {
 /* The above code is updating the user profile image. */
 router.post("/changeuploadimage",uploadUserImage.single("image"), fetchUser, async (req, res) => {
   try {
+  console.log("first")
     const id = req.user.id;
     const user = await User.findById(id);
-
+console.log('second')
     if (!user) {
       return res.status(404).json({ error: "Sorry user does not exist" });
     }

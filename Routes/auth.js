@@ -230,7 +230,6 @@ router.post("/checkUsername", async (req, res) => {
 /* The above code is updating the user profile image. */
 router.post("/changeuploadimage",uploadUserImage.single("image"), fetchUser, async (req, res) => {
   try {
-   
     const id = req.user.id;
     const user = await User.findById(id);
 

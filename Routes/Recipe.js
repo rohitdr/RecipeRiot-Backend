@@ -46,7 +46,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
 });
 //crating  or adding a new Recipe , login require
 /* The above code is adding a recipe to the database. */
-router.post("/addRecipe",upload.single("image"), fetchuser, async (req, res) => {
+router.post("/addRecipe", upload.single("image"),fetchuser, async (req, res) => {
   try {
     const {
       totalTime,
@@ -120,7 +120,7 @@ router.put("/updateRecipe/:id",upload.single("image"), fetchuser, async (req, re
       totalNutrients,
       instruction,
     } = req.body;
-
+     
     const newrecipe = {};
     if (totalTime) {
       newrecipe.totalTime = totalTime;
@@ -170,11 +170,13 @@ router.put("/updateRecipe/:id",upload.single("image"), fetchuser, async (req, re
 
 
     //for image we have to delete it form cloudinary and replace 
-
-      if (req.file.path) {
+  
+      if (req.file && req.file.path) {
       newrecipe.image ={url:req.file.path,public_id:req.file.filename};
     
     }
+ 
+
     let recipe = await Recipe.findById(req.params.id);
     //checking recipe exist of not
     if (!recipe) {
@@ -182,7 +184,7 @@ router.put("/updateRecipe/:id",upload.single("image"), fetchuser, async (req, re
       
     }
     //deleteing image form cloudinary if it exists 
-    if(recipe.image.url){
+    if(recipe.image.public_id){
           await cloudinary.uploader.destroy(recipe.image.public_id);
     }
     //allowing only owner to update the recipe

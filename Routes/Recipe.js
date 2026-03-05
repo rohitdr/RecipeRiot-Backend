@@ -8,6 +8,7 @@ const fetchUser = require("../Middleware/fetchUser");
 const User = require("../Modals/User.js");
 const upload = require("../Middleware/Upload")
 const cloudinary = require("../Config/cloudinary");
+const { cloudinary_api_secret,cloudinary_api_key,cloudinary_cloud_name } = require("../Config/Keys");
 
 /* Fetching all the recipes from the database. */
 router.get("/allRecipes", fetchuser, async (req, res) => {
@@ -46,7 +47,7 @@ router.get("/recipebyid/:id", fetchuser, async (req, res) => {
 });
 //crating  or adding a new Recipe , login require
 /* The above code is adding a recipe to the database. */
-router.post("/addRecipe", upload.single("image"),fetchuser, async (req, res) => {
+router.post("/addRecipe",fetchuser, async (req, res) => {
   try {
     const {
       totalTime,
@@ -75,7 +76,6 @@ router.post("/addRecipe", upload.single("image"),fetchuser, async (req, res) => 
       healthLabels,
       dietLabels,
       source,
-      image:{url:req.file.path,public_id:req.file.filename},
       label,
       dishType,
       mealType,
@@ -87,13 +87,8 @@ router.post("/addRecipe", upload.single("image"),fetchuser, async (req, res) => 
    
     });
     const user = await User.findById(req.user.id);
-
-    const newtotalrecipenumber = await User.findByIdAndUpdate(
-      { _id: req.user.id },
-      { $set: { Total_Recipes: user.Total_Recipes + 1 } }
-    );
     const savedRecipe = await recipe.save();
-    res.status(200).json(savedRecipe);
+    res.status(200).json({id:savedRecipe._id,message:"Success your have added the recipe"});
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -384,6 +379,7 @@ router.get("/allRecipeswithdishtype/:dishtype", async (req, res) => {
 /// fecthing all recipes sorting by time
 /* Getting the latest recipes from the database. */
 router.get("/LatestRecipes", async (req, res) => {
+console.log(cloudinary_api_key,cloudinary_api_secret,cloudinary_cloud_name)
   try {
     const recipe = await Recipe.find().sort({ date: -1 });
     if (recipe.length === 0) {

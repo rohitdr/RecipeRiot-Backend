@@ -89,7 +89,6 @@ npm install
 nodemon index.cjs
 ```
 
----
 
 ## 📡 API Endpoints (Sample)
 
@@ -109,7 +108,6 @@ nodemon index.cjs
 
 * POST `/api/recipe/commentreicpe` → Add comment 
 
----
 
 ## 📌 Notes
 
@@ -117,13 +115,14 @@ nodemon index.cjs
 * Images are stored in Cloudinary
 * Admin routes control recipe & user management
 
----
+## 🌐 Live Links
+
+- Backend API: https://reciperiot-backend.onrender.com 
 
 ## 🔗 Frontend Repository
 
 👉 https://github.com/rohitdr/RecipeRiot-Frontend.git
 
----
 ## 📌 Note
 
 This project was initially developed as a single full-stack repository combining both frontend and backend.
@@ -137,7 +136,6 @@ Due to this restructuring, the current repository may have a limited commit hist
 
 Rohit Kumar
 
----
 
 ## ⭐ Support
 

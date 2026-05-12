@@ -7,7 +7,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  phone_number: {
+  phoneNumber: {
     type: Number,
     required: true,
   },
@@ -15,62 +15,43 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  Liked_Recipe: {
-    type: Array,
-  },
-  Profile_Image: {
+refreshToken:String,
+  likedRecipes: [
+    {
+     type: mongoose.Schema.Types.ObjectId,
+       ref: "Recipe"
+    },
+  ],
+  profileImage: {
      url: {
       type: String,
        default: "UserImages/default.jpg"
     },
-    public_id: {
+    publicId: {
       type: String,
     }
   },
   username: {
     type: String,
   },
-  Total_Recipes: {
+  bio:String,
+  totalRecipes: {
     type: Number,
     default: 0,
   },
-  Total_Comments: {
+  totalComments: {
     type: Number,
     default: 0,
   },
-  Total_Ratings: {
+  totalRatings: {
     type: Number,
     default: 0,
   },
+ name:String,
+},{timestamps:true});
+userSchema.index({email:1})
+userSchema.index({createdAt:-1})
 
-  facebook: {
-    type: String,
-  },
-  twitter: {
-    type: String,
-  },
-  git: {
-    type: String,
-  },
-  web: {
-    type: String,
-  },
-
-  first_name: {
-    type: String,
-  },
-  last_name: {
-    type: String,
-  },
-  OnLine: {
-    type: Boolean,
-    default: false,
-  },
-});
 /* Exporting the model to be used in other files. */
 User = mongoose.model("User", userSchema);
 module.exports = User;

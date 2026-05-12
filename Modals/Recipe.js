@@ -8,38 +8,25 @@ const RecipeSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required:true
   },
-  instruction: {
-    type: Array,
-  },
+  instruction:[String],
   date: {
     type: Date,
     default: Date.now,
   },
-  Comments: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-      comment: {
-        type: String,
-      },
-      rating: {
-        type: Number,
-      },
-      username: {
-        type: String,
-      },
-      Profileimage: {
-        type: String,
-      },
-    },
-  ],
+  views:{
+    type:Number,
+    default:0
+  },
+  totalRatings:{
+ type: Number,
+    default: 0,
+  },
+  averageRating:{
+     type: Number,
+    default: 0,
+  },
   Likes: {
     type: Number,
     default: 0,
@@ -51,25 +38,17 @@ const RecipeSchema = new Schema({
     url: {
       type: String,
     },
-    public_id: {
+    publicId: {
       type: String,
     },
   },
   source: {
     type: String,
   },
-  dietLabels: {
-    type: Array,
-  },
-  healthLabels: {
-    type: Array,
-  },
-  cautions: {
-    type: Array,
-  },
-  ingredientLines: {
-    type: Array,
-  },
+  dietLabels: [String],
+  healthLabels: [String],
+  cautions:[String],
+  ingredientLines: [String],
   ingredients: [
     {
       text: {
@@ -93,15 +72,9 @@ const RecipeSchema = new Schema({
   totalTime: {
     type: Number,
   },
-  cuisineType: {
-    type: Array,
-  },
-  mealType: {
-    type: Array,
-  },
-  dishType: {
-    type: Array,
-  },
+  cuisineType: [String],
+  mealType: [String],
+  dishType: [String],
   totalNutrients: {
     ENERC_KCAL: {
       label: {
@@ -336,6 +309,7 @@ const RecipeSchema = new Schema({
       },
     },
   },
-});
+},{timestamps:true});
+RecipeSchema.index({createdAt:-1})
 
 module.exports = mongoose.model("Recipe", RecipeSchema);

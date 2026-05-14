@@ -69,6 +69,7 @@ const addRecipeValidation = [
     .withMessage("Invalid image URL"),
 
   body("image.publicId")
+  .optional()
     .notEmpty()
     .withMessage("Image public id required")
 ];

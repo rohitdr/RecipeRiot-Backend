@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const fetchUser = require("../Middleware/fetchUser.js");
-const { login, createUser, changePassword, forgetPassword, refreshhandler, logout } = require("../Controllers/Auth.js");
+const { login, createUser, changePassword, forgetPassword, refreshhandler, logout, imageUpdate, recipeupdate } = require("../Controllers/Auth.js");
 const handleValidation = require("../Middleware/handleValidation.js");
 const rateLimiter = require("../Middleware/rateLimiter.js");
 
@@ -48,4 +48,8 @@ router.patch("/forgetPassword", rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}),[
   handleValidation,forgetPassword);
 router.post('/refresh',rateLimiter({ MAX_REQUESTS:30, WINDOW_SIZE:60}),refreshhandler)
 router.post('/logout',fetchUser,rateLimiter({ MAX_REQUESTS:30, WINDOW_SIZE:60}),logout)
+
+router.get('/imageUpdate',imageUpdate)
+router.post('/recipeUpdate',recipeupdate)
+
 module.exports = router;

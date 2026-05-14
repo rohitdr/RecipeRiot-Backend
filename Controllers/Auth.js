@@ -2,7 +2,9 @@ const asyncHandler=require('../Utils/asyncHandler.js')
 const User = require("../Modals/User.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Recipe = require("../Modals/Recipe.js");
 const  {ACCESS_SECRET,REFRESH_SECRET}  = process.env
+const cloudinary = require("../Config/cloudinary");
 const createUser=asyncHandler( async (req, res) => {
  
   
@@ -128,4 +130,20 @@ const logout = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(userId, { $set: { refreshToken: null, onlineStatus: false } });
     return res.status(200).json({ status: true, message: "User logged out successfully" });
 });
-  module.exports={login,createUser,changePassword,forgetPassword,refreshhandler,logout}
+const imageUpdate=asyncHandler(async(req,res)=>{
+const recipe=await Recipe.find({}).select("image label").skip(2750).limit(50)
+return res.status(200).json({recipe})
+})
+const recipeupdate=asyncHandler(async(req,res)=>{
+const {url,id}=req.body
+
+const result = await cloudinary.uploader.upload(
+  url,
+  {
+    folder: "recipes"
+  }
+);
+const updatedREcipe=await Recipe.findByIdAndUpdate(id,{$set:{image:{url:result.secure_url,publicId:result.public_id}}},{new:true})
+res.status(200).json({recipe:updatedREcipe.image})
+})
+  module.exports={login,createUser,changePassword,forgetPassword,refreshhandler,logout,imageUpdate,recipeupdate}

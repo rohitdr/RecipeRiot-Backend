@@ -80,7 +80,7 @@ const featuredRecipes=asyncHandler( async (req, res) => {
  
 })
 const addRecipe=asyncHandler(async (req, res) => {
-  const {label}=req.body
+  const {label,link}=req.body
   const existingRecipe = await Recipe.findOne({
   user: req.user.id,
   label: {
@@ -93,18 +93,33 @@ if (existingRecipe) {
     message: "You already added this recipe"
   });
 }
-   
-  const recipe = await Recipe.create({
+if(!link)  {
+ const recipe = await Recipe.create({
     ...req.body,
     user: req.user.id
   });
 
-    res.status(201).json({success:true,id:recipe._id,message:"Success your have added the recipe"});
-  
+  return res.status(201).json({success:true,id:recipe._id,message:"Success your have added the recipe"});
+
+} 
+const imageUpload = await cloudinary.uploader.upload(
+  req.body.image.url,
+  {
+    folder: "recipes"
+  }
+);
+ const recipe = await Recipe.create({
+    ...req.body,
+   image:{url:imageUpload.secure_url,publicId:imageUpload.public_id},
+    user: req.user.id
+  });
+  res.status(201).json({success:true,id:recipe._id,message:"Success your have added the recipe"});
+ 
 })
 const editRecipe=asyncHandler( async (req, res) => {
  
     const recipeId=req.params.id
+    const {link}=req.body
    const recipe=await Recipe.findById(recipeId)
    if(!recipe){
     return res.status(404).json({success:false,message:"Recipe Not Found"})
@@ -115,6 +130,7 @@ const editRecipe=asyncHandler( async (req, res) => {
     message: "You are not allowed to edit this recipe"
   });
 }
+
    const allowedUpdates = {
     label: req.body.label,
     totalTime: req.body.totalTime,
@@ -128,8 +144,17 @@ const editRecipe=asyncHandler( async (req, res) => {
     mealType: req.body.mealType,
     cuisineType: req.body.cuisineType,
     totalNutrients: req.body.totalNutrients,
-    image: req.body.image
+    image:req.body.image
   };
+  if(link){
+  const imageUpload = await cloudinary.uploader.upload(
+  req.body.image.url,
+  {
+    folder: "recipes"
+  }
+);
+allowedUpdates.image={url:imageUpload.secure_url,publicId:imageUpload.public_id}
+}
    Object.keys(allowedUpdates).forEach(
     key => allowedUpdates[key] === undefined && delete allowedUpdates[key]
   );

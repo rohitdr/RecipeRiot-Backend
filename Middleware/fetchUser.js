@@ -7,7 +7,7 @@ const  ACCESS_SECRET  =process.env.ACCESS_SECRET;
 const fetchUser = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).send({ error: "Please login to continue" });
+    return res.status(401).json({ error: "Please login to continue", code: "ACCESS_TOKEN_EXPIRED" });
   }
   const accessToken = authHeader.split(" ")[1]
   try {
@@ -15,7 +15,7 @@ const fetchUser = (req, res, next) => {
     req.user = data;
     next();
   } catch (error) {
-    return res.status(401).send({ error: "Please login to continue " });
+    return res.status(401).json({ error: "Please login to continue ", code: "ACCESS_TOKEN_EXPIRED" });
   }
 };
 

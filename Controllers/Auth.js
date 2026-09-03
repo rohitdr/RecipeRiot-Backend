@@ -131,7 +131,9 @@ const logout = asyncHandler(async (req, res) => {
     return res.status(200).json({ status: true, message: "User logged out successfully" });
 });
 const imageUpdate=asyncHandler(async(req,res)=>{
-const recipe=await Recipe.find({}).select("image label").skip(2750).limit(50)
+  const skip=Number(req.query.skip)
+const recipe=await Recipe.find({}).select("image label").skip(skip).limit(50)
+// const recipe=await Recipe.find({}).select("image label").skip(4350).limit(50)
 return res.status(200).json({recipe})
 })
 const recipeupdate=asyncHandler(async(req,res)=>{

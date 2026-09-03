@@ -61,7 +61,7 @@ const getComments=asyncHandler(async(req,res)=>{
     Comments.find({ recipe: recipeId })
       .skip((page - 1) * limit)
       .limit(limit)
-      .populate("user", "username profileImage"),
+      .populate("user", "username profileImage name"),
 
     Comments.countDocuments({ recipe: recipeId })
   ]);

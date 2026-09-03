@@ -1,16 +1,21 @@
 const asyncHandler=require('../Utils/asyncHandler.js')
 const User = require("../Modals/User.js");
 const Recipe = require("../Modals/Recipe.js");
+const Comments = require('../Modals/Comments.js');
 
 const getUser=asyncHandler(async (req, res) => {
 
     const userId = req.user.id;
-    const user = await User.findById(userId).select("-password")
+    const [user,recipes,comments]=await Promise.all([
+  User.findById(userId).select("-password"),
+    Recipe.countDocuments({user:userId}),
+     Comments.countDocuments({user:userId})
+    ])
     if(!user){
        return res.status(404).json({success:false, message: "User Not Found"});
     }
   
-    res.status(200).json({success:true,user});
+    res.status(200).json({success:true,user:{...user.toObject(),recipes,comments}});
 
 })
 const likedRecipes=asyncHandler(async (req, res) => {

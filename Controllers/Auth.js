@@ -29,6 +29,8 @@ const createUser=asyncHandler( async (req, res) => {
       res.status(201).json({success:true,message:"User created SuccessFully"});
   
   })
+
+  
   const login=asyncHandler( async (req, res) => {
      
       const { email, password } = req.body;

@@ -3,6 +3,7 @@ const User = require("../Modals/User.js");
 const Recipe = require("../Modals/Recipe.js");
 const Comments = require('../Modals/Comments.js');
 
+const cloudinary = require("../Config/cloudinary");
 const getUser=asyncHandler(async (req, res) => {
 
     const userId = req.user.id;

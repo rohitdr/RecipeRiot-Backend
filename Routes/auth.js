@@ -49,7 +49,6 @@ router.patch("/forgetPassword", rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}),[
 router.post('/refresh',rateLimiter({ MAX_REQUESTS:30, WINDOW_SIZE:60}),refreshhandler)
 router.post('/logout',fetchUser,rateLimiter({ MAX_REQUESTS:30, WINDOW_SIZE:60}),logout)
 
-router.get('/imageUpdate',imageUpdate)
-router.post('/recipeUpdate',recipeupdate)
+
 
 module.exports = router;

@@ -1,6 +1,18 @@
-const errorHandler=(err,)=>{
-  console.log(err)
-          return res.status(500).json({status:false,message:err.message})
+// middlewares/errorHandler.js
 
-}
-module.exports=errorHandler
+const errorHandler = (err, req, res, next) => {
+  console.error(err);
+
+  const statusCode = err.statusCode || 500;
+
+  return res.status(statusCode).json({
+    success: false,
+    message:
+      err.isOperational
+        ? err.message
+        : "Internal server error",
+        ...(err.code && {code:err.code})
+  });
+};
+
+module.exports = errorHandler;

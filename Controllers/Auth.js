@@ -1,9 +1,4 @@
 const asyncHandler=require('../Utils/asyncHandler.js')
-const User = require("../Modals/User.js");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const Recipe = require("../Modals/Recipe.js");
-const cloudinary = require("../Config/cloudinary");
 const auth = require('../services/auth.services.js');
 
 

@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const fetchUser = require("../Middleware/fetchUser.js");
-const { login, createUser, changePassword, forgetPassword, refreshhandler, logout, imageUpdate, recipeupdate } = require("../Controllers/Auth.js");
+const { login, createUser, changePassword, forgetPassword, refreshhandler, logout, imageUpdate, recipeupdate, register } = require("../Controllers/Auth.js");
 const handleValidation = require("../Middleware/handleValidation.js");
 const rateLimiter = require("../Middleware/rateLimiter.js");
 
@@ -11,7 +11,7 @@ const rateLimiter = require("../Middleware/rateLimiter.js");
 
 /* The above code is creating a user. */
 router.post(
-  "/createUser",
+  "/register",
     rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}),
   [
     body("name","Please Enter a valid name").isLength({min:2}),
@@ -19,7 +19,8 @@ router.post(
       body("email", "Please Enter a valid Email").isEmail(),
     body("username", "Username length must be 8 digits").isLength({ min: 8 }),
     body("password", "password must be of length 8").isLength({ min: 8 }),
-  ],handleValidation,createUser
+  ],handleValidation,
+  register
 );
 
 /* The above code is a login route. */
@@ -34,13 +35,13 @@ router.post(
 )
 
 /* The above code is changing the password of the user. */
-router.patch("/changePassword", fetchUser,rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}), [
+router.patch("/change-password", fetchUser,rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}), [
     body("oldPassword", "password length should be more than 8").isLength({ min: 8 }),
     body("newPassword", "password length should be more than 8").isLength({ min: 8 }),
   ],handleValidation,changePassword);
 
 /* The above code is a route for a user to change his/her password. */
-router.patch("/forgetPassword", rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}),[
+router.patch("/forget-password", rateLimiter({ MAX_REQUESTS:5, WINDOW_SIZE:60}),[
     body("email", "Please Enter a valid Email").isEmail(),
     body("username", "Username length must be 8 digits").isLength({ min: 8 }),
     body("password", "password must be of length 8").isLength({ min: 8 }),

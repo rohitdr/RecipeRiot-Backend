@@ -2,7 +2,7 @@ const asyncHandler=require('../Utils/asyncHandler.js')
 const auth = require('../services/auth.services.js');
 
 
-const createUser=asyncHandler( async (req, res) => {
+const register=asyncHandler( async (req, res) => {
       
        await auth.createUser(req.body)
      
@@ -44,4 +44,4 @@ const logout = asyncHandler(async (req, res) => {
 });
 
 
-  module.exports={login,createUser,changePassword,forgetPassword,refreshhandler,logout}
+  module.exports={login,register,changePassword,forgetPassword,refreshhandler,logout}

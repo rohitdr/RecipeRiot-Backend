@@ -32,7 +32,7 @@ app.use("/api/auth", require("./Routes/auth"));
 app.use("/api/user", require("./Routes/User"));
 app.use("/api/contact", require("./Routes/contact.js"));
 app.use("/api/recipe", require("./Routes/Recipe.js"));
-app.use("/api/comment", require("./Routes/Comment.js"));
+app.use("/api", require("./Routes/Comment.js"));
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });

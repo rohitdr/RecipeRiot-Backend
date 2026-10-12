@@ -2,9 +2,9 @@ const asyncHandler=require('../Utils/asyncHandler.js')
 const user = require('../services/user.services.js');
 
 const getUser=asyncHandler(async (req, res) => {
- const user=await user.getUser(req.user.id)
+ const result=await user.getUser(req.user.id)
   
-    res.status(200).json({success:true,user})
+    res.status(200).json({success:true,user:result})
 
 })
 const likedRecipes=asyncHandler(async (req, res) => {
